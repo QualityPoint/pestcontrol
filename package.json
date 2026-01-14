@@ -1,0 +1,23 @@
+{
+  "name": "pestcontrol",
+  "version": "1.0.0",
+  "description": "A comprehensive pest control management system built on Frappe, streamlining service scheduling, technician dispatch, chemical inventory tracking, and client reporting",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cd crm && yarn install",
+    "dev": "cd crm && yarn dev",
+    "build": "cd crm && yarn build"
+  },
+  "repository": {
+    "type": "git"
+    },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/QualityPoint/pestcontrol/issues"
+  },
+  "homepage": "https://github.com/QualityPoint/pestcontrol#readme"
+}
