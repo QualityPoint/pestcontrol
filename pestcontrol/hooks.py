@@ -243,4 +243,7 @@ app_license = "agpl-3.0"
 # }
 
 
-website_route_rules = [{'from_route': '/operation/<path:app_path>', 'to_route': 'operation'}, {'from_route': '/crm/<path:app_path>', 'to_route': 'crm'},]
+website_route_rules = [
+    {'from_route': '/operation/<path:app_path>', 'to_route': 'operation'},
+    {'from_route': '/crm/<path:app_path>', 'to_route': 'crm'},
+]
