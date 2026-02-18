@@ -16,10 +16,19 @@
   "visit_no",
   "column_break_nptk",
   "company",
+  "visit_type",
   "amended_from",
-  "operation_details_section",
+  "timesheet_section",
+  "timesheet",
+  "section_break_ngcd",
+  "column_break_ixed",
+  "no_of_interval",
+  "column_break_lgwy",
+  "visit_duration",
+  "visit_timeout",
+  "section_break_nzmm",
   "operation_supervisor",
-  "column_break_xqid",
+  "team_members",
   "address_and_contact_tab",
   "visit_address_section",
   "visit_address_name",
@@ -86,7 +95,8 @@
    "fieldname": "customer_name",
    "fieldtype": "Data",
    "in_global_search": 1,
-   "label": "Customer Name"
+   "label": "Customer Name",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_nkcr",
@@ -148,28 +158,84 @@
    "search_index": 1
   },
   {
-   "fieldname": "operation_details_section",
-   "fieldtype": "Section Break",
-   "label": "Operation Details"
-  },
-  {
    "fieldname": "operation_supervisor",
    "fieldtype": "Link",
    "in_standard_filter": 1,
    "label": "Operation Supervisor",
-   "options": "Employee",
+   "options": "Operation Team Member",
    "reqd": 1
   },
   {
-   "fieldname": "column_break_xqid",
+   "fieldname": "visit_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Visit Type",
+   "options": "Visit Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "timesheet_section",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Visit Timesheet"
+  },
+  {
+   "fieldname": "timesheet",
+   "fieldtype": "Table",
+   "label": "Timesheet",
+   "options": "Visit Timesheet",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_nzmm",
+   "fieldtype": "Section Break",
+   "label": "Operation Team"
+  },
+  {
+   "fieldname": "section_break_ngcd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_ixed",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_lgwy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "no_of_interval",
+   "fieldtype": "Int",
+   "label": "No of Interval",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "visit_duration",
+   "fieldtype": "Time",
+   "label": "Visit Duration",
+   "read_only": 1
+  },
+  {
+   "fieldname": "visit_timeout",
+   "fieldtype": "Time",
+   "label": "Visit Timeout",
+   "read_only": 1
+  },
+  {
+   "fieldname": "team_members",
+   "fieldtype": "Table",
+   "label": "Team Members",
+   "options": "Visit Operation Team",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-02-17 15:26:38.259448",
+ "modified": "2026-02-18 20:59:01.286818",
  "modified_by": "Administrator",
  "module": "Operation",
  "name": "Operation Visit",
