@@ -247,3 +247,8 @@ after_migrate = "pestcontrol.install.after_install"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
+
+website_route_rules = [
+    {'from_route': '/operation/<path:app_path>', 'to_route': 'operation'},
+    {'from_route': '/crm/<path:app_path>', 'to_route': 'crm'},
+]
