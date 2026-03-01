@@ -6,6 +6,7 @@ frappe.ui.form.on("Operation Visit", {
         frm.set_query("project", function () {
             return {
                 filters: {
+                    company: frm.doc.company,
                     customer: frm.doc.customer
                 }
             };

@@ -15,6 +15,7 @@ class OperationTeamMember(NestedSet):
 
     def validate(self):
         self.validate_parent_member()
+        self.validate_default_warehouse()
 
     def validate_parent_member(self):
         if self.parent_member == self.name:
@@ -25,6 +26,23 @@ class OperationTeamMember(NestedSet):
             if not frappe.db.get_value("Operation Team Member", self.parent_member, "is_supervisor"):
                 frappe.throw(
                     _("{0} cannot report to {1} because {1} is not a supervisor.").format(self.member_name, self.parent_member))
+
+    def validate_default_warehouse(self):
+        if self.default_warehouse:
+            warehouse = frappe.db.get_value(
+                "Warehouse", self.default_warehouse, ["company", "disabled", "is_group"], as_dict=True)
+            if not warehouse:
+                frappe.throw(_("Warehouse {0} does not exist.").format(
+                    self.default_warehouse))
+            if warehouse.disabled:
+                frappe.throw(_("Warehouse {0} is disabled.").format(
+                    self.default_warehouse))
+            if warehouse.is_group:
+                frappe.throw(
+                    _("Warehouse {0} is a group. Please select a non-group warehouse.").format(self.default_warehouse))
+            if warehouse.company != self.company:
+                frappe.throw(_("Warehouse {0} does not belong to the selected company {1}.").format(
+                    self.default_warehouse, self.company))
 
     def update_nsm_model(self):
         frappe.utils.nestedset.update_nsm(self)

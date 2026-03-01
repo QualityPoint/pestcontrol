@@ -1,0 +1,49 @@
+Applying rates according to injury severity,تطبيق الأسعار وفقًا لشدة الإصابة,
+
+
+Description,الوصف,
+Duration,المدة,
+
+
+From Time,من الوقت,
+
+
+Is Group,هل مجموعة,
+Is Supervisor,هل هو مشرف,
+
+
+Member Name,اسم العضو,
+No of Interval,عدد الفواصل الزمنية,
+
+
+Operation Team,فريق التشغيل,
+Operation Visit,زيارة التشغيل,
+
+
+Parent Pest Type,نوع الآفة الأصل,
+Pest Information,معلومات الآفة,
+Pest Name,اسم الآفة,
+Pest Type,نوع الآفة,
+
+
+Rate,السعر,
+
+
+Severity Level,مستوى الشدة,
+Severity Level Rates,أسعار مستوى الشدة,
+Standard Rate,السعر القياسي,
+Supervisor,المشرف,
+
+
+Team Member,عضو الفريق,
+Team Members,أعضاء الفريق,
+To Time,إلى الوقت,
+
+
+Visit Date,تاريخ الزيارة,
+Visit Duration,مدة الزيارة,
+Visit No,رقم الزيارة,
+Visit Operation Team,فريق تشغيل الزيارة,
+Visit Timeout,الوقت المستقطع في الزيارة,
+Visit Timesheet,جدول الزيارة,
+Visit Type,نوع الزيارة,

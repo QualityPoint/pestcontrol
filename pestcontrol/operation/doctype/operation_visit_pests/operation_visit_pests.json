@@ -1,0 +1,58 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-18 23:46:19.065876",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "pest_type",
+  "is_group",
+  "column_break_qpbe",
+  "severity_level"
+ ],
+ "fields": [
+  {
+   "fieldname": "pest_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Pest Type",
+   "options": "Pest Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_qpbe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "severity_level",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Severity Level",
+   "options": "Severity Level"
+  },
+  {
+   "default": "0",
+   "fetch_from": "pest_type.is_group",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-02-18 23:54:31.910670",
+ "modified_by": "Administrator",
+ "module": "Operation",
+ "name": "Operation Visit Pests",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

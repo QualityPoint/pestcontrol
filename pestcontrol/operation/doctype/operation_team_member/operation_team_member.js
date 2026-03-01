@@ -10,5 +10,15 @@ frappe.ui.form.on("Operation Team Member", {
                 }
             };
         });
+
+        frm.set_query("default_warehouse", function () {
+            return {
+                filters: {
+                    company: frm.doc.company,
+                    disabled: 0,
+                    is_group: 0
+                }
+            };
+        });
     },
 });

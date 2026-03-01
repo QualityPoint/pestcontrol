@@ -13,6 +13,9 @@
   "column_break_ylxr",
   "company",
   "image",
+  "inventory_section",
+  "default_warehouse",
+  "column_break_akgy",
   "section_break_hvfh",
   "lft",
   "old_parent",
@@ -105,6 +108,21 @@
    "hidden": 1,
    "label": "Image",
    "no_copy": 1
+  },
+  {
+   "fieldname": "inventory_section",
+   "fieldtype": "Section Break",
+   "label": "Inventory"
+  },
+  {
+   "fieldname": "default_warehouse",
+   "fieldtype": "Link",
+   "label": "Default Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "column_break_akgy",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
@@ -112,7 +130,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2026-02-17 18:06:55.219866",
+ "modified": "2026-02-25 02:35:04.259117",
  "modified_by": "Administrator",
  "module": "Operation",
  "name": "Operation Team Member",
@@ -120,6 +138,15 @@
  "nsm_parent_field": "parent_member",
  "owner": "Administrator",
  "permissions": [
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Operation Auditor",
+   "share": 1
+  },
   {
    "email": 1,
    "export": 1,
@@ -149,7 +176,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Operation Admin",
+   "role": "Pestcontrol Manager",
    "share": 1,
    "write": 1
   }

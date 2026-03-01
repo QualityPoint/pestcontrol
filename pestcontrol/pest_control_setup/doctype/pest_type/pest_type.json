@@ -1,0 +1,220 @@
+{
+    "actions": [],
+    "allow_rename": 1,
+    "autoname": "field:pest_name",
+    "creation": "2026-02-18 22:26:48.250300",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "section_break_k0cl",
+        "pest_name",
+        "is_group",
+        "parent_pest_type",
+        "column_break_lcgu",
+        "disabled",
+        "image",
+        "service_prices_section",
+        "standard_rate",
+        "column_break_qeim",
+        "apply_severity_rates",
+        "severity_level_rates",
+        "pest_information_section",
+        "description",
+        "section_break_nbee",
+        "lft",
+        "old_parent",
+        "column_break_ithl",
+        "rgt"
+    ],
+    "fields": [
+        {
+            "fieldname": "section_break_k0cl",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "lft",
+            "fieldtype": "Int",
+            "hidden": 1,
+            "label": "Left",
+            "no_copy": 1,
+            "read_only": 1
+        },
+        {
+            "fieldname": "rgt",
+            "fieldtype": "Int",
+            "hidden": 1,
+            "label": "Right",
+            "no_copy": 1,
+            "read_only": 1
+        },
+        {
+            "bold": 1,
+            "default": "0",
+            "fieldname": "is_group",
+            "fieldtype": "Check",
+            "in_list_view": 1,
+            "label": "Is Group"
+        },
+        {
+            "fieldname": "old_parent",
+            "fieldtype": "Link",
+            "hidden": 1,
+            "label": "Old Parent",
+            "options": "Pest Type"
+        },
+        {
+            "allow_in_quick_entry": 1,
+            "bold": 1,
+            "fieldname": "parent_pest_type",
+            "fieldtype": "Link",
+            "ignore_user_permissions": 1,
+            "in_list_view": 1,
+            "label": "Parent Pest Type",
+            "options": "Pest Type"
+        },
+        {
+            "fieldname": "section_break_nbee",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "column_break_ithl",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "pest_name",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Pest Name",
+            "no_copy": 1,
+            "reqd": 1,
+            "unique": 1
+        },
+        {
+            "fieldname": "column_break_lcgu",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "0",
+            "fieldname": "disabled",
+            "fieldtype": "Check",
+            "label": "Disabled",
+            "no_copy": 1
+        },
+        {
+            "fieldname": "image",
+            "fieldtype": "Attach Image",
+            "hidden": 1,
+            "label": "Image",
+            "no_copy": 1
+        },
+        {
+            "fieldname": "pest_information_section",
+            "fieldtype": "Section Break",
+            "label": "Pest Information"
+        },
+        {
+            "fieldname": "description",
+            "fieldtype": "Text Editor",
+            "in_preview": 1,
+            "label": "Description",
+            "no_copy": 1
+        },
+        {
+            "fieldname": "service_prices_section",
+            "fieldtype": "Section Break",
+            "label": "Service Prices"
+        },
+        {
+            "default": "0",
+            "description": "This rate will be added to the total service price",
+            "fieldname": "standard_rate",
+            "fieldtype": "Currency",
+            "in_list_view": 1,
+            "in_preview": 1,
+            "label": "Standard Rate",
+            "non_negative": 1,
+            "precision": "2",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_qeim",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "0",
+            "fieldname": "apply_severity_rates",
+            "fieldtype": "Check",
+            "label": "Applying rates according to injury severity"
+        },
+        {
+            "depends_on": "apply_severity_rates",
+            "fieldname": "severity_level_rates",
+            "fieldtype": "Table",
+            "label": "Severity Level Rates",
+            "mandatory_depends_on": "apply_severity_rates",
+            "options": "Severity Level Rates"
+        }
+    ],
+    "grid_page_length": 50,
+    "image_field": "image",
+    "index_web_pages_for_search": 1,
+    "is_tree": 1,
+    "links": [],
+    "modified": "2026-02-19 00:05:05.023806",
+    "modified_by": "Administrator",
+    "module": "Pest Control Setup",
+    "name": "Pest Type",
+    "naming_rule": "By fieldname",
+    "nsm_parent_field": "parent_pest_type",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Operation Auditor",
+            "share": 1
+        },
+        {
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Operation User",
+            "share": 1
+        },
+        {
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Operation Manager",
+            "share": 1
+        },
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Pestcontrol Admin",
+            "share": 1,
+            "write": 1
+        }
+    ],
+    "quick_entry": 1,
+    "row_format": "Dynamic",
+    "rows_threshold_for_grid_search": 20,
+    "show_preview_popup": 1,
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "track_changes": 1,
+    "translated_doctype": 1
+}

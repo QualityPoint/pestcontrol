@@ -11,12 +11,13 @@
   "tax_id",
   "customer_name",
   "column_break_nkcr",
-  "project",
   "visit_date",
+  "visit_type",
   "visit_no",
   "column_break_nptk",
   "company",
-  "visit_type",
+  "project",
+  "service_type",
   "amended_from",
   "timesheet_section",
   "timesheet",
@@ -29,6 +30,8 @@
   "section_break_nzmm",
   "operation_supervisor",
   "team_members",
+  "pests_tab",
+  "pests",
   "address_and_contact_tab",
   "visit_address_section",
   "visit_address_name",
@@ -229,19 +232,48 @@
    "label": "Team Members",
    "options": "Visit Operation Team",
    "reqd": 1
+  },
+  {
+   "fieldname": "pests_tab",
+   "fieldtype": "Tab Break",
+   "label": "Pests"
+  },
+  {
+   "fieldname": "service_type",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Service Type",
+   "options": "PC Service Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pests",
+   "fieldtype": "Table",
+   "label": "Pests",
+   "no_copy": 1,
+   "options": "Operation Visit Pests"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-02-18 20:59:01.286818",
+ "modified": "2026-02-19 00:31:50.705470",
  "modified_by": "Administrator",
  "module": "Operation",
  "name": "Operation Visit",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Operation Auditor",
+   "share": 1
+  },
   {
    "create": 1,
    "email": 1,
@@ -258,6 +290,7 @@
    "amend": 1,
    "cancel": 1,
    "create": 1,
+   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
@@ -278,7 +311,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Operation Admin",
+   "role": "Pestcontrol Manager",
    "share": 1,
    "submit": 1,
    "write": 1

@@ -25,8 +25,8 @@ app_license = "agpl-3.0"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/pestcontrol/css/pestcontrol.css"
-# app_include_js = "/assets/pestcontrol/js/pestcontrol.js"
+app_include_css = "/assets/pestcontrol/css/pestcontrol.css"
+app_include_js = "pestcontrol.bundle.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/pestcontrol/css/pestcontrol.css"
@@ -90,6 +90,12 @@ app_license = "agpl-3.0"
 
 # before_uninstall = "pestcontrol.uninstall.before_uninstall"
 # after_uninstall = "pestcontrol.uninstall.after_uninstall"
+
+# Site Migration
+# --------------
+
+# before_migrate = "pestcontrol.install.before_install"
+after_migrate = "pestcontrol.install.after_install"
 
 # Integration Setup
 # ------------------
@@ -241,9 +247,3 @@ app_license = "agpl-3.0"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-
-
-website_route_rules = [
-    {'from_route': '/operation/<path:app_path>', 'to_route': 'operation'},
-    {'from_route': '/crm/<path:app_path>', 'to_route': 'crm'},
-]
