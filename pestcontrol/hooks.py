@@ -249,6 +249,5 @@ after_migrate = "pestcontrol.install.after_install"
 # }
 
 website_route_rules = [
-    {'from_route': '/operation/<path:app_path>', 'to_route': 'operation'},
-    {'from_route': '/crm/<path:app_path>', 'to_route': 'crm'},
-]
+    {'from_route': '/frontend/<path:app_path>', 'to_route': 'frontend'},
+    ]
