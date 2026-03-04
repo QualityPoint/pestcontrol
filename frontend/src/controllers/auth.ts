@@ -1,4 +1,5 @@
 import call from './call';
+import socket from './socket';
 
 export default class Auth {
     isLoggedIn: boolean;
@@ -33,6 +34,7 @@ export default class Auth {
     async logout() {
         await call('logout');
         this.isLoggedIn = false;
+        socket.disconnect();
         window.location.reload();
     }
 }
