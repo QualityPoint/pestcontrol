@@ -1,0 +1,73 @@
+{
+ "actions": [],
+ "creation": "2026-03-25 14:43:51.138289",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "operation_tab",
+  "check_visit_location_remoteness",
+  "permissible_visit_location_remoteness",
+  "diameter_unit",
+  "column_break_hleu"
+ ],
+ "fields": [
+  {
+   "fieldname": "operation_tab",
+   "fieldtype": "Tab Break",
+   "label": "Operation"
+  },
+  {
+   "default": "10",
+   "depends_on": "check_visit_location_remoteness",
+   "fieldname": "permissible_visit_location_remoteness",
+   "fieldtype": "Float",
+   "label": "Permissible Visit Location Remoteness",
+   "mandatory_depends_on": "check_visit_location_remoteness",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_hleu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "check_visit_location_remoteness",
+   "fieldname": "diameter_unit",
+   "fieldtype": "Link",
+   "label": "Diameter Unit",
+   "mandatory_depends_on": "check_visit_location_remoteness",
+   "options": "UOM"
+  },
+  {
+   "default": "0",
+   "fieldname": "check_visit_location_remoteness",
+   "fieldtype": "Check",
+   "label": "Check Visit Location Remoteness"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-03-25 15:06:44.135762",
+ "modified_by": "Administrator",
+ "module": "Pest Control Setup",
+ "name": "Pest Control Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
