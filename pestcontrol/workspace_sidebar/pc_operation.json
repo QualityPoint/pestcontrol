@@ -1,0 +1,64 @@
+{
+ "app": "pestcontrol",
+ "creation": "2026-03-25 12:37:42.451993",
+ "docstatus": 0,
+ "doctype": "Workspace Sidebar",
+ "header_icon": "cog",
+ "idx": 0,
+ "items": [
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "door-open",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Operation Visit",
+   "link_to": "Operation Visit",
+   "link_type": "DocType",
+   "navigate_to_tab": "",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "users",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Operation Team Member",
+   "link_to": "Operation Team Member",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "tool",
+   "indent": 1,
+   "keep_closed": 1,
+   "label": "Tools",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Section Break"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Visit Type",
+   "link_to": "Visit Type",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-03-25 13:09:22.702698",
+ "modified_by": "Administrator",
+ "module": "Operation",
+ "name": "PC Operation",
+ "owner": "Administrator",
+ "standard": 1,
+ "title": "PC Operation"
+}

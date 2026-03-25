@@ -1,0 +1,19 @@
+{
+ "app": "pestcontrol",
+ "bg_color": "blue",
+ "creation": "2026-03-25 12:17:52.991200",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon_type": "Folder",
+ "idx": 0,
+ "label": "Pest Control",
+ "link_type": "Workspace Sidebar",
+ "modified": "2026-03-25 12:17:52.991200",
+ "modified_by": "Administrator",
+ "name": "Pest Control",
+ "owner": "Administrator",
+ "restrict_removal": 0,
+ "roles": [],
+ "standard": 1
+}

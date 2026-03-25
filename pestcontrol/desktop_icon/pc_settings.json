@@ -1,0 +1,21 @@
+{
+ "app": "pestcontrol",
+ "bg_color": "blue",
+ "creation": "2026-03-25 14:13:19.303594",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon_type": "Link",
+ "idx": 0,
+ "label": "PC Settings",
+ "link_to": "PC Settings",
+ "link_type": "Workspace Sidebar",
+ "modified": "2026-03-25 14:13:19.303594",
+ "modified_by": "Administrator",
+ "name": "PC Settings",
+ "owner": "Administrator",
+ "parent_icon": "Pest Control",
+ "restrict_removal": 0,
+ "roles": [],
+ "standard": 1
+}
