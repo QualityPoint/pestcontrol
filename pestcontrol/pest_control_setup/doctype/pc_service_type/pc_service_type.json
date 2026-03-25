@@ -7,11 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "service_name",
-  "description",
-  "pest_types_settings_section",
-  "included_pests",
-  "column_break_lidu",
-  "excluded_pests"
+  "description"
  ],
  "fields": [
   {
@@ -23,27 +19,6 @@
    "unique": 1
   },
   {
-   "fieldname": "pest_types_settings_section",
-   "fieldtype": "Section Break",
-   "label": "Pest Types Settings"
-  },
-  {
-   "fieldname": "included_pests",
-   "fieldtype": "Table",
-   "label": "Included Pests",
-   "options": "Included Pests"
-  },
-  {
-   "fieldname": "column_break_lidu",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "excluded_pests",
-   "fieldtype": "Table",
-   "label": "Excluded Pests",
-   "options": "Excluded Pests"
-  },
-  {
    "fieldname": "description",
    "fieldtype": "Small Text",
    "label": "Description",
@@ -53,7 +28,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-19 01:20:47.558517",
+ "modified": "2026-03-25 14:08:25.220827",
  "modified_by": "Administrator",
  "module": "Pest Control Setup",
  "name": "PC Service Type",
