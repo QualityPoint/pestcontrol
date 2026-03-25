@@ -1,0 +1,28 @@
+{
+ "app": "pestcontrol",
+ "creation": "2026-03-25 16:22:46.416233",
+ "docstatus": 0,
+ "doctype": "Workspace Sidebar",
+ "header_icon": "crm",
+ "idx": 0,
+ "items": [
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "users-round",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Lead",
+   "link_to": "Lead",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-03-25 16:22:46.416233",
+ "modified_by": "Administrator",
+ "name": "PC CRM",
+ "owner": "Administrator",
+ "standard": 1,
+ "title": "PC CRM"
+}

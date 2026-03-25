@@ -41,9 +41,21 @@
    "link_type": "DocType",
    "show_arrow": 0,
    "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "setting-gear",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Global Settings",
+   "link_to": "Pest Control Settings",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-03-25 14:12:35.092685",
+ "modified": "2026-03-25 15:34:17.799832",
  "modified_by": "Administrator",
  "module": "Pest Control Setup",
  "name": "PC Settings",
