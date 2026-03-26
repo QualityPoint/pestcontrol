@@ -11,6 +11,7 @@ class VisitEntry(Document):
         self.validate_visit_no()
         self.validate_customer_project()
         self.validate_supervisor()
+        self.validate_team_members()
 
     def validate_visit_no(self):
         if self.visit_no:
@@ -34,3 +35,12 @@ class VisitEntry(Document):
         if not frappe.db.get_value("Operation Team Member", self.operation_supervisor, "is_supervisor"):
             frappe.throw(
                 _("{0} is not a valid supervisor.").format(self.operation_supervisor))
+
+    def validate_team_members(self):
+        """Ensure that all team members are related to the same company"""
+        for team_member in self.team_members:
+            member_company = frappe.db.get_value(
+                "Operation Team Member", team_member.team_member, "company")
+            if member_company != self.company:
+                frappe.throw(
+                    _("Team member {0} does not belong to the selected company {1}.").format(team_member.team_member, self.company))

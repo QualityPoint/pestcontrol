@@ -15,7 +15,16 @@ frappe.ui.form.on("Visit Entry", {
         frm.set_query("operation_supervisor", function () {
             return {
                 filters: {
+                    company: frm.doc.company,
                     is_supervisor: 1
+                }
+            };
+        });
+
+        frm.set_query("team_member", "team_members", function () {
+            return {
+                filters: {
+                    company: frm.doc.company,
                 }
             };
         });

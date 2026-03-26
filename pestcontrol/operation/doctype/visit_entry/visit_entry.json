@@ -8,16 +8,14 @@
   "section_break_joib",
   "naming_series",
   "customer",
-  "tax_id",
   "customer_name",
   "column_break_nkcr",
-  "visit_date",
+  "service_type",
   "visit_type",
   "visit_no",
   "column_break_nptk",
   "company",
   "project",
-  "service_type",
   "amended_from",
   "timesheet_section",
   "timesheet",
@@ -30,13 +28,15 @@
   "section_break_nzmm",
   "operation_supervisor",
   "team_members",
-  "pests_tab",
-  "pests",
   "address_and_contact_tab",
   "visit_address_section",
   "visit_address_name",
   "visit_address",
-  "column_break_dgjt"
+  "column_break_dgjt",
+  "pests_tab",
+  "pests",
+  "chemicals_tab",
+  "chemicals"
  ],
  "fields": [
   {
@@ -48,7 +48,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Operation Visit",
+   "options": "Visit Entry",
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
@@ -87,18 +87,13 @@
    "search_index": 1
   },
   {
-   "fieldname": "tax_id",
-   "fieldtype": "Data",
-   "label": "Tax ID",
-   "read_only": 1
-  },
-  {
    "bold": 1,
    "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
    "in_global_search": 1,
    "label": "Customer Name",
+   "options": "Name",
    "read_only": 1
   },
   {
@@ -113,15 +108,6 @@
    "label": "Visit No",
    "no_copy": 1,
    "reqd": 1
-  },
-  {
-   "default": "Today",
-   "fieldname": "visit_date",
-   "fieldtype": "Data",
-   "label": "Visit Date",
-   "no_copy": 1,
-   "reqd": 1,
-   "search_index": 1
   },
   {
    "fieldname": "address_and_contact_tab",
@@ -252,13 +238,24 @@
    "label": "Pests",
    "no_copy": 1,
    "options": "Operation Visit Pests"
+  },
+  {
+   "fieldname": "chemicals_tab",
+   "fieldtype": "Tab Break",
+   "label": "Chemicals"
+  },
+  {
+   "fieldname": "chemicals",
+   "fieldtype": "Table",
+   "label": "Chemicals",
+   "options": "Visit Chemicals"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-02-19 00:31:50.705470",
+ "modified": "2026-03-26 13:57:15.649656",
  "modified_by": "Administrator",
  "module": "Operation",
  "name": "Visit Entry",
