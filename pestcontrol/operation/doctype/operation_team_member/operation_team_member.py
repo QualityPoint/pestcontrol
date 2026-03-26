@@ -13,6 +13,9 @@ class OperationTeamMember(NestedSet):
         self.member_name = frappe.get_value(
             "Employee", self.team_member, "employee_name")
 
+        if self.is_supervisor:
+            self.parent_member = None
+
     def validate(self):
         self.validate_parent_member()
         self.validate_default_warehouse()
@@ -22,7 +25,7 @@ class OperationTeamMember(NestedSet):
             frappe.throw(
                 _("{0} cannot report to himself.").format(self.member_name))
 
-        if self.parent_member:
+        if not self.is_supervisor and self.parent_member:
             if not frappe.db.get_value("Operation Team Member", self.parent_member, "is_supervisor"):
                 frappe.throw(
                     _("{0} cannot report to {1} because {1} is not a supervisor.").format(self.member_name, self.parent_member))

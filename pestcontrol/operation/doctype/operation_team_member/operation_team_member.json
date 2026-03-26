@@ -64,10 +64,12 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.is_supervisor===0;",
    "fieldname": "parent_member",
    "fieldtype": "Link",
    "ignore_user_permissions": 1,
    "label": "Supervisor",
+   "mandatory_depends_on": "eval:doc.is_supervisor===0;",
    "options": "Operation Team Member"
   },
   {
@@ -130,7 +132,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2026-02-25 02:35:04.259117",
+ "modified": "2026-03-26 13:37:29.819704",
  "modified_by": "Administrator",
  "module": "Operation",
  "name": "Operation Team Member",
