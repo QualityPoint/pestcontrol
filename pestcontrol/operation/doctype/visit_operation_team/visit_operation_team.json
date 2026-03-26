@@ -8,7 +8,8 @@
  "field_order": [
   "team_member",
   "member_name",
-  "column_break_gkds"
+  "column_break_gkds",
+  "is_supervisor"
  ],
  "fields": [
   {
@@ -29,13 +30,21 @@
   {
    "fieldname": "column_break_gkds",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fetch_from": "team_member.is_supervisor",
+   "fieldname": "is_supervisor",
+   "fieldtype": "Check",
+   "label": "Is Supervisor",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-02-17 19:42:06.335657",
+ "modified": "2026-03-26 13:44:31.902816",
  "modified_by": "Administrator",
  "module": "Operation",
  "name": "Visit Operation Team",
