@@ -12,10 +12,22 @@
    "icon": "door-open",
    "indent": 0,
    "keep_closed": 0,
-   "label": "Operation Visit",
-   "link_to": "Operation Visit",
+   "label": "Visit Entry",
+   "link_to": "Visit Entry",
    "link_type": "DocType",
    "navigate_to_tab": "",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "siren",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Visit Request",
+   "link_to": "Visit Request",
+   "link_type": "DocType",
    "show_arrow": 0,
    "type": "Link"
   },
@@ -34,10 +46,10 @@
   {
    "child": 0,
    "collapsible": 1,
-   "icon": "tool",
+   "icon": "database",
    "indent": 1,
    "keep_closed": 1,
-   "label": "Tools",
+   "label": "Setup",
    "link_type": "DocType",
    "show_arrow": 0,
    "type": "Section Break"
@@ -54,7 +66,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-03-25 13:09:22.702698",
+ "modified": "2026-03-26 13:34:03.056430",
  "modified_by": "Administrator",
  "module": "Operation",
  "name": "PC Operation",
