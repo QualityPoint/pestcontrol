@@ -1,0 +1,135 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:division_name",
+ "creation": "2026-03-25 16:30:28.365287",
+ "default_view": "Tree",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "division_name",
+  "division_type",
+  "is_group",
+  "column_break_wqxm",
+  "country",
+  "parent_division",
+  "section_break_h3wf",
+  "lft",
+  "old_parent",
+  "column_break_dxzk",
+  "rgt"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_h3wf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Left",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Right",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "Only leaf nodes will be allowed in selecting address division",
+   "fetch_from": "division_type.is_group",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group",
+   "read_only": 1
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Old Parent",
+   "options": "Address Division"
+  },
+  {
+   "fieldname": "division_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Division Name",
+   "no_copy": 1,
+   "options": "Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_wqxm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_dxzk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "parent_division",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Parent Division",
+   "options": "Address Division"
+  },
+  {
+   "fieldname": "division_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Division Type",
+   "options": "Address Division Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Country",
+   "options": "Country",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_tree": 1,
+ "links": [],
+ "modified": "2026-03-26 14:44:56.916212",
+ "modified_by": "Administrator",
+ "module": "Pest Control Setup",
+ "name": "Address Division",
+ "naming_rule": "By fieldname",
+ "nsm_parent_field": "parent_division",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "show_name_in_global_search": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

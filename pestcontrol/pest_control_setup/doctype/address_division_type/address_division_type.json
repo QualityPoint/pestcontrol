@@ -1,0 +1,127 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:division_type",
+ "creation": "2026-03-26 12:52:52.251162",
+ "default_view": "Tree",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "division_type",
+  "parent_division_type",
+  "is_group",
+  "column_break_wwxy",
+  "country",
+  "section_break_sd3z",
+  "lft",
+  "old_parent",
+  "column_break_fvwg",
+  "rgt"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_sd3z",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Left",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Right",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "default": "0",
+   "description": "Only leaf nodes will be allowed in selecting address division",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Group"
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Old Parent",
+   "options": "Address Division Type"
+  },
+  {
+   "fieldname": "column_break_wwxy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_fvwg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "division_type",
+   "fieldtype": "Data",
+   "label": "Division Type",
+   "no_copy": 1,
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "parent_division_type",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Parent Division Type",
+   "options": "Address Division Type"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Country",
+   "options": "Country",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_tree": 1,
+ "links": [],
+ "modified": "2026-03-26 14:11:31.675235",
+ "modified_by": "Administrator",
+ "module": "Pest Control Setup",
+ "name": "Address Division Type",
+ "naming_rule": "By fieldname",
+ "nsm_parent_field": "parent_division_type",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "show_name_in_global_search": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "translated_doctype": 1
+}
