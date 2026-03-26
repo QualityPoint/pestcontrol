@@ -8,6 +8,7 @@ from frappe.model.document import Document
 class PestControlSettings(Document):
     def validate(self):
         self.validate_diameter_unit()
+        self.validate_default_division_types()
 
     def validate_diameter_unit(self):
         if not self.check_visit_location_remoteness:
@@ -18,6 +19,17 @@ class PestControlSettings(Document):
                 frappe._("{0} is not a valid Length unit").format(
                     frappe.bold(self.diameter_unit))
             )
+
+    def validate_default_division_types(self):
+        for row in self.default_division_types:
+            country = frappe.db.get_value(
+                "Address Division Type", row.division_type, "country")
+            if country != row.country:
+                frappe.throw(
+                    frappe._(
+                        "Row #{0}: Division Type {1} does not belong to country {2}"
+                    ).format(row.idx, frappe.bold(row.division_type), frappe.bold(row.country))
+                )
 
 
 def _query_uoms_by_category(category: str, txt: str = "", page_len: int = 500, start: int = 0):

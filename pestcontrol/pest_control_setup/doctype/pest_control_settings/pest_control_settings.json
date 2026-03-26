@@ -4,6 +4,15 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "global_defaults_tab",
+  "contracting_section",
+  "column_break_wzoq",
+  "default_division_types",
+  "column_break_ekfq",
+  "warehouse_inventory_section",
+  "create_visit_delivery_note",
+  "submit_delivery_note",
+  "column_break_hejq",
   "operation_tab",
   "check_visit_location_remoteness",
   "permissible_visit_location_remoteness",
@@ -42,13 +51,61 @@
    "fieldname": "check_visit_location_remoteness",
    "fieldtype": "Check",
    "label": "Check Visit Location Remoteness"
+  },
+  {
+   "fieldname": "global_defaults_tab",
+   "fieldtype": "Tab Break",
+   "label": "Global Defaults"
+  },
+  {
+   "fieldname": "column_break_ekfq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contracting_section",
+   "fieldtype": "Section Break",
+   "label": "Contracting"
+  },
+  {
+   "fieldname": "column_break_wzoq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_division_types",
+   "fieldtype": "Table",
+   "label": "Default Division Types",
+   "options": "Default Address Division Types"
+  },
+  {
+   "fieldname": "warehouse_inventory_section",
+   "fieldtype": "Section Break",
+   "label": "Warehouse Inventory"
+  },
+  {
+   "default": "0",
+   "description": "If this is checked Delivery Notes will be created automatically by getting all the details regarding the customer, project, used items, and targeted warehouse.",
+   "fieldname": "create_visit_delivery_note",
+   "fieldtype": "Check",
+   "label": "Automatically Create Delivery Note Document Upon Visit Completion"
+  },
+  {
+   "fieldname": "column_break_hejq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "depends_on": "create_visit_delivery_note",
+   "description": "If this is unchecked Delivery Notes will be saved in a Draft state and will have to be submitted manually.",
+   "fieldname": "submit_delivery_note",
+   "fieldtype": "Check",
+   "label": "Submit Delivery Note"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-03-25 15:06:44.135762",
+ "modified": "2026-03-26 17:32:29.365750",
  "modified_by": "Administrator",
  "module": "Pest Control Setup",
  "name": "Pest Control Settings",
