@@ -42,7 +42,6 @@
   },
   {
    "default": "0",
-   "description": "Only leaf nodes will be allowed in selecting address division",
    "fetch_from": "division_type.is_group",
    "fieldname": "is_group",
    "fieldtype": "Check",
@@ -104,7 +103,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2026-03-26 14:44:56.916212",
+ "modified": "2026-03-26 16:50:58.732626",
  "modified_by": "Administrator",
  "module": "Pest Control Setup",
  "name": "Address Division",
