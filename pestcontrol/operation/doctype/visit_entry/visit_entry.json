@@ -261,7 +261,7 @@
  "modified": "2026-02-19 00:31:50.705470",
  "modified_by": "Administrator",
  "module": "Operation",
- "name": "Operation Visit",
+ "name": "Visit Entry",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [

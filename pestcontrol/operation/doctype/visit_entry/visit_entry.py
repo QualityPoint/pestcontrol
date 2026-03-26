@@ -6,7 +6,7 @@ from frappe import _
 from frappe.model.document import Document
 
 
-class OperationVisit(Document):
+class VisitEntry(Document):
     def validate(self):
         self.validate_visit_no()
         self.validate_customer_project()
