@@ -7,15 +7,14 @@ from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 def custom_fields():
     """Waqf specific custom fields that need to be added to the masters in ERPNext"""
     return {
-        # "Company": [
-        #     {
-        #         "fieldname": "is_endowment",
-        #         "fieldtype": "Check",
-        #         "label": _("Is Endowment"),
-        #         "default": "0",
-        #         "insert_after": "abbr",
-        #     }
-        # ]
+        "Address": [
+            {
+                "fieldname": "location_tab",
+                "fieldtype": "Tab Break",
+                "label": _("Location"),
+                "insert_after": "links",
+            }
+        ]
     }
 
 
