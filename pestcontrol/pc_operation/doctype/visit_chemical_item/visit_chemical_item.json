@@ -1,0 +1,101 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-03-26 10:29:20.202678",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "chemical_item",
+  "chemical_name",
+  "column_break_fcsa",
+  "section_break_dmgl",
+  "qty",
+  "stock_uom",
+  "column_break_bitg",
+  "uom",
+  "conversion_factor"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "chemical_item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Chemical Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "chemical_item.item_name",
+   "fieldname": "chemical_name",
+   "fieldtype": "Data",
+   "label": "Chemical Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_fcsa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "UOM",
+   "options": "UOM",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "columns": 2,
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_dmgl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "chemical_item.stock_uom",
+   "fieldname": "stock_uom",
+   "fieldtype": "Link",
+   "label": "Stock UOM",
+   "options": "UOM",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_bitg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.uom != doc.stock_uom",
+   "fieldname": "conversion_factor",
+   "fieldtype": "Float",
+   "label": "UOM Conversion Factor",
+   "print_hide": 1,
+   "read_only": 1,
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-06-16 12:34:41.026092",
+ "modified_by": "Administrator",
+ "module": "PC Operation",
+ "name": "Visit Chemical Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

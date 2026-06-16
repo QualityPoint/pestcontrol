@@ -95,7 +95,7 @@ app_include_js = "pestcontrol.bundle.js"
 # --------------
 
 # before_migrate = "pestcontrol.install.before_install"
-after_migrate = "pestcontrol.install.after_install"
+# after_migrate = "pestcontrol.install.after_install"
 
 # Integration Setup
 # ------------------
@@ -250,4 +250,4 @@ after_migrate = "pestcontrol.install.after_install"
 
 website_route_rules = [
     {'from_route': '/frontend/<path:app_path>', 'to_route': 'frontend'},
-    ]
+]

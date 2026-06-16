@@ -1,0 +1,150 @@
+{
+ "actions": [],
+ "creation": "2026-03-25 14:43:51.138289",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "global_defaults_tab",
+  "service_global_settings_section",
+  "service_territory",
+  "column_break_xtpj",
+  "contracting_section",
+  "column_break_wzoq",
+  "default_division_types",
+  "column_break_ekfq",
+  "warehouse_inventory_section",
+  "create_visit_delivery_note",
+  "submit_delivery_note",
+  "column_break_hejq",
+  "operation_tab",
+  "check_visit_location_remoteness",
+  "permissible_visit_location_remoteness",
+  "diameter_unit",
+  "column_break_hleu"
+ ],
+ "fields": [
+  {
+   "fieldname": "global_defaults_tab",
+   "fieldtype": "Tab Break",
+   "label": "Global Defaults"
+  },
+  {
+   "fieldname": "service_global_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Service Global Settings"
+  },
+  {
+   "description": "These settings will be used to manage multiple companies with different branches in different geographic regions. If no geographic region is specified for each company, the default company will be selected.",
+   "fieldname": "service_territory",
+   "fieldtype": "Table",
+   "label": "Service Territory",
+   "options": "Company Service Territory"
+  },
+  {
+   "fieldname": "column_break_xtpj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contracting_section",
+   "fieldtype": "Section Break",
+   "label": "Contracting"
+  },
+  {
+   "fieldname": "column_break_wzoq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Specify the division type corresponding to the country, which will be mandatory when determining the service location.",
+   "fieldname": "default_division_types",
+   "fieldtype": "Table",
+   "label": "Default Division Types",
+   "options": "Default Address Division Types"
+  },
+  {
+   "fieldname": "column_break_ekfq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "warehouse_inventory_section",
+   "fieldtype": "Section Break",
+   "label": "Warehouse Inventory"
+  },
+  {
+   "default": "0",
+   "description": "If this is checked Delivery Notes will be created automatically by getting all the details regarding the customer, project, used items, and targeted warehouse.",
+   "fieldname": "create_visit_delivery_note",
+   "fieldtype": "Check",
+   "label": "Automatically Create Delivery Note Document Upon Visit Completion"
+  },
+  {
+   "default": "0",
+   "depends_on": "create_visit_delivery_note",
+   "description": "If this is unchecked Delivery Notes will be saved in a Draft state and will have to be submitted manually.",
+   "fieldname": "submit_delivery_note",
+   "fieldtype": "Check",
+   "label": "Submit Delivery Note"
+  },
+  {
+   "fieldname": "column_break_hejq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "operation_tab",
+   "fieldtype": "Tab Break",
+   "label": "Operation"
+  },
+  {
+   "default": "0",
+   "fieldname": "check_visit_location_remoteness",
+   "fieldtype": "Check",
+   "label": "Check Visit Location Remoteness"
+  },
+  {
+   "default": "10",
+   "depends_on": "check_visit_location_remoteness",
+   "fieldname": "permissible_visit_location_remoteness",
+   "fieldtype": "Float",
+   "label": "Permissible Visit Location Remoteness",
+   "mandatory_depends_on": "check_visit_location_remoteness",
+   "precision": "2"
+  },
+  {
+   "depends_on": "check_visit_location_remoteness",
+   "fieldname": "diameter_unit",
+   "fieldtype": "Link",
+   "label": "Diameter Unit",
+   "mandatory_depends_on": "check_visit_location_remoteness",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "column_break_hleu",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-06-15 10:23:58.592367",
+ "modified_by": "Administrator",
+ "module": "PC Setup",
+ "name": "Pest Control Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

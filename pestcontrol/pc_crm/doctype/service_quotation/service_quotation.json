@@ -1,0 +1,139 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-06-15 13:56:47.495557",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ii9f",
+  "naming_series",
+  "column_break_epry",
+  "transaction_date",
+  "valid_till",
+  "column_break_ydkw",
+  "company",
+  "amended_from",
+  "pests_tab",
+  "pest_category",
+  "pests_html",
+  "pests"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ii9f",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Service Quotation",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Series",
+   "no_copy": 1,
+   "options": "PC-QTN-.YYYY.-",
+   "print_hide": 1,
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "column_break_epry",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ydkw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Date",
+   "no_copy": 1,
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "valid_till",
+   "fieldtype": "Date",
+   "label": "Valid Till"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "print_hide": 1,
+   "remember_last_selected_value": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "pests_tab",
+   "fieldtype": "Tab Break",
+   "label": "Pests"
+  },
+  {
+   "fieldname": "pest_category",
+   "fieldtype": "Table MultiSelect",
+   "label": "Pest Category",
+   "options": "Service Pest Category"
+  },
+  {
+   "fieldname": "pests_html",
+   "fieldtype": "HTML",
+   "label": "Pests HTML",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pests",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Pests",
+   "options": "Service Pest Item",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-06-15 14:27:25.845509",
+ "modified_by": "Administrator",
+ "module": "PC CRM",
+ "name": "Service Quotation",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

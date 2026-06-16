@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-18 23:46:19.065876",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "column_break_djit",
+  "amenity",
+  "floor_type",
+  "pest_type",
+  "column_break_qpbe",
+  "pest_category_html",
+  "pest_category",
+  "pest_type_html",
+  "condition"
+ ],
+ "fields": [
+  {
+   "fieldname": "column_break_djit",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "floor_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Floor",
+   "options": "Floor Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_qpbe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "description": "Set via the Pest Type selector (expand the row).",
+   "fieldname": "pest_type",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Pest Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pest_category_html",
+   "fieldtype": "HTML",
+   "label": "Pest Category"
+  },
+  {
+   "columns": 2,
+   "fieldname": "pest_category",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Pest Category",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pest_type_html",
+   "fieldtype": "HTML",
+   "label": "Pest Type"
+  },
+  {
+   "columns": 2,
+   "fieldname": "condition",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Condition",
+   "options": "Condition Level",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "amenity",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Amenity",
+   "options": "Amenity",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-06-16 11:52:21.251595",
+ "modified_by": "Administrator",
+ "module": "PC Operation",
+ "name": "Visit Facility Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

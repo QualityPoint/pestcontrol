@@ -1,0 +1,495 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2026-06-15 11:42:35.566306",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_jmi6",
+  "naming_series",
+  "customer",
+  "customer_name",
+  "column_break_irjs",
+  "company",
+  "posting_date",
+  "service_type",
+  "project_details_section",
+  "facility",
+  "project_name",
+  "column_break_tmlo",
+  "project_category",
+  "project_duration_section",
+  "start_date",
+  "end_date",
+  "column_break_udmh",
+  "duration_uom",
+  "project_duration",
+  "operation_section",
+  "visit_count",
+  "column_break_rasf",
+  "visit_period_count",
+  "visit_period_uom",
+  "section_break_jjso",
+  "include_emergency_visits",
+  "emergency_visit_count",
+  "column_break_oytu",
+  "emergency_visit_period_count",
+  "emergency_visit_period_uom",
+  "pests_tab",
+  "pest_category",
+  "pests_html",
+  "pests",
+  "address_and_contact_tab",
+  "location_section",
+  "location",
+  "section_break_cqhz",
+  "latitude",
+  "longitude",
+  "column_break_xdsf",
+  "property_address",
+  "section_break_eqkw",
+  "column_break_iznz",
+  "contact_person",
+  "contact_display",
+  "contact_mobile",
+  "contact_email",
+  "column_break_mgcf",
+  "more_info_tab",
+  "references_section",
+  "project",
+  "service_contract",
+  "column_break_phha",
+  "status_section",
+  "status",
+  "remarks",
+  "column_break_rkyn",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_jmi6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Operation Order",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Series",
+   "no_copy": 1,
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "column_break_irjs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company",
+   "remember_last_selected_value": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "Posting Date",
+   "no_copy": 1,
+   "print_hide": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "project_duration_section",
+   "fieldtype": "Section Break",
+   "label": "Project Duration"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_udmh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Duration-Based",
+   "description": "<ul><li>Duration-Based: Depends on contract expiry.</li><li>Milestone-Based: Depends on milestone completion.</li></ul>",
+   "fieldname": "project_category",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Project Category",
+   "options": "\nDuration-Based\nMilestone-Based",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.project_category==\"Duration-Based\"",
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date",
+   "mandatory_depends_on": "eval:doc.project_category==\"Duration-Based\""
+  },
+  {
+   "default": "Month",
+   "depends_on": "eval:doc.project_category==\"Duration-Based\"",
+   "fieldname": "duration_uom",
+   "fieldtype": "Select",
+   "label": "Duration UOM",
+   "mandatory_depends_on": "eval:doc.project_category==\"Duration-Based\"",
+   "options": "\nDay\nMonth\nYear"
+  },
+  {
+   "depends_on": "eval:doc.project_category==\"Duration-Based\"",
+   "fieldname": "project_duration",
+   "fieldtype": "Float",
+   "label": "Project Duration",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "more_info_tab",
+   "fieldtype": "Tab Break",
+   "label": "More Info"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Status"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Draft\nIn Progress\nNot Started\nStopped\nClosed\nCompleted\nCancelled",
+   "print_hide": 1,
+   "read_only": 1,
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_rkyn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "remarks",
+   "fieldtype": "Text",
+   "label": "Remarks",
+   "no_copy": 1,
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "pests_tab",
+   "fieldtype": "Tab Break",
+   "label": "Pests"
+  },
+  {
+   "fieldname": "pests_html",
+   "fieldtype": "HTML",
+   "label": "Pests HTML",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pests",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Pests",
+   "options": "Operation Pest Item",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "pest_category",
+   "fieldtype": "Table MultiSelect",
+   "label": "Pest Category",
+   "options": "Operation Pest Category"
+  },
+  {
+   "fieldname": "service_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Service Type",
+   "options": "Service Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project_details_section",
+   "fieldtype": "Section Break",
+   "label": "Project Details"
+  },
+  {
+   "fieldname": "column_break_tmlo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "address_and_contact_tab",
+   "fieldtype": "Tab Break",
+   "label": "Address & Contact"
+  },
+  {
+   "fieldname": "property_address",
+   "fieldtype": "Text Editor",
+   "label": "Property Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_iznz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "contact_person",
+   "fieldtype": "Link",
+   "label": "Contact Person",
+   "options": "Contact",
+   "print_hide": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fetch_from": "contact_person.full_name",
+   "fieldname": "contact_display",
+   "fieldtype": "Small Text",
+   "in_global_search": 1,
+   "label": "Contact",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fetch_from": "contact_person.mobile_no",
+   "fieldname": "contact_mobile",
+   "fieldtype": "Small Text",
+   "label": "Mobile No",
+   "options": "Phone",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fetch_from": "contact_person.email_id",
+   "fieldname": "contact_email",
+   "fieldtype": "Data",
+   "label": "Contact Email",
+   "options": "Email",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "references_section",
+   "fieldtype": "Section Break",
+   "label": "References"
+  },
+  {
+   "fieldname": "column_break_phha",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "label": "Project Name",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "location_section",
+   "fieldtype": "Section Break",
+   "label": "Location"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Geolocation",
+   "label": "Location"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Float",
+   "label": "Latitude",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Float",
+   "label": "Longitude",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_eqkw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_cqhz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_xdsf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_mgcf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "operation_section",
+   "fieldtype": "Section Break",
+   "label": "Operation"
+  },
+  {
+   "default": "1",
+   "fieldname": "visit_count",
+   "fieldtype": "Int",
+   "label": "Visit Count",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_rasf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "visit_period_count",
+   "fieldtype": "Int",
+   "label": "Visit Period Count",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Day",
+   "fieldname": "visit_period_uom",
+   "fieldtype": "Select",
+   "label": "Visit Period UOM",
+   "options": "Day\nWeek\nMonth\nYear",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_jjso",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.include_emergency_visits",
+   "fieldname": "emergency_visit_count",
+   "fieldtype": "Int",
+   "label": "Emergency Visit Count",
+   "mandatory_depends_on": "eval:doc.include_emergency_visits",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_oytu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.include_emergency_visits",
+   "fieldname": "emergency_visit_period_count",
+   "fieldtype": "Int",
+   "label": "Emergency Visit Period Count",
+   "mandatory_depends_on": "eval:doc.include_emergency_visits",
+   "non_negative": 1
+  },
+  {
+   "depends_on": "eval:doc.include_emergency_visits",
+   "fieldname": "emergency_visit_period_uom",
+   "fieldtype": "Select",
+   "label": "Emergency Visit Period UOM",
+   "mandatory_depends_on": "eval:doc.include_emergency_visits",
+   "options": "\nDay\nWeek\nMonth\nYear"
+  },
+  {
+   "default": "0",
+   "fieldname": "include_emergency_visits",
+   "fieldtype": "Check",
+   "label": "Include Emergency Visits"
+  },
+  {
+   "fieldname": "facility",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Facility",
+   "options": "Facility",
+   "reqd": 1
+  },
+  {
+   "fieldname": "service_contract",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Service Contract",
+   "options": "Service Contract"
+  }
+ ],
+ "grid_page_length": 50,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-06-16 17:54:28.534713",
+ "modified_by": "Administrator",
+ "module": "PC Operation",
+ "name": "Operation Order",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "company,service_type,project,service_contract",
+ "show_title_field_in_link": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "project_name"
+}

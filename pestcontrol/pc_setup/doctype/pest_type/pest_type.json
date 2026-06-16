@@ -1,0 +1,84 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:pest_name",
+ "creation": "2026-06-14 16:50:29.354519",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "pest_name",
+  "disabled",
+  "column_break_udmn",
+  "image",
+  "pest_information_section",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "pest_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Pest Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_udmn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "If disabled, this pest type will be removed from all pest categories.",
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "label": "Disabled"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "Image",
+   "no_copy": 1
+  },
+  {
+   "fieldname": "pest_information_section",
+   "fieldtype": "Section Break",
+   "label": "Pest Information"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  }
+ ],
+ "grid_page_length": 50,
+ "image_field": "image",
+ "links": [],
+ "modified": "2026-06-15 13:32:56.892873",
+ "modified_by": "Administrator",
+ "module": "PC Setup",
+ "name": "Pest Type",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "show_preview_popup": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "translated_doctype": 1
+}
