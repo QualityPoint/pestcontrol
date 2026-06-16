@@ -248,6 +248,5 @@ app_include_js = "pestcontrol.bundle.js"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
-website_route_rules = [
-    {'from_route': '/frontend/<path:app_path>', 'to_route': 'frontend'},
-]
+# Marketing website (static theme served from www/, assets under public/website/)
+home_page = "index"

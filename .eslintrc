@@ -26,8 +26,6 @@
 	"root": true,
 	"globals": {
 		"frappe": true,
-		"Vue": true,
-		"SetVueGlobals": true,
 		"__": true,
 		"repl": true,
 		"Class": true,
