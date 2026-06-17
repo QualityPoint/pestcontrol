@@ -14,7 +14,7 @@ def after_install():
     # create_property_setter()
     make_custom_fields()
     make_fixtures()
-    # set_single_defaults()
+    set_single_defaults()
 
 
 def before_uninstall():
@@ -23,9 +23,10 @@ def before_uninstall():
 
 
 def set_single_defaults():
-    """Set default values for single DocTypes"""
+    """Seed each single DocType with its fields' `default` values (mirrors
+    ERPNext's `set_single_defaults`)."""
     for dt in (
-        "WMS Settings"
+        "Operation Settings",
     ):
         default_values = frappe.db.sql(
             """select fieldname, `default` from `tabDocField`

@@ -13,7 +13,7 @@
   "company",
   "operation_order",
   "visit_type",
-  "visit_reference_no",
+  "visit_no",
   "timesheet_section",
   "timesheet",
   "section_break_ngcd",
@@ -96,16 +96,6 @@
    "label": "Visit Type",
    "options": "Visit Type",
    "reqd": 1
-  },
-  {
-   "allow_on_submit": 1,
-   "bold": 1,
-   "fieldname": "visit_reference_no",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Visit Reference No",
-   "no_copy": 1
   },
   {
    "fieldname": "column_break_nptk",
@@ -310,13 +300,23 @@
    "label": "Amenities",
    "no_copy": 1,
    "options": "Visit Facility Item"
+  },
+  {
+   "allow_on_submit": 1,
+   "bold": 1,
+   "fieldname": "visit_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Visit Reference Number",
+   "no_copy": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-06-16 16:36:44.669805",
+ "modified": "2026-06-17 12:02:24.949501",
  "modified_by": "Administrator",
  "module": "PC Operation",
  "name": "Visit Entry",

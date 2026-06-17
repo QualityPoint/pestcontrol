@@ -13,6 +13,7 @@ from pestcontrol.utils import calculate_duration
 
 class VisitEntry(Document):
     def validate(self):
+        self.validate_visit_reference_unique()
         self.validate_operation_order()
         self.validate_supervisor()
         self.validate_worker_company()
@@ -46,9 +47,54 @@ class VisitEntry(Document):
         the order.
         """
         rows = self.timesheet or []
-        rows.sort(key=lambda row: get_datetime(row.from_time) if row.from_time else datetime.max)
+        rows.sort(key=lambda row: get_datetime(row.from_time)
+                  if row.from_time else datetime.max)
         for idx, row in enumerate(rows, start=1):
             row.idx = idx
+
+    def validate_visit_reference_unique(self):
+        """Enforce uniqueness of `visit_no`, scoped by Operation Settings.
+
+        The single `Operation Settings.unique_visit_reference` flag toggles the
+        *scope* of the constraint (it never disables it):
+          - ON  → unique per company: the same reference may appear under
+            different companies, but not twice within one company.
+          - OFF → unique across the entire doctype: the reference may not repeat
+            anywhere, regardless of company.
+
+        Empty references are never checked. Cancelled peers (docstatus 2) are
+        ignored so a freed-up reference can be reused.
+        """
+        if not self.visit_no:
+            return
+
+        per_company = frappe.db.get_single_value(
+            "Operation Settings", "unique_visit_reference")
+
+        filters = {
+            "visit_no": self.visit_no,
+            "name": ("!=", self.name),
+            "docstatus": ("!=", 2),
+        }
+        if per_company:
+            filters["company"] = self.company
+
+        duplicate = frappe.db.exists("Visit Entry", filters)
+        if not duplicate:
+            return
+
+        if per_company:
+            message = _("Visit Reference No.: {0} is already used by {1} for company {2}.").format(
+                frappe.bold(self.visit_no),
+                frappe.bold(duplicate),
+                frappe.bold(self.company or ""),
+            )
+        else:
+            message = _("Visit Reference No.: {0} is already used by {1}.").format(
+                frappe.bold(self.visit_no), frappe.bold(duplicate)
+            )
+
+        frappe.throw(message, title=_("Duplicate Visit Reference No"))
 
     def validate_operation_order(self):
         """The linked Operation Order must be submitted and belong to this visit's
@@ -65,7 +111,8 @@ class VisitEntry(Document):
         )
 
         if order.docstatus != 1:
-            frappe.throw(_("Operation Order {0} must be submitted.").format(frappe.bold(self.operation_order)))
+            frappe.throw(_("Operation Order {0} must be submitted.").format(
+                frappe.bold(self.operation_order)))
 
         for fieldname in ("customer", "company"):
             if order.get(fieldname) != self.get(fieldname):
@@ -87,11 +134,13 @@ class VisitEntry(Document):
             "Operation Worker", self.supervisor, ("company", "is_supervisor"), as_dict=True
         )
         if not worker.is_supervisor:
-            frappe.throw(_("{0} is not a supervisor.").format(frappe.bold(self.supervisor)))
+            frappe.throw(_("{0} is not a supervisor.").format(
+                frappe.bold(self.supervisor)))
         if worker.company != self.company:
             frappe.throw(
                 _("Supervisor {0} does not belong to company {1}.").format(
-                    frappe.bold(self.supervisor), frappe.bold(self.company or "")
+                    frappe.bold(self.supervisor), frappe.bold(
+                        self.company or "")
                 )
             )
 
@@ -112,7 +161,8 @@ class VisitEntry(Document):
                 self._row_throw(
                     row,
                     _("Worker {0} does not belong to company {1}.").format(
-                        frappe.bold(row.worker_name or row.worker), frappe.bold(self.company or "")
+                        frappe.bold(row.worker_name or row.worker), frappe.bold(
+                            self.company or "")
                     ),
                 )
 
@@ -133,7 +183,8 @@ class VisitEntry(Document):
                 groups.setdefault(row.worker, []).append(row)
 
         for rows in groups.values():
-            context = _("Worker {0} — ").format(rows[0].worker_name or rows[0].worker)
+            context = _("Worker {0} — ").format(
+                rows[0].worker_name or rows[0].worker)
             self._check_interval_overlap(rows, context)
 
     def validate_worker_times_within_visit(self):
@@ -151,14 +202,16 @@ class VisitEntry(Document):
                 self._row_throw(
                     row,
                     _("From Time ({0}) cannot be before the visit start ({1}).").format(
-                        format_datetime(row.from_time), format_datetime(visit_start)
+                        format_datetime(
+                            row.from_time), format_datetime(visit_start)
                     ),
                 )
             if visit_end and row.to_time and get_datetime(row.to_time) > visit_end:
                 self._row_throw(
                     row,
                     _("To Time ({0}) cannot be after the visit end ({1}).").format(
-                        format_datetime(row.to_time), format_datetime(visit_end)
+                        format_datetime(
+                            row.to_time), format_datetime(visit_end)
                     ),
                 )
 
@@ -171,7 +224,8 @@ class VisitEntry(Document):
         for row in self.amenities:
             if not (row.pest_type or "").strip():
                 self._row_throw(
-                    row, _("select at least one Pest Type for amenity {0}.").format(frappe.bold(row.amenity or ""))
+                    row, _("select at least one Pest Type for amenity {0}.").format(
+                        frappe.bold(row.amenity or ""))
                 )
 
     def validate_required_tables(self, fieldnames):
@@ -179,7 +233,8 @@ class VisitEntry(Document):
         for fieldname in fieldnames:
             if not self.get(fieldname):
                 frappe.throw(
-                    _("Add at least one row in {0}.").format(frappe.bold(_(self.meta.get_label(fieldname))))
+                    _("Add at least one row in {0}.").format(
+                        frappe.bold(_(self.meta.get_label(fieldname))))
                 )
 
     def validate_chemicals(self):
@@ -206,7 +261,8 @@ class VisitEntry(Document):
                 )
                 row.uom = sales_uom or stock_uom
 
-            factor = get_conversion_factor(row.chemical_item, row.uom).get("conversion_factor")
+            factor = get_conversion_factor(
+                row.chemical_item, row.uom).get("conversion_factor")
             if not factor:
                 self._row_throw(
                     row,
@@ -226,7 +282,8 @@ class VisitEntry(Document):
         — the client's live value is never trusted.
         """
         self._validate_time_rows(self.timesheet, required=("to_time",))
-        self._validate_time_rows(self.workers, required=("from_time", "to_time"))
+        self._validate_time_rows(
+            self.workers, required=("from_time", "to_time"))
 
     # ------------------------------------------------------------------ #
     # roll-ups                                                           #
@@ -262,8 +319,10 @@ class VisitEntry(Document):
 
         Either bound is ``None`` when no row carries the corresponding time yet.
         """
-        starts = [get_datetime(row.from_time) for row in self.timesheet if row.from_time]
-        ends = [get_datetime(row.to_time) for row in self.timesheet if row.to_time]
+        starts = [get_datetime(row.from_time)
+                  for row in self.timesheet if row.from_time]
+        ends = [get_datetime(row.to_time)
+                for row in self.timesheet if row.to_time]
         return (min(starts) if starts else None, max(ends) if ends else None)
 
     def _validate_time_rows(self, rows, required):
@@ -271,13 +330,15 @@ class VisitEntry(Document):
         for row in rows or []:
             for fieldname in required:
                 if not row.get(fieldname):
-                    self._row_throw(row, _("{0} is required.").format(_(row.meta.get_label(fieldname))))
+                    self._row_throw(row, _("{0} is required.").format(
+                        _(row.meta.get_label(fieldname))))
 
             if row.from_time and row.to_time and time_diff_in_seconds(row.to_time, row.from_time) <= 0:
                 self._row_throw(
                     row,
                     _("To Time ({0}) must be after From Time ({1}).").format(
-                        format_datetime(row.to_time), format_datetime(row.from_time)
+                        format_datetime(row.to_time), format_datetime(
+                            row.from_time)
                     ),
                 )
 
@@ -313,4 +374,5 @@ class VisitEntry(Document):
     @staticmethod
     def _row_throw(row, message):
         """Raise a row-prefixed error: '<Child DocType> Row #<idx>: <message>'."""
-        frappe.throw(_("{0} Row #{1}: {2}").format(_(row.doctype), row.idx, message))
+        frappe.throw(_("{0} Row #{1}: {2}").format(
+            _(row.doctype), row.idx, message))

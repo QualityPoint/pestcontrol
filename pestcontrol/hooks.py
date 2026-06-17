@@ -83,7 +83,7 @@ app_include_js = "pestcontrol.bundle.js"
 # ------------
 
 # before_install = "pestcontrol.install.before_install"
-# after_install = "pestcontrol.install.after_install"
+after_install = "pestcontrol.install.after_install"
 
 # Uninstallation
 # ------------
@@ -247,6 +247,3 @@ app_include_js = "pestcontrol.bundle.js"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-
-# Marketing website (static theme served from www/, assets under public/website/)
-home_page = "index"
