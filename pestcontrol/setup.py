@@ -1,13 +1,15 @@
 import frappe
+
 from pestcontrol.custom.custom_fields import (
+    delete_custom_fields,
     make_custom_fields,
-    delete_custom_fields
 )
+from pestcontrol.custom.fixtures import make_fixtures
+
 # from pestcontrol.custom.property_setter import (
 #     create_property_setter,
 #     remove_property_setter
 # )
-from pestcontrol.custom.fixtures import make_fixtures
 
 
 def after_install():
