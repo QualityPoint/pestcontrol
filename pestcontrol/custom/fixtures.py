@@ -125,6 +125,50 @@ def make_fixtures():
             "name": _("Rats"),
             "description": _("Rats are medium-sized rodents that are known for their adaptability and ability to thrive in various environments, often considered pests due to their association with unsanitary conditions and potential to spread diseases")
         },
+        # Pest Category (replaces the old Pest Type tree grouping)
+        {
+            "doctype": "Pest Category",
+            "category_name": _("Flying Pests"),
+            "pests": [
+                {"pest_type": _("Flies")},
+                {"pest_type": _("Drain Flies")},
+                {"pest_type": _("Mosquitoes")},
+                {"pest_type": _("Chironomus")}
+            ]
+        },
+        {
+            "doctype": "Pest Category",
+            "category_name": _("Crawling Pests"),
+            "pests": [
+                {"pest_type": _("Beetles")},
+                {"pest_type": _("Flour Beetle")},
+                {"pest_type": _("Bed Bugs")},
+                {"pest_type": _("Mites")},
+                {"pest_type": _("Fleas")},
+                {"pest_type": _("Ticks")},
+                {"pest_type": _("Ants")},
+                {"pest_type": _("Spiders")},
+                {"pest_type": _("Cockroaches")},
+                {"pest_type": _("Scorpions")},
+                {"pest_type": _("Centipede")}
+            ]
+        },
+        {
+            "doctype": "Pest Category",
+            "category_name": _("Rodents"),
+            "pests": [
+                {"pest_type": _("Rats")}
+            ]
+        },
+        {
+            "doctype": "Pest Category",
+            "category_name": _("Reptiles"),
+            "pests": [
+                {"pest_type": _("Gecko")},
+                {"pest_type": _("Snakes")},
+                {"pest_type": _("Vipers")}
+            ]
+        },
         # Service Type
         {
             "doctype": "Service Type",
