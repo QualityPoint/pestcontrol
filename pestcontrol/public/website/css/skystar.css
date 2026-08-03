@@ -1,0 +1,33 @@
+/*
+ * Skystar brand overrides
+ * Loaded after custom.css so these rules win without editing vendor files.
+ */
+
+/*
+ * The template was designed for a 193x50 wordmark (~3.86:1) and therefore
+ * puts no size constraint on the header logo. icons/skystar-logo.png is
+ * 4377x599 (~7.31:1) - nearly twice as wide per unit of height - so it is
+ * sized by width to stay within the horizontal space the header reserves
+ * for the brand. Height follows the aspect ratio (~30px at 220px wide).
+ */
+.navbar-brand img {
+	width: 220px;
+	max-width: 100%;
+	height: auto;
+}
+
+.footer-logo img {
+	width: 200px;
+	max-width: 100%;
+	height: auto;
+}
+
+@media (max-width: 991px) {
+	.navbar-brand img {
+		width: 170px;
+	}
+
+	.footer-logo img {
+		width: 170px;
+	}
+}
