@@ -24,8 +24,8 @@
    "icon": "radar",
    "indent": 0,
    "keep_closed": 0,
-   "label": "Severity Level",
-   "link_to": "Severity Level",
+   "label": "Condition Level",
+   "link_to": "Condition Level",
    "link_type": "DocType",
    "show_arrow": 0,
    "type": "Link"

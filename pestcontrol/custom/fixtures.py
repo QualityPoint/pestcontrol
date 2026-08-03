@@ -246,25 +246,25 @@ def make_fixtures():
             "service_name": _("Sterilization and disinfection"),
             "description": _("Services that involve sterilization and disinfection to eliminate pests and prevent the spread of diseases, often used in healthcare settings, food processing facilities, and other environments where hygiene is critical")
         },
-        # Severity Level
+        # Condition Level
         {
-            "doctype": "Severity Level",
-            "severity_level": "Low",
+            "doctype": "Condition Level",
+            "level_name": "Low",
             "description": "Low severity level for minor pest issues"
         },
         {
-            "doctype": "Severity Level",
-            "severity_level": "Medium",
+            "doctype": "Condition Level",
+            "level_name": "Medium",
             "description": "Medium severity level for moderate pest issues"
         },
         {
-            "doctype": "Severity Level",
-            "severity_level": "High",
+            "doctype": "Condition Level",
+            "level_name": "High",
             "description": "High severity level for severe pest issues"
         },
         {
-            "doctype": "Severity Level",
-            "severity_level": "Preventive",
+            "doctype": "Condition Level",
+            "level_name": "Preventive",
             "description": "Preventive severity level for proactive pest control measures"
         },
         # Visit Type
