@@ -232,17 +232,17 @@ def make_fixtures():
         },
         # Service Type
         {
-            "doctype": "PC Service Type",
+            "doctype": "Service Type",
             "service_name": _("Public health pest control"),
             "description": _("Pest control services aimed at protecting public health by controlling pests that can transmit diseases or cause health hazards")
         },
         {
-            "doctype": "PC Service Type",
+            "doctype": "Service Type",
             "service_name": _("Termite control"),
             "description": _("Pest control services focused on the prevention and elimination of termite infestations, which can cause significant damage to wooden structures")
         },
         {
-            "doctype": "PC Service Type",
+            "doctype": "Service Type",
             "service_name": _("Sterilization and disinfection"),
             "description": _("Services that involve sterilization and disinfection to eliminate pests and prevent the spread of diseases, often used in healthcare settings, food processing facilities, and other environments where hygiene is critical")
         },
