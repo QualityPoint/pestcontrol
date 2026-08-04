@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_bulk_edit": 1,
  "autoname": "naming_series:",
  "creation": "2026-06-15 11:42:35.566306",
  "doctype": "DocType",
@@ -83,7 +84,6 @@
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
-   "in_list_view": 1,
    "label": "Series",
    "no_copy": 1,
    "options": "OPR-ORD-.YYYY.-",
@@ -464,7 +464,7 @@
  "grid_page_length": 50,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-06-17 10:52:39.739462",
+ "modified": "2026-08-04 16:33:04.120589",
  "modified_by": "Administrator",
  "module": "PC Operation",
  "name": "Operation Order",
