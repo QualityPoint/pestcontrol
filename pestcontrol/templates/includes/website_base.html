@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{{ 'rtl' if lang == 'ar' else 'ltr' }}">
+<head>
+    {% include "pestcontrol/templates/includes/website_head.html" %}
+    <title>{% block title %}Skystar - Environmental Services{% endblock %}</title>
+</head>
+<body>
+    {% include "pestcontrol/templates/includes/website_topbar.html" %}
+    {% include "pestcontrol/templates/includes/website_navbar.html" %}
+
+    {% block page_header %}{% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% include "pestcontrol/templates/includes/website_footer.html" %}
+    {% include "pestcontrol/templates/includes/website_scripts.html" %}
+</body>
+</html>
