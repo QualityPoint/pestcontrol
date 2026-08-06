@@ -34,9 +34,11 @@ def get_pest_types_for_categories(categories):
 	string. Used to expand selected categories into pest types on a facility row.
 	"""
 	if isinstance(categories, str):
-		categories = frappe.parse_json(categories) if categories.strip().startswith("[") else [
-			c.strip() for c in categories.splitlines() if c.strip()
-		]
+		categories = (
+			frappe.parse_json(categories)
+			if categories.strip().startswith("[")
+			else [c.strip() for c in categories.splitlines() if c.strip()]
+		)
 
 	pests = set()
 	for name in categories or []:

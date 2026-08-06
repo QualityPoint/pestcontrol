@@ -1,0 +1,50 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-05 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "feature_text",
+  "feature_text_ar",
+  "is_included"
+ ],
+ "fields": [
+  {
+   "fieldname": "feature_text",
+   "fieldtype": "Data",
+   "label": "Feature Text",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "feature_text_ar",
+   "fieldtype": "Data",
+   "label": "Feature Text (Arabic)",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "is_included",
+   "fieldtype": "Check",
+   "label": "Is Included",
+   "default": "1",
+   "in_list_view": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-05 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "PC Website",
+ "name": "Pricing Plan Feature",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "istable": 1,
+ "editable_grid": 1
+}

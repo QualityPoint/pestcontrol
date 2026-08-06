@@ -1,0 +1,161 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-05 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "member_name",
+  "route",
+  "photo",
+  "column_break_wtmb",
+  "designation",
+  "designation_ar",
+  "section_break_wtmc",
+  "bio",
+  "bio_ar",
+  "section_break_wtmd",
+  "phone",
+  "email",
+  "column_break_wtme",
+  "instagram_url",
+  "facebook_url",
+  "twitter_url",
+  "section_break_wtmf",
+  "display_order",
+  "published"
+ ],
+ "fields": [
+  {
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "label": "Member Name",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route"
+  },
+  {
+   "fieldname": "photo",
+   "fieldtype": "Attach Image",
+   "label": "Photo"
+  },
+  {
+   "fieldname": "column_break_wtmb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "designation_ar",
+   "fieldtype": "Data",
+   "label": "Designation (Arabic)"
+  },
+  {
+   "fieldname": "section_break_wtmc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "bio",
+   "fieldtype": "Text Editor",
+   "label": "Bio"
+  },
+  {
+   "fieldname": "bio_ar",
+   "fieldtype": "Text Editor",
+   "label": "Bio (Arabic)"
+  },
+  {
+   "fieldname": "section_break_wtmd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "column_break_wtme",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "instagram_url",
+   "fieldtype": "Data",
+   "label": "Instagram URL",
+   "options": "URL"
+  },
+  {
+   "fieldname": "facebook_url",
+   "fieldtype": "Data",
+   "label": "Facebook URL",
+   "options": "URL"
+  },
+  {
+   "fieldname": "twitter_url",
+   "fieldtype": "Data",
+   "label": "Twitter URL",
+   "options": "URL"
+  },
+  {
+   "fieldname": "section_break_wtmf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "display_order",
+   "fieldtype": "Int",
+   "label": "Display Order",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "label": "Published",
+   "default": "1",
+   "in_list_view": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-05 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "PC Website",
+ "name": "Website Team Member",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Pestcontrol Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "allow_import": 1,
+ "autoname": "hash",
+ "naming_rule": "Random",
+ "translated_doctype": 1
+}

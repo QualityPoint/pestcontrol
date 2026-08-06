@@ -1,0 +1,22 @@
+{
+ "app": "pestcontrol",
+ "bg_color": "blue",
+ "creation": "2026-08-05 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon_type": "Link",
+ "idx": 0,
+ "label": "PC Website",
+ "link_to": "PC Website",
+ "link_type": "Workspace Sidebar",
+ "logo_url": "/assets/pestcontrol/icons/desktop_icons/solid/pc_website.svg",
+ "modified": "2026-08-05 12:00:00.000000",
+ "modified_by": "Administrator",
+ "name": "PC Website",
+ "owner": "Administrator",
+ "parent_icon": "Pest Control",
+ "restrict_removal": 0,
+ "roles": [],
+ "standard": 1
+}

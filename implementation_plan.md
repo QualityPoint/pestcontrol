@@ -28,7 +28,7 @@ Build the **CMS layer** on top of the existing website pages at `D:\skyStar\temp
 |---|---|---|
 | **Asset loading** (was open item #6 in review) | Keep pages standalone (own `<html>`/`<head>`), do **not** use `hooks.py` `web_include_css`/`web_include_js` | Those hooks only inject into pages that extend Frappe's `templates/web.html`. Our pages don't (and shouldn't) — extending it would pull in Frappe's own Bootstrap 4 + site chrome, which collides with the template's own Bootstrap 5 library. DRY-ing up CSS/JS `<link>`/`<script>` tags happens via our own shared includes instead (Phase 1), preserving the template's design exactly. |
 | **Q1: Bootstrap version** | Standalone pages, template's own Bootstrap 5 stack, no Frappe base template | Same reasoning as above — this *is* the "keep it standalone" answer to Q1. |
-| **Q2: Blog approach** | Reuse Frappe core **`Blog Post`** doctype instead of a custom `Website Blog Post` | Already wired as a website generator (`/blog/<route>`), has publishing/category/comments infra built in. Missing fields (`author_image`, `tags`) added as Custom Fields via fixtures. Design match achieved by overriding `templates/generators/blog_post.html` and `templates/pages/blog.html` inside `pestcontrol` app — Frappe resolves templates by app order, so this overrides core without touching core files. |
+| **Q2: Blog approach** | ~~Reuse Frappe core `Blog Post`~~ — **custom `Website Blog Post` DocType** | Originally planned to reuse core `Blog Post`/`Blog Category`/`Blogger`. Verified against the actual site (Frappe v16.30.0): **none of those doctypes exist in core anymore** — blogging was removed from Frappe core in v16. Built `Website Blog Post` in the `PC Website` module instead (title/route/blog_category/author fields/published/blog_intro/content, each with an `_ar` counterpart, plus `website_tags`). |
 | **Q3: Arabic/RTL** | Yes, from the start. Structure now, translations filled in incrementally | See dedicated section below. |
 | **Q4: Contact form target** | Still open — `Website Contact Message` vs. CRM `Lead` | Pending decision. |
 
@@ -167,15 +167,26 @@ The main admin control panel for global site settings:
 
 **Has web view**: Yes — generates `/service/<slug>`
 
-#### [MODIFY / REUSE] Blog — core `Blog Post` doctype (not a custom `Website Blog Post`)
+#### [NEW] `Website Blog Post`
 
-Instead of a new doctype, use Frappe core's `Blog Post` (already a website generator producing `/blog/<route>`, with `Blog Category` and `Blog Settings` built in):
+Frappe v16 dropped `Blog Post`/`Blog Category`/`Blogger` from core entirely (confirmed absent from both the `frappe` and `erpnext` app sources and the live site's DocType table), so the original "reuse core Blog Post" plan is void. Built as a normal `PC Website` module doctype instead:
 
-- **[NEW] Custom Fields** (via fixtures, upgrade-safe) added to `Blog Post`: `author_image` (Attach Image), `tags` (Small Text). Check whether Frappe's generic tagging feature covers `tags` before adding a custom field — avoid duplicating built-in functionality.
-- **[NEW] `pestcontrol/templates/generators/blog_post.html`** — overrides core's detail template to match the Skystar/template design. Frappe resolves generator templates by app order, so this doesn't touch Frappe core.
-- **[NEW] `pestcontrol/templates/pages/blog.html`** — overrides the core blog listing page the same way.
-- Content translation: `content`/`blog_intro` don't have core Arabic variants — add `content_ar`/`blog_intro_ar` as Custom Fields for the same reason as other content doctypes.
-- **[DELETE]** drop the `Website Blog Post` doctype from scope entirely.
+| Field | Type |
+|---|---|
+| `title` / `title_ar` | Data (reqd) |
+| `route` | Data |
+| `blog_category` | Data |
+| `website_tags` | Small Text |
+| `cover_image` | Attach Image |
+| `author_name` | Data |
+| `author_image` | Attach Image |
+| `published` | Check |
+| `published_on` | Date |
+| `blog_intro` / `blog_intro_ar` | Small Text |
+| `content` / `content_ar` | Text Editor |
+
+**Has web view**: Yes — generates `/blog/<route>` (Phase 4, same as the other content doctypes).
+- **[NEW] `pestcontrol/templates/generators/website_blog_post.html`** and **`pestcontrol/templates/pages/blog.html`** in Phase 4, same as the other generators — no core template overrides needed since there's no core doctype to override.
 
 #### [NEW] `Website Team Member`
 
@@ -364,7 +375,7 @@ For DocTypes with `has_web_view = 1`, create Jinja templates in `templates/gener
 | Template | Route Pattern | Data Source |
 |---|---|---|
 | `website_service.html` | `/service/<slug>` | Website Service |
-| `blog_post.html` | `/blog/<slug>` | core `Blog Post` (overridden template) |
+| `website_blog_post.html` | `/blog/<slug>` | Website Blog Post |
 | `website_team_member.html` | `/team/<slug>` | Website Team Member |
 | `website_project.html` | `/project/<slug>` | Website Project |
 
@@ -372,8 +383,7 @@ These replace the current static `service-single/`, `blog-single/`, etc. pages.
 
 #### [MODIFY] [hooks.py](file:///d:/skyStar/template/pestcontrol-develop/pestcontrol/hooks.py)
 ```python
-website_generators = ["Website Service", "Website Team Member", "Website Project"]
-# Blog Post is already a core website generator — no entry needed here.
+website_generators = ["Website Service", "Website Blog Post", "Website Team Member", "Website Project"]
 ```
 
 #### [NEW] Contact form API endpoint
@@ -407,15 +417,15 @@ Remove after generators are working:
 #### [NEW] Fixtures for website content
 Seed the CMS DocTypes with the content currently hardcoded in the HTML files, so the website looks identical after the migration. Seed both English and Arabic fields where Arabic copy is available; leave `_ar` fields blank otherwise (templates fall back to English when `_ar` is empty).
 
-#### [MODIFY] [pyproject.toml](file:///d:/skyStar/template/pestcontrol-develop/pyproject.toml)
-Fix `requires-python = ">=3.10"` and `target-version = "py310"`.
+#### ~~[MODIFY] pyproject.toml~~
+Superseded — commit `1bc5749` intentionally moved the whole repo (`pyproject.toml`, CI workflows) to `>=3.14`/`py314`. No action needed.
 
 ---
 
-## Open Questions
+## Resolved Questions
 
-> [!IMPORTANT]
-> **Q4: Contact form target** — Should submissions create a `Website Contact Message` (simple, standalone) or a Frappe `Lead` (integrates with CRM module for the other team)?
+> [!NOTE]
+> **Q4: Contact form target** — Resolved: **`Website Contact Message`** (simple, standalone DocType), built in Phase 2. Not routed to CRM `Lead`.
 
 ---
 

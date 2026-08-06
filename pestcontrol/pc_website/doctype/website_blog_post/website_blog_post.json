@@ -1,0 +1,151 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-05 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "title_ar",
+  "route",
+  "column_break_wblg",
+  "blog_category",
+  "website_tags",
+  "section_break_wbla",
+  "cover_image",
+  "author_name",
+  "author_image",
+  "column_break_wblb",
+  "published",
+  "published_on",
+  "section_break_wblc",
+  "blog_intro",
+  "blog_intro_ar",
+  "content",
+  "content_ar"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "title_ar",
+   "fieldtype": "Data",
+   "label": "Title (Arabic)"
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route"
+  },
+  {
+   "fieldname": "column_break_wblg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "blog_category",
+   "fieldtype": "Data",
+   "label": "Blog Category",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "website_tags",
+   "fieldtype": "Small Text",
+   "label": "Tags"
+  },
+  {
+   "fieldname": "section_break_wbla",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cover_image",
+   "fieldtype": "Attach Image",
+   "label": "Cover Image"
+  },
+  {
+   "fieldname": "author_name",
+   "fieldtype": "Data",
+   "label": "Author Name"
+  },
+  {
+   "fieldname": "author_image",
+   "fieldtype": "Attach Image",
+   "label": "Author Image"
+  },
+  {
+   "fieldname": "column_break_wblb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "label": "Published",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "published_on",
+   "fieldtype": "Date",
+   "label": "Published On",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "section_break_wblc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "blog_intro",
+   "fieldtype": "Small Text",
+   "label": "Blog Intro"
+  },
+  {
+   "fieldname": "blog_intro_ar",
+   "fieldtype": "Small Text",
+   "label": "Blog Intro (Arabic)"
+  },
+  {
+   "fieldname": "content",
+   "fieldtype": "Text Editor",
+   "label": "Content"
+  },
+  {
+   "fieldname": "content_ar",
+   "fieldtype": "Text Editor",
+   "label": "Content (Arabic)"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-05 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "PC Website",
+ "name": "Website Blog Post",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Pestcontrol Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "allow_import": 1,
+ "autoname": "hash",
+ "naming_rule": "Random",
+ "translated_doctype": 1
+}

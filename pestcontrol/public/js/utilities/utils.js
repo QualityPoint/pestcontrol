@@ -1,4 +1,4 @@
-frappe.provide('pestcontrol.utils');
+frappe.provide("pestcontrol.utils");
 
 pestcontrol.utils = {
 	/**

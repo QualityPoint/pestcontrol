@@ -1,0 +1,118 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-05 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "client_name",
+  "client_photo",
+  "column_break_wtst",
+  "designation",
+  "designation_ar",
+  "rating",
+  "section_break_wtsu",
+  "testimonial_text",
+  "testimonial_text_ar",
+  "section_break_wtsv",
+  "display_order",
+  "published"
+ ],
+ "fields": [
+  {
+   "fieldname": "client_name",
+   "fieldtype": "Data",
+   "label": "Client Name",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "client_photo",
+   "fieldtype": "Attach Image",
+   "label": "Client Photo"
+  },
+  {
+   "fieldname": "column_break_wtst",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "designation_ar",
+   "fieldtype": "Data",
+   "label": "Designation (Arabic)"
+  },
+  {
+   "fieldname": "rating",
+   "fieldtype": "Rating",
+   "label": "Rating"
+  },
+  {
+   "fieldname": "section_break_wtsu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "testimonial_text",
+   "fieldtype": "Text",
+   "label": "Testimonial Text",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "testimonial_text_ar",
+   "fieldtype": "Text",
+   "label": "Testimonial Text (Arabic)"
+  },
+  {
+   "fieldname": "section_break_wtsv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "display_order",
+   "fieldtype": "Int",
+   "label": "Display Order",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "label": "Published",
+   "default": "1",
+   "in_list_view": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-05 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "PC Website",
+ "name": "Website Testimonial",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Pestcontrol Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "allow_import": 1,
+ "autoname": "hash",
+ "naming_rule": "Random",
+ "translated_doctype": 1
+}
