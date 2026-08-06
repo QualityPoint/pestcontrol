@@ -42,7 +42,7 @@
 
 /************************************/
 /*** 	 01. Global Variables	  ***/
-/************************************/	
+/************************************/
 
 :root{
 	--primary-color				: #002F47;
@@ -259,7 +259,7 @@ body{
 	transition: all 0.4s ease-in-out;
 	z-index: -1;
 }
-  
+
 .btn-default:hover::after{
 	left: 0;
   	right: 0;
@@ -1202,7 +1202,7 @@ header.main-header .header-sticky.active{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	cursor: none	
+	cursor: none
 }
 
 .video-play-button i{
@@ -2010,7 +2010,7 @@ header.main-header .header-sticky.active{
     margin-bottom: 10px;
 }
 
-.faq-accordion .accordion-item .accordion-button::after, 
+.faq-accordion .accordion-item .accordion-button::after,
 .faq-accordion .accordion-item .accordion-button.collapsed::after{
     content: '';
     position: absolute;
@@ -2044,7 +2044,7 @@ header.main-header .header-sticky.active{
 
 /************************************/
 /*** 	  12. Testimonials Css 	  ***/
-/************************************/	
+/************************************/
 
 .our-testimonials{
     background: url('../images/testimonial-bg-img.png') no-repeat;
@@ -2900,7 +2900,7 @@ header.main-header .header-sticky.active{
 	font-size: 20px;
     line-height: 1.2em;
 	font-weight: 500;
-} 
+}
 
 .skills-progress-bar .skillbar .skill-progress{
 	position: relative;
@@ -3506,7 +3506,7 @@ header.main-header .header-sticky.active{
 }
 
 .post-image figure{
-	display: block;	
+	display: block;
 	border-radius: 24px;
 	overflow: hidden;
 }
@@ -3947,7 +3947,7 @@ header.main-header .header-sticky.active{
     list-style: none;
     margin: 0;
     padding: 0;
-    margin-bottom: 40px;    
+    margin-bottom: 40px;
 }
 
 .member-info-list ul li{
@@ -4396,7 +4396,7 @@ header.main-header .header-sticky.active{
 	.main-menu ul li.highlighted-menu{
 		display: block;
 	}
-	
+
 	.slicknav_nav li,
 	.slicknav_nav ul{
         display: block;
@@ -4811,13 +4811,13 @@ header.main-header .header-sticky.active{
     .approach-img-2 img{
         aspect-ratio: 1 / 0.7;
     }
-    
+
     .experience-box{
         max-width: 245px;
         padding: 25px;
         margin-left: -55px;
     }
-    
+
     .experience-box .icon-box img{
         max-width: 60px;
     }
@@ -4860,7 +4860,7 @@ header.main-header .header-sticky.active{
     .passion-list ul li{
         margin-bottom: 10px;
     }
-    
+
     .our-legacy{
 		background-position: left -20px bottom -7px;
         background-size: 90px auto;
@@ -4876,7 +4876,7 @@ header.main-header .header-sticky.active{
     .legacy-item-list{
         gap: 30px;
     }
-    
+
     .legacy-item .icon-box{
         width: 60px;
         height: 60px;
@@ -5071,7 +5071,7 @@ header.main-header .header-sticky.active{
 	.page-blog{
         padding: 50px 0;
     }
-    
+
     .page-pagination{
         margin-top: 10px;
     }
@@ -5079,11 +5079,11 @@ header.main-header .header-sticky.active{
 	.page-single-post{
         padding: 50px 0;
     }
-    
+
     .post-image{
         margin-bottom: 20px;
     }
-    
+
     .post-entry h1,
     .post-entry h2,
     .post-entry h3,
@@ -5092,40 +5092,40 @@ header.main-header .header-sticky.active{
     .post-entry h6{
         margin: 0 0 0.417em;
     }
-    
+
     .post-entry h2{
         font-size: 34px;
     }
-    
+
     .post-entry p{
         margin-bottom: 15px;
     }
-    
+
     .post-entry ol li,
     .post-entry ul li{
         font-size: 16px;
         margin-bottom: 10px;
     }
-    
+
     .post-entry blockquote{
         background-position: 20px 20px;
         background-size: 40px;
         padding: 20px 20px 20px 70px;
         margin-bottom: 20px;
     }
-    
+
     .post-entry blockquote p{
         font-size: 18px;
     }
-    
+
     .post-tags{
         margin-bottom: 20px;
     }
-    
+
     .post-tags .tag-links a{
         padding: 12px 15px;
     }
-    
+
     .post-social-sharing ul{
         text-align: left;
     }
@@ -5789,28 +5789,28 @@ header.main-header .header-sticky.active{
 	.post-single-meta ol li{
         font-size: 16px;
     }
-    
+
     .post-single-meta ol li i{
         font-size: 16px;
     }
-    
+
     .post-image img{
         aspect-ratio: 1 / 0.7;
     }
-    
+
     .post-entry blockquote{
         background-position: 15px 15px;
         padding: 60px 15px 15px 15px;
     }
-    
+
     .post-entry blockquote p{
         font-size: 16px;
     }
-    
+
     .post-entry h2{
         font-size: 24px;
     }
-    
+
     .tag-links{
         font-size: 18px;
     }

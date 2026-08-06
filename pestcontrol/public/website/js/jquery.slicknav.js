@@ -215,7 +215,7 @@
 
             //also close on click if parent links are set
             if (settings.closeOnClick && settings.allowParentLinks) {
-				
+
                 item.children('a').children('a').on("click", function(event){
                     //Emulate menu close
                     $($this.btn).trigger('click');
@@ -275,12 +275,12 @@
                     if (ev.keyCode !== Keyboard.DOWN || !$($this.btn).hasClass(prefix+'_open')){
                         $this._menuToggle();
                     }
-                    
+
                     $($this.btn).next().find('[role="menuitem"]').first().trigger( "focus" );
                     break;
             }
 
-            
+
         });
 
         $this.mobileNav.on('keydown', '.'+prefix+'_item', function(e) {
@@ -338,7 +338,7 @@
                     e.preventDefault();
                     $this._menuToggle();
                     $($this.btn).trigger( "focus" );
-                    break;    
+                    break;
             }
         });
 
@@ -408,7 +408,7 @@
         if (animate) {
             duration = settings.duration;
         }
-        
+
         function afterOpen(trigger, parent) {
             $(trigger).removeClass(prefix+'_animating');
             $(parent).removeClass(prefix+'_animating');
@@ -418,7 +418,7 @@
                 settings.afterOpen(trigger);
             }
         }
-        
+
         function afterClose(trigger, parent) {
             el.attr('aria-hidden','true');
             items.attr('tabindex', '-1');
@@ -471,7 +471,7 @@
                     afterClose(trigger, parent)
                 });
             } else if (settings.animations === 'velocity') {
-                
+
                 el.velocity("finish").velocity("slideUp", {
                     duration: duration,
                     easing: settings.easingClose,
