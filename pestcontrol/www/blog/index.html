@@ -19,7 +19,7 @@
                     <div class="post-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                         <!-- Post Featured Image Start-->
                         <div class="post-featured-image">
-                            <a href="/blog/{{ post.route }}" data-cursor-text="View">
+                            <a href="/{{ post.route }}" data-cursor-text="View">
                                 <figure class="image-anime">
                                     <img src="{{ post.cover_image }}" alt="{{ localize(post, 'title') }}">
                                 </figure>
@@ -31,13 +31,13 @@
                         <div class="post-item-body">
                             <!-- Post Item Content Start -->
                             <div class="post-item-content">
-                                <h2><a href="/blog/{{ post.route }}">{{ localize(post, "title") }}</a></h2>
+                                <h2><a href="/{{ post.route }}">{{ localize(post, "title") }}</a></h2>
                             </div>
                             <!-- Post Item Content End -->
 
                             <!-- Blog Item Button Start -->
                             <div class="post-item-btn">
-                                <a href="/blog/{{ post.route }}" class="readmore-btn">read more</a>
+                                <a href="/{{ post.route }}" class="readmore-btn">read more</a>
                             </div>
                             <!-- Blog Item Button End -->
                         </div>

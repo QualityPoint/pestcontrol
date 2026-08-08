@@ -19,7 +19,7 @@
                     <div class="team-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                         <!-- Team Image Start -->
                         <div class="team-image">
-                            <a href="/team/{{ member.route }}" data-cursor-text="View">
+                            <a href="/{{ member.route }}" data-cursor-text="View">
                                 <figure class="image-anime">
                                     <img src="{{ member.photo }}" alt="{{ member.member_name }}">
                                 </figure>
@@ -39,7 +39,7 @@
 
                         <!-- Team Content Start -->
                         <div class="team-content">
-                            <h3><a href="/team/{{ member.route }}">{{ member.member_name }}</a></h3>
+                            <h3><a href="/{{ member.route }}">{{ member.member_name }}</a></h3>
                             <p>{{ localize(member, "designation") }}</p>
                         </div>
                         <!-- Team Content End -->

@@ -19,7 +19,7 @@
                     <div class="service-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                         <!-- Service Image Start -->
                         <div class="service-image">
-                            <a href="/service/{{ service.route }}" data-cursor-text="View">
+                            <a href="/{{ service.route }}" data-cursor-text="View">
                                 <figure class="image-anime">
                                     <img src="{{ service.image }}" alt="{{ localize(service, 'service_name') }}">
                                 </figure>
@@ -33,11 +33,11 @@
                                 <img src="{{ service.icon }}" alt="">
                             </div>
                             <div class="service-content">
-                                <h3><a href="/service/{{ service.route }}">{{ localize(service, "service_name") }}</a></h3>
+                                <h3><a href="/{{ service.route }}">{{ localize(service, "service_name") }}</a></h3>
                                 <p>{{ localize(service, "short_description") }}</p>
                             </div>
                             <div class="service-btn">
-                                <a href="/service/{{ service.route }}" class="readmore-btn">read More</a>
+                                <a href="/{{ service.route }}" class="readmore-btn">read More</a>
                             </div>
                         </div>
                         <!-- Service Body End -->

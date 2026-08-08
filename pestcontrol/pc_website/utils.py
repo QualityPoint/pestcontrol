@@ -62,8 +62,12 @@ def attach_articles(doctype, items):
         }
 
     for item in items:
-        item["doctype"] = doctype
-        item["_articles"] = by_parent.get(item.name, {})
+        # attribute assignment, not bracket assignment: `item` may be a real
+        # Document (generator pages), which has no __setitem__, or a frappe
+        # `_dict` (list pages), where attribute and bracket access are the
+        # same thing anyway
+        item.doctype = doctype
+        item._articles = by_parent.get(item.name, {})
     return items
 
 
@@ -77,15 +81,18 @@ def get_translated_list(doctype, **kwargs):
 def localize(item, fieldname):
     """Return the value of `fieldname` for the active language by looking up
     the matching slot on the item's `article` bundle, falling back to the
-    English article when the current language has no row at all."""
+    English article when the current language's row is missing or has that
+    particular field left blank (a partial translation)."""
     slot = ARTICLE_FIELD_MAP.get(item.get("doctype"), {}).get(fieldname)
     if not slot:
         return item.get(fieldname)
 
     articles = item.get("_articles") or {}
     lang = frappe.local.lang or "en"
-    article = articles.get(lang) or articles.get("en") or {}
-    return article.get(slot)
+    value = (articles.get(lang) or {}).get(slot)
+    if value:
+        return value
+    return (articles.get("en") or {}).get(slot)
 
 
 def route_from_article(doc):

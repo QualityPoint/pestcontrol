@@ -1,0 +1,217 @@
+{% extends "pestcontrol/templates/includes/website_base.html" %}
+
+{% block title %}{{ doc.member_name }} | {{ settings.site_name or "Skystar" }}{% endblock %}
+
+{% block page_header %}
+    <!-- Page Header Start -->
+    <div class="page-header parallaxie">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Page Header Box Start -->
+                    <div class="page-header-box">
+                        <h1 class="text-anime-style-2" data-cursor="-opaque">{{ doc.member_name }}</h1>
+                        <nav class="wow fadeInUp">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">home</a></li>
+                                <li class="breadcrumb-item"><a href="/team">team</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ doc.member_name }}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Page Header Box End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+{% endblock %}
+
+{% block content %}
+    <!-- Page Team Single Start -->
+    <div class="page-team-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Page Team Single Box Start -->
+				    <div class="page-team-single-box">
+                        <!-- Team Member Info Box Start -->
+                        <div class="team-member-info-box">
+                            <!-- Team Member Image Start -->
+                            <div class="team-member-image">
+                                <figure class="image-anime reveal">
+                                    <img src="{{ doc.photo }}" alt="{{ doc.member_name }}">
+                                </figure>
+                            </div>
+                            <!-- Team Member Image End -->
+
+                            <!-- Team Member Content Start -->
+                            <div class="team-member-content">
+                                <!-- Member Content Header Start -->
+                                <div class="section-title">
+                                    <h2 class="wow fadeInUp" data-cursor="-opaque">About <span>me</span></h2>
+                                    <p class="wow fadeInUp" data-wow-delay="0.2s">{{ localize(doc, "bio") }}</p>
+                                </div>
+                                <!-- Member Content Header End -->
+
+                                <!-- Member Info List Start -->
+                                <div class="member-info-list wow fadeInUp" data-wow-delay="0.4s">
+                                    <ul>
+                                        {% if doc.phone %}<li>Phone : <span>{{ doc.phone }}</span></li>{% endif %}
+                                        {% if doc.email %}<li>Email: <span>{{ doc.email }}</span></li>{% endif %}
+                                        {% if doc.designation %}<li>Position: <span>{{ localize(doc, "designation") }}</span></li>{% endif %}
+                                    </ul>
+                                </div>
+                                <!-- Member Info List End -->
+
+                                <!-- Member Social List Start -->
+                                <div class="member-social-list wow fadeInUp" data-wow-delay="0.6s">
+                                    <ul>
+                                        {% if doc.instagram_url %}<li><a href="{{ doc.instagram_url }}"><i class="fa-brands fa-instagram"></i></a></li>{% endif %}
+                                        {% if doc.facebook_url %}<li><a href="{{ doc.facebook_url }}"><i class="fa-brands fa-facebook-f"></i></a></li>{% endif %}
+                                        {% if doc.twitter_url %}<li><a href="{{ doc.twitter_url }}"><i class="fa-brands fa-x-twitter"></i></a></li>{% endif %}
+                                    </ul>
+                                </div>
+                                <!-- Member Social List End -->
+                            </div>
+                            <!-- Team Member Content End -->
+                        </div>
+                        <!-- Team Member Info Box End -->
+
+                        <!-- Team Member About Start -->
+                        <div class="team-member-about">
+                            <!-- Section Title Start -->
+                            <div class="section-title">
+                                <h2 class="text-anime-style-2" data-cursor="-opaque">Personals info</h2>
+                                <p class="wow fadeInUp" data-wow-delay="0.2s">{{ doc.member_name }} has years of experience in the pest control industry, specializing in residential and commercial pest management. They hold multiple certifications in pest control and are highly knowledgeable about the latest treatment methods and eco-friendly solutions. Their attention to detail and commitment to customer satisfaction have earned them a reputation for excellence.</p>
+
+                                <p class="wow fadeInUp" data-wow-delay="0.4s">Explaining the treatment process, and ensuring that customers feel comfortable and informed, is a core part of the job — known for a friendly demeanor and the ability to put customers at ease while solving even the toughest pest problems.</p>
+                            </div>
+                            <!-- Section Title End -->
+                        </div>
+                        <!-- Team Member About End -->
+
+                        <!-- Team Member Skill Box Start -->
+                        <div class="team-member-Skill-box">
+                            <div class="team-member-Skill-capability">
+                                <div class="team-member-skill-content">
+                                    <!-- Section Title Start -->
+                                    <div class="section-title">
+                                        <h2 class="text-anime-style-2" data-cursor="-opaque">Professional <span>skills</span></h2>
+                                    </div>
+                                    <!-- Section Title End -->
+
+                                    <!-- Team Skills List Start -->
+                                    <div class="team-skills-list">
+                                        <!-- Skills Progress Bar Start -->
+                                        <div class="skills-progress-bar">
+                                            <!-- Skill Item Start -->
+                                            <div class="skillbar" data-percent="85%">
+                                                <div class="skill-data">
+                                                    <div class="skill-title">Chemical Handling :</div>
+                                                    <div class="skill-no">85%</div>
+                                                </div>
+                                                <div class="skill-progress">
+                                                    <div class="count-bar"></div>
+                                                </div>
+                                            </div>
+                                            <!-- Skill Item End -->
+                                        </div>
+                                        <!-- Skills Progress Bar End -->
+
+                                        <!-- Skills Progress Bar Start -->
+                                        <div class="skills-progress-bar">
+                                            <!-- Skill Item Start -->
+                                            <div class="skillbar" data-percent="95%">
+                                                <div class="skill-data">
+                                                    <div class="skill-title">IPM Techniques :</div>
+                                                    <div class="skill-no">95%</div>
+                                                </div>
+                                                <div class="skill-progress">
+                                                    <div class="count-bar"></div>
+                                                </div>
+                                            </div>
+                                            <!-- Skill Item End -->
+                                        </div>
+                                        <!-- Skills Progress Bar End -->
+                                    </div>
+                                    <!-- Team Skills List End -->
+                                </div>
+
+                                <!-- Member Capability Content Start -->
+                                <div class="member-capability-content">
+                                    <!-- Section Title Start -->
+                                    <div class="section-title">
+                                        <h2 class="text-anime-style-2" data-cursor="-opaque">Capabilities</h2>
+                                    </div>
+                                    <!-- Section Title End -->
+
+                                    <ul class="wow fadeInUp" data-wow-delay="0.2s">
+                                        <li>Advanced Pest Control Solutions for Every Need</li>
+                                        <li>Eco-Friendly Approaches to Effective Pest Management</li>
+                                        <li>Tailored Services for Residential and Commercial Properties</li>
+                                    </ul>
+                                </div>
+                                <!-- Member Capability Content End -->
+                            </div>
+
+                            <!-- Team Contact Form Start -->
+                            <div class="team-contact-form">
+                                <!-- Section Title Start -->
+                                <div class="section-title">
+                                    <h2 class="text-anime-style-2" data-cursor="-opaque">Contact <span>me</span></h2>
+                                </div>
+                                <!-- Section Title End -->
+
+                                <!-- Contact Form Start -->
+                                <div class="contact-form">
+                                    <!-- Contact Form Start -->
+                                    <form id="contactForm" action="#" method="POST" data-toggle="validator" class="contact-form wow fadeInUp">
+                                        <div class="row">
+                                            <div class="form-group col-md-6 mb-4">
+                                                <input type="text" name="fname" class="form-control" id="fname" placeholder="First name" required>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+
+                                            <div class="form-group col-md-6 mb-4">
+                                                <input type="text" name="lname" class="form-control" id="lname" placeholder="Last name" required>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+
+                                            <div class="form-group col-md-6 mb-4">
+                                                <input type="email" name ="email" class="form-control" id="email" placeholder="E-mail" required>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+
+                                            <div class="form-group col-md-6 mb-4">
+                                                <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone no." required>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+
+                                            <div class="form-group col-md-12 mb-5">
+                                                <textarea name="message" class="form-control" id="message" rows="4" placeholder="Message"></textarea>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn-default"><span>send message</span></button>
+                                                <div id="msgSubmit" class="h3 hidden"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- Contact Form End -->
+                                </div>
+                                <!-- Contact Form End -->
+                            </div>
+                            <!-- Team Contact Form End -->
+                        </div>
+                        <!-- Team Member Skill Box End -->
+                    </div>
+                    <!-- Page Team Single Box End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Team Single End -->
+
+{% endblock %}
