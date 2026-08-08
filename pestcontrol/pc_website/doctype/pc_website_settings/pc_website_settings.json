@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2026-08-05 12:00:00.000000",
+ "creation": "2026-08-05 12:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -16,7 +16,6 @@
   "phone",
   "whatsapp",
   "column_break_wsct",
-  "address",
   "social_links_tab",
   "instagram_url",
   "facebook_url",
@@ -24,7 +23,6 @@
   "twitter_url",
   "linkedin_url",
   "footer_tab",
-  "about_footer_text",
   "column_break_wsft",
   "copyright_text",
   "counters_tab",
@@ -33,8 +31,8 @@
   "column_break_wsco",
   "team_size",
   "satisfaction_rate",
-  "section_break_tr_ttings",
-  "translations"
+  "section_break_art_ttings",
+  "article"
  ],
  "fields": [
   {
@@ -43,10 +41,10 @@
    "label": "Brand"
   },
   {
+   "default": "Skystar",
    "fieldname": "site_name",
    "fieldtype": "Data",
-   "label": "Site Name",
-   "default": "Skystar"
+   "label": "Site Name"
   },
   {
    "fieldname": "column_break_wsbr",
@@ -93,11 +91,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "address",
-   "fieldtype": "Small Text",
-   "label": "Address"
-  },
-  {
    "fieldname": "social_links_tab",
    "fieldtype": "Tab Break",
    "label": "Social Links"
@@ -134,11 +127,6 @@
    "fieldname": "footer_tab",
    "fieldtype": "Tab Break",
    "label": "Footer"
-  },
-  {
-   "fieldname": "about_footer_text",
-   "fieldtype": "Text",
-   "label": "About Footer Text"
   },
   {
    "fieldname": "column_break_wsft",
@@ -179,21 +167,23 @@
    "label": "Satisfaction Rate (%)"
   },
   {
-   "fieldname": "section_break_tr_ttings",
+   "fieldname": "section_break_art_ttings",
    "fieldtype": "Section Break",
-   "label": "Translations"
+   "label": "Content"
   },
   {
-   "fieldname": "translations",
+   "fieldname": "article",
    "fieldtype": "Table",
-   "label": "Translations",
-   "options": "Website-Language"
+   "label": "Article",
+   "options": "Website Article",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
+ "issingle": 1,
  "links": [],
- "modified": "2026-08-05 12:00:00.000000",
+ "modified": "2026-08-08 18:36:23.470283",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "PC Website Settings",
@@ -214,6 +204,5 @@
  "rows_threshold_for_grid_search": 20,
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": [],
- "issingle": 1
+ "states": []
 }

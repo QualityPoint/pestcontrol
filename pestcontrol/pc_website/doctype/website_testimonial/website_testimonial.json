@@ -1,30 +1,29 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
- "creation": "2026-08-05 12:00:00.000000",
+ "autoname": "hash",
+ "creation": "2026-08-05 12:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "client_name",
   "client_photo",
   "column_break_wtst",
-  "designation",
   "rating",
-  "section_break_wtsu",
-  "testimonial_text",
   "section_break_wtsv",
   "display_order",
   "published",
-  "section_break_tr_monial",
-  "translations"
+  "section_break_art_monial",
+  "article"
  ],
  "fields": [
   {
    "fieldname": "client_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Client Name",
-   "reqd": 1,
-   "in_list_view": 1
+   "reqd": 1
   },
   {
    "fieldname": "client_photo",
@@ -36,25 +35,9 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "designation",
-   "fieldtype": "Data",
-   "label": "Designation",
-   "in_list_view": 1
-  },
-  {
    "fieldname": "rating",
    "fieldtype": "Rating",
    "label": "Rating"
-  },
-  {
-   "fieldname": "section_break_wtsu",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "testimonial_text",
-   "fieldtype": "Text",
-   "label": "Testimonial Text",
-   "in_list_view": 1
   },
   {
    "fieldname": "section_break_wtsv",
@@ -63,35 +46,37 @@
   {
    "fieldname": "display_order",
    "fieldtype": "Int",
-   "label": "Display Order",
-   "in_list_view": 1
+   "in_list_view": 1,
+   "label": "Display Order"
   },
   {
+   "default": "1",
    "fieldname": "published",
    "fieldtype": "Check",
-   "label": "Published",
-   "default": "1",
-   "in_list_view": 1
+   "in_list_view": 1,
+   "label": "Published"
   },
   {
-   "fieldname": "section_break_tr_monial",
+   "fieldname": "section_break_art_monial",
    "fieldtype": "Section Break",
-   "label": "Translations"
+   "label": "Content"
   },
   {
-   "fieldname": "translations",
+   "fieldname": "article",
    "fieldtype": "Table",
-   "label": "Translations",
-   "options": "Website-Language"
+   "label": "Article",
+   "options": "Website Article",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-05 12:00:00.000000",
+ "modified": "2026-08-08 18:36:23.826066",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Testimonial",
+ "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [
   {
@@ -111,8 +96,5 @@
  "rows_threshold_for_grid_search": 20,
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": [],
- "allow_import": 1,
- "autoname": "hash",
- "naming_rule": "Random"
+ "states": []
 }

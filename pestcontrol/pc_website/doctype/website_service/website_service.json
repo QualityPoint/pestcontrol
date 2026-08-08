@@ -1,37 +1,27 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
- "creation": "2026-08-05 12:00:00.000000",
+ "autoname": "prompt",
+ "creation": "2026-08-05 12:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "service_name",
   "route",
   "column_break_wsvc",
   "icon",
   "image",
-  "section_break_wsvd",
-  "short_description",
-  "full_description",
-  "column_break_wsve",
   "display_order",
   "published",
-  "section_break_tr_ervice",
-  "translations"
+  "section_break_vfhu",
+  "article"
  ],
  "fields": [
   {
-   "fieldname": "service_name",
-   "fieldtype": "Data",
-   "label": "Service Name",
-   "reqd": 1,
-   "unique": 1,
-   "in_list_view": 1
-  },
-  {
    "fieldname": "route",
    "fieldtype": "Data",
-   "label": "Route"
+   "label": "Route",
+   "in_list_view": 1
   },
   {
    "fieldname": "column_break_wsvc",
@@ -48,56 +38,38 @@
    "label": "Image"
   },
   {
-   "fieldname": "section_break_wsvd",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "short_description",
-   "fieldtype": "Small Text",
-   "label": "Short Description",
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "full_description",
-   "fieldtype": "Text Editor",
-   "label": "Full Description"
-  },
-  {
-   "fieldname": "column_break_wsve",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "display_order",
    "fieldtype": "Int",
    "label": "Display Order",
    "in_list_view": 1
   },
   {
+   "default": "1",
    "fieldname": "published",
    "fieldtype": "Check",
-   "label": "Published",
-   "default": "1",
-   "in_list_view": 1
+   "in_list_view": 1,
+   "label": "Published"
   },
   {
-   "fieldname": "section_break_tr_ervice",
-   "fieldtype": "Section Break",
-   "label": "Translations"
+   "fieldname": "section_break_vfhu",
+   "fieldtype": "Section Break"
   },
   {
-   "fieldname": "translations",
+   "fieldname": "article",
    "fieldtype": "Table",
-   "label": "Translations",
-   "options": "Website-Language"
+   "label": "Article",
+   "options": "Website Article",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-05 12:00:00.000000",
+ "modified": "2026-08-08 18:38:50.326373",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Service",
+ "naming_rule": "Set by user",
  "owner": "Administrator",
  "permissions": [
   {
@@ -117,8 +89,5 @@
  "rows_threshold_for_grid_search": 20,
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": [],
- "allow_import": 1,
- "autoname": "field:service_name",
- "naming_rule": "By fieldname"
+ "states": []
 }

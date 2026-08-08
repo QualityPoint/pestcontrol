@@ -1,7 +1,7 @@
 import frappe
 
 from pestcontrol.pc_website.utils import (
-	attach_translations,
+	attach_articles,
 	get_translated_list,
 	get_website_context,
 	make_route,
@@ -43,11 +43,11 @@ def get_context(context):
 		plan.features = frappe.get_all(
 			"Pricing Plan Feature",
 			filters={"parent": plan.name},
-			fields=["name", "feature_text", "is_included"],
+			fields=["name", "is_included"],
 			order_by="idx asc",
 		)
 		all_features.extend(plan.features)
-	attach_translations("Pricing Plan Feature", all_features)
+	attach_articles("Pricing Plan Feature", all_features)
 
 	context.faqs = get_translated_list(
 		"Website FAQ",

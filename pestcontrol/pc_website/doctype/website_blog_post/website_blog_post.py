@@ -3,13 +3,15 @@
 
 from frappe.model.document import Document
 
-from pestcontrol.pc_website.utils import make_route, validate_translations
+from pestcontrol.pc_website.utils import make_route, route_from_article, validate_articles
 
 
 class WebsiteBlogPost(Document):
 	def validate(self):
-		validate_translations(self)
+		validate_articles(self)
 
 	def before_save(self):
 		if not self.route:
-			self.route = make_route(self.title)
+			title = route_from_article(self)
+			if title:
+				self.route = make_route(title)

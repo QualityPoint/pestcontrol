@@ -3,9 +3,9 @@
 
 from frappe.model.document import Document
 
-from pestcontrol.pc_website.utils import validate_translations
+from pestcontrol.pc_website.utils import validate_articles
 
 
 class PricingPlanFeature(Document):
 	def validate(self):
-		validate_translations(self)
+		validate_articles(self)

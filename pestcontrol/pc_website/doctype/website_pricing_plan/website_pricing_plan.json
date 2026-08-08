@@ -1,11 +1,12 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
- "creation": "2026-08-05 12:00:00.000000",
+ "autoname": "hash",
+ "creation": "2026-08-05 12:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "plan_name",
   "column_break_wppl",
   "price",
   "billing_period",
@@ -18,17 +19,10 @@
   "section_break_wppo",
   "display_order",
   "published",
-  "section_break_tr_ngplan",
-  "translations"
+  "section_break_art_ngplan",
+  "article"
  ],
  "fields": [
-  {
-   "fieldname": "plan_name",
-   "fieldtype": "Data",
-   "label": "Plan Name",
-   "reqd": 1,
-   "in_list_view": 1
-  },
   {
    "fieldname": "column_break_wppl",
    "fieldtype": "Column Break"
@@ -36,8 +30,8 @@
   {
    "fieldname": "price",
    "fieldtype": "Currency",
-   "label": "Price",
-   "in_list_view": 1
+   "in_list_view": 1,
+   "label": "Price"
   },
   {
    "fieldname": "billing_period",
@@ -45,10 +39,11 @@
    "label": "Billing Period"
   },
   {
+   "default": "0",
    "fieldname": "is_featured",
    "fieldtype": "Check",
-   "label": "Is Featured",
-   "in_list_view": 1
+   "in_list_view": 1,
+   "label": "Is Featured"
   },
   {
    "fieldname": "section_break_wppm",
@@ -82,35 +77,37 @@
   {
    "fieldname": "display_order",
    "fieldtype": "Int",
-   "label": "Display Order",
-   "in_list_view": 1
+   "in_list_view": 1,
+   "label": "Display Order"
   },
   {
+   "default": "1",
    "fieldname": "published",
    "fieldtype": "Check",
-   "label": "Published",
-   "default": "1",
-   "in_list_view": 1
+   "in_list_view": 1,
+   "label": "Published"
   },
   {
-   "fieldname": "section_break_tr_ngplan",
+   "fieldname": "section_break_art_ngplan",
    "fieldtype": "Section Break",
-   "label": "Translations"
+   "label": "Content"
   },
   {
-   "fieldname": "translations",
+   "fieldname": "article",
    "fieldtype": "Table",
-   "label": "Translations",
-   "options": "Website-Language"
+   "label": "Article",
+   "options": "Website Article",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-05 12:00:00.000000",
+ "modified": "2026-08-08 18:36:23.580800",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Pricing Plan",
+ "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [
   {
@@ -130,8 +127,5 @@
  "rows_threshold_for_grid_search": 20,
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": [],
- "allow_import": 1,
- "autoname": "hash",
- "naming_rule": "Random"
+ "states": []
 }
