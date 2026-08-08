@@ -13,14 +13,15 @@
     <div class="page-services">
         <div class="container">
             <div class="row">
+                {% for service in services %}
                 <div class="col-lg-3 col-md-6">
                     <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp">
+                    <div class="service-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                         <!-- Service Image Start -->
                         <div class="service-image">
-                            <a href="/service-single" data-cursor-text="View">
+                            <a href="/service/{{ service.route }}" data-cursor-text="View">
                                 <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/service-image-1.jpg" alt="">
+                                    <img src="{{ service.image }}" alt="{{ localize(service, 'service_name') }}">
                                 </figure>
                             </a>
                         </div>
@@ -29,237 +30,21 @@
                         <!-- Service Body Start -->
                         <div class="service-body">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-service-item-1.svg" alt="">
+                                <img src="{{ service.icon }}" alt="">
                             </div>
                             <div class="service-content">
-                                <h3><a href="/service-single">Residential Pest Control</a></h3>
-                                <p>Tailored solutions to protect your home from common pests.</p>
+                                <h3><a href="/service/{{ service.route }}">{{ localize(service, "service_name") }}</a></h3>
+                                <p>{{ localize(service, "short_description") }}</p>
                             </div>
                             <div class="service-btn">
-                                <a href="/service-single" class="readmore-btn">read More</a>
+                                <a href="/service/{{ service.route }}" class="readmore-btn">read More</a>
                             </div>
                         </div>
                         <!-- Service Body End -->
                     </div>
                     <!-- Service Item End -->
                 </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.2s">
-                        <!-- Service Image Start -->
-                        <div class="service-image">
-                            <a href="/service-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/service-image-2.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Service Image End -->
-
-                        <!-- Service Body Start -->
-                        <div class="service-body">
-                            <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-service-item-2.svg" alt="">
-                            </div>
-                            <div class="service-content">
-                                <h3><a href="/service-single">Commercial Pest Solutions</a></h3>
-                                <p>Tailored solutions to protect your home from common pests.</p>
-                            </div>
-                            <div class="service-btn">
-                                <a href="/service-single" class="readmore-btn">read More</a>
-                            </div>
-                        </div>
-                        <!-- Service Body End -->
-                    </div>
-                    <!-- Service Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.4s">
-                        <!-- Service Image Start -->
-                        <div class="service-image">
-                            <a href="/service-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/service-image-3.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Service Image End -->
-
-                        <!-- Service Body Start -->
-                        <div class="service-body">
-                            <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-service-item-3.svg" alt="">
-                            </div>
-                            <div class="service-content">
-                                <h3><a href="/service-single">Termite & Rodent Control</a></h3>
-                                <p>Tailored solutions to protect your home from common pests.</p>
-                            </div>
-                            <div class="service-btn">
-                                <a href="/service-single" class="readmore-btn">read More</a>
-                            </div>
-                        </div>
-                        <!-- Service Body End -->
-                    </div>
-                    <!-- Service Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.6s">
-                        <!-- Service Image Start -->
-                        <div class="service-image">
-                            <a href="/service-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/service-image-4.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Service Image End -->
-
-                        <!-- Service Body Start -->
-                        <div class="service-body">
-                            <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-service-item-4.svg" alt="">
-                            </div>
-                            <div class="service-content">
-                                <h3><a href="/service-single">Outdoor Pest Control</a></h3>
-                                <p>Tailored solutions to protect your home from common pests.</p>
-                            </div>
-                            <div class="service-btn">
-                                <a href="/service-single" class="readmore-btn">read More</a>
-                            </div>
-                        </div>
-                        <!-- Service Body End -->
-                    </div>
-                    <!-- Service Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.8s">
-                        <!-- Service Image Start -->
-                        <div class="service-image">
-                            <a href="/service-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/service-image-5.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Service Image End -->
-
-                        <!-- Service Body Start -->
-                        <div class="service-body">
-                            <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-service-item-5.svg" alt="">
-                            </div>
-                            <div class="service-content">
-                                <h3><a href="/service-single">mosquito & fly control</a></h3>
-                                <p>Tailored solutions to protect your home from common pests.</p>
-                            </div>
-                            <div class="service-btn">
-                                <a href="/service-single" class="readmore-btn">read More</a>
-                            </div>
-                        </div>
-                        <!-- Service Body End -->
-                    </div>
-                    <!-- Service Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="1s">
-                        <!-- Service Image Start -->
-                        <div class="service-image">
-                            <a href="/service-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/service-image-6.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Service Image End -->
-
-                        <!-- Service Body Start -->
-                        <div class="service-body">
-                            <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-service-item-6.svg" alt="">
-                            </div>
-                            <div class="service-content">
-                                <h3><a href="/service-single">bed bug elimination</a></h3>
-                                <p>Tailored solutions to protect your home from common pests.</p>
-                            </div>
-                            <div class="service-btn">
-                                <a href="/service-single" class="readmore-btn">read More</a>
-                            </div>
-                        </div>
-                        <!-- Service Body End -->
-                    </div>
-                    <!-- Service Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="1.2s">
-                        <!-- Service Image Start -->
-                        <div class="service-image">
-                            <a href="/service-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/service-image-7.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Service Image End -->
-
-                        <!-- Service Body Start -->
-                        <div class="service-body">
-                            <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-service-item-7.svg" alt="">
-                            </div>
-                            <div class="service-content">
-                                <h3><a href="/service-single">green pest solutions</a></h3>
-                                <p>Tailored solutions to protect your home from common pests.</p>
-                            </div>
-                            <div class="service-btn">
-                                <a href="/service-single" class="readmore-btn">read More</a>
-                            </div>
-                        </div>
-                        <!-- Service Body End -->
-                    </div>
-                    <!-- Service Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="1.4s">
-                        <!-- Service Image Start -->
-                        <div class="service-image">
-                            <a href="/service-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/service-image-8.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Service Image End -->
-
-                        <!-- Service Body Start -->
-                        <div class="service-body">
-                            <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-service-item-8.svg" alt="">
-                            </div>
-                            <div class="service-content">
-                                <h3><a href="/service-single">preventive pest inspection</a></h3>
-                                <p>Tailored solutions to protect your home from common pests.</p>
-                            </div>
-                            <div class="service-btn">
-                                <a href="/service-single" class="readmore-btn">read More</a>
-                            </div>
-                        </div>
-                        <!-- Service Body End -->
-                    </div>
-                    <!-- Service Item End -->
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -336,7 +121,7 @@
                                         <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">
                                     </div>
                                     <div class="cta-contact-item-content">
-                                        <h3><a href="tel:+966567407779">+966 56 740 7779</a></h3>
+                                        <h3><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></h3>
                                     </div>
                                 </div>
                             </div>
@@ -379,117 +164,31 @@
                     <div class="testimonial-slider">
                         <div class="swiper">
                             <div class="swiper-wrapper" data-cursor-text="Drag">
+                                {% for testimonial in testimonials %}
                                 <!-- Testimonial Slide Start -->
                                 <div class="swiper-slide">
                                     <div class="testimonial-item">
                                         <div class="testimonial-author">
                                             <div class="author-image">
                                                 <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-1.jpg" alt="">
+                                                    <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}">
                                                 </figure>
                                             </div>
                                             <div class="author-content">
-                                                <h3>Oliver Spaltn</h3>
-                                                <p>CEO at D.B.A Pvt. Ltd</p>
+                                                <h3>{{ testimonial.client_name }}</h3>
+                                                <p>{{ localize(testimonial, "designation") }}</p>
                                             </div>
                                         </div>
                                         <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
+                                            {% for i in range(5) %}<i class="fa-{{ 'solid' if i < (testimonial.rating * 5)|round(0, 'floor') else 'regular' }} fa-star"></i>{% endfor %}
                                         </div>
                                         <div class="testimonial-content">
-                                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
+                                            <p>"{{ localize(testimonial, "testimonial_text") }}"</p>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Testimonial Slide End -->
-
-                                <!-- Testimonial Slide Start -->
-                                <div class="swiper-slide">
-                                    <div class="testimonial-item">
-                                        <div class="testimonial-author">
-                                            <div class="author-image">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-2.jpg" alt="">
-                                                </figure>
-                                            </div>
-                                            <div class="author-content">
-                                                <h3>Ronald Richards</h3>
-                                                <p>MD at D.B.A Pvt. Ltd</p>
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Testimonial Slide End -->
-
-                                <!-- Testimonial Slide Start -->
-                                <div class="swiper-slide">
-                                    <div class="testimonial-item">
-                                        <div class="testimonial-author">
-                                            <div class="author-image">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-3.jpg" alt="">
-                                                </figure>
-                                            </div>
-                                            <div class="author-content">
-                                                <h3>Brooklyn Simmons</h3>
-                                                <p>BOD at D.B.A Pvt. Ltd</p>
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Testimonial Slide End -->
-
-                                <!-- Testimonial Slide Start -->
-                                <div class="swiper-slide">
-                                    <div class="testimonial-item">
-                                        <div class="testimonial-author">
-                                            <div class="author-image">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-4.jpg" alt="">
-                                                </figure>
-                                            </div>
-                                            <div class="author-content">
-                                                <h3>emily williams</h3>
-                                                <p>Chairman</p>
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Testimonial Slide End -->
+                                {% endfor %}
                             </div>
                             <div class="testimonial-pagination"></div>
                         </div>

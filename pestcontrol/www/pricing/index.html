@@ -13,98 +13,36 @@
     <div class="page-pricing">
         <div class="container">
             <div class="row">
+                {% for plan in plans %}
                 <div class="col-lg-4 col-md-6">
                     <!-- Pricing Item Start -->
-                    <div class="pricing-item wow fadeInUp">
+                    <div class="pricing-item{{ ' highlighted-box' if plan.is_featured else '' }} wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                         <!-- Pricing Header Start -->
                         <div class="pricing-header">
-                            <h3>Basic Plan</h3>
-                            <h2>$99.00</h2>
+                            <h3>{{ localize(plan, "plan_name") }}</h3>
+                            <h2>${{ "%.2f"|format(plan.price) }}{{ "/" ~ plan.billing_period if plan.billing_period else "" }}</h2>
                         </div>
                         <!-- Pricing Header End -->
 
                         <!-- Pricing Body Start -->
                         <div class="pricing-body">
                             <ul>
-                                <li>Full-service pest control</li>
-                                <li>Detailed inspection</li>
-                                <li>Customized treatment plan</li>
-                                <li>Coverage for larger properties</li>
-                                <li>Priority emergency service.</li>
+                                {% for feature in plan.features %}
+                                <li{{ ' class="not-included"' if not feature.is_included else '' }}>{{ localize(feature, "feature_text") }}</li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <!-- Pricing Body End -->
 
                         <!-- Pricing Button Start -->
                         <div class="pricing-btn">
-                            <a href="/contact" class="btn-default">Get Started Now</a>
+                            <a href="{{ plan.cta_url or '/contact' }}" class="btn-default{{ ' btn-highlighted' if plan.is_featured else '' }}">{{ plan.cta_text or "Get Started Now" }}</a>
                         </div>
                         <!-- Pricing Button End -->
                     </div>
                     <!-- Pricing Item End -->
                 </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Pricing Item Start -->
-                    <div class="pricing-item highlighted-box wow fadeInUp" data-wow-delay="0.2s">
-                        <!-- Pricing Header Start -->
-                        <div class="pricing-header">
-                            <h3>Premium Plan</h3>
-                            <h2>$399.00</h2>
-                        </div>
-                        <!-- Pricing Header End -->
-
-                        <!-- Pricing Body Start -->
-                        <div class="pricing-body">
-                            <ul>
-                                <li>Full-service pest control</li>
-                                <li>Detailed inspection</li>
-                                <li>Customized treatment plan</li>
-                                <li>Coverage for larger properties</li>
-                                <li>Priority emergency service.</li>
-                            </ul>
-                        </div>
-                        <!-- Pricing Body End -->
-
-                        <!-- Pricing Button Start -->
-                        <div class="pricing-btn">
-                            <a href="/contact" class="btn-default btn-highlighted">Get Started Now</a>
-                        </div>
-                        <!-- Pricing Button End -->
-                    </div>
-                    <!-- Pricing Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Pricing Item Start -->
-                    <div class="pricing-item wow fadeInUp" data-wow-delay="0.4s">
-                        <!-- Pricing Header Start -->
-                        <div class="pricing-header">
-                            <h3>Standard Plan</h3>
-                            <h2>$199.00</h2>
-                        </div>
-                        <!-- Pricing Header End -->
-
-                        <!-- Pricing Body Start -->
-                        <div class="pricing-body">
-                            <ul>
-                                <li>Full-service pest control</li>
-                                <li>Detailed inspection</li>
-                                <li>Customized treatment plan</li>
-                                <li>Coverage for larger properties</li>
-                                <li>Priority emergency service.</li>
-                            </ul>
-                        </div>
-                        <!-- Pricing Body End -->
-
-                        <!-- Pricing Button Start -->
-                        <div class="pricing-btn">
-                            <a href="/contact" class="btn-default">Get Started Now</a>
-                        </div>
-                        <!-- Pricing Button End -->
-                    </div>
-                    <!-- Pricing Item End -->
-                </div>
+                {% endfor %}
 
                 <div class="col-lg-12">
                     <!-- Pricing Benefit List Start -->
@@ -193,7 +131,7 @@
                                         <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">
                                     </div>
                                     <div class="cta-contact-item-content">
-                                        <h3><a href="tel:+966567407779">+966 56 740 7779</a></h3>
+                                        <h3><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></h3>
                                     </div>
                                 </div>
                             </div>
@@ -236,117 +174,31 @@
                     <div class="testimonial-slider">
                         <div class="swiper">
                             <div class="swiper-wrapper" data-cursor-text="Drag">
+                                {% for testimonial in testimonials %}
                                 <!-- Testimonial Slide Start -->
                                 <div class="swiper-slide">
                                     <div class="testimonial-item">
                                         <div class="testimonial-author">
                                             <div class="author-image">
                                                 <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-1.jpg" alt="">
+                                                    <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}">
                                                 </figure>
                                             </div>
                                             <div class="author-content">
-                                                <h3>Oliver Spaltn</h3>
-                                                <p>CEO at D.B.A Pvt. Ltd</p>
+                                                <h3>{{ testimonial.client_name }}</h3>
+                                                <p>{{ localize(testimonial, "designation") }}</p>
                                             </div>
                                         </div>
                                         <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
+                                            {% for i in range(5) %}<i class="fa-{{ 'solid' if i < (testimonial.rating * 5)|round(0, 'floor') else 'regular' }} fa-star"></i>{% endfor %}
                                         </div>
                                         <div class="testimonial-content">
-                                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
+                                            <p>"{{ localize(testimonial, "testimonial_text") }}"</p>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Testimonial Slide End -->
-
-                                <!-- Testimonial Slide Start -->
-                                <div class="swiper-slide">
-                                    <div class="testimonial-item">
-                                        <div class="testimonial-author">
-                                            <div class="author-image">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-2.jpg" alt="">
-                                                </figure>
-                                            </div>
-                                            <div class="author-content">
-                                                <h3>Ronald Richards</h3>
-                                                <p>MD at D.B.A Pvt. Ltd</p>
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Testimonial Slide End -->
-
-                                <!-- Testimonial Slide Start -->
-                                <div class="swiper-slide">
-                                    <div class="testimonial-item">
-                                        <div class="testimonial-author">
-                                            <div class="author-image">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-3.jpg" alt="">
-                                                </figure>
-                                            </div>
-                                            <div class="author-content">
-                                                <h3>Brooklyn Simmons</h3>
-                                                <p>BOD at D.B.A Pvt. Ltd</p>
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Testimonial Slide End -->
-
-                                <!-- Testimonial Slide Start -->
-                                <div class="swiper-slide">
-                                    <div class="testimonial-item">
-                                        <div class="testimonial-author">
-                                            <div class="author-image">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-4.jpg" alt="">
-                                                </figure>
-                                            </div>
-                                            <div class="author-content">
-                                                <h3>emily williams</h3>
-                                                <p>Chairman</p>
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Testimonial Slide End -->
+                                {% endfor %}
                             </div>
                             <div class="testimonial-pagination"></div>
                         </div>

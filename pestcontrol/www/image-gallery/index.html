@@ -14,113 +14,19 @@
         <div class="container">
             <!-- gallery section start -->
             <div class="row gallery-items page-gallery-box">
+                {% for item in gallery_items %}
                 <div class="col-lg-4 col-6">
                     <!-- Image Gallery start -->
-                    <div class="photo-gallery wow fadeInUp">
-                        <a href="/assets/pestcontrol/website/images/gallery-1.jpg" data-cursor-text="View">
+                    <div class="photo-gallery wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
+                        <a href="{{ item.image }}" data-cursor-text="View">
                             <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/gallery-1.jpg" alt="">
+                                <img src="{{ item.image }}" alt="{{ localize(item, 'title') }}">
                             </figure>
                         </a>
                     </div>
                     <!-- Image Gallery end -->
                 </div>
-
-                <div class="col-lg-4 col-6">
-                    <!-- Image Gallery start -->
-                    <div class="photo-gallery wow fadeInUp" data-wow-delay="0.2s">
-                        <a href="/assets/pestcontrol/website/images/gallery-2.jpg" data-cursor-text="View">
-                            <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/gallery-2.jpg" alt="">
-                            </figure>
-                        </a>
-                    </div>
-                    <!-- Image Gallery end -->
-                </div>
-
-                <div class="col-lg-4 col-6">
-                    <!-- Image Gallery start -->
-                    <div class="photo-gallery wow fadeInUp" data-wow-delay="0.4s">
-                        <a href="/assets/pestcontrol/website/images/gallery-3.jpg" data-cursor-text="View">
-                            <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/gallery-3.jpg" alt="">
-                            </figure>
-                        </a>
-                    </div>
-                    <!-- Image Gallery end -->
-                </div>
-
-                <div class="col-lg-4 col-6">
-                    <!-- Image Gallery start -->
-                    <div class="photo-gallery wow fadeInUp" data-wow-delay="0.6s">
-                        <a href="/assets/pestcontrol/website/images/gallery-4.jpg" data-cursor-text="View">
-                            <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/gallery-4.jpg" alt="">
-                            </figure>
-                        </a>
-                    </div>
-                    <!-- Image Gallery end -->
-                </div>
-
-                <div class="col-lg-4 col-6">
-                    <!-- Image Gallery start -->
-                    <div class="photo-gallery wow fadeInUp" data-wow-delay="0.8s">
-                        <a href="/assets/pestcontrol/website/images/gallery-5.jpg" data-cursor-text="View">
-                            <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/gallery-5.jpg" alt="">
-                            </figure>
-                        </a>
-                    </div>
-                    <!-- Image Gallery end -->
-                </div>
-
-                <div class="col-lg-4 col-6">
-                    <!-- Image Gallery start -->
-                    <div class="photo-gallery wow fadeInUp" data-wow-delay="1s">
-                        <a href="/assets/pestcontrol/website/images/gallery-6.jpg" data-cursor-text="View">
-                            <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/gallery-6.jpg" alt="">
-                            </figure>
-                        </a>
-                    </div>
-                    <!-- Image Gallery end -->
-                </div>
-
-                <div class="col-lg-4 col-6">
-                    <!-- Image Gallery start -->
-                    <div class="photo-gallery wow fadeInUp" data-wow-delay="1.2s">
-                        <a href="/assets/pestcontrol/website/images/gallery-7.jpg" data-cursor-text="View">
-                            <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/gallery-7.jpg" alt="">
-                            </figure>
-                        </a>
-                    </div>
-                    <!-- Image Gallery end -->
-                </div>
-
-                <div class="col-lg-4 col-6">
-                    <!-- Image Gallery start -->
-                    <div class="photo-gallery wow fadeInUp" data-wow-delay="1.4s">
-                        <a href="/assets/pestcontrol/website/images/gallery-8.jpg" data-cursor-text="View">
-                            <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/gallery-8.jpg" alt="">
-                            </figure>
-                        </a>
-                    </div>
-                    <!-- Image Gallery end -->
-                </div>
-
-                <div class="col-lg-4 col-6">
-                    <!-- Image Gallery start -->
-                    <div class="photo-gallery wow fadeInUp" data-wow-delay="1.6s">
-                        <a href="/assets/pestcontrol/website/images/gallery-9.jpg" data-cursor-text="View">
-                            <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/gallery-9.jpg" alt="">
-                            </figure>
-                        </a>
-                    </div>
-                    <!-- Image Gallery end -->
-                </div>
+                {% endfor %}
             </div>
             <!-- gallery section end -->
         </div>

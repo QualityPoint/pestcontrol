@@ -17,7 +17,6 @@
   "whatsapp",
   "column_break_wsct",
   "address",
-  "address_ar",
   "social_links_tab",
   "instagram_url",
   "facebook_url",
@@ -26,7 +25,6 @@
   "linkedin_url",
   "footer_tab",
   "about_footer_text",
-  "about_footer_text_ar",
   "column_break_wsft",
   "copyright_text",
   "counters_tab",
@@ -34,7 +32,9 @@
   "projects_completed",
   "column_break_wsco",
   "team_size",
-  "satisfaction_rate"
+  "satisfaction_rate",
+  "section_break_tr_ttings",
+  "translations"
  ],
  "fields": [
   {
@@ -98,11 +98,6 @@
    "label": "Address"
   },
   {
-   "fieldname": "address_ar",
-   "fieldtype": "Small Text",
-   "label": "Address (Arabic)"
-  },
-  {
    "fieldname": "social_links_tab",
    "fieldtype": "Tab Break",
    "label": "Social Links"
@@ -146,11 +141,6 @@
    "label": "About Footer Text"
   },
   {
-   "fieldname": "about_footer_text_ar",
-   "fieldtype": "Text",
-   "label": "About Footer Text (Arabic)"
-  },
-  {
    "fieldname": "column_break_wsft",
    "fieldtype": "Column Break"
   },
@@ -187,6 +177,17 @@
    "fieldname": "satisfaction_rate",
    "fieldtype": "Int",
    "label": "Satisfaction Rate (%)"
+  },
+  {
+   "fieldname": "section_break_tr_ttings",
+   "fieldtype": "Section Break",
+   "label": "Translations"
+  },
+  {
+   "fieldname": "translations",
+   "fieldtype": "Table",
+   "label": "Translations",
+   "options": "Website-Language"
   }
  ],
  "grid_page_length": 50,

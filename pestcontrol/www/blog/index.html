@@ -13,14 +13,15 @@
     <div class="page-blog">
         <div class="container">
             <div class="row">
+                {% for post in blog_posts %}
                 <div class="col-lg-4 col-md-6">
                     <!-- Post Item Start -->
-                    <div class="post-item wow fadeInUp">
+                    <div class="post-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                         <!-- Post Featured Image Start-->
                         <div class="post-featured-image">
-                            <a href="/blog-single" data-cursor-text="View">
+                            <a href="/blog/{{ post.route }}" data-cursor-text="View">
                                 <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/post-1.jpg" alt="">
+                                    <img src="{{ post.cover_image }}" alt="{{ localize(post, 'title') }}">
                                 </figure>
                             </a>
                         </div>
@@ -30,13 +31,13 @@
                         <div class="post-item-body">
                             <!-- Post Item Content Start -->
                             <div class="post-item-content">
-                                <h2><a href="/blog-single">How to Keep Your Home Pest-Free This Winter</a></h2>
+                                <h2><a href="/blog/{{ post.route }}">{{ localize(post, "title") }}</a></h2>
                             </div>
                             <!-- Post Item Content End -->
 
                             <!-- Blog Item Button Start -->
                             <div class="post-item-btn">
-                                <a href="/blog-single" class="readmore-btn">read more</a>
+                                <a href="/blog/{{ post.route }}" class="readmore-btn">read more</a>
                             </div>
                             <!-- Blog Item Button End -->
                         </div>
@@ -44,180 +45,7 @@
                     </div>
                     <!-- Post Item End -->
                 </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Post Item Start -->
-                    <div class="post-item wow fadeInUp" data-wow-delay="0.2s">
-                        <!-- Post Featured Image Start-->
-                        <div class="post-featured-image">
-                            <a href="/blog-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/post-2.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Post Featured Image End -->
-
-                        <!-- Post Item Body Start -->
-                        <div class="post-item-body">
-                            <!-- Post Item Content Start -->
-                            <div class="post-item-content">
-                                <h2><a href="/blog-single">5 Eco-Friendly Pest Control Method You Should Know About</a></h2>
-                            </div>
-                            <!-- Post Item Content End -->
-
-                            <!-- Blog Item Button Start -->
-                            <div class="post-item-btn">
-                                <a href="/blog-single" class="readmore-btn">read more</a>
-                            </div>
-                            <!-- Blog Item Button End -->
-                        </div>
-                        <!-- Post Item Body End -->
-                    </div>
-                    <!-- Post Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Post Item Start -->
-                    <div class="post-item wow fadeInUp" data-wow-delay="0.4s">
-                        <!-- Post Featured Image Start-->
-                        <div class="post-featured-image">
-                            <a href="/blog-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/post-3.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Post Featured Image End -->
-
-                        <!-- Post Item Body Start -->
-                        <div class="post-item-body">
-                            <!-- Post Item Content Start -->
-                            <div class="post-item-content">
-                                <h2><a href="/blog-single">Signs You Have a Termite Problem and How to Handle It</a></h2>
-                            </div>
-                            <!-- Post Item Content End -->
-
-                            <!-- Blog Item Button Start -->
-                            <div class="post-item-btn">
-                                <a href="/blog-single" class="readmore-btn">read more</a>
-                            </div>
-                            <!-- Blog Item Button End -->
-                        </div>
-                        <!-- Post Item Body End -->
-                    </div>
-                    <!-- Post Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Post Item Start -->
-                    <div class="post-item wow fadeInUp" data-wow-delay="0.6s">
-                        <!-- Post Featured Image Start-->
-                        <div class="post-featured-image">
-                            <a href="/blog-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/post-4.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Post Featured Image End -->
-
-                        <!-- Post Item Body Start -->
-                        <div class="post-item-body">
-                            <!-- Post Item Content Start -->
-                            <div class="post-item-content">
-                                <h2><a href="/blog-single">Top Tips for Preventing Rodents in Your Home</a></h2>
-                            </div>
-                            <!-- Post Item Content End -->
-
-                            <!-- Blog Item Button Start -->
-                            <div class="post-item-btn">
-                                <a href="/blog-single" class="readmore-btn">read more</a>
-                            </div>
-                            <!-- Blog Item Button End -->
-                        </div>
-                        <!-- Post Item Body End -->
-                    </div>
-                    <!-- Post Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Post Item Start -->
-                    <div class="post-item wow fadeInUp" data-wow-delay="0.8s">
-                        <!-- Post Featured Image Start-->
-                        <div class="post-featured-image">
-                            <a href="/blog-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/post-5.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Post Featured Image End -->
-
-                        <!-- Post Item Body Start -->
-                        <div class="post-item-body">
-                            <!-- Post Item Content Start -->
-                            <div class="post-item-content">
-                                <h2><a href="/blog-single">How to Identify and Eliminate Bed Bugs Effectively</a></h2>
-                            </div>
-                            <!-- Post Item Content End -->
-
-                            <!-- Blog Item Button Start -->
-                            <div class="post-item-btn">
-                                <a href="/blog-single" class="readmore-btn">read more</a>
-                            </div>
-                            <!-- Blog Item Button End -->
-                        </div>
-                        <!-- Post Item Body End -->
-                    </div>
-                    <!-- Post Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Post Item Start -->
-                    <div class="post-item wow fadeInUp" data-wow-delay="1s">
-                        <!-- Post Featured Image Start-->
-                        <div class="post-featured-image">
-                            <a href="/blog-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/post-6.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Post Featured Image End -->
-
-                        <!-- Post Item Body Start -->
-                        <div class="post-item-body">
-                            <!-- Post Item Content Start -->
-                            <div class="post-item-content">
-                                <h2><a href="/blog-single">The Best Natural Remedies for Common Household Pests</a></h2>
-                            </div>
-                            <!-- Post Item Content End -->
-
-                            <!-- Blog Item Button Start -->
-                            <div class="post-item-btn">
-                                <a href="/blog-single" class="readmore-btn">read more</a>
-                            </div>
-                            <!-- Blog Item Button End -->
-                        </div>
-                        <!-- Post Item Body End -->
-                    </div>
-                    <!-- Post Item End -->
-                </div>
-
-                <div class="col-lg-12">
-                    <!-- Page Pagination Start -->
-                    <div class="page-pagination wow fadeInUp" data-wow-delay="1.2s">
-                        <ul class="pagination">
-                            <li><a href="#"><i class="fa-solid fa-arrow-left-long"></i></a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#"><i class="fa-solid fa-arrow-right-long"></i></a></li>
-                        </ul>
-                    </div>
-                    <!-- Page Pagination End -->
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

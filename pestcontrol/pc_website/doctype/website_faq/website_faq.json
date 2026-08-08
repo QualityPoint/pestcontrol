@@ -6,14 +6,14 @@
  "engine": "InnoDB",
  "field_order": [
   "question",
-  "question_ar",
   "faq_group",
   "section_break_wfaq",
   "answer",
-  "answer_ar",
   "section_break_wfar",
   "display_order",
-  "published"
+  "published",
+  "section_break_tr_itefaq",
+  "translations"
  ],
  "fields": [
   {
@@ -22,11 +22,6 @@
    "label": "Question",
    "reqd": 1,
    "in_list_view": 1
-  },
-  {
-   "fieldname": "question_ar",
-   "fieldtype": "Data",
-   "label": "Question (Arabic)"
   },
   {
    "fieldname": "faq_group",
@@ -44,11 +39,6 @@
    "label": "Answer"
   },
   {
-   "fieldname": "answer_ar",
-   "fieldtype": "Text Editor",
-   "label": "Answer (Arabic)"
-  },
-  {
    "fieldname": "section_break_wfar",
    "fieldtype": "Section Break"
   },
@@ -64,6 +54,17 @@
    "label": "Published",
    "default": "1",
    "in_list_view": 1
+  },
+  {
+   "fieldname": "section_break_tr_itefaq",
+   "fieldtype": "Section Break",
+   "label": "Translations"
+  },
+  {
+   "fieldname": "translations",
+   "fieldtype": "Table",
+   "label": "Translations",
+   "options": "Website-Language"
   }
  ],
  "grid_page_length": 50,
@@ -95,6 +96,5 @@
  "states": [],
  "allow_import": 1,
  "autoname": "hash",
- "naming_rule": "Random",
- "translated_doctype": 1
+ "naming_rule": "Random"
 }

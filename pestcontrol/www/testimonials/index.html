@@ -13,173 +13,31 @@
     <div class="page-testimonials">
         <div class="container">
             <div class="row">
+                {% for testimonial in testimonials %}
                 <div class="col-lg-4 col-md-6">
                     <!-- Testimonial Item Start -->
-                    <div class="testimonial-item wow fadeInUp">
+                    <div class="testimonial-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                         <div class="testimonial-author">
                             <div class="author-image">
                                 <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/author-1.jpg" alt="">
+                                    <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}">
                                 </figure>
                             </div>
                             <div class="author-content">
-                                <h3>Oliver Spaltn</h3>
-                                <p>CEO at D.B.A Pvt. Ltd</p>
+                                <h3>{{ testimonial.client_name }}</h3>
+                                <p>{{ localize(testimonial, "designation") }}</p>
                             </div>
                         </div>
                         <div class="testimonial-rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
+                            {% for i in range(5) %}<i class="fa-{{ 'solid' if i < (testimonial.rating * 5)|round(0, 'floor') else 'regular' }} fa-star"></i>{% endfor %}
                         </div>
                         <div class="testimonial-content">
-                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
+                            <p>"{{ localize(testimonial, "testimonial_text") }}"</p>
                         </div>
                     </div>
                     <!-- Testimonial Item End -->
                 </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Testimonial Item Start -->
-                    <div class="testimonial-item wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="testimonial-author">
-                            <div class="author-image">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/author-2.jpg" alt="">
-                                </figure>
-                            </div>
-                            <div class="author-content">
-                                <h3>ronald richards</h3>
-                                <p>CEO at D.B.A Pvt. Ltd</p>
-                            </div>
-                        </div>
-                        <div class="testimonial-rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <div class="testimonial-content">
-                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
-                        </div>
-                    </div>
-                    <!-- Testimonial Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Testimonial Item Start -->
-                    <div class="testimonial-item wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="testimonial-author">
-                            <div class="author-image">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/author-3.jpg" alt="">
-                                </figure>
-                            </div>
-                            <div class="author-content">
-                                <h3>brooklyn simmons</h3>
-                                <p>CEO at D.B.A Pvt. Ltd</p>
-                            </div>
-                        </div>
-                        <div class="testimonial-rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <div class="testimonial-content">
-                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
-                        </div>
-                    </div>
-                    <!-- Testimonial Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Testimonial Item Start -->
-                    <div class="testimonial-item wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="testimonial-author">
-                            <div class="author-image">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/author-4.jpg" alt="">
-                                </figure>
-                            </div>
-                            <div class="author-content">
-                                <h3>jenny wilson</h3>
-                                <p>CEO at D.B.A Pvt. Ltd</p>
-                            </div>
-                        </div>
-                        <div class="testimonial-rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <div class="testimonial-content">
-                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
-                        </div>
-                    </div>
-                    <!-- Testimonial Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Testimonial Item Start -->
-                    <div class="testimonial-item wow fadeInUp" data-wow-delay="0.8s">
-                        <div class="testimonial-author">
-                            <div class="author-image">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/author-5.jpg" alt="">
-                                </figure>
-                            </div>
-                            <div class="author-content">
-                                <h3>robert fox</h3>
-                                <p>CEO at D.B.A Pvt. Ltd</p>
-                            </div>
-                        </div>
-                        <div class="testimonial-rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <div class="testimonial-content">
-                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
-                        </div>
-                    </div>
-                    <!-- Testimonial Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Testimonial Item Start -->
-                    <div class="testimonial-item wow fadeInUp" data-wow-delay="1s">
-                        <div class="testimonial-author">
-                            <div class="author-image">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/author-6.jpg" alt="">
-                                </figure>
-                            </div>
-                            <div class="author-content">
-                                <h3>leslie alexander</h3>
-                                <p>CEO at D.B.A Pvt. Ltd</p>
-                            </div>
-                        </div>
-                        <div class="testimonial-rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <div class="testimonial-content">
-                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>
-                        </div>
-                    </div>
-                    <!-- Testimonial Item End -->
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -256,7 +114,7 @@
                                         <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">
                                     </div>
                                     <div class="cta-contact-item-content">
-                                        <h3><a href="tel:+966567407779">+966 56 740 7779</a></h3>
+                                        <h3><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></h3>
                                     </div>
                                 </div>
                             </div>

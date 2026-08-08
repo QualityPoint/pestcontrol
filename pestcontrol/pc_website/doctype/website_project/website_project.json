@@ -6,23 +6,22 @@
  "engine": "InnoDB",
  "field_order": [
   "project_name",
-  "project_name_ar",
   "route",
   "column_break_wprj",
   "image",
   "category",
   "section_break_wprk",
   "short_description",
-  "short_description_ar",
   "full_description",
-  "full_description_ar",
   "column_break_wprl",
   "client_name",
   "location",
   "duration",
   "section_break_wprm",
   "display_order",
-  "published"
+  "published",
+  "section_break_tr_roject",
+  "translations"
  ],
  "fields": [
   {
@@ -31,11 +30,6 @@
    "label": "Project Name",
    "reqd": 1,
    "in_list_view": 1
-  },
-  {
-   "fieldname": "project_name_ar",
-   "fieldtype": "Data",
-   "label": "Project Name (Arabic)"
   },
   {
    "fieldname": "route",
@@ -68,19 +62,9 @@
    "label": "Short Description"
   },
   {
-   "fieldname": "short_description_ar",
-   "fieldtype": "Small Text",
-   "label": "Short Description (Arabic)"
-  },
-  {
    "fieldname": "full_description",
    "fieldtype": "Text Editor",
    "label": "Full Description"
-  },
-  {
-   "fieldname": "full_description_ar",
-   "fieldtype": "Text Editor",
-   "label": "Full Description (Arabic)"
   },
   {
    "fieldname": "column_break_wprl",
@@ -117,6 +101,17 @@
    "label": "Published",
    "default": "1",
    "in_list_view": 1
+  },
+  {
+   "fieldname": "section_break_tr_roject",
+   "fieldtype": "Section Break",
+   "label": "Translations"
+  },
+  {
+   "fieldname": "translations",
+   "fieldtype": "Table",
+   "label": "Translations",
+   "options": "Website-Language"
   }
  ],
  "grid_page_length": 50,
@@ -148,6 +143,5 @@
  "states": [],
  "allow_import": 1,
  "autoname": "hash",
- "naming_rule": "Random",
- "translated_doctype": 1
+ "naming_rule": "Random"
 }

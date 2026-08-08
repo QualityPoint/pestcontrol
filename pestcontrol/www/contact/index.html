@@ -23,8 +23,7 @@
                             </div>
                             <div class="contact-info-content">
                                 <h3>Email address</h3>
-                                <p><a href="mailto:info@the-skystar.com">info@the-skystar.com</a></p>
-                                <p><a href="mailto:info@the-skystar.com">info@the-skystar.com</a></p>
+                                <p><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></p>
                             </div>
                         </div>
                         <!-- Contact Info Item End -->
@@ -36,8 +35,8 @@
                             </div>
                             <div class="contact-info-content">
                                 <h3>Contact Us</h3>
-                                <p><a href="tel:+966567407779">+966 56 740 7779</a></p>
-                                <p><a href="tel:+966567407779">+966 56 740 7779</a></p>
+                                <p><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></p>
+                                {% if settings.whatsapp %}<p><a href="https://wa.me/{{ settings.whatsapp }}">{{ settings.whatsapp }}</a></p>{% endif %}
                             </div>
                         </div>
                         <!-- Contact Info Item End -->
@@ -49,7 +48,7 @@
                             </div>
                             <div class="contact-info-content">
                                 <h3>location</h3>
-                                <p>123 Greenway Avenue, Springfield, USA</p>
+                                <p>{{ localize(settings, "address") }}</p>
                             </div>
                         </div>
                         <!-- Contact Info Item End -->

@@ -87,28 +87,28 @@
                         <div class="about-counter-list">
                             <!-- About Counter Item Start -->
                             <div class="about-counter-item">
-                               <h2><span class="counter">29</span>+</h2>
+                               <h2><span class="counter">{{ settings.years_experience or 0 }}</span>+</h2>
                                <p>Years Of Experience</p>
                             </div>
                             <!-- About Counter Item End -->
 
                             <!-- About Counter Item Start -->
                             <div class="about-counter-item">
-                                <h2><span class="counter">2</span>K</h2>
+                                <h2>{{ settings.projects_completed or "0" }}</h2>
                                 <p>Projects Completed</p>
                             </div>
                             <!-- About Counter Item End -->
 
                             <!-- About Counter Item Start -->
                             <div class="about-counter-item">
-                                <h2><span class="counter">50</span></h2>
+                                <h2><span class="counter">{{ settings.team_size or 0 }}</span></h2>
                                 <p>Dedicated Team</p>
                             </div>
                             <!-- About Counter Item End -->
 
                             <!-- About Counter Item Start -->
                             <div class="about-counter-item">
-                                <h2><span class="counter">98</span>%</h2>
+                                <h2><span class="counter">{{ settings.satisfaction_rate or 0 }}</span>%</h2>
                                 <p>Happy Customers</p>
                             </div>
                             <!-- About Counter Item End -->
@@ -150,7 +150,7 @@
                                     <img src="/assets/pestcontrol/website/images/icon-experience.svg" alt="">
                                 </div>
                                 <div class="experience-content">
-                                    <h2><span class="counter">29</span>+</h2>
+                                    <h2><span class="counter">{{ settings.years_experience or 0 }}</span>+</h2>
                                     <p>Years Of experience</p>
                                 </div>
                             </div>
@@ -358,7 +358,7 @@
                                         <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">
                                     </div>
                                     <div class="cta-contact-item-content">
-                                        <h3><a href="tel:+966567407779">+966 56 740 7779</a></h3>
+                                        <h3><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></h3>
                                     </div>
                                 </div>
                             </div>
@@ -533,7 +533,7 @@
 
                         <!-- Experience Counter Box Start -->
                         <div class="experience-counter-box">
-                            <h2><span class="counter">25</span>+</h2>
+                            <h2><span class="counter">{{ settings.years_experience or 0 }}</span>+</h2>
                             <p>Years of experience</p>
                         </div>
                         <!-- Experience Counter Box End -->

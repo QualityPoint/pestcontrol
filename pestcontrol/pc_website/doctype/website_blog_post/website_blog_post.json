@@ -6,7 +6,6 @@
  "engine": "InnoDB",
  "field_order": [
   "title",
-  "title_ar",
   "route",
   "column_break_wblg",
   "blog_category",
@@ -20,9 +19,9 @@
   "published_on",
   "section_break_wblc",
   "blog_intro",
-  "blog_intro_ar",
   "content",
-  "content_ar"
+  "section_break_tr_ogpost",
+  "translations"
  ],
  "fields": [
   {
@@ -31,11 +30,6 @@
    "label": "Title",
    "reqd": 1,
    "in_list_view": 1
-  },
-  {
-   "fieldname": "title_ar",
-   "fieldtype": "Data",
-   "label": "Title (Arabic)"
   },
   {
    "fieldname": "route",
@@ -102,19 +96,20 @@
    "label": "Blog Intro"
   },
   {
-   "fieldname": "blog_intro_ar",
-   "fieldtype": "Small Text",
-   "label": "Blog Intro (Arabic)"
-  },
-  {
    "fieldname": "content",
    "fieldtype": "Text Editor",
    "label": "Content"
   },
   {
-   "fieldname": "content_ar",
-   "fieldtype": "Text Editor",
-   "label": "Content (Arabic)"
+   "fieldname": "section_break_tr_ogpost",
+   "fieldtype": "Section Break",
+   "label": "Translations"
+  },
+  {
+   "fieldname": "translations",
+   "fieldtype": "Table",
+   "label": "Translations",
+   "options": "Website-Language"
   }
  ],
  "grid_page_length": 50,
@@ -146,6 +141,5 @@
  "states": [],
  "allow_import": 1,
  "autoname": "hash",
- "naming_rule": "Random",
- "translated_doctype": 1
+ "naming_rule": "Random"
 }

@@ -13,24 +13,24 @@
     <div class="page-team">
         <div class="container">
             <div class="row">
+                {% for member in team_members %}
                 <div class="col-lg-3 col-md-6">
                     <!-- Team Member Item Start -->
-                    <div class="team-item wow fadeInUp">
+                    <div class="team-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                         <!-- Team Image Start -->
                         <div class="team-image">
-                            <a href="/team-single" data-cursor-text="View">
+                            <a href="/team/{{ member.route }}" data-cursor-text="View">
                                 <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/team-1.jpg" alt="">
+                                    <img src="{{ member.photo }}" alt="{{ member.member_name }}">
                                 </figure>
                             </a>
 
                             <!-- Team Social Icon Start -->
                             <div class="team-social-icon">
                                 <ul>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                    {% if member.instagram_url %}<li><a href="{{ member.instagram_url }}" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>{% endif %}
+                                    {% if member.facebook_url %}<li><a href="{{ member.facebook_url }}" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>{% endif %}
+                                    {% if member.twitter_url %}<li><a href="{{ member.twitter_url }}" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a></li>{% endif %}
                                 </ul>
                             </div>
                             <!-- Team Social Icon End -->
@@ -39,251 +39,14 @@
 
                         <!-- Team Content Start -->
                         <div class="team-content">
-                            <h3><a href="/team-single">Arjun Khanna</a></h3>
-                            <p>Technical Engineer</p>
+                            <h3><a href="/team/{{ member.route }}">{{ member.member_name }}</a></h3>
+                            <p>{{ localize(member, "designation") }}</p>
                         </div>
                         <!-- Team Content End -->
                     </div>
                     <!-- Team Member Item End -->
                 </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member Item Start -->
-                    <div class="team-item wow fadeInUp" data-wow-delay="0.2s">
-                        <!-- Team Image Start -->
-                        <div class="team-image">
-                            <a href="/team-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/team-2.jpg" alt="">
-                                </figure>
-                            </a>
-
-                            <!-- Team Social Icon Start -->
-                            <div class="team-social-icon">
-                                <ul>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- Team Social Icon End -->
-                        </div>
-                        <!-- Team Image End -->
-
-                        <!-- Team Content Start -->
-                        <div class="team-content">
-                            <h3><a href="/team-single">Cameron Williamson</a></h3>
-                            <p>Security Specialist</p>
-                        </div>
-                        <!-- Team Content End -->
-                    </div>
-                    <!-- Team Member Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member Item Start -->
-                    <div class="team-item wow fadeInUp" data-wow-delay="0.4s">
-                        <!-- Team Image Start -->
-                        <div class="team-image">
-                            <a href="/team-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/team-3.jpg" alt="">
-                                </figure>
-                            </a>
-
-                            <!-- Team Social Icon Start -->
-                            <div class="team-social-icon">
-                                <ul>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- Team Social Icon End -->
-                        </div>
-                        <!-- Team Image End -->
-
-                        <!-- Team Content Start -->
-                        <div class="team-content">
-                            <h3><a href="/team-single">leslie alexander</a></h3>
-                            <p>Security Specialist</p>
-                        </div>
-                        <!-- Team Content End -->
-                    </div>
-                    <!-- Team Member Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member Item Start -->
-                    <div class="team-item wow fadeInUp" data-wow-delay="0.6s">
-                        <!-- Team Image Start -->
-                        <div class="team-image">
-                            <a href="/team-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/team-4.jpg" alt="">
-                                </figure>
-                            </a>
-
-                            <!-- Team Social Icon Start -->
-                            <div class="team-social-icon">
-                                <ul>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- Team Social Icon End -->
-                        </div>
-                        <!-- Team Image End -->
-
-                        <!-- Team Content Start -->
-                        <div class="team-content">
-                            <h3><a href="/team-single">michael johnson</a></h3>
-                            <p>Support Manager</p>
-                        </div>
-                        <!-- Team Content End -->
-                    </div>
-                    <!-- Team Member Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member Item Start -->
-                    <div class="team-item wow fadeInUp" data-wow-delay="0.8s">
-                        <!-- Team Image Start -->
-                        <div class="team-image">
-                            <a href="/team-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/team-5.jpg" alt="">
-                                </figure>
-                            </a>
-
-                            <!-- Team Social Icon Start -->
-                            <div class="team-social-icon">
-                                <ul>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- Team Social Icon End -->
-                        </div>
-                        <!-- Team Image End -->
-
-                        <!-- Team Content Start -->
-                        <div class="team-content">
-                            <h3><a href="/team-single">aryan khanna</a></h3>
-                            <p>security consultant</p>
-                        </div>
-                        <!-- Team Content End -->
-                    </div>
-                    <!-- Team Member Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member Item Start -->
-                    <div class="team-item wow fadeInUp" data-wow-delay="1s">
-                        <!-- Team Image Start -->
-                        <div class="team-image">
-                            <a href="/team-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/team-6.jpg" alt="">
-                                </figure>
-                            </a>
-
-                            <!-- Team Social Icon Start -->
-                            <div class="team-social-icon">
-                                <ul>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- Team Social Icon End -->
-                        </div>
-                        <!-- Team Image End -->
-
-                        <!-- Team Content Start -->
-                        <div class="team-content">
-                            <h3><a href="/team-single">riya sharma</a></h3>
-                            <p>surveillance specialist</p>
-                        </div>
-                        <!-- Team Content End -->
-                    </div>
-                    <!-- Team Member Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member Item Start -->
-                    <div class="team-item wow fadeInUp" data-wow-delay="1.2s">
-                        <!-- Team Image Start -->
-                        <div class="team-image">
-                            <a href="/team-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/team-7.jpg" alt="">
-                                </figure>
-                            </a>
-
-                            <!-- Team Social Icon Start -->
-                            <div class="team-social-icon">
-                                <ul>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- Team Social Icon End -->
-                        </div>
-                        <!-- Team Image End -->
-
-                        <!-- Team Content Start -->
-                        <div class="team-content">
-                            <h3><a href="/team-single">kabir mehta</a></h3>
-                            <p>cctv technician</p>
-                        </div>
-                        <!-- Team Content End -->
-                    </div>
-                    <!-- Team Member Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member Item Start -->
-                    <div class="team-item wow fadeInUp" data-wow-delay="1.4s">
-                        <!-- Team Image Start -->
-                        <div class="team-image">
-                            <a href="/team-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/team-8.jpg" alt="">
-                                </figure>
-                            </a>
-
-                            <!-- Team Social Icon Start -->
-                            <div class="team-social-icon">
-                                <ul>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- Team Social Icon End -->
-                        </div>
-                        <!-- Team Image End -->
-
-                        <!-- Team Content Start -->
-                        <div class="team-content">
-                            <h3><a href="/team-single">neha verma</a></h3>
-                            <p>operations manager</p>
-                        </div>
-                        <!-- Team Content End -->
-                    </div>
-                    <!-- Team Member Item End -->
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

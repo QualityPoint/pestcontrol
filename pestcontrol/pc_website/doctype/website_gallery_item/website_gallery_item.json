@@ -6,7 +6,6 @@
  "engine": "InnoDB",
  "field_order": [
   "title",
-  "title_ar",
   "media_type",
   "column_break_wgal",
   "image",
@@ -14,7 +13,9 @@
   "category",
   "section_break_wgab",
   "display_order",
-  "published"
+  "published",
+  "section_break_tr_ryitem",
+  "translations"
  ],
  "fields": [
   {
@@ -23,11 +24,6 @@
    "label": "Title",
    "reqd": 1,
    "in_list_view": 1
-  },
-  {
-   "fieldname": "title_ar",
-   "fieldtype": "Data",
-   "label": "Title (Arabic)"
   },
   {
    "fieldname": "media_type",
@@ -45,8 +41,7 @@
   {
    "fieldname": "image",
    "fieldtype": "Attach Image",
-   "label": "Image",
-   "depends_on": "eval:doc.media_type=='Image'"
+   "label": "Image / Thumbnail"
   },
   {
    "fieldname": "video_url",
@@ -76,6 +71,17 @@
    "label": "Published",
    "default": "1",
    "in_list_view": 1
+  },
+  {
+   "fieldname": "section_break_tr_ryitem",
+   "fieldtype": "Section Break",
+   "label": "Translations"
+  },
+  {
+   "fieldname": "translations",
+   "fieldtype": "Table",
+   "label": "Translations",
+   "options": "Website-Language"
   }
  ],
  "grid_page_length": 50,
@@ -107,6 +113,5 @@
  "states": [],
  "allow_import": 1,
  "autoname": "hash",
- "naming_rule": "Random",
- "translated_doctype": 1
+ "naming_rule": "Random"
 }

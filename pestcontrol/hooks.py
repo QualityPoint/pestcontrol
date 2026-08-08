@@ -74,10 +74,11 @@ home_page = "home"
 # ----------
 
 # add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "pestcontrol.utils.jinja_methods",
-# 	"filters": "pestcontrol.utils.jinja_filters"
-# }
+jinja = {
+	"methods": [
+		"pestcontrol.pc_website.utils.localize",
+	],
+}
 
 # Installation
 # ------------

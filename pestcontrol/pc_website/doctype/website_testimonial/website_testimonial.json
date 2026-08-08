@@ -9,14 +9,14 @@
   "client_photo",
   "column_break_wtst",
   "designation",
-  "designation_ar",
   "rating",
   "section_break_wtsu",
   "testimonial_text",
-  "testimonial_text_ar",
   "section_break_wtsv",
   "display_order",
-  "published"
+  "published",
+  "section_break_tr_monial",
+  "translations"
  ],
  "fields": [
   {
@@ -42,11 +42,6 @@
    "in_list_view": 1
   },
   {
-   "fieldname": "designation_ar",
-   "fieldtype": "Data",
-   "label": "Designation (Arabic)"
-  },
-  {
    "fieldname": "rating",
    "fieldtype": "Rating",
    "label": "Rating"
@@ -60,11 +55,6 @@
    "fieldtype": "Text",
    "label": "Testimonial Text",
    "in_list_view": 1
-  },
-  {
-   "fieldname": "testimonial_text_ar",
-   "fieldtype": "Text",
-   "label": "Testimonial Text (Arabic)"
   },
   {
    "fieldname": "section_break_wtsv",
@@ -82,6 +72,17 @@
    "label": "Published",
    "default": "1",
    "in_list_view": 1
+  },
+  {
+   "fieldname": "section_break_tr_monial",
+   "fieldtype": "Section Break",
+   "label": "Translations"
+  },
+  {
+   "fieldname": "translations",
+   "fieldtype": "Table",
+   "label": "Translations",
+   "options": "Website-Language"
   }
  ],
  "grid_page_length": 50,
@@ -113,6 +114,5 @@
  "states": [],
  "allow_import": 1,
  "autoname": "hash",
- "naming_rule": "Random",
- "translated_doctype": 1
+ "naming_rule": "Random"
 }

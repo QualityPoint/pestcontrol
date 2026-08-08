@@ -18,11 +18,9 @@
                     <div class="our-project-nav wow fadeInUp" data-wow-delay="0.25s">
                         <ul>
                             <li><a href="#" class="active-btn" data-filter="*">all</a></li>
-                            <li><a href="#" data-filter=".home">Home Pest</a></li>
-                            <li><a href="#" data-filter=".commercial">Commercial Pest</a></li>
-                            <li><a href="#" data-filter=".eco-friendly">Eco-Friendly Pest</a></li>
-                            <li><a href="#" data-filter=".termite">Termite & Rodent</a></li>
-                            <li><a href="#" data-filter=".outdoor">Outdoor Pest</a></li>
+                            {% for category in categories %}
+                            <li><a href="#" data-filter=".{{ category_class(category) }}">{{ category }}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <!-- Choose Our Projects Nav End -->
@@ -31,149 +29,23 @@
                 <div class="col-lg-12">
                     <!-- Project Item Boxes start -->
                     <div class="row project-item-boxes align-items-center">
-                        <div class="col-lg-4 col-md-6 project-item-box eco-friendly">
+                        {% for project in projects %}
+                        <div class="col-lg-4 col-md-6 project-item-box {{ category_class(project.category) }}">
                             <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp">
+                            <div class="project-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                                 <div class="project-image">
                                     <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-1.jpg" alt="">
+                                        <img src="{{ project.image }}" alt="{{ localize(project, 'project_name') }}">
                                     </figure>
                                 </div>
                                 <div class="project-content">
-                                    <h3>Home Sweet Home Pest Protection</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
+                                    <h3>{{ localize(project, "project_name") }}</h3>
+                                    <a href="/project/{{ project.route }}"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
                                 </div>
                             </div>
                             <!-- Project Item End -->
                         </div>
-
-                        <div class="col-lg-4 col-md-6 project-item-box termite outdoor">
-                            <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp" data-wow-delay="0.2s">
-                                <div class="project-image">
-                                    <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-2.jpg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="project-content">
-                                    <h3>Non-Toxic Insect Repellents Methods</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
-                                </div>
-                            </div>
-                            <!-- Project Item End -->
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 project-item-box outdoor eco-friendly">
-                            <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp" data-wow-delay="0.4s">
-                                <div class="project-image">
-                                    <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-3.jpg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="project-content">
-                                    <h3>Innovative Pest Control Equipment</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
-                                </div>
-                            </div>
-                            <!-- Project Item End -->
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 project-item-box commercial termite">
-                            <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp" data-wow-delay="0.6s">
-                                <div class="project-image">
-                                    <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-4.jpg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="project-content">
-                                    <h3>Indoor Pest Prevention Techniques</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
-                                </div>
-                            </div>
-                            <!-- Project Item End -->
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 project-item-box home eco-friendly">
-                            <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp" data-wow-delay="0.8s">
-                                <div class="project-image">
-                                    <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-5.jpg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="project-content">
-                                    <h3>Pest Control Using Nanotechnology</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
-                                </div>
-                            </div>
-                            <!-- Project Item End -->
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 project-item-box home outdoor">
-                            <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp" data-wow-delay="1s">
-                                <div class="project-image">
-                                    <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-6.jpg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="project-content">
-                                    <h3>Chemical-Free Mosquito Management</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
-                                </div>
-                            </div>
-                            <!-- Project Item End -->
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 project-item-box home commercial">
-                            <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp" data-wow-delay="1.2s">
-                                <div class="project-image">
-                                    <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-7.jpg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="project-content">
-                                    <h3>Biorational Pest Control Approaches</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
-                                </div>
-                            </div>
-                            <!-- Project Item End -->
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 project-item-box termite">
-                            <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp" data-wow-delay="1.4s">
-                                <div class="project-image">
-                                    <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-8.jpg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="project-content">
-                                    <h3>Urban Pest Surveillance Systems Method</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
-                                </div>
-                            </div>
-                            <!-- Project Item End -->
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 project-item-box commercial">
-                            <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp" data-wow-delay="1.6s">
-                                <div class="project-image">
-                                    <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-9.jpg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="project-content">
-                                    <h3>Sustainable Mosquito Control Methods</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
-                                </div>
-                            </div>
-                            <!-- Project Item End -->
-                        </div>
+                        {% endfor %}
                     </div>
                     <!-- Project Item Boxes End -->
                 </div>

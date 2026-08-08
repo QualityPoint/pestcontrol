@@ -10,10 +10,8 @@
   "photo",
   "column_break_wtmb",
   "designation",
-  "designation_ar",
   "section_break_wtmc",
   "bio",
-  "bio_ar",
   "section_break_wtmd",
   "phone",
   "email",
@@ -23,7 +21,9 @@
   "twitter_url",
   "section_break_wtmf",
   "display_order",
-  "published"
+  "published",
+  "section_break_tr_member",
+  "translations"
  ],
  "fields": [
   {
@@ -54,11 +54,6 @@
    "in_list_view": 1
   },
   {
-   "fieldname": "designation_ar",
-   "fieldtype": "Data",
-   "label": "Designation (Arabic)"
-  },
-  {
    "fieldname": "section_break_wtmc",
    "fieldtype": "Section Break"
   },
@@ -66,11 +61,6 @@
    "fieldname": "bio",
    "fieldtype": "Text Editor",
    "label": "Bio"
-  },
-  {
-   "fieldname": "bio_ar",
-   "fieldtype": "Text Editor",
-   "label": "Bio (Arabic)"
   },
   {
    "fieldname": "section_break_wtmd",
@@ -125,6 +115,17 @@
    "label": "Published",
    "default": "1",
    "in_list_view": 1
+  },
+  {
+   "fieldname": "section_break_tr_member",
+   "fieldtype": "Section Break",
+   "label": "Translations"
+  },
+  {
+   "fieldname": "translations",
+   "fieldtype": "Table",
+   "label": "Translations",
+   "options": "Website-Language"
   }
  ],
  "grid_page_length": 50,
@@ -156,6 +157,5 @@
  "states": [],
  "allow_import": 1,
  "autoname": "hash",
- "naming_rule": "Random",
- "translated_doctype": 1
+ "naming_rule": "Random"
 }

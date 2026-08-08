@@ -6,19 +6,18 @@
  "engine": "InnoDB",
  "field_order": [
   "service_name",
-  "service_name_ar",
   "route",
   "column_break_wsvc",
   "icon",
   "image",
   "section_break_wsvd",
   "short_description",
-  "short_description_ar",
   "full_description",
-  "full_description_ar",
   "column_break_wsve",
   "display_order",
-  "published"
+  "published",
+  "section_break_tr_ervice",
+  "translations"
  ],
  "fields": [
   {
@@ -28,11 +27,6 @@
    "reqd": 1,
    "unique": 1,
    "in_list_view": 1
-  },
-  {
-   "fieldname": "service_name_ar",
-   "fieldtype": "Data",
-   "label": "Service Name (Arabic)"
   },
   {
    "fieldname": "route",
@@ -64,19 +58,9 @@
    "in_list_view": 1
   },
   {
-   "fieldname": "short_description_ar",
-   "fieldtype": "Small Text",
-   "label": "Short Description (Arabic)"
-  },
-  {
    "fieldname": "full_description",
    "fieldtype": "Text Editor",
    "label": "Full Description"
-  },
-  {
-   "fieldname": "full_description_ar",
-   "fieldtype": "Text Editor",
-   "label": "Full Description (Arabic)"
   },
   {
    "fieldname": "column_break_wsve",
@@ -94,6 +78,17 @@
    "label": "Published",
    "default": "1",
    "in_list_view": 1
+  },
+  {
+   "fieldname": "section_break_tr_ervice",
+   "fieldtype": "Section Break",
+   "label": "Translations"
+  },
+  {
+   "fieldname": "translations",
+   "fieldtype": "Table",
+   "label": "Translations",
+   "options": "Website-Language"
   }
  ],
  "grid_page_length": 50,
@@ -125,6 +120,5 @@
  "states": [],
  "allow_import": 1,
  "autoname": "field:service_name",
- "naming_rule": "By fieldname",
- "translated_doctype": 1
+ "naming_rule": "By fieldname"
 }

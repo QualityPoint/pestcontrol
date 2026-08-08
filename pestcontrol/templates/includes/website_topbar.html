@@ -15,8 +15,8 @@
                     <!-- Topbar Contact Information Start -->
                     <div class="topbar-contact-info">
                         <ul>
-                            <li><i class="fa-regular fa-envelope"></i><a href="mailto:info@the-skystar.com">info@the-skystar.com</a></li>
-                            <li><i class="fa-solid fa-location-dot"></i>6391 Elgin St. Celina, Delaware 10299</li>
+                            {% if settings.email %}<li><i class="fa-regular fa-envelope"></i><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></li>{% endif %}
+                            {% if settings.address %}<li><i class="fa-solid fa-location-dot"></i>{{ localize(settings, "address") }}</li>{% endif %}
                         </ul>
                     </div>
                     <!-- Topbar Contact Information End -->
@@ -26,12 +26,20 @@
                     <!-- Topbar Social Links Start -->
                     <div class="topbar-social-links">
                         <ul>
-                            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
+                            {% if settings.instagram_url %}<li><a href="{{ settings.instagram_url }}"><i class="fa-brands fa-instagram"></i></a></li>{% endif %}
+                            {% if settings.facebook_url %}<li><a href="{{ settings.facebook_url }}"><i class="fa-brands fa-facebook-f"></i></a></li>{% endif %}
+                            {% if settings.twitter_url %}<li><a href="{{ settings.twitter_url }}"><i class="fa-brands fa-x-twitter"></i></a></li>{% endif %}
                         </ul>
                     </div>
                     <!-- Topbar Social Links End -->
+
+                    <!-- Topbar Language Switch Start -->
+                    <div class="topbar-lang-switch" style="display:inline-flex; gap:6px; margin-inline-start:12px;">
+                        <a href="#" data-set-lang="en" style="{{ 'font-weight:bold;' if lang != 'ar' else 'opacity:0.6;' }}">EN</a>
+                        <span>|</span>
+                        <a href="#" data-set-lang="ar" style="{{ 'font-weight:bold;' if lang == 'ar' else 'opacity:0.6;' }}">AR</a>
+                    </div>
+                    <!-- Topbar Language Switch End -->
                 </div>
             </div>
         </div>

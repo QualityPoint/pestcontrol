@@ -5,9 +5,8 @@
                 <div class="col-lg-5">
                     <!-- About Footer Start -->
                     <div class="about-footer footer-links">
-                        <h3>About Skystar</h3>
-                        <p>we are dedicated to creating safe, pest-free environments for homes and businesses alike. With years of experience in the pest control industry.</p>
-                        <p>we pride ourselves on delivering effective, eco-friendly solutions tailored to your needs.</p>
+                        <h3>About {{ settings.site_name or "Skystar" }}</h3>
+                        <p>{{ localize(settings, "about_footer_text") }}</p>
                     </div>
                     <!-- About Footer End -->
                 </div>
@@ -45,27 +44,31 @@
                 <div class="col-lg-3 col-md-5">
                     <div class="footer-links">
                         <h3>contact us</h3>
-                        <!-- Footer Contact Item Start -->
-                        <div class="footer-contact-item">
-                            <div class="icon-box">
-                                <i class="fa-solid fa-envelope"></i>
-                            </div>
-                            <div class="footer-contact-content">
-                                <p><a href="tel:+966567407779">+966 56 740 7779</a></p>
-                            </div>
-                        </div>
-                        <!-- Footer Contact Item End -->
-
+                        {% if settings.phone %}
                         <!-- Footer Contact Item Start -->
                         <div class="footer-contact-item">
                             <div class="icon-box">
                                 <i class="fa-solid fa-phone"></i>
                             </div>
                             <div class="footer-contact-content">
-                                <p><a href="mailto:info@the-skystar.com">info@the-skystar.com</a></p>
+                                <p><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></p>
                             </div>
                         </div>
                         <!-- Footer Contact Item End -->
+                        {% endif %}
+
+                        {% if settings.email %}
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-contact-item">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="footer-contact-content">
+                                <p><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></p>
+                            </div>
+                        </div>
+                        <!-- Footer Contact Item End -->
+                        {% endif %}
                     </div>
                 </div>
 
@@ -74,23 +77,24 @@
                     <div class="footer-copyright">
                         <!-- Footer Logo Start -->
                         <div class="footer-logo">
-                            <img src="/assets/pestcontrol/website/icons/skystar-logo.png" alt="Skystar">
+                            <img src="{{ settings.footer_logo or '/assets/pestcontrol/website/icons/skystar-logo.png' }}" alt="{{ settings.site_name or 'Skystar' }}">
                         </div>
                         <!-- Footer Logo End -->
 
                         <!-- Footer Social Links Start -->
                         <div class="footer-social-links">
                             <ul>
-                                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
+                                {% if settings.instagram_url %}<li><a href="{{ settings.instagram_url }}"><i class="fa-brands fa-instagram"></i></a></li>{% endif %}
+                                {% if settings.facebook_url %}<li><a href="{{ settings.facebook_url }}"><i class="fa-brands fa-facebook-f"></i></a></li>{% endif %}
+                                {% if settings.twitter_url %}<li><a href="{{ settings.twitter_url }}"><i class="fa-brands fa-x-twitter"></i></a></li>{% endif %}
+                                {% if settings.linkedin_url %}<li><a href="{{ settings.linkedin_url }}"><i class="fa-brands fa-linkedin-in"></i></a></li>{% endif %}
                             </ul>
                         </div>
                         <!-- Footer Social Links End -->
 
                         <!-- Footer Copyright Text Start -->
                         <div class="footer-copyright-text">
-                            <p>Copyright © {{ year }} Skystar. All Rights Reserved.</p>
+                            <p>{{ settings.copyright_text or "Copyright © " ~ year ~ " " ~ (settings.site_name or "Skystar") ~ ". All Rights Reserved." }}</p>
                         </div>
                         <!-- Footer Copyright Text End -->
                     </div>

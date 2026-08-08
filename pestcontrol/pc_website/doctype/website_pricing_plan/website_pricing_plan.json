@@ -6,7 +6,6 @@
  "engine": "InnoDB",
  "field_order": [
   "plan_name",
-  "plan_name_ar",
   "column_break_wppl",
   "price",
   "billing_period",
@@ -18,7 +17,9 @@
   "features",
   "section_break_wppo",
   "display_order",
-  "published"
+  "published",
+  "section_break_tr_ngplan",
+  "translations"
  ],
  "fields": [
   {
@@ -27,11 +28,6 @@
    "label": "Plan Name",
    "reqd": 1,
    "in_list_view": 1
-  },
-  {
-   "fieldname": "plan_name_ar",
-   "fieldtype": "Data",
-   "label": "Plan Name (Arabic)"
   },
   {
    "fieldname": "column_break_wppl",
@@ -95,6 +91,17 @@
    "label": "Published",
    "default": "1",
    "in_list_view": 1
+  },
+  {
+   "fieldname": "section_break_tr_ngplan",
+   "fieldtype": "Section Break",
+   "label": "Translations"
+  },
+  {
+   "fieldname": "translations",
+   "fieldtype": "Table",
+   "label": "Translations",
+   "options": "Website-Language"
   }
  ],
  "grid_page_length": 50,
@@ -126,6 +133,5 @@
  "states": [],
  "allow_import": 1,
  "autoname": "hash",
- "naming_rule": "Random",
- "translated_doctype": 1
+ "naming_rule": "Random"
 }
