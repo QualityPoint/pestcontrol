@@ -50,7 +50,11 @@ def attach_articles(doctype, items):
 
     rows = frappe.get_all(
         "Website Article",
-        filters={"parenttype": doctype, "parent": ["in", [item.name for item in items]]},
+        filters={
+            "parenttype": doctype,
+            "parentfield": "article",
+            "parent": ["in", [item.name for item in items]],
+        },
         fields=["parent", "language", "title", "subtitle", "context"],
     )
     by_parent = {}
