@@ -43,6 +43,7 @@ ARTICLE_FIELD_MAP = {
 def get_website_context(context):
     """Common context every pestcontrol www/ page needs: current year,
     the site-wide settings singleton, and the active language."""
+    _apply_preferred_language_cookie()
     context.year = frappe.utils.now_datetime().year
     settings = frappe.get_cached_doc("PC Website Settings").as_dict()
     attach_articles("PC Website Settings", [settings])
@@ -52,6 +53,22 @@ def get_website_context(context):
     context.current_language = next(
         (l for l in SITE_LANGUAGES if l["code"] == context.lang), SITE_LANGUAGES[0]
     )
+
+
+def _apply_preferred_language_cookie():
+    """Frappe's own language resolution only honors the `preferred_language`
+    cookie for Guest visitors — a logged-in user (e.g. an admin testing the
+    site in the same browser as the desk) falls back to their profile
+    language instead, silently dropping the switcher's choice on every
+    navigation that doesn't explicitly carry ?_lang. Override that here so
+    the cookie sticks site-wide, regardless of session state, matching what
+    a public marketing site visitor expects."""
+    if frappe.form_dict.get("_lang"):
+        return  # explicit request always wins; core already applied it
+    cookie_lang = frappe.request.cookies.get("preferred_language")
+    valid_codes = {l["code"] for l in SITE_LANGUAGES}
+    if cookie_lang and cookie_lang in valid_codes:
+        frappe.local.lang = cookie_lang
 
 
 def asset_version(path):

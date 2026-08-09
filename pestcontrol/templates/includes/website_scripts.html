@@ -42,7 +42,13 @@
                 e.preventDefault();
                 var lang = option.getAttribute("data-set-lang");
                 document.cookie = "preferred_language=" + lang + ";path=/;max-age=31536000";
-                window.location.reload();
+                // The cookie alone is ignored by Frappe for logged-in users
+                // (it only reads it for Guests) — the _lang query param is
+                // checked first and always wins, so use it to force the
+                // switch immediately regardless of session state.
+                var url = new URL(window.location.href);
+                url.searchParams.set("_lang", lang);
+                window.location.href = url.toString();
                 return;
             }
 
