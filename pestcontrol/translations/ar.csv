@@ -1,51 +1,279 @@
-Applying rates according to injury severity,تطبيق الأسعار وفقًا لشدة الإصابة,
-
-
-Description,الوصف,
-Duration,المدة,
-
-
-From Time,من الوقت,
-
-
-Is Group,هل مجموعة,
-Is Supervisor,هل هو مشرف,
-
-
-Member Name,اسم العضو,
-No of Interval,عدد الفواصل الزمنية,
-
-
-Operation Team,فريق التشغيل,
-Operation Visit,زيارة التشغيل,
-
-
-Parent Pest Type,نوع الآفة الأصل,
-Pest Information,معلومات الآفة,
-Pest Name,اسم الآفة,
-Pest Type,نوع الآفة,
-
-
-Rate,السعر,
-
-
-Severity Level,مستوى الشدة,
-Severity Level Rates,أسعار مستوى الشدة,
-Standard Rate,السعر القياسي,
-Supervisor,المشرف,
-
-
-Team Member,عضو الفريق,
-Team Members,أعضاء الفريق,
-To Time,إلى الوقت,
-
-
-Visit Date,تاريخ الزيارة,
-Visit Duration,مدة الزيارة,
-Visit No,رقم الزيارة,
-Visit Operation Team,فريق تشغيل الزيارة,
-Visit Timeout,الوقت المستقطع في الزيارة,
-Visit Timesheet,جدول الزيارة,
-Visit Type,نوع الزيارة,
-Scope Visit Reference No Uniqueness to Company,جعل الرقم المرجعي للزيارة فريد على مستوى الشركة,
-"When enabled, a Visit Reference No only needs to be unique within each company (the same number may be reused across companies). When disabled, it must be unique across all companies.",عند التمكين، يجب أن يكون رقم المرجع للزيارة فريدًا فقط داخل كل شركة (يمكن إعادة استخدام نفس الرقم عبر الشركات). عند تعطيله، يجب أن يكون فريدًا عبر جميع الشركات.,
+. All Rights Reserved.,. جميع الحقوق محفوظة.
+1. What types of pests do you treat?,1. ما أنواع الآفات التي تعالجونها؟
+2. Are your pest control methods safe for my pets?,2. هل طرق مكافحة الآفات لديكم آمنة على حيواناتي الأليفة؟
+24/7 Availability,متاحون على مدار الساعة
+24/7 Emergency Services,خدمات طوارئ على مدار الساعة
+3. How often should I schedule pest control services?,3. كم مرة يجب أن أجدول خدمات مكافحة الآفات؟
+4. Do you offer emergency pest control services?,4. هل تقدمون خدمات مكافحة آفات طارئة؟
+404 error page,صفحة خطأ 404
+5. How do I know if I have a pest infestation?,5. كيف أعرف أن لدي انتشارًا للآفات؟
+About,عن
+About Us,من نحن
+About company,عن الشركة
+About us,من نحن
+Advanced Pest Control Solutions for Every Need,حلول متقدمة لمكافحة الآفات تناسب كل احتياج
+Advanced Techniques,تقنيات متقدمة
+Affordable Solutions,حلول بأسعار معقولة
+Are your treatments suitable for all skin types?,هل علاجاتكم مناسبة لجميع أنواع البشرة؟
+Arjun Khanna,أرجون خانا
+"At Skystar, we believe that a pest-free home is the foundation of a healthy and happy life. Our innovative pest control solutions are designed to protect your living spaces from unwanted intruders, ensuring comfort, safety, and peace of mind. From preventive treatments to effective removal strategies, we provide tailored services that enhance the quality of your home environment. Trust us to safeguard your home while prioritizing eco-friendly practices for a better tomorrow.",في سكاي ستار، نؤمن بأن المنزل الخالي من الآفات هو أساس حياة صحية وسعيدة. حلولنا المبتكرة لمكافحة الآفات مصممة لحماية مساحات معيشتكم من الدخلاء غير المرغوب فيهم، لضمان الراحة والأمان وراحة البال. من العلاجات الوقائية إلى استراتيجيات الإزالة الفعالة، نقدم خدمات مخصصة ترتقي بجودة بيئة منزلكم. ثقوا بنا لحماية منزلكم مع إعطاء الأولوية للممارسات الصديقة للبيئة من أجل غد أفضل.
+"At the heart of everything we do lies a commitment to innovation and excellence. We believe in creating tailored solutions that address unique challenges, while fostering growth and sustainability for a brighter tomorrow.",في صميم كل ما نقوم به يكمن التزامنا بالابتكار والتميز. نؤمن بابتكار حلول مخصصة تعالج التحديات الفريدة، مع تعزيز النمو والاستدامة من أجل غد أكثر إشراقًا.
+BOD at D.B.A Pvt. Ltd,عضو مجلس إدارة في D.B.A Pvt. Ltd
+Better Homes,منازل أفضل
+Blog,المدونة
+Blog Details,تفاصيل المقال
+Brooklyn Simmons,بروكلين سيمونز
+CEO at D.B.A Pvt. Ltd,الرئيس التنفيذي في D.B.A Pvt. Ltd
+Cameron Williamson,كاميرون ويليامسون
+Capabilities,القدرات
+Category :,الفئة :
+Certified Professionals,متخصصون معتمدون
+Chairman,رئيس مجلس الإدارة
+Chemical Handling :,التعامل مع المواد الكيميائية :
+Commercial Pest,آفات تجارية
+Commercial Services,خدمات تجارية
+Commitment to Excellence,الالتزام بالتميز
+Committed to protecting your home and the environment with innovative green solutions.,ملتزمون بحماية منزلكم والبيئة من خلال حلول خضراء مبتكرة.
+Comprehensive Coverage,تغطية شاملة
+Comprehensive Pest Manage Solution,حل شامل لإدارة الآفات
+Comprehensive pest,حلول شاملة
+Comprehesive pest management solution,حل شامل لإدارة الآفات
+Comprhensive pest,حلول شاملة
+Contact,تواصل
+Contact Us,اتصل بنا
+Contact us,اتصل بنا
+Contact us today!,تواصلوا معنا اليوم!
+Copyright © ,حقوق النشر © 
+"Crafting,",نصنع،
+Customer :,العميل :
+Customer-Focused Service,خدمة تركز على العميل
+Customized Plans for Every Home,خطط مخصصة لكل منزل
+Customized Treatment,علاج مخصص
+Customized Treatments,علاجات مخصصة
+Customized pest to your unique needs.,حلول آفات مخصصة تلبي احتياجاتكم الفريدة.
+Dedicated Team,فريق متفانٍ
+Dedicated experts supporting,خبراء متفانون يدعمون
+Dedicated to long-term,ملتزمون بحلول طويلة الأمد
+Delivering efficient and reliable pest control service exactly when you need them the most.,نقدم خدمة مكافحة آفات فعالة وموثوقة تمامًا عندما تحتاجونها أكثر.
+"Discover comprehensive pest control services designed to address your unique needs with precision and care. From tailored solutions to advanced eco-friendly treatments, we ensure the effective elimination of pests and provide long-term protection for your home or business. Trust our expert team for reliable, safe, and environmentally responsible pest management solutions.",اكتشفوا خدمات مكافحة آفات شاملة مصممة لتلبية احتياجاتكم الفريدة بدقة وعناية. من الحلول المخصصة إلى العلاجات المتقدمة الصديقة للبيئة، نضمن القضاء الفعال على الآفات ونوفر حماية طويلة الأمد لمنزلكم أو عملكم. ثقوا بفريقنا الخبير لحلول إدارة آفات موثوقة وآمنة ومسؤولة بيئيًا.
+Discover more,اكتشف المزيد
+Do I need a consultation before getting treatment?,هل أحتاج إلى استشارة قبل الحصول على العلاج؟
+Do you offer cosmetic dermatology services?,هل تقدمون خدمات تجميل الجلدية؟
+Duration :,المدة :
+E-mail,البريد الإلكتروني
+Eco-Friendly Approach,نهج صديق للبيئة
+Eco-Friendly Approaches to Effective Pest Management,نهج صديق للبيئة لإدارة فعالة للآفات
+Eco-Friendly Pest,آفات صديقة للبيئة
+Eco-Friendly approach,نهج صديق للبيئة
+Eco-Friendly practices,ممارسات صديقة للبيئة
+Eco-conscious methods designed to eliminate pests without compromising the safety of your loved ones or the environment.,طرق واعية بيئيًا مصممة للقضاء على الآفات دون المساس بسلامة أحبائكم أو البيئة.
+Eco-friendly technique ensuring healthier.,تقنية صديقة للبيئة تضمن بيئة أكثر صحة.
+Effective pest solutions -,حلول فعالة للآفات -
+Elite trainer insights,رؤى من كبار المدربين
+Email address,البريد الإلكتروني
+Email:,البريد الإلكتروني:
+Emergency Services,خدمات طارئة
+Environmental Services,خدمات بيئية
+"Every property is unique, so we offer personalized pest.",كل عقار فريد، لذا نقدم حلول آفات مخصصة.
+"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!",خدمة ممتازة! كانت لدينا مشكلة كبيرة مع النمل، وتم حلها بسرعة واحترافية!
+Experienced technician delivering trusted.,فنيون ذوو خبرة يقدمون خدمة موثوقة.
+Expert Care with Guaranteed Results,رعاية متخصصة بنتائج مضمونة
+Expert fitness strategies,استراتيجيات لياقة احترافية
+Expert solutions for every,حلول احترافية لكل
+Expert techniques,تقنيات احترافية
+Expertise You Can Trust,خبرة يمكنكم الوثوق بها
+"Expertise You Can Trust, Backed by Years of Experience.",خبرة يمكنكم الوثوق بها، مدعومة بسنوات من الخبرة.
+"Expertise You Can Trust, Built on Years of Experience.",خبرة يمكنكم الوثوق بها، مبنية على سنوات من الخبرة.
+"Explaining the treatment process, and ensuring that customers feel comfortable and informed, is a core part of the job — known for a friendly demeanor and the ability to put customers at ease while solving even the toughest pest problems.",شرح عملية العلاج وضمان شعور العملاء بالراحة والاطلاع هو جزء أساسي من العمل — معروف بأسلوب ودود والقدرة على طمأنة العملاء أثناء حل أصعب مشكلات الآفات.
+Explore our proven track record of,استكشفوا سجلنا الحافل والمثبت في
+FAQs,الأسئلة الشائعة
+Fast Response Times,أوقات استجابة سريعة
+Find helpful answers to your pest,اعثروا على إجابات مفيدة لأسئلتكم حول الآفات
+First name,الاسم الأول
+Free,مجانًا
+Frequently asked question,الأسئلة الشائعة
+Get 30 day free trial,احصل على تجربة مجانية لمدة 30 يومًا
+Get Membership,احصل على عضوية
+Get Started Now,ابدأ الآن
+Guaranteed Results,نتائج مضمونة
+Happy Customers,عملاء سعداء
+Home,الرئيسية
+Home Pest Control,مكافحة آفات المنزل
+IPM Techniques :,تقنيات الإدارة المتكاملة للآفات :
+Image Gallery,معرض الصور
+Last name,اسم العائلة
+Latest blog,أحدث المقالات
+Let's create a pest-free environment -,لنصنع معًا بيئة خالية من الآفات -
+Let's talk about your,لنتحدث عن
+Links,روابط
+Location :,الموقع :
+Long-term prevention,وقاية طويلة الأمد
+MD at D.B.A Pvt. Ltd,المدير الإداري في D.B.A Pvt. Ltd
+Message,الرسالة
+Mon - Sat :- 7:00 to 5:00,الإثنين - السبت :- 7:00 إلى 5:00
+No any hidden fees pay,بدون أي رسوم خفية
+Oliver Spaltn,أوليفر سبالتن
+Oops!,عذرًا!
+Our Features,مميزاتنا
+Our Portfolio,أعمالنا
+Our Services,خدماتنا
+"Our Skilled Team Delivers Consistent, Reliable Solutions.",فريقنا الماهر يقدم حلولًا ثابتة وموثوقة.
+Our Team,فريقنا
+Our approach,نهجنا
+"Our approach to pest control goes beyond just elimination — we focus on prevention, protection, and long-term solutions. By combining advanced tools, expert knowledge, and eco-friendly practices, we ensure that your home or business stays free from pests all year round. Trust us to deliver customized services tailored to your specific needs, giving you peace of mind and a pest-free environment.",نهجنا في مكافحة الآفات يتجاوز مجرد القضاء عليها — نحن نركز على الوقاية والحماية والحلول طويلة الأمد. من خلال الجمع بين الأدوات المتقدمة والمعرفة المتخصصة والممارسات الصديقة للبيئة، نضمن بقاء منزلكم أو عملكم خاليًا من الآفات على مدار العام. ثقوا بنا لتقديم خدمات مخصصة تلبي احتياجاتكم الخاصة، مما يمنحكم راحة البال وبيئة خالية من الآفات.
+Our blog,مدونتنا
+Our blogs,مدونتنا
+"Our certified team provides expert pest control services, tailored to your specific needs.",فريقنا المعتمد يقدم خدمات مكافحة آفات احترافية، مصممة خصيصًا لاحتياجاتكم.
+Our gallery,معرض صورنا
+Our legacy,إرثنا
+Our mission,مهمتنا
+"Our mission is simple: to provide dependable pest management services that ensure a clean, safe, and comfortable environment for everyone. With years of expertise and a customer-first approach ,we go above and beyond to eliminate pests and prevent their return.",مهمتنا بسيطة: تقديم خدمات إدارة آفات موثوقة تضمن بيئة نظيفة وآمنة ومريحة للجميع. وبفضل سنوات من الخبرة ونهج يضع العميل أولاً، نبذل جهدًا إضافيًا للقضاء على الآفات ومنع عودتها.
+"Our mission is to be leader in our industry, setting new standards.",مهمتنا أن نكون رواد صناعتنا، ونضع معايير جديدة.
+"Our pest control plans are tailored to address the unique needs of your home, offering targeted solutions for lasting protection.",خططنا لمكافحة الآفات مصممة لتلبية الاحتياجات الفريدة لمنزلكم، وتقدم حلولًا موجهة لحماية دائمة.
+"Our pest control services are crafted to deliver exceptional results while prioritizing your safety and comfort. Using the latest techniques and environmentally friendly methods, we tackle pest issues of all kinds, ensuring your space remains protected and pest-free. With a focus on quality, reliability, and customer satisfaction.",خدماتنا لمكافحة الآفات مصممة لتحقيق نتائج استثنائية مع إعطاء الأولوية لسلامتكم وراحتكم. باستخدام أحدث التقنيات والطرق الصديقة للبيئة، نعالج مشكلات الآفات بجميع أنواعها، لضمان بقاء مساحتكم محمية وخالية من الآفات. مع التركيز على الجودة والموثوقية ورضا العملاء.
+Our projects,مشاريعنا
+Our services,خدماتنا
+Our team,فريقنا
+"Our team is fully trained, certified, and experienced.",فريقنا مدرب بالكامل ومعتمد وذو خبرة.
+Our videos,مقاطع الفيديو لدينا
+Our vision,رؤيتنا
+"Our vision is to be a leader in our industry, setting new standards.",رؤيتنا أن نكون رواد صناعتنا، ونضع معايير جديدة.
+Page Not Found,الصفحة غير موجودة
+Page not found,الصفحة غير موجودة
+Pages,الصفحات
+Passion for innovation and,شغف بالابتكار و
+Personals info,المعلومات الشخصية
+Pest control,مكافحة الآفات
+Pest control effectiveness,فعالية مكافحة الآفات
+Pest-Free Living,حياة خالية من الآفات
+"Pest-Free Living,",حياة خالية من الآفات،
+Phone :,الهاتف :
+Phone no.,رقم الهاتف
+Position:,المنصب:
+"Preserving our legacy with innovative and reliable pest control solutions, ensuring safety and satisfaction for every space we protect.",نحافظ على إرثنا من خلال حلول مبتكرة وموثوقة لمكافحة الآفات، لضمان السلامة والرضا لكل مساحة نحميها.
+Prevent Future Infestations,الوقاية من الإصابات المستقبلية
+Pricing,الأسعار
+Pricing Plan,خطة الأسعار
+Pricing plan,خطة الأسعار
+Professional,احترافية
+Project Details,تفاصيل المشروع
+Project Information,معلومات المشروع
+Projects,المشاريع
+Projects Completed,مشاريع منجزة
+Protect your home and business with our effective pest control solutions. From termites to rodents we eliminate pest quickly & safely.,احموا منزلكم وعملكم بحلولنا الفعالة لمكافحة الآفات. من النمل الأبيض إلى القوارض، نقضي على الآفات بسرعة وأمان.
+"Protecting home, businesses,",نحمي المنازل والأعمال،
+Quality pest control services at,خدمات مكافحة آفات عالية الجودة بـ
+Reach Out to Us Today!,تواصلوا معنا اليوم!
+Ready for a Pest-Free Home?,هل أنتم مستعدون لمنزل خالٍ من الآفات؟
+Reliable pest & bug control services you can trust,خدمات موثوقة لمكافحة الآفات والحشرات يمكنكم الوثوق بها
+Ronald Richards,رونالد ريتشاردز
+Safe and Sustainable Treatments,علاجات آمنة ومستدامة
+Schedule Your Free Inspection,احجزوا فحصكم المجاني
+Security Specialist,أخصائي أمن
+Service Details,تفاصيل الخدمة
+Services,الخدمات
+Shaping excellence in,نصنع التميز في
+Simple and Fast Booking,حجز بسيط وسريع
+Skilled experts experience.,خبرة متخصصين مهرة.
+Stay up to date with our latest,ابقوا على اطلاع بأحدث
+Sunday :- Close,الأحد :- مغلق
+Support Manager,مدير الدعم
+Tags:,الوسوم:
+Tailored Services for Residential and Commercial Properties,خدمات مخصصة للعقارات السكنية والتجارية
+Tailored solutions,حلول مخصصة
+Take Back Your Home From Pests. Today!,استعيدوا منزلكم من الآفات. اليوم!
+Team,الفريق
+Team Details,تفاصيل الفريق
+Technical Engineer,مهندس تقني
+Termite & Rodent,النمل الأبيض والقوارض
+Testimonials,آراء العملاء
+The page you are looking for does not exist.,الصفحة التي تبحثون عنها غير موجودة.
+Timely service,خدمة في الوقت المناسب
+Trained professionals,متخصصون مدربون
+"Trusted by Thousands, We Take Pride in Offering the.",موثوقون من قبل الآلاف، ونفخر بتقديم الأفضل.
+Trusted by hundreds for reliable,موثوق به من قبل المئات لخدمات
+Using advanced tools and proven methods to ensure long-lasting pest control solutions.,نستخدم أدوات متقدمة وطرقًا مثبتة لضمان حلول مكافحة آفات طويلة الأمد.
+Using sustainable methods to protect your home environment.,نستخدم طرقًا مستدامة لحماية بيئة منزلكم.
+Video Gallery,معرض الفيديو
+View All Projects,عرض جميع المشاريع
+View All Services,عرض جميع الخدمات
+We are available round the clock to address.,نحن متاحون على مدار الساعة لمعالجة مشكلاتكم.
+"We are driven by a commitment to deliver innovative, reliable, and high-quality pest control solutions that ensure long-lasting results.",يحركنا التزامنا بتقديم حلول مبتكرة وموثوقة وعالية الجودة لمكافحة الآفات تضمن نتائج طويلة الأمد.
+"We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.",نتعامل مع مجموعة واسعة من الآفات، بما في ذلك القوارض والنمل والصراصير والنمل الأبيض وبق الفراش والبعوض والعناكب والحيوانات البرية.
+"We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.",نقدم مجموعة واسعة من علاجات الجلدية، بما في ذلك العناية بحب الشباب وإدارة الصدفية وفحص سرطان الجلد والإجراءات التجميلية مثل البوتوكس وغيرها.
+We provide pest control plans designed to fit your unique needs.,نقدم خططًا لمكافحة الآفات مصممة لتناسب احتياجاتكم الفريدة.
+We provide sustainable pest control solutions that address immediate issues and prevent future infestations.,نقدم حلولًا مستدامة لمكافحة الآفات تعالج المشكلات الفورية وتمنع الإصابات المستقبلية.
+We stand behind our service with a satisfaction guarante.,نقف خلف خدمتنا بضمان الرضا.
+"We understand how frustrating and disruptive pests can be, which is why we're committed to providing fast, reliable, and effective solutions.",ندرك مدى الإزعاج والاضطراب الذي قد تسببه الآفات، لذا نلتزم بتقديم حلول سريعة وموثوقة وفعالة.
+"We understand how frustrating and disruptive pests can be, which is why we're committed to providing fast, reliable, and effective solutions. With a team of certified experts, eco-friendly methods, and unmatched customer care.",ندرك مدى الإزعاج والاضطراب الذي قد تسببه الآفات، لذا نلتزم بتقديم حلول سريعة وموثوقة وفعالة. مع فريق من الخبراء المعتمدين وطرق صديقة للبيئة ورعاية عملاء لا مثيل لها.
+"We understand that every home is different, and so are the pest problems it may face. That's why our expert team conducts thorough.",ندرك أن كل منزل مختلف، وكذلك مشكلات الآفات التي قد يواجهها. لهذا يجري فريقنا الخبير فحصًا شاملاً.
+What drives us,ما الذي يحركنا
+What makes us the best,ما الذي يجعلنا الأفضل
+What should I expect during my first visit?,ماذا يجب أن أتوقع خلال زيارتي الأولى؟
+What types of treatments do you offer?,ما أنواع العلاجات التي تقدمونها؟
+Wildlife Removal,إزالة الحيوانات البرية
+Working Hours,ساعات العمل
+Years Of Experience,سنوات من الخبرة
+Years Of experience,سنوات من الخبرة
+Years of experience,سنوات من الخبرة
+You can  cancel anytime ,يمكنكم الإلغاء في أي وقت
+Your Shield Against Unwanted Guests,درعكم ضد الضيوف غير المرغوب فيهم
+Your trusted partner in pest,شريككم الموثوق في
+about us,من نحن
+all,الكل
+and communities,والمجتمعات
+back to home,العودة إلى الرئيسية
+basics,أساسيات
+blog,المدونة
+book a service,احجز خدمة
+call now,اتصل الآن
+choice for you,الخيار لكم
+commercial pest solutions,حلول آفات تجارية
+competitive rates,أسعار تنافسية
+contact us,اتصل بنا
+control concerns,مخاوف المكافحة
+control excellence,التميز في المكافحة
+control solutions,حلول المكافحة
+creating a tailored plan that delivers effective results. Whether it's preventive treatments or targeted solutions for an existing issue.,نضع خطة مخصصة تحقق نتائج فعالة. سواء كانت علاجات وقائية أو حلولًا موجهة لمشكلة قائمة.
+emily williams,إيميلي ويليامز
+frequently asked questions,الأسئلة الشائعة
+gallery,معرض الصور
+get a quote,احصل على عرض سعر
+"has years of experience in the pest control industry, specializing in residential and commercial pest management. They hold multiple certifications in pest control and are highly knowledgeable about the latest treatment methods and eco-friendly solutions. Their attention to detail and commitment to customer satisfaction have earned them a reputation for excellence.",يتمتع بسنوات من الخبرة في صناعة مكافحة الآفات، متخصصًا في إدارة آفات المنازل والمنشآت التجارية. حاصل على شهادات متعددة في مكافحة الآفات ولديه معرفة واسعة بأحدث طرق العلاج والحلول الصديقة للبيئة. اهتمامه بالتفاصيل والتزامه برضا العملاء أكسباه سمعة التميز.
+home,الرئيسية
+learn more,اعرف المزيد
+leslie alexander,ليزلي ألكسندر
+location,الموقع
+management solution,حل الإدارة
+me,عني
+michael johnson,مايكل جونسون
+mosquito & fly control,مكافحة البعوض والذباب
+our commitment,التزامنا
+our pricing plan,خطة أسعارنا
+our team,فريقنا
+outdoor pest control,مكافحة الآفات الخارجية
+page not found,الصفحة غير موجودة
+pest control advice,نصائح مكافحة الآفات
+pest control needs,احتياجات مكافحة الآفات
+pest control solutions,حلول مكافحة الآفات
+pest management,إدارة الآفات
+pest problem,مشكلة الآفات
+pest-free solutions,حلول خالية من الآفات
+pricing,الأسعار
+project,مشروع
+projects,المشاريع
+quality service,خدمة عالية الجودة
+reach out today!,تواصلوا اليوم!
+read More,اقرأ المزيد
+read more,اقرأ المزيد
+residential pest control,مكافحة آفات المنازل
+send message,إرسال الرسالة
+services,الخدمات
+shaping futures,نصنع المستقبل
+skills,المهارات
+team,الفريق
+termite & rodent control,مكافحة النمل الأبيض والقوارض
+testimonials,آراء العملاء
+videos,مقاطع الفيديو
+why choose us,لماذا تختاروننا
+your journey,رحلتكم

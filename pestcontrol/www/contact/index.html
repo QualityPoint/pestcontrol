@@ -1,10 +1,10 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}Contact Us | Skystar{% endblock %}
+{% block title %}{{ _("Contact Us") }} | Skystar{% endblock %}
 
 {% block page_header %}
-    {% set page_h1 = "Contact us" %}
-    {% set page_breadcrumb = "contact us" %}
+    {% set page_h1 = _("Contact us") %}
+    {% set page_breadcrumb = _("contact us") %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
@@ -22,7 +22,7 @@
                                 <img src="/assets/pestcontrol/website/images/icon-mail.svg" alt="">
                             </div>
                             <div class="contact-info-content">
-                                <h3>Email address</h3>
+                                <h3>{{ _("Email address") }}</h3>
                                 <p><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></p>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                                 <img src="/assets/pestcontrol/website/images/icon-phone.svg" alt="">
                             </div>
                             <div class="contact-info-content">
-                                <h3>Contact Us</h3>
+                                <h3>{{ _("Contact Us") }}</h3>
                                 <p><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></p>
                                 {% if settings.whatsapp %}<p><a href="https://wa.me/{{ settings.whatsapp }}">{{ settings.whatsapp }}</a></p>{% endif %}
                             </div>
@@ -47,7 +47,7 @@
                                 <img src="/assets/pestcontrol/website/images/icon-location.svg" alt="">
                             </div>
                             <div class="contact-info-content">
-                                <h3>location</h3>
+                                <h3>{{ _("location") }}</h3>
                                 <p>{{ localize(settings, "address") }}</p>
                             </div>
                         </div>
@@ -59,9 +59,9 @@
                                 <img src="/assets/pestcontrol/website/images/icon-clock.svg" alt="">
                             </div>
                             <div class="contact-info-content">
-                                <h3>Working Hours</h3>
-                                <p>Mon - Sat :- 7:00 to 5:00</p>
-                                <p>Sunday :- Close</p>
+                                <h3>{{ _("Working Hours") }}</h3>
+                                <p>{{ _("Mon - Sat :- 7:00 to 5:00") }}</p>
+                                <p>{{ _("Sunday :- Close") }}</p>
                             </div>
                         </div>
                         <!-- Contact Info Item End -->
@@ -84,39 +84,39 @@
                         <div class="contact-us-form">
                             <!-- Section Title Start -->
                             <div class="section-title">
-                                <h2 class="text-anime-style-2" data-cursor="-opaque">Effective pest solutions - <span>reach out today!</span></h2>
+                                <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Effective pest solutions -") }} <span>{{ _("reach out today!") }}</span></h2>
                             </div>
                             <!-- Section Title End -->
 
                             <form id="contactForm" action="#" method="POST" data-toggle="validator" class="contact-form wow fadeInUp">
                                 <div class="row">
                                     <div class="form-group col-md-6 mb-4">
-                                        <input type="text" name="fname" class="form-control" id="fname" placeholder="First name" required>
+                                        <input type="text" name="fname" class="form-control" id="fname" placeholder="{{ _('First name') }}" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
 
                                     <div class="form-group col-md-6 mb-4">
-                                        <input type="text" name="lname" class="form-control" id="lname" placeholder="Last name" required>
+                                        <input type="text" name="lname" class="form-control" id="lname" placeholder="{{ _('Last name') }}" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
 
                                     <div class="form-group col-md-6 mb-4">
-                                        <input type="email" name ="email" class="form-control" id="email" placeholder="E-mail" required>
+                                        <input type="email" name ="email" class="form-control" id="email" placeholder="{{ _('E-mail') }}" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
 
                                     <div class="form-group col-md-6 mb-4">
-                                        <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone no." required>
+                                        <input type="text" name="phone" class="form-control" id="phone" placeholder="{{ _('Phone no.') }}" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
 
                                     <div class="form-group col-md-12 mb-5">
-                                        <textarea name="message" class="form-control" id="message" rows="4" placeholder="Message"></textarea>
+                                        <textarea name="message" class="form-control" id="message" rows="4" placeholder="{{ _('Message') }}"></textarea>
                                         <div class="help-block with-errors"></div>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn-default"><span>send message</span></button>
+                                        <button type="submit" class="btn-default"><span>{{ _("send message") }}</span></button>
                                         <div id="msgSubmit" class="h3 hidden"></div>
                                     </div>
                                 </div>

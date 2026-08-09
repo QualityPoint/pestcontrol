@@ -1,10 +1,10 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}Video Gallery | Skystar{% endblock %}
+{% block title %}{{ _("Video Gallery") }} | Skystar{% endblock %}
 
 {% block page_header %}
-    {% set page_h1 = "Our videos" %}
-    {% set page_breadcrumb = "videos" %}
+    {% set page_h1 = _("Our videos") %}
+    {% set page_breadcrumb = _("videos") %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 

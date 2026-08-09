@@ -1,10 +1,10 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}Projects | Skystar{% endblock %}
+{% block title %}{{ _("Projects") }} | Skystar{% endblock %}
 
 {% block page_header %}
-    {% set page_h1 = "Our projects" %}
-    {% set page_breadcrumb = "project" %}
+    {% set page_h1 = _("Our projects") %}
+    {% set page_breadcrumb = _("project") %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
@@ -17,7 +17,7 @@
                     <!-- Choose Our Projects Nav start -->
                     <div class="our-project-nav wow fadeInUp" data-wow-delay="0.25s">
                         <ul>
-                            <li><a href="#" class="active-btn" data-filter="*">all</a></li>
+                            <li><a href="#" class="active-btn" data-filter="*">{{ _("all") }}</a></li>
                             {% for category in categories %}
                             <li><a href="#" data-filter=".{{ category_class(category) }}">{{ category }}</a></li>
                             {% endfor %}

@@ -5,7 +5,7 @@
                 <div class="col-lg-5">
                     <!-- About Footer Start -->
                     <div class="about-footer footer-links">
-                        <h3>About {{ settings.site_name or "Skystar" }}</h3>
+                        <h3>{{ _("About") }} {{ settings.site_name or "Skystar" }}</h3>
                         <p>{{ localize(settings, "about_footer_text") }}</p>
                     </div>
                     <!-- About Footer End -->
@@ -14,13 +14,13 @@
                 <div class="col-lg-2 col-md-3">
                     <!-- Footer Links Start -->
                     <div class="footer-links">
-                        <h3>services</h3>
+                        <h3>{{ _("services") }}</h3>
                         <ul>
-                            <li><a href="/about">About company</a></li>
-                            <li><a href="/services">Our services</a></li>
-                            <li><a href="/projects">Our projects</a></li>
-                            <li><a href="/blog">Our blogs</a></li>
-                            <li><a href="/contact">Contact us</a></li>
+                            <li><a href="/about">{{ _("About company") }}</a></li>
+                            <li><a href="/services">{{ _("Our services") }}</a></li>
+                            <li><a href="/projects">{{ _("Our projects") }}</a></li>
+                            <li><a href="/blog">{{ _("Our blogs") }}</a></li>
+                            <li><a href="/contact">{{ _("Contact us") }}</a></li>
                         </ul>
                     </div>
                     <!-- Footer Links End -->
@@ -29,13 +29,13 @@
                 <div class="col-lg-2 col-md-4">
                     <!-- Footer Links Start -->
                     <div class="footer-links">
-                        <h3>Links</h3>
+                        <h3>{{ _("Links") }}</h3>
                         <ul>
-                            <li><a href="/project-single">Home Pest Control</a></li>
-                            <li><a href="/project-single">Commercial Pest</a></li>
-                            <li><a href="/project-single">Termite & Rodent</a></li>
-                            <li><a href="/project-single">Eco-Friendly Pest</a></li>
-                            <li><a href="/project-single">Wildlife Removal</a></li>
+                            <li><a href="/project-single">{{ _("Home Pest Control") }}</a></li>
+                            <li><a href="/project-single">{{ _("Commercial Pest") }}</a></li>
+                            <li><a href="/project-single">{{ _("Termite & Rodent") }}</a></li>
+                            <li><a href="/project-single">{{ _("Eco-Friendly Pest") }}</a></li>
+                            <li><a href="/project-single">{{ _("Wildlife Removal") }}</a></li>
                         </ul>
                     </div>
                     <!-- Footer Links End -->
@@ -43,7 +43,7 @@
 
                 <div class="col-lg-3 col-md-5">
                     <div class="footer-links">
-                        <h3>contact us</h3>
+                        <h3>{{ _("contact us") }}</h3>
                         {% if settings.phone %}
                         <!-- Footer Contact Item Start -->
                         <div class="footer-contact-item">
@@ -94,7 +94,7 @@
 
                         <!-- Footer Copyright Text Start -->
                         <div class="footer-copyright-text">
-                            <p>{{ settings.copyright_text or "Copyright © " ~ year ~ " " ~ (settings.site_name or "Skystar") ~ ". All Rights Reserved." }}</p>
+                            <p>{{ settings.copyright_text or _("Copyright © ") ~ year ~ " " ~ (settings.site_name or "Skystar") ~ _(". All Rights Reserved.") }}</p>
                         </div>
                         <!-- Footer Copyright Text End -->
                     </div>

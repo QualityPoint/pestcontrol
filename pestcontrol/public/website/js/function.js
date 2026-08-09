@@ -171,7 +171,12 @@
 	}
 
 	/* Text Effect Animation */
-	if ($(".text-anime-style-1").length) {
+	// SplitText breaks each element into individual char/word spans, which
+	// corrupts Arabic letter-joining and ordering — skip it for RTL pages
+	// and let the text render normally, unanimated.
+	var isRTL = document.documentElement.dir === "rtl";
+
+	if (!isRTL && $(".text-anime-style-1").length) {
 		let staggerAmount = 0.05,
 			translateXValue = 0,
 			delayValue = 0.5,
@@ -190,7 +195,7 @@
 		});
 	}
 
-	if ($(".text-anime-style-2").length) {
+	if (!isRTL && $(".text-anime-style-2").length) {
 		let staggerAmount = 0.03,
 			translateXValue = 20,
 			delayValue = 0.1,
@@ -211,7 +216,7 @@
 		});
 	}
 
-	if ($(".text-anime-style-3").length) {
+	if (!isRTL && $(".text-anime-style-3").length) {
 		let animatedTextElements = document.querySelectorAll(".text-anime-style-3");
 
 		animatedTextElements.forEach((element) => {

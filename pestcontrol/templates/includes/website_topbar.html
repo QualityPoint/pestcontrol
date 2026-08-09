@@ -34,10 +34,9 @@
                     <!-- Topbar Social Links End -->
 
                     <!-- Topbar Language Switch Start -->
-                    <div class="topbar-lang-switch" style="display:inline-flex; gap:6px; margin-inline-start:12px;">
-                        <a href="#" data-set-lang="en" style="{{ 'font-weight:bold;' if lang != 'ar' else 'opacity:0.6;' }}">EN</a>
-                        <span>|</span>
-                        <a href="#" data-set-lang="ar" style="{{ 'font-weight:bold;' if lang == 'ar' else 'opacity:0.6;' }}">AR</a>
+                    <div class="topbar-lang-switch">
+                        <button type="button" class="lang-btn{{ ' active' if lang != 'ar' else '' }}" data-set-lang="en">EN</button>
+                        <button type="button" class="lang-btn{{ ' active' if lang == 'ar' else '' }}" data-set-lang="ar">AR</button>
                     </div>
                     <!-- Topbar Language Switch End -->
                 </div>

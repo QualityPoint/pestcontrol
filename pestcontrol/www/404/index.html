@@ -1,10 +1,10 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}Page Not Found | Skystar{% endblock %}
+{% block title %}{{ _("Page Not Found") }} | Skystar{% endblock %}
 
 {% block page_header %}
-    {% set page_h1 = "Page not found" %}
-    {% set page_breadcrumb = "404 error page" %}
+    {% set page_h1 = _("Page not found") %}
+    {% set page_breadcrumb = _("404 error page") %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
@@ -19,11 +19,11 @@
                     </div>
                     <div class="error-page-content">
                         <div class="section-title">
-                            <h2 class="text-anime-style-2" data-cursor="-opaque"><span>Oops!</span> page not found</h2>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque"><span>{{ _("Oops!") }}</span> {{ _("page not found") }}</h2>
                         </div>
                         <div class="error-page-content-body">
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">The page you are looking for does not exist.</p>
-                            <a class="btn-default wow fadeInUp" data-wow-delay="0.4s" href="/">back to home</a>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ _("The page you are looking for does not exist.") }}</p>
+                            <a class="btn-default wow fadeInUp" data-wow-delay="0.4s" href="/">{{ _("back to home") }}</a>
                         </div>
                     </div>
                 </div>

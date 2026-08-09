@@ -1,10 +1,10 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}Image Gallery | Skystar{% endblock %}
+{% block title %}{{ _("Image Gallery") }} | Skystar{% endblock %}
 
 {% block page_header %}
-    {% set page_h1 = "Our gallery" %}
-    {% set page_breadcrumb = "gallery" %}
+    {% set page_h1 = _("Our gallery") %}
+    {% set page_breadcrumb = _("gallery") %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 

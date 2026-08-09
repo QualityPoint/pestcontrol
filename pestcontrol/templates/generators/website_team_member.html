@@ -13,8 +13,8 @@
                         <h1 class="text-anime-style-2" data-cursor="-opaque">{{ doc.member_name }}</h1>
                         <nav class="wow fadeInUp">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">home</a></li>
-                                <li class="breadcrumb-item"><a href="/team">team</a></li>
+                                <li class="breadcrumb-item"><a href="/">{{ _("home") }}</a></li>
+                                <li class="breadcrumb-item"><a href="/team">{{ _("team") }}</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">{{ doc.member_name }}</li>
                             </ol>
                         </nav>
@@ -49,7 +49,7 @@
                             <div class="team-member-content">
                                 <!-- Member Content Header Start -->
                                 <div class="section-title">
-                                    <h2 class="wow fadeInUp" data-cursor="-opaque">About <span>me</span></h2>
+                                    <h2 class="wow fadeInUp" data-cursor="-opaque">{{ _("About") }} <span>{{ _("me") }}</span></h2>
                                     <p class="wow fadeInUp" data-wow-delay="0.2s">{{ localize(doc, "bio") }}</p>
                                 </div>
                                 <!-- Member Content Header End -->
@@ -57,9 +57,9 @@
                                 <!-- Member Info List Start -->
                                 <div class="member-info-list wow fadeInUp" data-wow-delay="0.4s">
                                     <ul>
-                                        {% if doc.phone %}<li>Phone : <span>{{ doc.phone }}</span></li>{% endif %}
-                                        {% if doc.email %}<li>Email: <span>{{ doc.email }}</span></li>{% endif %}
-                                        {% if doc.designation %}<li>Position: <span>{{ localize(doc, "designation") }}</span></li>{% endif %}
+                                        {% if doc.phone %}<li>{{ _("Phone :") }} <span>{{ doc.phone }}</span></li>{% endif %}
+                                        {% if doc.email %}<li>{{ _("Email:") }} <span>{{ doc.email }}</span></li>{% endif %}
+                                        {% if doc.designation %}<li>{{ _("Position:") }} <span>{{ localize(doc, "designation") }}</span></li>{% endif %}
                                     </ul>
                                 </div>
                                 <!-- Member Info List End -->
@@ -82,10 +82,10 @@
                         <div class="team-member-about">
                             <!-- Section Title Start -->
                             <div class="section-title">
-                                <h2 class="text-anime-style-2" data-cursor="-opaque">Personals info</h2>
-                                <p class="wow fadeInUp" data-wow-delay="0.2s">{{ doc.member_name }} has years of experience in the pest control industry, specializing in residential and commercial pest management. They hold multiple certifications in pest control and are highly knowledgeable about the latest treatment methods and eco-friendly solutions. Their attention to detail and commitment to customer satisfaction have earned them a reputation for excellence.</p>
+                                <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Personals info") }}</h2>
+                                <p class="wow fadeInUp" data-wow-delay="0.2s">{{ doc.member_name }} {{ _("has years of experience in the pest control industry, specializing in residential and commercial pest management. They hold multiple certifications in pest control and are highly knowledgeable about the latest treatment methods and eco-friendly solutions. Their attention to detail and commitment to customer satisfaction have earned them a reputation for excellence.") }}</p>
 
-                                <p class="wow fadeInUp" data-wow-delay="0.4s">Explaining the treatment process, and ensuring that customers feel comfortable and informed, is a core part of the job — known for a friendly demeanor and the ability to put customers at ease while solving even the toughest pest problems.</p>
+                                <p class="wow fadeInUp" data-wow-delay="0.4s">{{ _("Explaining the treatment process, and ensuring that customers feel comfortable and informed, is a core part of the job — known for a friendly demeanor and the ability to put customers at ease while solving even the toughest pest problems.") }}</p>
                             </div>
                             <!-- Section Title End -->
                         </div>
@@ -97,7 +97,7 @@
                                 <div class="team-member-skill-content">
                                     <!-- Section Title Start -->
                                     <div class="section-title">
-                                        <h2 class="text-anime-style-2" data-cursor="-opaque">Professional <span>skills</span></h2>
+                                        <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Professional") }} <span>{{ _("skills") }}</span></h2>
                                     </div>
                                     <!-- Section Title End -->
 
@@ -108,7 +108,7 @@
                                             <!-- Skill Item Start -->
                                             <div class="skillbar" data-percent="85%">
                                                 <div class="skill-data">
-                                                    <div class="skill-title">Chemical Handling :</div>
+                                                    <div class="skill-title">{{ _("Chemical Handling :") }}</div>
                                                     <div class="skill-no">85%</div>
                                                 </div>
                                                 <div class="skill-progress">
@@ -124,7 +124,7 @@
                                             <!-- Skill Item Start -->
                                             <div class="skillbar" data-percent="95%">
                                                 <div class="skill-data">
-                                                    <div class="skill-title">IPM Techniques :</div>
+                                                    <div class="skill-title">{{ _("IPM Techniques :") }}</div>
                                                     <div class="skill-no">95%</div>
                                                 </div>
                                                 <div class="skill-progress">
@@ -142,14 +142,14 @@
                                 <div class="member-capability-content">
                                     <!-- Section Title Start -->
                                     <div class="section-title">
-                                        <h2 class="text-anime-style-2" data-cursor="-opaque">Capabilities</h2>
+                                        <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Capabilities") }}</h2>
                                     </div>
                                     <!-- Section Title End -->
 
                                     <ul class="wow fadeInUp" data-wow-delay="0.2s">
-                                        <li>Advanced Pest Control Solutions for Every Need</li>
-                                        <li>Eco-Friendly Approaches to Effective Pest Management</li>
-                                        <li>Tailored Services for Residential and Commercial Properties</li>
+                                        <li>{{ _("Advanced Pest Control Solutions for Every Need") }}</li>
+                                        <li>{{ _("Eco-Friendly Approaches to Effective Pest Management") }}</li>
+                                        <li>{{ _("Tailored Services for Residential and Commercial Properties") }}</li>
                                     </ul>
                                 </div>
                                 <!-- Member Capability Content End -->
@@ -159,7 +159,7 @@
                             <div class="team-contact-form">
                                 <!-- Section Title Start -->
                                 <div class="section-title">
-                                    <h2 class="text-anime-style-2" data-cursor="-opaque">Contact <span>me</span></h2>
+                                    <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Contact") }} <span>{{ _("me") }}</span></h2>
                                 </div>
                                 <!-- Section Title End -->
 
@@ -169,32 +169,32 @@
                                     <form id="contactForm" action="#" method="POST" data-toggle="validator" class="contact-form wow fadeInUp">
                                         <div class="row">
                                             <div class="form-group col-md-6 mb-4">
-                                                <input type="text" name="fname" class="form-control" id="fname" placeholder="First name" required>
+                                                <input type="text" name="fname" class="form-control" id="fname" placeholder="{{ _('First name') }}" required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
 
                                             <div class="form-group col-md-6 mb-4">
-                                                <input type="text" name="lname" class="form-control" id="lname" placeholder="Last name" required>
+                                                <input type="text" name="lname" class="form-control" id="lname" placeholder="{{ _('Last name') }}" required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
 
                                             <div class="form-group col-md-6 mb-4">
-                                                <input type="email" name ="email" class="form-control" id="email" placeholder="E-mail" required>
+                                                <input type="email" name ="email" class="form-control" id="email" placeholder="{{ _('E-mail') }}" required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
 
                                             <div class="form-group col-md-6 mb-4">
-                                                <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone no." required>
+                                                <input type="text" name="phone" class="form-control" id="phone" placeholder="{{ _('Phone no.') }}" required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
 
                                             <div class="form-group col-md-12 mb-5">
-                                                <textarea name="message" class="form-control" id="message" rows="4" placeholder="Message"></textarea>
+                                                <textarea name="message" class="form-control" id="message" rows="4" placeholder="{{ _('Message') }}"></textarea>
                                                 <div class="help-block with-errors"></div>
                                             </div>
 
                                             <div class="col-md-12">
-                                                <button type="submit" class="btn-default"><span>send message</span></button>
+                                                <button type="submit" class="btn-default"><span>{{ _("send message") }}</span></button>
                                                 <div id="msgSubmit" class="h3 hidden"></div>
                                             </div>
                                         </div>

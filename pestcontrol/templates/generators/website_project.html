@@ -13,8 +13,8 @@
                         <h1 class="text-anime-style-2" data-cursor="-opaque">{{ localize(doc, "project_name") }}</h1>
                         <nav class="wow fadeInUp">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">home</a></li>
-                                <li class="breadcrumb-item"><a href="/projects">projects</a></li>
+                                <li class="breadcrumb-item"><a href="/">{{ _("home") }}</a></li>
+                                <li class="breadcrumb-item"><a href="/projects">{{ _("projects") }}</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">{{ localize(doc, "project_name") }}</li>
                             </ol>
                         </nav>
@@ -37,12 +37,12 @@
                     <div class="page-single-sidebar">
                         <!-- Page Category List Start -->
                         <div class="page-catagery-list project-sidebar wow fadeInUp">
-                            <h3>Project Information</h3>
+                            <h3>{{ _("Project Information") }}</h3>
                             <ul>
-                                {% if doc.category %}<li>Category : <span>{{ doc.category }}</span></li>{% endif %}
-                                {% if doc.client_name %}<li>Customer : <span>{{ doc.client_name }}</span></li>{% endif %}
-                                {% if doc.location %}<li>Location : <span>{{ doc.location }}</span></li>{% endif %}
-                                {% if doc.duration %}<li>Duration : <span>{{ doc.duration }}</span></li>{% endif %}
+                                {% if doc.category %}<li>{{ _("Category :") }} <span>{{ doc.category }}</span></li>{% endif %}
+                                {% if doc.client_name %}<li>{{ _("Customer :") }} <span>{{ doc.client_name }}</span></li>{% endif %}
+                                {% if doc.location %}<li>{{ _("Location :") }} <span>{{ doc.location }}</span></li>{% endif %}
+                                {% if doc.duration %}<li>{{ _("Duration :") }} <span>{{ doc.duration }}</span></li>{% endif %}
                             </ul>
 
                             <div class="sidebar-social-list">
@@ -57,13 +57,13 @@
                         <div class="page-cta-box sidebar-cta-box wow fadeInUp" data-wow-delay="0.2s">
                             <!-- Page Cta Box Info Start -->
                             <div class="page-cta-box-info">
-                                <h3>Take Back Your Home From Pests. Today!</h3>
+                                <h3>{{ _("Take Back Your Home From Pests. Today!") }}</h3>
                             </div>
                             <!-- Page Cta Box Info End -->
 
                             <!-- Cta Contact Box Start -->
                             <div class="cta-contact-box">
-                                <p>call now</p>
+                                <p>{{ _("call now") }}</p>
                                 <div class="cta-contact-item">
                                     <div class="icon-box">
                                         <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">
@@ -98,29 +98,29 @@
 
                             <!-- Project Overview Start -->
                             <div class="project-overview">
-                                <h2 class="text-anime-style-2" data-cursor="-opaque">Pest-Free Living, <span>Better Homes</span></h2>
-                                <p class="wow fadeInUp" data-wow-delay="0.4s">At Skystar, we believe that a pest-free home is the foundation of a healthy and happy life. Our innovative pest control solutions are designed to protect your living spaces from unwanted intruders, ensuring comfort, safety, and peace of mind. From preventive treatments to effective removal strategies, we provide tailored services that enhance the quality of your home environment. Trust us to safeguard your home while prioritizing eco-friendly practices for a better tomorrow.</p>
+                                <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Pest-Free Living,") }} <span>{{ _("Better Homes") }}</span></h2>
+                                <p class="wow fadeInUp" data-wow-delay="0.4s">{{ _("At Skystar, we believe that a pest-free home is the foundation of a healthy and happy life. Our innovative pest control solutions are designed to protect your living spaces from unwanted intruders, ensuring comfort, safety, and peace of mind. From preventive treatments to effective removal strategies, we provide tailored services that enhance the quality of your home environment. Trust us to safeguard your home while prioritizing eco-friendly practices for a better tomorrow.") }}</p>
                                 <ul class="wow fadeInUp" data-wow-delay="0.6s">
-                                    <li>Eco-conscious methods designed to eliminate pests without compromising the safety of your loved ones or the environment.</li>
-                                    <li>Our pest control plans are tailored to address the unique needs of your home, offering targeted solutions for lasting protection.</li>
-                                    <li>We understand that every home is different, and so are the pest problems it may face. That's why our expert team conducts thorough.</li>
-                                    <li>creating a tailored plan that delivers effective results. Whether it's preventive treatments or targeted solutions for an existing issue.</li>
+                                    <li>{{ _("Eco-conscious methods designed to eliminate pests without compromising the safety of your loved ones or the environment.") }}</li>
+                                    <li>{{ _("Our pest control plans are tailored to address the unique needs of your home, offering targeted solutions for lasting protection.") }}</li>
+                                    <li>{{ _("We understand that every home is different, and so are the pest problems it may face. That's why our expert team conducts thorough.") }}</li>
+                                    <li>{{ _("creating a tailored plan that delivers effective results. Whether it's preventive treatments or targeted solutions for an existing issue.") }}</li>
                                 </ul>
                             </div>
                             <!-- Project Overview End -->
 
                             <!-- Project Better Homes Start -->
                             <div class="project-better-homes">
-                                <h2 class="text-anime-style-2" data-cursor="-opaque">Pest-Free Living <span>Better Homes</span></h2>
-                                <p class="wow fadeInUp" data-wow-delay="0.2s">At Skystar, we believe that a pest-free home is the foundation of a healthy and happy life. Our innovative pest control solutions are designed to protect your living spaces from unwanted intruders, ensuring comfort, safety, and peace of mind. From preventive treatments to effective removal strategies, we provide tailored services that enhance the quality of your home environment. Trust us to safeguard your home while prioritizing eco-friendly practices for a better tomorrow.</p>
+                                <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Pest-Free Living") }} <span>{{ _("Better Homes") }}</span></h2>
+                                <p class="wow fadeInUp" data-wow-delay="0.2s">{{ _("At Skystar, we believe that a pest-free home is the foundation of a healthy and happy life. Our innovative pest control solutions are designed to protect your living spaces from unwanted intruders, ensuring comfort, safety, and peace of mind. From preventive treatments to effective removal strategies, we provide tailored services that enhance the quality of your home environment. Trust us to safeguard your home while prioritizing eco-friendly practices for a better tomorrow.") }}</p>
 
                                 <ul class="wow fadeInUp" data-wow-delay="0.4s">
-                                    <li>Comprehensive Pest Manage Solution</li>
-                                    <li>Safe and Sustainable Treatments</li>
-                                    <li>Customized Plans for Every Home</li>
-                                    <li>Expert Care with Guaranteed Results</li>
-                                    <li>Customized Plans for Every Home</li>
-                                    <li>Expert Care with Guaranteed Results</li>
+                                    <li>{{ _("Comprehensive Pest Manage Solution") }}</li>
+                                    <li>{{ _("Safe and Sustainable Treatments") }}</li>
+                                    <li>{{ _("Customized Plans for Every Home") }}</li>
+                                    <li>{{ _("Expert Care with Guaranteed Results") }}</li>
+                                    <li>{{ _("Customized Plans for Every Home") }}</li>
+                                    <li>{{ _("Expert Care with Guaranteed Results") }}</li>
                                 </ul>
                             </div>
                             <!-- Project Better Homes End -->
@@ -130,7 +130,7 @@
                         <!-- FAQs section start -->
                         <div class="page-single-faqs page-faq-accordion">
                             <div class="section-title">
-                                <h2 class="text-anime-style-2" data-cursor="-opaque">Find helpful answers to your pest <span>control concerns</span></h2>
+                                <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Find helpful answers to your pest") }} <span>{{ _("control concerns") }}</span></h2>
                             </div>
                             <!-- FAQ Accordion Start -->
                             <div class="faq-accordion" id="accordion">
@@ -138,12 +138,12 @@
                                 <div class="accordion-item wow fadeInUp">
                                     <h2 class="accordion-header" id="heading1">
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                            1. What types of pests do you treat?
+                                            {{ _("1. What types of pests do you treat?") }}
                                         </button>
                                     </h2>
                                     <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#accordion">
                                         <div class="accordion-body">
-                                            <p>We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.</p>
+                                            <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -153,12 +153,12 @@
                                 <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
                                     <h2 class="accordion-header" id="heading2">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                            2. Are your pest control methods safe for my pets?
+                                            {{ _("2. Are your pest control methods safe for my pets?") }}
                                         </button>
                                     </h2>
                                     <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#accordion">
                                         <div class="accordion-body">
-                                            <p>We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.</p>
+                                            <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -168,12 +168,12 @@
                                 <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
                                     <h2 class="accordion-header" id="heading3">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                            3. How often should I schedule pest control services?
+                                            {{ _("3. How often should I schedule pest control services?") }}
                                         </button>
                                     </h2>
                                     <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordion">
                                         <div class="accordion-body">
-                                            <p>We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.</p>
+                                            <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -183,12 +183,12 @@
                                 <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
                                     <h2 class="accordion-header" id="heading4">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                            4. Do you offer emergency pest control services?
+                                            {{ _("4. Do you offer emergency pest control services?") }}
                                         </button>
                                     </h2>
                                     <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordion">
                                         <div class="accordion-body">
-                                            <p>We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.</p>
+                                            <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -198,12 +198,12 @@
                                 <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
                                     <h2 class="accordion-header" id="heading5">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                                            5. How do I know if I have a pest infestation?
+                                            {{ _("5. How do I know if I have a pest infestation?") }}
                                         </button>
                                     </h2>
                                     <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#accordion">
                                         <div class="accordion-body">
-                                            <p>We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.</p>
+                                            <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
                                         </div>
                                     </div>
                                 </div>

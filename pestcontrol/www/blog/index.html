@@ -1,10 +1,10 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}Blog | Skystar{% endblock %}
+{% block title %}{{ _("Blog") }} | Skystar{% endblock %}
 
 {% block page_header %}
-    {% set page_h1 = "Our blog" %}
-    {% set page_breadcrumb = "blog" %}
+    {% set page_h1 = _("Our blog") %}
+    {% set page_breadcrumb = _("blog") %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
@@ -37,7 +37,7 @@
 
                             <!-- Blog Item Button Start -->
                             <div class="post-item-btn">
-                                <a href="/{{ post.route }}" class="readmore-btn">read more</a>
+                                <a href="/{{ post.route }}" class="readmore-btn">{{ _("read more") }}</a>
                             </div>
                             <!-- Blog Item Button End -->
                         </div>

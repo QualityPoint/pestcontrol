@@ -1,10 +1,10 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}FAQs | Skystar{% endblock %}
+{% block title %}{{ _("FAQs") }} | Skystar{% endblock %}
 
 {% block page_header %}
-    {% set page_h1 = "Frequently asked question" %}
-    {% set page_breadcrumb = "FAQs" %}
+    {% set page_h1 = _("Frequently asked question") %}
+    {% set page_breadcrumb = _("FAQs") %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
@@ -30,13 +30,13 @@
                         <div class="page-cta-box sidebar-cta-box wow fadeInUp" data-wow-delay="0.2s">
                             <!-- Page Cta Box Info Start -->
                             <div class="page-cta-box-info">
-                                <h3>Take Back Your Home From Pests. Today!</h3>
+                                <h3>{{ _("Take Back Your Home From Pests. Today!") }}</h3>
                             </div>
                             <!-- Page Cta Box Info End -->
 
                             <!-- Cta Contact Box Start -->
                             <div class="cta-contact-box">
-                                <p>call now</p>
+                                <p>{{ _("call now") }}</p>
                                 <div class="cta-contact-item">
                                     <div class="icon-box">
                                         <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">

@@ -58,7 +58,7 @@
                                     {% if doc.website_tags %}
                                     <div class="post-tags wow fadeInUp" data-wow-delay="0.5s">
                                         <span class="tag-links">
-                                            Tags:
+                                            {{ _("Tags:") }}
                                             {% for tag in doc.website_tags.split(',') %}<a href="#">{{ tag.strip() }}</a>{% endfor %}
                                         </span>
                                     </div>
