@@ -53,7 +53,7 @@
 	--divider-color				: #002F471A;
 	--dark-divider-color		: #FFFFFF24;
 	--error-color				: rgb(230, 87, 87);
-	--default-font				: "Onest", sans-serif;
+	--default-font				: "IBM Plex Sans Arabic", sans-serif;
 }
 
 /************************************/
@@ -1511,11 +1511,13 @@ header.main-header .header-sticky.active{
 	padding: 100px 0;
 }
 
-.our-project-nav{
+.our-project-nav,
+.our-blog-nav{
 	margin-bottom: 60px;
 }
 
-.our-project-nav ul{
+.our-project-nav ul,
+.our-blog-nav ul{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -1525,15 +1527,18 @@ header.main-header .header-sticky.active{
 	margin: 0;
 }
 
-.our-project-nav ul li{
+.our-project-nav ul li,
+.our-blog-nav ul li{
 	display: inline-block;
 }
 
-.our-project-nav ul li:last-child{
+.our-project-nav ul li:last-child,
+.our-blog-nav ul li:last-child{
 	margin-right: 0;
 }
 
-.our-project-nav ul li a{
+.our-project-nav ul li a,
+.our-blog-nav ul li a{
 	position: relative;
 	display: inline-block;
 	font-weight: 500;
@@ -1542,7 +1547,8 @@ header.main-header .header-sticky.active{
 	transition: all 0.3s ease-in-out;
 }
 
-.our-project-nav ul li a::before{
+.our-project-nav ul li a::before,
+.our-blog-nav ul li a::before{
     content: '';
     position: absolute;
     top: 50%;
@@ -1554,16 +1560,24 @@ header.main-header .header-sticky.active{
     height: 6px;
 }
 
-.our-project-nav ul li:last-child a::before{
+.our-project-nav ul li:last-child a::before,
+.our-blog-nav ul li:last-child a::before{
 	display: none;
 }
 
 .our-project-nav ul li a.active-btn,
-.our-project-nav ul li a:hover{
+.our-project-nav ul li a:hover,
+.our-blog-nav ul li a.active-btn,
+.our-blog-nav ul li a:hover{
 	color: var(--accent-color);
 }
 
 .project-item-box .project-item{
+	height: calc(100% - 30px);
+	margin-bottom: 30px;
+}
+
+.blog-item-box .post-item{
 	height: calc(100% - 30px);
 	margin-bottom: 30px;
 }
@@ -4577,15 +4591,18 @@ header.main-header .header-sticky.active{
 		padding: 50px 0;
 	}
 
-	.our-project-nav{
+	.our-project-nav,
+	.our-blog-nav{
 		margin-bottom: 40px;
 	}
 
-	.our-project-nav ul{
+	.our-project-nav ul,
+	.our-blog-nav ul{
 		gap: 24px;
 	}
 
-	.our-project-nav ul li a::before{
+	.our-project-nav ul li a::before,
+	.our-blog-nav ul li a::before{
 		right: -15px;
 	}
 
@@ -5430,19 +5447,23 @@ header.main-header .header-sticky.active{
         max-width: 80px;
     }
 
-	.our-project-nav{
+	.our-project-nav,
+	.our-blog-nav{
         margin-bottom: 30px;
     }
 
-	.our-project-nav ul{
+	.our-project-nav ul,
+	.our-blog-nav ul{
         gap: 14px;
     }
 
-	.our-project-nav ul li a{
+	.our-project-nav ul li a,
+	.our-blog-nav ul li a{
 		font-size: 12px;
 	}
 
-	.our-project-nav ul li a::before{
+	.our-project-nav ul li a::before,
+	.our-blog-nav ul li a::before{
 		right: -9px;;
 		width: 4px;
 		height: 4px;

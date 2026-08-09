@@ -353,6 +353,36 @@
 	});
 	/* Our Project (filtering) End */
 
+	/* Our Blog (filtering) Start */
+	$window.on("load", function () {
+		if ($(".blog-item-boxes").length) {
+			/* Init Isotope */
+			var $blogmenuitem = $(".blog-item-boxes").isotope({
+				itemSelector: ".blog-item-box",
+				layoutMode: "masonry",
+				masonry: {
+					// use outer width of grid-sizer for columnWidth
+					columnWidth: 1,
+				},
+			});
+
+			/* Filter items on click */
+			var $blogmenudisesnav = $(".our-blog-nav li a");
+			$blogmenudisesnav.on("click", function (e) {
+				var filterValue = $(this).attr("data-filter");
+				$blogmenuitem.isotope({
+					filter: filterValue,
+				});
+
+				$blogmenudisesnav.removeClass("active-btn");
+				$(this).addClass("active-btn");
+				e.preventDefault();
+			});
+			$blogmenuitem.isotope({ filter: "*" });
+		}
+	});
+	/* Our Blog (filtering) End */
+
 	/* Animated Wow Js */
 	new WOW().init();
 

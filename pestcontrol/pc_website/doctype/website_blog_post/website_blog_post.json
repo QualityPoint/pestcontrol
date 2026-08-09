@@ -12,10 +12,13 @@
   "column_break_wblg",
   "cover_image",
   "author_name",
-  "published_on",
   "published",
-  "section_break_art_ogpost",
+  "column_break_xiuu",
+  "blog_category",
+  "published_on",
   "website_tags",
+  "section_break_art_ogpost",
+  "column_break_wbed",
   "article"
  ],
  "fields": [
@@ -32,6 +35,12 @@
    "fieldname": "cover_image",
    "fieldtype": "Attach Image",
    "label": "Cover Image"
+  },
+  {
+   "fieldname": "blog_category",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Category"
   },
   {
    "fieldname": "author_name",
@@ -67,13 +76,21 @@
    "label": "Article",
    "options": "Website Article",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xiuu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_wbed",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2026-08-09 15:05:18.472704",
+ "modified": "2026-08-09 16:02:24.531016",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Blog Post",
