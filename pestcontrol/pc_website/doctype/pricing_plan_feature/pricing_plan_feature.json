@@ -6,36 +6,39 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "is_included",
-  "section_break_art_eature",
-  "article"
+  "feature_text",
+  "language",
+  "is_included"
  ],
  "fields": [
+  {
+   "fieldname": "feature_text",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Feature Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "language",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Language",
+   "options": "Language",
+   "reqd": 1
+  },
   {
    "default": "1",
    "fieldname": "is_included",
    "fieldtype": "Check",
    "in_list_view": 1,
    "label": "Is Included"
-  },
-  {
-   "fieldname": "section_break_art_eature",
-   "fieldtype": "Section Break",
-   "label": "Content"
-  },
-  {
-   "fieldname": "article",
-   "fieldtype": "Table",
-   "label": "Article",
-   "options": "Website Article",
-   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-08-08 18:36:23.398146",
+ "modified": "2026-08-09 12:00:00",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Pricing Plan Feature",

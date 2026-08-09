@@ -37,7 +37,6 @@ ARTICLE_FIELD_MAP = {
 	"Website Team Member": {"designation": "title", "bio": "context"},
 	"Website Testimonial": {"designation": "title", "testimonial_text": "context"},
 	"Website Pricing Plan": {"plan_name": "title"},
-	"Pricing Plan Feature": {"feature_text": "title"},
 	"Website FAQ": {"question": "title", "answer": "context"},
 	"Website Gallery Item": {"title": "title"},
 	"Website Blog Post": {"title": "title", "blog_intro": "subtitle", "content": "context"},
@@ -148,6 +147,20 @@ def localize(item, fieldname):
 	if value:
 		return value
 	return (articles.get("en") or {}).get(slot)
+
+
+def filter_by_language(rows):
+	"""Given a flat list of rows each carrying a `language` field (e.g.
+	Pricing Plan Feature, which stores one row per language directly rather
+	than nesting a Website Article bundle — nested tables inside a child
+	table are unreliable in both the desk grid and Document.append()),
+	return the subset matching the active language, falling back to English
+	when the active language has no rows at all."""
+	lang = frappe.local.lang or "en"
+	matches = [r for r in rows if r.get("language") == lang]
+	if matches:
+		return matches
+	return [r for r in rows if r.get("language") == "en"]
 
 
 def route_from_article(doc):

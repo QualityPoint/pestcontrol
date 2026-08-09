@@ -28,7 +28,7 @@
                         <div class="pricing-body">
                             <ul>
                                 {% for feature in plan.features %}
-                                <li{{ ' class="not-included"' if not feature.is_included else '' }}>{{ localize(feature, "feature_text") }}</li>
+                                <li{{ ' class="not-included"' if not feature.is_included else '' }}>{{ feature.feature_text }}</li>
                                 {% endfor %}
                             </ul>
                         </div>
