@@ -1,10 +1,19 @@
 # Copyright (c) 2026, QP and contributors
 # For license information, please see license.txt
 
+import os
 import re
 
 import frappe
 from frappe import _
+
+# Languages offered by the topbar switcher. Add an entry here to light up a
+# new language site-wide — the dropdown, cookie switching, and localize()
+# fallback logic all read from this list, no template changes needed.
+SITE_LANGUAGES = [
+    {"code": "en", "label": "English", "flag": "🇺🇸"},
+    {"code": "ar", "label": "العربية", "flag": "🇸🇦"},
+]
 
 # Maps each translatable doctype's semantic fieldnames onto the generic
 # title/subtitle/context slots on its `article` (Website Article) bundle rows.
@@ -39,6 +48,21 @@ def get_website_context(context):
     attach_articles("PC Website Settings", [settings])
     context.settings = settings
     context.lang = frappe.local.lang
+    context.languages = SITE_LANGUAGES
+    context.current_language = next(
+        (l for l in SITE_LANGUAGES if l["code"] == context.lang), SITE_LANGUAGES[0]
+    )
+
+
+def asset_version(path):
+    """Cache-busting query value for a public/ asset, based on its mtime, so
+    edits to CSS/JS show up immediately instead of waiting out the browser's
+    long max-age on static assets."""
+    full_path = frappe.get_app_path("pestcontrol", "public", path)
+    try:
+        return int(os.path.getmtime(full_path))
+    except OSError:
+        return 0
 
 
 def attach_articles(doctype, items):

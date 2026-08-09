@@ -4,6 +4,128 @@
  */
 
 /*
+ * Chromium/WebKit disable complex-script shaping (Arabic letter joining)
+ * on any element with a non-zero letter-spacing, even a small negative
+ * tracking value used purely for Latin headings. That makes Arabic text
+ * render as isolated, disconnected letters. Force it back to normal
+ * across the whole page whenever we're in an RTL (Arabic) context.
+ */
+html[dir="rtl"] * {
+	letter-spacing: normal !important;
+}
+
+/*
+ * Topbar language dropdown. Built to scale past two languages: the list
+ * is rendered from the `languages` context list (see pc_website/utils.py),
+ * so adding a new language means adding one entry there, not touching CSS.
+ */
+.lang-switch{
+	position: relative;
+}
+
+.lang-switch-toggle{
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	border: none;
+	background: rgba(255, 255, 255, 0.15);
+	color: var(--white-color);
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1;
+	padding: 7px 12px;
+	border-radius: 30px;
+	cursor: pointer;
+	transition: background 0.3s ease-in-out;
+}
+
+.lang-switch-toggle:hover{
+	background: rgba(255, 255, 255, 0.25);
+}
+
+.lang-switch-toggle .lang-flag{
+	font-size: 15px;
+	line-height: 1;
+}
+
+.lang-switch-toggle i{
+	font-size: 10px;
+	transition: transform 0.25s ease-in-out;
+}
+
+.lang-switch.open .lang-switch-toggle i{
+	transform: rotate(180deg);
+}
+
+.lang-switch-menu{
+	position: absolute;
+	top: calc(100% + 10px);
+	right: 0;
+	min-width: 160px;
+	margin: 0;
+	padding: 6px;
+	list-style: none;
+	background: var(--white-color);
+	border-radius: 10px;
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-8px);
+	transition: all 0.2s ease-in-out;
+	z-index: 999;
+}
+
+html[dir="rtl"] .lang-switch-menu{
+	right: auto;
+	left: 0;
+}
+
+.lang-switch.open .lang-switch-menu{
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.lang-switch-menu li + li{
+	margin-top: 2px;
+}
+
+.lang-option{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	width: 100%;
+	border: none;
+	background: transparent;
+	color: var(--primary-color);
+	font-size: 13px;
+	font-weight: 500;
+	text-align: left;
+	padding: 8px 10px;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background 0.2s ease-in-out;
+}
+
+html[dir="rtl"] .lang-option{
+	text-align: right;
+}
+
+.lang-option:hover{
+	background: rgba(0, 0, 0, 0.05);
+}
+
+.lang-option.active{
+	background: var(--accent-color);
+	color: var(--white-color);
+}
+
+.lang-option .lang-flag{
+	font-size: 16px;
+	line-height: 1;
+}
+
+/*
  * The template was designed for a 193x50 wordmark (~3.86:1) and therefore
  * puts no size constraint on the header logo. icons/skystar-logo.png is
  * 4377x599 (~7.31:1) - nearly twice as wide per unit of height - so it is

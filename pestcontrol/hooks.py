@@ -77,6 +77,7 @@ website_generators = ["Website Service", "Website Project", "Website Team Member
 jinja = {
 	"methods": [
 		"pestcontrol.pc_website.utils.localize",
+		"pestcontrol.pc_website.utils.asset_version",
 	],
 }
 

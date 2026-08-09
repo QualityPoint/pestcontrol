@@ -538,40 +538,6 @@ body{
 	gap: 20px;
 }
 
-.topbar-lang-switch{
-	display: flex;
-	align-items: center;
-	gap: 2px;
-	background: rgba(255, 255, 255, 0.15);
-	border-radius: 30px;
-	padding: 3px;
-}
-
-.topbar-lang-switch .lang-btn{
-	border: none;
-	background: transparent;
-	color: var(--white-color);
-	font-size: 12px;
-	font-weight: 600;
-	letter-spacing: 0.5px;
-	line-height: 1;
-	padding: 6px 12px;
-	border-radius: 30px;
-	cursor: pointer;
-	opacity: 0.7;
-	transition: all 0.3s ease-in-out;
-}
-
-.topbar-lang-switch .lang-btn:hover{
-	opacity: 1;
-}
-
-.topbar-lang-switch .lang-btn.active{
-	background: var(--primary-color);
-	color: var(--white-color);
-	opacity: 1;
-}
-
 .topbar-social-links ul{
 	margin: 0;
 	padding: 0;

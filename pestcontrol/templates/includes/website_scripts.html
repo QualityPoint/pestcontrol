@@ -30,17 +30,32 @@
     <!-- Wow js file -->
     <script src="/assets/pestcontrol/website/js/wow.min.js"></script>
     <!-- Main Custom js file -->
-    <script src="/assets/pestcontrol/website/js/function.js"></script>
+    <script src="/assets/pestcontrol/website/js/function.js?v={{ asset_version('website/js/function.js') }}"></script>
 
     <!-- Language Switcher -->
     <script>
         document.addEventListener("click", function (e) {
-            var btn = e.target.closest("[data-set-lang]");
-            if (!btn) return;
-            e.preventDefault();
-            var lang = btn.getAttribute("data-set-lang");
-            document.cookie = "preferred_language=" + lang + ";path=/;max-age=31536000";
-            window.location.reload();
+            var langSwitch = document.getElementById("langSwitch");
+
+            var option = e.target.closest("[data-set-lang]");
+            if (option) {
+                e.preventDefault();
+                var lang = option.getAttribute("data-set-lang");
+                document.cookie = "preferred_language=" + lang + ";path=/;max-age=31536000";
+                window.location.reload();
+                return;
+            }
+
+            var toggle = e.target.closest("#langSwitchToggle");
+            if (toggle) {
+                e.preventDefault();
+                langSwitch.classList.toggle("open");
+                return;
+            }
+
+            if (langSwitch && !langSwitch.contains(e.target)) {
+                langSwitch.classList.remove("open");
+            }
         });
     </script>
 
