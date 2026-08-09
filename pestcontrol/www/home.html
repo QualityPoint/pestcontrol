@@ -7,12 +7,13 @@
     <div class="hero hero-slider-layout dark-section parallaxie">
         <div class="swiper">
             <div class="swiper-wrapper">
+                {% for slide in hero_slides %}
                 <!-- Hero Slide Start -->
                 <div class="swiper-slide">
                     <div class="hero-slide">
                         <!-- Slider Image Start -->
                         <div class="hero-slider-image">
-                            <img src="/assets/pestcontrol/website/images/hero-bg.jpg" alt="">
+                            <img src="{{ slide.background_image }}" alt="">
                         </div>
                         <!-- Slider Image End -->
 
@@ -23,9 +24,9 @@
                                     <div class="hero-content">
                                         <!-- Section Title Start -->
                                         <div class="section-title">
-                                            <h3 class="wow fadeInUp">{{ _("Your Shield Against Unwanted Guests") }}</h3>
-                                            <h1 class="text-anime-style-2" data-cursor="-opaque">{{ _("Reliable pest & bug control services you can trust") }}</h1>
-                                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ _("Protect your home and business with our effective pest control solutions. From termites to rodents we eliminate pest quickly & safely.") }}</p>
+                                            <h3 class="wow fadeInUp">{{ localize(slide, "kicker") }}</h3>
+                                            <h1 class="text-anime-style-2" data-cursor="-opaque">{{ localize(slide, "heading") }}</h1>
+                                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ localize(slide, "description") }}</p>
                                         </div>
                                         <!-- Section Title End -->
 
@@ -43,7 +44,7 @@
                                     <!-- Hero Image Start -->
                                     <div class="hero-image">
                                         <figure>
-                                            <img src="/assets/pestcontrol/website/images/hero-image.png" alt="">
+                                            <img src="{{ slide.foreground_image }}" alt="">
                                         </figure>
                                     </div>
                                     <!-- Hero Image End -->
@@ -53,54 +54,9 @@
                     </div>
                 </div>
                 <!-- Hero Slide End -->
-
-                <!-- Hero Slide Start -->
-                <div class="swiper-slide">
-                    <div class="hero-slide">
-                        <!-- Slider Image Start -->
-                        <div class="hero-slider-image">
-                            <img src="/assets/pestcontrol/website/images/hero-bg-2.jpg" alt="">
-                        </div>
-                        <!-- Slider Image End -->
-
-                        <div class="container">
-                            <div class="row align-items-center">
-                                <div class="col-lg-6">
-                                    <!-- Hero Content Start -->
-                                    <div class="hero-content">
-                                        <!-- Section Title Start -->
-                                        <div class="section-title">
-                                            <h3 class="wow fadeInUp">{{ _("Your Shield Against Unwanted Guests") }}</h3>
-                                            <h1 class="text-anime-style-2" data-cursor="-opaque">{{ _("Reliable pest & bug control services you can trust") }}</h1>
-                                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ _("Protect your home and business with our effective pest control solutions. From termites to rodents we eliminate pest quickly & safely.") }}</p>
-                                        </div>
-                                        <!-- Section Title End -->
-
-                                        <!-- Hero Button Start -->
-                                        <div class="hero-btn wow fadeInUp" data-wow-delay="0.4s">
-                                            <a href="/contact" class="btn-default btn-highlighted">{{ _("book a service") }}</a>
-                                            <a href="/services" class="hero-service-btn">{{ _("View All Services") }}</a>
-                                        </div>
-                                        <!-- Hero Button End -->
-                                    </div>
-                                    <!-- Hero Content End -->
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <!-- Hero Image Start -->
-                                    <div class="hero-image">
-                                        <figure>
-                                            <img src="/assets/pestcontrol/website/images/hero-image.png" alt="">
-                                        </figure>
-                                    </div>
-                                    <!-- Hero Image End -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Hero Slide End -->
+                {% endfor %}
             </div>
+            <div class="hero-pagination"></div>
         </div>
     </div>
     <!-- Hero Section End -->

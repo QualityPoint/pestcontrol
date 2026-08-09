@@ -7,6 +7,7 @@ import re
 import frappe
 from frappe import _
 
+
 def get_site_languages():
 	"""Languages offered by the topbar switcher, sourced from the core
 	Language doctype's `enabled` flag — enabling/disabling a language for
@@ -40,6 +41,7 @@ ARTICLE_FIELD_MAP = {
 	"Website FAQ": {"question": "title", "answer": "context"},
 	"Website Gallery Item": {"title": "title"},
 	"Website Blog Post": {"title": "title", "blog_intro": "subtitle", "content": "context"},
+	"Website Hero Slide": {"heading": "title", "kicker": "subtitle", "description": "context"},
 }
 
 
@@ -52,6 +54,9 @@ def get_website_context(context):
 	settings = frappe.get_cached_doc("PC Website Settings").as_dict()
 	attach_articles("PC Website Settings", [settings])
 	context.settings = settings
+	context.hero_slides = get_translated_list(
+		"Website Hero Slide", filters={"published": 1}, fields="*", order_by="display_order asc"
+	)
 	context.lang = frappe.local.lang
 	context.languages = languages
 	context.current_language = next(
