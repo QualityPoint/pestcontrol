@@ -7,13 +7,16 @@ import re
 import frappe
 from frappe import _
 
-# Languages offered by the topbar switcher. Add an entry here to light up a
-# new language site-wide — the dropdown, cookie switching, and localize()
-# fallback logic all read from this list, no template changes needed.
-SITE_LANGUAGES = [
-	{"code": "en", "label": "English", "flag": "🇺🇸"},
-	{"code": "ar", "label": "العربية", "flag": "🇸🇦"},
-]
+def get_site_languages():
+	"""Languages offered by the topbar switcher, sourced from the core
+	Language doctype's `enabled` flag — enabling/disabling a language for
+	the site is a desk action, not a code change. A language having no
+	`Website Article`/translations yet just means it silently falls back to
+	English, same as any other partial translation."""
+	return frappe.get_all(
+		"Language", filters={"enabled": 1}, fields=["name as code", "language_name as label"]
+	)
+
 
 # Maps each translatable doctype's semantic fieldnames onto the generic
 # title/subtitle/context slots on its `article` (Website Article) bundle rows.
@@ -43,19 +46,21 @@ ARTICLE_FIELD_MAP = {
 def get_website_context(context):
 	"""Common context every pestcontrol www/ page needs: current year,
 	the site-wide settings singleton, and the active language."""
-	_apply_preferred_language_cookie()
+	languages = get_site_languages()
+	_apply_preferred_language_cookie(languages)
 	context.year = frappe.utils.now_datetime().year
 	settings = frappe.get_cached_doc("PC Website Settings").as_dict()
 	attach_articles("PC Website Settings", [settings])
 	context.settings = settings
 	context.lang = frappe.local.lang
-	context.languages = SITE_LANGUAGES
+	context.languages = languages
 	context.current_language = next(
-		(l for l in SITE_LANGUAGES if l["code"] == context.lang), SITE_LANGUAGES[0]
+		(l for l in languages if l["code"] == context.lang),
+		(languages[0] if languages else {"code": "en", "label": "English"}),
 	)
 
 
-def _apply_preferred_language_cookie():
+def _apply_preferred_language_cookie(languages):
 	"""Frappe's own language resolution only honors the `preferred_language`
 	cookie for Guest visitors — a logged-in user (e.g. an admin testing the
 	site in the same browser as the desk) falls back to their profile
@@ -66,7 +71,7 @@ def _apply_preferred_language_cookie():
 	if frappe.form_dict.get("_lang"):
 		return  # explicit request always wins; core already applied it
 	cookie_lang = frappe.request.cookies.get("preferred_language")
-	valid_codes = {l["code"] for l in SITE_LANGUAGES}
+	valid_codes = {l["code"] for l in languages}
 	if cookie_lang and cookie_lang in valid_codes:
 		frappe.local.lang = cookie_lang
 

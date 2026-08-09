@@ -36,7 +36,6 @@
                     <!-- Topbar Language Switch Start -->
                     <div class="lang-switch" id="langSwitch">
                         <button type="button" class="lang-switch-toggle" id="langSwitchToggle">
-                            <span class="lang-flag">{{ current_language.flag }}</span>
                             <span class="lang-code">{{ current_language.code|upper }}</span>
                             <i class="fa-solid fa-chevron-down"></i>
                         </button>
@@ -44,7 +43,7 @@
                             {% for l in languages %}
                             <li>
                                 <button type="button" class="lang-option{{ ' active' if l.code == lang else '' }}" data-set-lang="{{ l.code }}">
-                                    <span class="lang-flag">{{ l.flag }}</span> {{ l.label }}
+                                    {{ l.label }}
                                 </button>
                             </li>
                             {% endfor %}

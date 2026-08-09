@@ -43,11 +43,6 @@ html[dir="rtl"] * {
 	background: rgba(255, 255, 255, 0.25);
 }
 
-.lang-switch-toggle .lang-flag{
-	font-size: 15px;
-	line-height: 1;
-}
-
 .lang-switch-toggle i{
 	font-size: 10px;
 	transition: transform 0.25s ease-in-out;
@@ -118,11 +113,6 @@ html[dir="rtl"] .lang-option{
 .lang-option.active{
 	background: var(--accent-color);
 	color: var(--white-color);
-}
-
-.lang-option .lang-flag{
-	font-size: 16px;
-	line-height: 1;
 }
 
 /*
