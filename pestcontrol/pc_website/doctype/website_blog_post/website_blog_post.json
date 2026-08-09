@@ -9,16 +9,12 @@
  "field_order": [
   "route",
   "column_break_wblg",
-  "blog_category",
-  "website_tags",
-  "section_break_wbla",
   "cover_image",
   "author_name",
-  "author_image",
-  "column_break_wblb",
-  "published",
   "published_on",
+  "published",
   "section_break_art_ogpost",
+  "website_tags",
   "article"
  ],
  "fields": [
@@ -32,21 +28,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "blog_category",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Blog Category"
-  },
-  {
-   "fieldname": "website_tags",
-   "fieldtype": "Small Text",
-   "label": "Tags"
-  },
-  {
-   "fieldname": "section_break_wbla",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "cover_image",
    "fieldtype": "Attach Image",
    "label": "Cover Image"
@@ -57,13 +38,10 @@
    "label": "Author Name"
   },
   {
-   "fieldname": "author_image",
-   "fieldtype": "Attach Image",
-   "label": "Author Image"
-  },
-  {
-   "fieldname": "column_break_wblb",
-   "fieldtype": "Column Break"
+   "fieldname": "published_on",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Published On"
   },
   {
    "default": "0",
@@ -73,15 +51,14 @@
    "label": "Published"
   },
   {
-   "fieldname": "published_on",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Published On"
-  },
-  {
    "fieldname": "section_break_art_ogpost",
    "fieldtype": "Section Break",
    "label": "Content"
+  },
+  {
+   "fieldname": "website_tags",
+   "fieldtype": "Small Text",
+   "label": "Tags"
   },
   {
    "fieldname": "article",
