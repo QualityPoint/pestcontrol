@@ -500,6 +500,14 @@ body{
 	padding: 10px 0;
 }
 
+.topbar-inner{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 10px 20px;
+}
+
 .topbar-contact-info ul{
     display: flex;
     list-style: none;
@@ -531,10 +539,9 @@ body{
 	color: var(--primary-color);
 }
 
-.topbar-social-links{
+.topbar-right{
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
 	gap: 20px;
 }
 

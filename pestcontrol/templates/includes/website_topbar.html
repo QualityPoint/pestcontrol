@@ -10,25 +10,23 @@
     <!-- Topbar Section Start -->
     <div class="topbar">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-9">
-                    <!-- Topbar Contact Information Start -->
-                    <div class="topbar-contact-info">
-                        <ul>
-                            {% if settings.email %}<li><i class="fa-regular fa-envelope"></i><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></li>{% endif %}
-                            {% if settings.address %}<li><i class="fa-solid fa-location-dot"></i>{{ localize(settings, "address") }}</li>{% endif %}
-                        </ul>
-                    </div>
-                    <!-- Topbar Contact Information End -->
+            <div class="topbar-inner">
+                <!-- Topbar Contact Information Start -->
+                <div class="topbar-contact-info">
+                    <ul>
+                        {% if settings.email %}<li><i class="fa-regular fa-envelope"></i><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></li>{% endif %}
+                        {% if settings.address %}<li><i class="fa-solid fa-location-dot"></i>{{ localize(settings, "address") }}</li>{% endif %}
+                    </ul>
                 </div>
+                <!-- Topbar Contact Information End -->
 
-                <div class="col-md-3">
+                <div class="topbar-right">
                     <!-- Topbar Social Links Start -->
                     <div class="topbar-social-links">
                         <ul>
-                            {% if settings.instagram_url %}<li><a href="{{ settings.instagram_url }}"><i class="fa-brands fa-instagram"></i></a></li>{% endif %}
-                            {% if settings.facebook_url %}<li><a href="{{ settings.facebook_url }}"><i class="fa-brands fa-facebook-f"></i></a></li>{% endif %}
-                            {% if settings.twitter_url %}<li><a href="{{ settings.twitter_url }}"><i class="fa-brands fa-x-twitter"></i></a></li>{% endif %}
+                            {% if settings.instagram_url %}<li><a href="{{ settings.instagram_url }}" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>{% endif %}
+                            {% if settings.facebook_url %}<li><a href="{{ settings.facebook_url }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>{% endif %}
+                            {% if settings.twitter_url %}<li><a href="{{ settings.twitter_url }}" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>{% endif %}
                         </ul>
                     </div>
                     <!-- Topbar Social Links End -->
