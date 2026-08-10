@@ -15,18 +15,19 @@ html[dir="rtl"] * {
 }
 
 /*
- * Login / signup — full-bleed background photo (reuses the same image
- * as .page-header, no dark overlay) with a white card floating at the
- * start edge. The card sits in normal block flow inside .container, so
- * it naturally lands on the correct side for both LTR and RTL — no
- * manual left/right positioning needed.
+ * Login / signup — full-bleed background photo (admin-configurable via
+ * PC Website Settings > Login Page, set inline per-page so it can be a
+ * dynamic value; falls back to the same static photo .page-header uses).
+ * .container is a two-item flex row: the info text and the white card.
+ * Because they're plain flex items (not manually positioned left/right),
+ * they naturally swap sides for RTL along with everything else on the
+ * site — the card ends up on the "near" edge, the text fills the rest.
  */
 .auth-page{
 	position: relative;
 	min-height: 100vh;
 	display: flex;
 	align-items: center;
-	background-image: url('../images/page-header-bg.jpg');
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
@@ -37,9 +38,33 @@ html[dir="rtl"] * {
 .auth-page .container{
 	position: relative;
 	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 40px;
+	flex-wrap: wrap;
+}
+
+.auth-page-info{
+	flex: 1 1 360px;
+	color: var(--white-color);
+}
+
+.auth-page-info h1{
+	color: var(--white-color);
+	font-size: 42px;
+	line-height: 1.2em;
+	margin-bottom: 16px;
+	text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+}
+
+.auth-page-info p{
+	font-size: 17px;
+	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
 
 .auth-page-box{
+	flex: 0 1 440px;
 	width: 100%;
 	max-width: 440px;
 	background: var(--white-color);
@@ -96,6 +121,10 @@ html[dir="rtl"] * {
 	.auth-page{
 		min-height: auto;
 		padding: 40px 0;
+	}
+
+	.auth-page-info{
+		display: none;
 	}
 
 	.auth-page-box{

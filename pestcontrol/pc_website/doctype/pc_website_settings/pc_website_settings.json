@@ -5,6 +5,8 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "login_page_tab",
+  "auth_background_image",
   "brand_tab",
   "site_name",
   "column_break_wsbr",
@@ -35,6 +37,17 @@
   "article"
  ],
  "fields": [
+  {
+   "fieldname": "login_page_tab",
+   "fieldtype": "Tab Break",
+   "label": "Login Page"
+  },
+  {
+   "description": "Full-bleed background photo behind the login / sign up forms.",
+   "fieldname": "auth_background_image",
+   "fieldtype": "Attach Image",
+   "label": "Background Image"
+  },
   {
    "fieldname": "brand_tab",
    "fieldtype": "Tab Break",

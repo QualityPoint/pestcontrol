@@ -3,7 +3,7 @@ from frappe.utils import cint
 from frappe.website.utils import get_home_page
 from frappe.www.login import sanitize_redirect
 
-from pestcontrol.pc_website.utils import get_website_context
+from pestcontrol.pc_website.utils import get_language_row, get_website_context
 
 
 def get_context(context):
@@ -20,3 +20,6 @@ def get_context(context):
 
 	context.redirect_to = redirect_to or ""
 	context.disable_signup = cint(frappe.get_website_settings("disable_signup"))
+
+	about_page = frappe.get_cached_doc("Website About Page").as_dict()
+	context.about = get_language_row(about_page.get("content") or [])

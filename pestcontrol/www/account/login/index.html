@@ -4,8 +4,13 @@
 
 {% block content %}
     <!-- Auth Page Start -->
-    <div class="auth-page">
+    <div class="auth-page" style="background-image: url('{{ settings.auth_background_image or '/assets/pestcontrol/website/images/page-header-bg.jpg' }}');">
         <div class="container">
+            <div class="auth-page-info">
+                <h1>{{ about.auth_heading or _("Your Shield Against Unwanted Guests") }}</h1>
+                <p>{{ about.auth_text or _("Log in to manage your services, track requests, and stay connected with us.") }}</p>
+            </div>
+
             <div class="auth-page-box">
                 <a href="/" class="auth-page-logo">
                     <img src="{{ settings.logo or '/assets/pestcontrol/website/icons/skystar-logo.png' }}" alt="{{ settings.site_name or 'Skystar' }}">

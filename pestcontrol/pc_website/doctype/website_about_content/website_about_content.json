@@ -21,7 +21,10 @@
   "drives_text",
   "section_break_wact5",
   "legacy_heading",
-  "legacy_text"
+  "legacy_text",
+  "section_break_wact6",
+  "auth_heading",
+  "auth_text"
  ],
  "fields": [
   {
@@ -103,6 +106,21 @@
   },
   {
    "fieldname": "legacy_text",
+   "fieldtype": "Small Text",
+   "label": "Text"
+  },
+  {
+   "fieldname": "section_break_wact6",
+   "fieldtype": "Section Break",
+   "label": "Login / Sign Up Page"
+  },
+  {
+   "fieldname": "auth_heading",
+   "fieldtype": "Data",
+   "label": "Heading"
+  },
+  {
+   "fieldname": "auth_text",
    "fieldtype": "Small Text",
    "label": "Text"
   }
