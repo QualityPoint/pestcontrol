@@ -2,6 +2,7 @@ import frappe
 
 from pestcontrol.pc_website.utils import (
 	filter_by_language,
+	get_language_row,
 	get_translated_list,
 	get_website_context,
 	make_route,
@@ -11,6 +12,9 @@ from pestcontrol.pc_website.utils import (
 def get_context(context):
 	get_website_context(context)
 	context.no_cache = 1
+
+	about_page = frappe.get_cached_doc("Website About Page").as_dict()
+	context.about = get_language_row(about_page.get("content") or [])
 
 	context.services = get_translated_list(
 		"Website Service",

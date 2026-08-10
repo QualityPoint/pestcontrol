@@ -49,8 +49,8 @@
                         <!-- Section Title Start -->
                         <div class="section-title">
                             <h3 class="wow fadeInUp">{{ _("about us") }}</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Protecting home, businesses,") }} <span>{{ _("and communities") }}</span></h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ _("Our mission is simple: to provide dependable pest management services that ensure a clean, safe, and comfortable environment for everyone. With years of expertise and a customer-first approach ,we go above and beyond to eliminate pests and prevent their return.") }}</p>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">{{ about.intro_heading or _("Protecting home, businesses, and communities") }}</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ about.intro_text or _("Our mission is simple: to provide dependable pest management services that ensure a clean, safe, and comfortable environment for everyone. With years of expertise and a customer-first approach ,we go above and beyond to eliminate pests and prevent their return.") }}</p>
                         </div>
                         <!-- Section Title End -->
 
@@ -166,8 +166,8 @@
                         <!-- Section Title Start -->
                         <div class="section-title">
                             <h3 class="wow fadeInUp">{{ _("Our approach") }}</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Crafting,") }} <span>{{ _("shaping futures") }}</span></h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ _("At the heart of everything we do lies a commitment to innovation and excellence. We believe in creating tailored solutions that address unique challenges, while fostering growth and sustainability for a brighter tomorrow.") }}</p>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">{{ about.approach_heading or _("Crafting, shaping futures") }}</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ about.approach_text or _("At the heart of everything we do lies a commitment to innovation and excellence. We believe in creating tailored solutions that address unique challenges, while fostering growth and sustainability for a brighter tomorrow.") }}</p>
                         </div>
                         <!-- Section Title End -->
 
@@ -177,7 +177,7 @@
                             <div class="vision-mission-item wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="vision-mission-content">
                                     <h3>{{ _("Our vision") }}</h3>
-                                    <p>{{ _("Our vision is to be a leader in our industry, setting new standards.") }}</p>
+                                    <p>{{ about.vision_text or _("Our vision is to be a leader in our industry, setting new standards.") }}</p>
                                 </div>
                                 <div class="vision-mission-image">
                                     <figure class="image-anime">
@@ -191,7 +191,7 @@
                             <div class="vision-mission-item wow fadeInUp" data-wow-delay="0.4s">
                                 <div class="vision-mission-content">
                                     <h3>{{ _("Our mission") }}</h3>
-                                    <p>{{ _("Our mission is to be leader in our industry, setting new standards.") }}</p>
+                                    <p>{{ about.mission_text or _("Our mission is to be leader in our industry, setting new standards.") }}</p>
                                 </div>
                                 <div class="vision-mission-image">
                                     <figure class="image-anime">
@@ -236,8 +236,8 @@
                         <!-- Section Title Start -->
                         <div class="section-title">
                             <h3 class="wow fadeInUp">{{ _("What drives us") }}</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Passion for innovation and") }} <span>{{ _("quality service") }}</span></h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ _("We are driven by a commitment to deliver innovative, reliable, and high-quality pest control solutions that ensure long-lasting results.") }}</p>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">{{ about.drives_heading or _("Passion for innovation and quality service") }}</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ about.drives_text or _("We are driven by a commitment to deliver innovative, reliable, and high-quality pest control solutions that ensure long-lasting results.") }}</p>
                         </div>
                         <!-- Section Title End -->
 
@@ -391,8 +391,8 @@
                         <!-- Section Title Start -->
                         <div class="section-title section-title-center">
                             <h3 class="wow fadeInUp">{{ _("Our legacy") }}</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Shaping excellence in") }} <span>{{ _("pest management") }}</span></h2>
-                            <p>{{ _("Preserving our legacy with innovative and reliable pest control solutions, ensuring safety and satisfaction for every space we protect.") }}</p>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">{{ about.legacy_heading or _("Shaping excellence in pest management") }}</h2>
+                            <p>{{ about.legacy_text or _("Preserving our legacy with innovative and reliable pest control solutions, ensuring safety and satisfaction for every space we protect.") }}</p>
                         </div>
                         <!-- Section Title End -->
 
@@ -560,24 +560,24 @@
             </div>
 
             <div class="row">
+                {% for member in team_members %}
                 <div class="col-lg-3 col-md-6">
                     <!-- Team Member Item Start -->
-                    <div class="team-item wow fadeInUp">
+                    <div class="team-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                         <!-- Team Image Start -->
                         <div class="team-image">
-                            <a href="/team-single" data-cursor-text="View">
+                            <a href="/{{ member.route }}" data-cursor-text="View">
                                 <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/team-1.jpg" alt="">
+                                    <img src="{{ member.photo }}" alt="{{ member.member_name }}">
                                 </figure>
                             </a>
 
                             <!-- Team Social Icon Start -->
                             <div class="team-social-icon">
                                 <ul>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                    {% if member.instagram_url %}<li><a href="{{ member.instagram_url }}" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>{% endif %}
+                                    {% if member.facebook_url %}<li><a href="{{ member.facebook_url }}" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>{% endif %}
+                                    {% if member.twitter_url %}<li><a href="{{ member.twitter_url }}" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a></li>{% endif %}
                                 </ul>
                             </div>
                             <!-- Team Social Icon End -->
@@ -586,115 +586,14 @@
 
                         <!-- Team Content Start -->
                         <div class="team-content">
-                            <h3><a href="/team-single">{{ _("Arjun Khanna") }}</a></h3>
-                            <p>{{ _("Technical Engineer") }}</p>
+                            <h3><a href="/{{ member.route }}">{{ member.member_name }}</a></h3>
+                            <p>{{ localize(member, "designation") }}</p>
                         </div>
                         <!-- Team Content End -->
                     </div>
                     <!-- Team Member Item End -->
                 </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member Item Start -->
-                    <div class="team-item wow fadeInUp" data-wow-delay="0.2s">
-                        <!-- Team Image Start -->
-                        <div class="team-image">
-                            <a href="/team-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/team-2.jpg" alt="">
-                                </figure>
-                            </a>
-
-                            <!-- Team Social Icon Start -->
-                            <div class="team-social-icon">
-                                <ul>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- Team Social Icon End -->
-                        </div>
-                        <!-- Team Image End -->
-
-                        <!-- Team Content Start -->
-                        <div class="team-content">
-                            <h3><a href="/team-single">{{ _("Cameron Williamson") }}</a></h3>
-                            <p>{{ _("Security Specialist") }}</p>
-                        </div>
-                        <!-- Team Content End -->
-                    </div>
-                    <!-- Team Member Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member Item Start -->
-                    <div class="team-item wow fadeInUp" data-wow-delay="0.4s">
-                        <!-- Team Image Start -->
-                        <div class="team-image">
-                            <a href="/team-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/team-3.jpg" alt="">
-                                </figure>
-                            </a>
-
-                            <!-- Team Social Icon Start -->
-                            <div class="team-social-icon">
-                                <ul>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- Team Social Icon End -->
-                        </div>
-                        <!-- Team Image End -->
-
-                        <!-- Team Content Start -->
-                        <div class="team-content">
-                            <h3><a href="/team-single">{{ _("leslie alexander") }}</a></h3>
-                            <p>{{ _("Security Specialist") }}</p>
-                        </div>
-                        <!-- Team Content End -->
-                    </div>
-                    <!-- Team Member Item End -->
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member Item Start -->
-                    <div class="team-item wow fadeInUp" data-wow-delay="0.6s">
-                        <!-- Team Image Start -->
-                        <div class="team-image">
-                            <a href="/team-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/team-4.jpg" alt="">
-                                </figure>
-                            </a>
-
-                            <!-- Team Social Icon Start -->
-                            <div class="team-social-icon">
-                                <ul>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a></li>
-                                    <li><a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- Team Social Icon End -->
-                        </div>
-                        <!-- Team Image End -->
-
-                        <!-- Team Content Start -->
-                        <div class="team-content">
-                            <h3><a href="/team-single">{{ _("michael johnson") }}</a></h3>
-                            <p>{{ _("Support Manager") }}</p>
-                        </div>
-                        <!-- Team Content End -->
-                    </div>
-                    <!-- Team Member Item End -->
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -746,80 +645,22 @@
 
                         <!-- FAQ Accordion Start -->
                         <div class="faq-accordion" id="accordion">
+                            {% for faq in faqs %}
                             <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp">
-                                <h2 class="accordion-header" id="heading1">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                        {{ _("1. What types of pests do you treat?") }}
+                            <div class="accordion-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
+                                <h2 class="accordion-header" id="heading{{ loop.index }}">
+                                    <button class="accordion-button{{ '' if loop.first else ' collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="collapse{{ loop.index }}">
+                                        {{ localize(faq, "question") }}
                                     </button>
                                 </h2>
-                                <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#accordion">
+                                <div id="collapse{{ loop.index }}" class="accordion-collapse collapse{{ ' show' if loop.first else '' }}" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#accordion">
                                     <div class="accordion-body">
-                                        <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
+                                        <p>{{ localize(faq, "answer") }}</p>
                                     </div>
                                 </div>
                             </div>
                             <!-- FAQ Item End -->
-
-                            <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
-                                <h2 class="accordion-header" id="heading2">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                        {{ _("2. Are your pest control methods safe for my pets?") }}
-                                    </button>
-                                </h2>
-                                <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#accordion">
-                                    <div class="accordion-body">
-                                        <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- FAQ Item End -->
-
-                            <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
-                                <h2 class="accordion-header" id="heading3">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                        {{ _("3. How often should I schedule pest control services?") }}
-                                    </button>
-                                </h2>
-                                <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordion">
-                                    <div class="accordion-body">
-                                        <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- FAQ Item End -->
-
-                            <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
-                                <h2 class="accordion-header" id="heading4">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                        {{ _("4. Do you offer emergency pest control services?") }}
-                                    </button>
-                                </h2>
-                                <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordion">
-                                    <div class="accordion-body">
-                                        <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- FAQ Item End -->
-
-                            <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
-                                <h2 class="accordion-header" id="heading5">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                                        {{ _("5. How do I know if I have a pest infestation?") }}
-                                    </button>
-                                </h2>
-                                <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#accordion">
-                                    <div class="accordion-body">
-                                        <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- FAQ Item End -->
+                            {% endfor %}
                         </div>
                         <!-- FAQ Accordion End -->
                     </div>
@@ -850,117 +691,31 @@
                     <div class="testimonial-slider">
                         <div class="swiper">
                             <div class="swiper-wrapper" data-cursor-text="Drag">
+                                {% for testimonial in testimonials %}
                                 <!-- Testimonial Slide Start -->
                                 <div class="swiper-slide">
                                     <div class="testimonial-item">
                                         <div class="testimonial-author">
                                             <div class="author-image">
                                                 <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-1.jpg" alt="">
+                                                    <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}">
                                                 </figure>
                                             </div>
                                             <div class="author-content">
-                                                <h3>{{ _("Oliver Spaltn") }}</h3>
-                                                <p>{{ _("CEO at D.B.A Pvt. Ltd") }}</p>
+                                                <h3>{{ testimonial.client_name }}</h3>
+                                                <p>{{ localize(testimonial, "designation") }}</p>
                                             </div>
                                         </div>
                                         <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
+                                            {% for i in range(5) %}<i class="fa-{{ 'solid' if i < (testimonial.rating * 5)|round(0, 'floor') else 'regular' }} fa-star"></i>{% endfor %}
                                         </div>
                                         <div class="testimonial-content">
-                                            <p>"{{ _("Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!") }}"</p>
+                                            <p>"{{ localize(testimonial, "testimonial_text") }}"</p>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Testimonial Slide End -->
-
-                                <!-- Testimonial Slide Start -->
-                                <div class="swiper-slide">
-                                    <div class="testimonial-item">
-                                        <div class="testimonial-author">
-                                            <div class="author-image">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-2.jpg" alt="">
-                                                </figure>
-                                            </div>
-                                            <div class="author-content">
-                                                <h3>{{ _("Ronald Richards") }}</h3>
-                                                <p>{{ _("MD at D.B.A Pvt. Ltd") }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>"{{ _("Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!") }}"</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Testimonial Slide End -->
-
-                                <!-- Testimonial Slide Start -->
-                                <div class="swiper-slide">
-                                    <div class="testimonial-item">
-                                        <div class="testimonial-author">
-                                            <div class="author-image">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-3.jpg" alt="">
-                                                </figure>
-                                            </div>
-                                            <div class="author-content">
-                                                <h3>{{ _("Brooklyn Simmons") }}</h3>
-                                                <p>{{ _("BOD at D.B.A Pvt. Ltd") }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>"{{ _("Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!") }}"</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Testimonial Slide End -->
-
-                                <!-- Testimonial Slide Start -->
-                                <div class="swiper-slide">
-                                    <div class="testimonial-item">
-                                        <div class="testimonial-author">
-                                            <div class="author-image">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-4.jpg" alt="">
-                                                </figure>
-                                            </div>
-                                            <div class="author-content">
-                                                <h3>{{ _("emily williams") }}</h3>
-                                                <p>{{ _("Chairman") }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>"{{ _("Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!") }}"</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Testimonial Slide End -->
+                                {% endfor %}
                             </div>
                             <div class="testimonial-pagination"></div>
                         </div>

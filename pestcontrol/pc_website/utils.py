@@ -176,12 +176,25 @@ def make_route(value):
 	return re.sub(r"[^a-z0-9]+", "-", (value or "").lower()).strip("-")
 
 
-def validate_articles(doc):
-	"""Raise if the `article` child table has more than one row for the same
-	language — a bundle row *is* the whole translation, so a duplicate
-	language would otherwise silently win with no indication why."""
+def validate_unique_language(doc, fieldname="article"):
+	"""Raise if `fieldname`'s child table has more than one row for the same
+	language — a row *is* the whole translation for that language, so a
+	duplicate would otherwise silently win with no indication why."""
 	seen = set()
-	for row in doc.get("article") or []:
+	for row in doc.get(fieldname) or []:
 		if row.language in seen:
-			frappe.throw(_("Duplicate article for language {0}").format(row.language))
+			frappe.throw(_("Duplicate {0} for language {1}").format(fieldname, row.language))
 		seen.add(row.language)
+
+
+def validate_articles(doc):
+	validate_unique_language(doc, "article")
+
+
+def get_language_row(rows):
+	"""Given a list of rows each carrying a `language` field (one row per
+	language, no nested bundle), return the row for the active language,
+	falling back to English, then the first row available."""
+	lang = frappe.local.lang or "en"
+	by_lang = {r.get("language"): r for r in rows}
+	return by_lang.get(lang) or by_lang.get("en") or (rows[0] if rows else None)
