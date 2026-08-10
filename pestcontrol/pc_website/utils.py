@@ -60,6 +60,11 @@ def get_website_context(context):
 	context.csrf_token = (
 		frappe.local.session.data.csrf_token if frappe.session.user != "Guest" else ""
 	)
+	context.is_logged_in = frappe.session.user != "Guest"
+	# session.data.full_name isn't reliably populated depending on how the
+	# session was created (e.g. straight through /api/method/login) — look
+	# it up directly from the User doc instead, which is always accurate.
+	context.user_full_name = frappe.utils.get_fullname() if context.is_logged_in else ""
 	settings = frappe.get_cached_doc("PC Website Settings").as_dict()
 	attach_articles("PC Website Settings", [settings])
 	context.settings = settings

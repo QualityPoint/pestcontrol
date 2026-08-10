@@ -99,3 +99,93 @@
             });
         });
     </script>
+
+    <!-- Login Form Submit -->
+    <script>
+        var loginForm = document.getElementById("loginForm");
+        if (loginForm) {
+            loginForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var msgBox = document.getElementById("loginMsg");
+                var formData = new FormData(loginForm);
+                fetch("/api/method/login", {
+                    method: "POST",
+                    body: formData,
+                    headers: { "X-Frappe-CSRF-Token": "{{ csrf_token }}" },
+                })
+                    .then(function (response) {
+                        return response.json().then(function (data) {
+                            if (!response.ok) throw new Error((data.message && data.message.message) || "Invalid login");
+                            return data;
+                        });
+                    })
+                    .then(function () {
+                        var redirectTo = loginForm.getAttribute("data-redirect-to");
+                        window.location.href = redirectTo || "/";
+                    })
+                    .catch(function (err) {
+                        if (msgBox) {
+                            msgBox.classList.remove("hidden");
+                            msgBox.classList.add("text-danger");
+                            msgBox.textContent = err.message || "Invalid email or password.";
+                        }
+                    });
+            });
+        }
+    </script>
+
+    <!-- Signup Form Submit -->
+    <script>
+        var signupForm = document.getElementById("signupForm");
+        if (signupForm) {
+            signupForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var msgBox = document.getElementById("signupMsg");
+                var formData = new FormData(signupForm);
+                formData.append("redirect_to", signupForm.getAttribute("data-redirect-to") || "");
+                fetch("/api/method/frappe.core.doctype.user.user.sign_up", {
+                    method: "POST",
+                    body: formData,
+                    headers: { "X-Frappe-CSRF-Token": "{{ csrf_token }}" },
+                })
+                    .then(function (response) {
+                        return response.json().then(function (data) {
+                            if (!response.ok) throw new Error((data.message && data.message.message) || "Sign up failed");
+                            return data;
+                        });
+                    })
+                    .then(function (data) {
+                        var result = data.message || [];
+                        var ok = result[0] === 1 || result[0] === 2;
+                        if (msgBox) {
+                            msgBox.classList.remove("hidden");
+                            msgBox.classList.add(ok ? "text-success" : "text-danger");
+                            msgBox.textContent = result[1] || "Something went wrong.";
+                        }
+                        if (ok) signupForm.reset();
+                    })
+                    .catch(function (err) {
+                        if (msgBox) {
+                            msgBox.classList.remove("hidden");
+                            msgBox.classList.add("text-danger");
+                            msgBox.textContent = err.message || "Something went wrong. Please try again.";
+                        }
+                    });
+            });
+        }
+    </script>
+
+    <!-- Logout -->
+    <script>
+        document.addEventListener("click", function (e) {
+            var logoutLink = e.target.closest("#logoutLink");
+            if (!logoutLink) return;
+            e.preventDefault();
+            fetch("/api/method/logout", {
+                method: "POST",
+                headers: { "X-Frappe-CSRF-Token": "{{ csrf_token }}" },
+            }).then(function () {
+                window.location.href = "/";
+            });
+        });
+    </script>
