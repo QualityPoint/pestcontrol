@@ -5,8 +5,11 @@
     <title>{% block title %}Skystar - {{ _("Environmental Services") }}{% endblock %}</title>
 </head>
 <body>
-    {% block content %}{% endblock %}
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
 
+    {% include "pestcontrol/templates/includes/accessibility_toolbar.html" %}
     {% include "pestcontrol/templates/includes/website_scripts.html" %}
 </body>
 </html>

@@ -5,14 +5,19 @@
     <title>{% block title %}Skystar - {{ _("Environmental Services") }}{% endblock %}</title>
 </head>
 <body>
+    <a href="#main-content" class="skip-to-content">{{ _("Skip to main content") }}</a>
+
     {% include "pestcontrol/templates/includes/website_topbar.html" %}
     {% include "pestcontrol/templates/includes/website_navbar.html" %}
 
-    {% block page_header %}{% endblock %}
+    <main id="main-content">
+        {% block page_header %}{% endblock %}
 
-    {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
+    </main>
 
     {% include "pestcontrol/templates/includes/website_footer.html" %}
+    {% include "pestcontrol/templates/includes/accessibility_toolbar.html" %}
     {% include "pestcontrol/templates/includes/website_scripts.html" %}
 </body>
 </html>

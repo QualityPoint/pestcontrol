@@ -91,26 +91,31 @@
                             <form id="contactForm" action="#" method="POST" data-toggle="validator" class="contact-form wow fadeInUp">
                                 <div class="row">
                                     <div class="form-group col-md-6 mb-4">
+                                        <label for="fname" class="visually-hidden">{{ _('First name') }}</label>
                                         <input type="text" name="fname" class="form-control" id="fname" placeholder="{{ _('First name') }}" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
 
                                     <div class="form-group col-md-6 mb-4">
+                                        <label for="lname" class="visually-hidden">{{ _('Last name') }}</label>
                                         <input type="text" name="lname" class="form-control" id="lname" placeholder="{{ _('Last name') }}" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
 
                                     <div class="form-group col-md-6 mb-4">
+                                        <label for="email" class="visually-hidden">{{ _('E-mail') }}</label>
                                         <input type="email" name ="email" class="form-control" id="email" placeholder="{{ _('E-mail') }}" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
 
                                     <div class="form-group col-md-6 mb-4">
+                                        <label for="phone" class="visually-hidden">{{ _('Phone no.') }}</label>
                                         <input type="text" name="phone" class="form-control" id="phone" placeholder="{{ _('Phone no.') }}" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
 
                                     <div class="form-group col-md-12 mb-5">
+                                        <label for="message" class="visually-hidden">{{ _('Message') }}</label>
                                         <textarea name="message" class="form-control" id="message" rows="4" placeholder="{{ _('Message') }}"></textarea>
                                         <div class="help-block with-errors"></div>
                                     </div>

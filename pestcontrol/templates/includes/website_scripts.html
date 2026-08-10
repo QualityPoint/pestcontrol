@@ -32,6 +32,23 @@
     <!-- Main Custom js file -->
     <script src="/assets/pestcontrol/website/js/function.js?v={{ asset_version('website/js/function.js') }}"></script>
 
+    <!-- Mobile Menu Toggle Accessibility -->
+    <!-- SlickNav (vendored) generates its own toggle button with no
+         accessible name and no aria-expanded state — patched here instead
+         of editing the library file. -->
+    <script>
+        var slicknavBtn = document.querySelector(".slicknav_btn");
+        if (slicknavBtn) slicknavBtn.setAttribute("aria-label", "{{ _('Toggle navigation menu') }}");
+
+        document.addEventListener("click", function (e) {
+            var toggle = e.target.closest(".slicknav_btn");
+            if (!toggle) return;
+            setTimeout(function () {
+                toggle.setAttribute("aria-expanded", toggle.classList.contains("slicknav_open") ? "true" : "false");
+            }, 0);
+        });
+    </script>
+
     <!-- Language Switcher -->
     <script>
         document.addEventListener("click", function (e) {
@@ -55,12 +72,28 @@
             var toggle = e.target.closest("#langSwitchToggle");
             if (toggle) {
                 e.preventDefault();
-                langSwitch.classList.toggle("open");
+                var isOpen = langSwitch.classList.toggle("open");
+                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
                 return;
             }
 
             if (langSwitch && !langSwitch.contains(e.target)) {
                 langSwitch.classList.remove("open");
+                var langSwitchToggle = document.getElementById("langSwitchToggle");
+                if (langSwitchToggle) langSwitchToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key !== "Escape") return;
+            var langSwitch = document.getElementById("langSwitch");
+            if (langSwitch && langSwitch.classList.contains("open")) {
+                langSwitch.classList.remove("open");
+                var langSwitchToggle = document.getElementById("langSwitchToggle");
+                if (langSwitchToggle) {
+                    langSwitchToggle.setAttribute("aria-expanded", "false");
+                    langSwitchToggle.focus();
+                }
             }
         });
     </script>
@@ -188,4 +221,109 @@
                 window.location.href = "/";
             });
         });
+    </script>
+
+    <!-- Accessibility Toolbar -->
+    <script>
+        (function () {
+            var root = document.documentElement;
+            var toolbar = document.getElementById("a11yToolbar");
+            if (!toolbar) return;
+            var toggle = document.getElementById("a11yToolbarToggle");
+            var MAX_FONT_STEP = 3;
+
+            function loadPrefs() {
+                try {
+                    return JSON.parse(localStorage.getItem("a11yPrefs") || "{}");
+                } catch (e) {
+                    return {};
+                }
+            }
+
+            function savePrefs(prefs) {
+                try {
+                    localStorage.setItem("a11yPrefs", JSON.stringify(prefs));
+                } catch (e) {}
+            }
+
+            // Reflect the current saved state onto the panel's buttons
+            // (the classes on <html> were already applied early, in
+            // website_head.html, to avoid a flash of unstyled content —
+            // this just syncs the UI to match on this page's load).
+            function syncUI(prefs) {
+                toolbar.querySelectorAll("[data-a11y-action='contrast']").forEach(function (btn) {
+                    btn.setAttribute("aria-checked", prefs.contrast ? "true" : "false");
+                    btn.classList.toggle("is-active", !!prefs.contrast);
+                });
+                toolbar.querySelectorAll("[data-a11y-action='readable-font']").forEach(function (btn) {
+                    btn.setAttribute("aria-checked", prefs.readableFont ? "true" : "false");
+                    btn.classList.toggle("is-active", !!prefs.readableFont);
+                });
+                toolbar.querySelectorAll("[data-a11y-action='reduce-motion']").forEach(function (btn) {
+                    btn.setAttribute("aria-checked", prefs.reduceMotion ? "true" : "false");
+                    btn.classList.toggle("is-active", !!prefs.reduceMotion);
+                });
+            }
+
+            function apply(prefs) {
+                for (var i = 1; i <= MAX_FONT_STEP; i++) root.classList.remove("a11y-font-" + i);
+                if (prefs.fontStep) root.classList.add("a11y-font-" + prefs.fontStep);
+                root.classList.toggle("a11y-high-contrast", !!prefs.contrast);
+                root.classList.toggle("a11y-readable-font", !!prefs.readableFont);
+                root.classList.toggle("a11y-reduce-motion", !!prefs.reduceMotion);
+                syncUI(prefs);
+                savePrefs(prefs);
+            }
+
+            syncUI(loadPrefs());
+
+            document.addEventListener("click", function (e) {
+                var t = e.target.closest("#a11yToolbarToggle");
+                if (t) {
+                    var isOpen = toolbar.classList.toggle("open");
+                    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                    return;
+                }
+
+                var action = e.target.closest("[data-a11y-action]");
+                if (action) {
+                    var prefs = loadPrefs();
+                    switch (action.getAttribute("data-a11y-action")) {
+                        case "font-increase":
+                            prefs.fontStep = Math.min((prefs.fontStep || 0) + 1, MAX_FONT_STEP);
+                            break;
+                        case "font-decrease":
+                            prefs.fontStep = Math.max((prefs.fontStep || 0) - 1, 0);
+                            break;
+                        case "contrast":
+                            prefs.contrast = !prefs.contrast;
+                            break;
+                        case "readable-font":
+                            prefs.readableFont = !prefs.readableFont;
+                            break;
+                        case "reduce-motion":
+                            prefs.reduceMotion = !prefs.reduceMotion;
+                            break;
+                        case "reset":
+                            prefs = {};
+                            break;
+                    }
+                    apply(prefs);
+                    return;
+                }
+
+                if (!toolbar.contains(e.target)) {
+                    toolbar.classList.remove("open");
+                    toggle.setAttribute("aria-expanded", "false");
+                }
+            });
+
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape" && toolbar.classList.contains("open")) {
+                    toolbar.classList.remove("open");
+                    toggle.setAttribute("aria-expanded", "false");
+                    toggle.focus();
+                }
+            });
+        })();
     </script>

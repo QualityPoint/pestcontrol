@@ -46,9 +46,9 @@
                             </ul>
 
                             <div class="sidebar-social-list">
-                                {% if settings.facebook_url %}<a href="{{ settings.facebook_url }}"><i class="fa-brands fa-facebook-f"></i></a>{% endif %}
-                                {% if settings.instagram_url %}<a href="{{ settings.instagram_url }}"><i class="fa-brands fa-instagram"></i></a>{% endif %}
-                                {% if settings.twitter_url %}<a href="{{ settings.twitter_url }}"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
+                                {% if settings.facebook_url %}<a href="{{ settings.facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Facebook') }}"><i class="fa-brands fa-facebook-f"></i></a>{% endif %}
+                                {% if settings.instagram_url %}<a href="{{ settings.instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Instagram') }}"><i class="fa-brands fa-instagram"></i></a>{% endif %}
+                                {% if settings.twitter_url %}<a href="{{ settings.twitter_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Twitter') }}"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
                             </div>
                         </div>
                         <!-- Page Category List End -->

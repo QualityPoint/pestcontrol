@@ -1,0 +1,27 @@
+<!-- Accessibility Toolbar Start -->
+<div class="a11y-toolbar" id="a11yToolbar">
+    <button type="button" class="a11y-toolbar-toggle" id="a11yToolbarToggle" aria-haspopup="true" aria-expanded="false" aria-label="{{ _('Accessibility options') }}">
+        <i class="fa-solid fa-universal-access" aria-hidden="true"></i>
+    </button>
+    <div class="a11y-toolbar-panel" role="menu" aria-label="{{ _('Accessibility options') }}">
+        <button type="button" class="a11y-option" role="menuitem" data-a11y-action="font-decrease">
+            <i class="fa-solid fa-minus" aria-hidden="true"></i> {{ _("Decrease text size") }}
+        </button>
+        <button type="button" class="a11y-option" role="menuitem" data-a11y-action="font-increase">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i> {{ _("Increase text size") }}
+        </button>
+        <button type="button" class="a11y-option" role="menuitemcheckbox" aria-checked="false" data-a11y-action="contrast">
+            <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i> {{ _("High contrast") }}
+        </button>
+        <button type="button" class="a11y-option" role="menuitemcheckbox" aria-checked="false" data-a11y-action="readable-font">
+            <i class="fa-solid fa-font" aria-hidden="true"></i> {{ _("Readable font") }}
+        </button>
+        <button type="button" class="a11y-option" role="menuitemcheckbox" aria-checked="false" data-a11y-action="reduce-motion">
+            <i class="fa-solid fa-person-walking" aria-hidden="true"></i> {{ _("Reduce motion") }}
+        </button>
+        <button type="button" class="a11y-option a11y-reset" role="menuitem" data-a11y-action="reset">
+            <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> {{ _("Reset") }}
+        </button>
+    </div>
+</div>
+<!-- Accessibility Toolbar End -->

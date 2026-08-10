@@ -24,23 +24,23 @@
                     <!-- Topbar Social Links Start -->
                     <div class="topbar-social-links">
                         <ul>
-                            {% if settings.instagram_url %}<li><a href="{{ settings.instagram_url }}" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>{% endif %}
-                            {% if settings.facebook_url %}<li><a href="{{ settings.facebook_url }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>{% endif %}
-                            {% if settings.twitter_url %}<li><a href="{{ settings.twitter_url }}" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>{% endif %}
+                            {% if settings.instagram_url %}<li><a href="{{ settings.instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Instagram') }}"><i class="fa-brands fa-instagram"></i></a></li>{% endif %}
+                            {% if settings.facebook_url %}<li><a href="{{ settings.facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Facebook') }}"><i class="fa-brands fa-facebook-f"></i></a></li>{% endif %}
+                            {% if settings.twitter_url %}<li><a href="{{ settings.twitter_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Twitter') }}"><i class="fa-brands fa-x-twitter"></i></a></li>{% endif %}
                         </ul>
                     </div>
                     <!-- Topbar Social Links End -->
 
                     <!-- Topbar Language Switch Start -->
                     <div class="lang-switch" id="langSwitch">
-                        <button type="button" class="lang-switch-toggle" id="langSwitchToggle">
+                        <button type="button" class="lang-switch-toggle" id="langSwitchToggle" aria-haspopup="true" aria-expanded="false" aria-label="{{ _('Select language') }}">
                             <span class="lang-code">{{ current_language.label|upper }}</span>
-                            <i class="fa-solid fa-chevron-down"></i>
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                         </button>
-                        <ul class="lang-switch-menu">
+                        <ul class="lang-switch-menu" role="menu">
                             {% for l in languages %}
-                            <li>
-                                <button type="button" class="lang-option{{ ' active' if l.code == lang else '' }}" data-set-lang="{{ l.code }}">
+                            <li role="none">
+                                <button type="button" role="menuitem" class="lang-option{{ ' active' if l.code == lang else '' }}" data-set-lang="{{ l.code }}"{{ ' aria-current="true"' if l.code == lang else '' }}>
                                     {{ l.label }}
                                 </button>
                             </li>

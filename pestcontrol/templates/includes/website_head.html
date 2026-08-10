@@ -31,3 +31,18 @@
 
 	<!-- Skystar Brand Overrides -->
 	<link href="/assets/pestcontrol/website/css/skystar.css?v={{ asset_version('website/css/skystar.css') }}" rel="stylesheet" media="screen">
+
+	<!-- Apply any saved accessibility preferences before first paint, so
+	     returning visitors don't see a flash of the default styling. -->
+	<script>
+		(function () {
+			try {
+				var saved = JSON.parse(localStorage.getItem("a11yPrefs") || "{}");
+				var root = document.documentElement;
+				if (saved.fontStep) root.classList.add("a11y-font-" + saved.fontStep);
+				if (saved.contrast) root.classList.add("a11y-high-contrast");
+				if (saved.readableFont) root.classList.add("a11y-readable-font");
+				if (saved.reduceMotion) root.classList.add("a11y-reduce-motion");
+			} catch (e) {}
+		})();
+	</script>
