@@ -50,6 +50,16 @@ def get_website_context(context):
 	languages = get_site_languages()
 	_apply_preferred_language_cookie(languages)
 	context.year = frappe.utils.now_datetime().year
+	# Our pages are standalone (never extend Frappe's own base template), so
+	# `window.frappe`/`frappe.csrf_token` never exists client-side. Forms that
+	# POST need the token rendered in directly. Only do this for real logged-in
+	# sessions — Guest uses one shared session (sid=Guest) across all visitors,
+	# so generating/reading a token there would leak between concurrent guests;
+	# Guest POSTs already work because Frappe skips CSRF when there's no saved
+	# session token at all, which stays true as long as we don't touch it here.
+	context.csrf_token = (
+		frappe.local.session.data.csrf_token if frappe.session.user != "Guest" else ""
+	)
 	settings = frappe.get_cached_doc("PC Website Settings").as_dict()
 	attach_articles("PC Website Settings", [settings])
 	context.settings = settings
