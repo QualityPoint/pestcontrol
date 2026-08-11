@@ -230,7 +230,50 @@
             var toolbar = document.getElementById("a11yToolbar");
             if (!toolbar) return;
             var toggle = document.getElementById("a11yToolbarToggle");
+            var panel = document.getElementById("a11yPanel");
             var MAX_FONT_STEP = 3;
+
+            // Maps each toggle card's data-a11y-action to the prefs key it
+            // reads/writes, so syncUI/apply don't need one-off code per
+            // feature — add a new toggle card in accessibility_toolbar.html
+            // and one CSS rule, and it works without touching this script.
+            var TOGGLE_PREFS = {
+                "readable-font": "readableFont",
+                "dyslexia-font": "dyslexiaFont",
+                "invert": "invert",
+                "highlight-links": "highlightLinks",
+                "highlight-headings": "highlightHeadings",
+                "line-spacing": "lineSpacing",
+                "text-align": "textAlign",
+                "reduce-motion": "reduceMotion",
+                "toolbar-large": "toolbarLarge",
+            };
+
+            // "Visually pleasing experience" is a radio group, not a set of
+            // independent toggles — only one whole-page color/contrast
+            // treatment makes sense at a time — so it's stored as a single
+            // prefs.visualStyle string rather than in TOGGLE_PREFS.
+            var VISUAL_STYLES = ["high-contrast", "monochrome", "light-contrast", "low-saturation", "high-saturation"];
+
+            // Custom color pickers — each stores a hex string (or is unset).
+            var COLOR_KEYS = { "text": "textColor", "title": "titleColor", "background": "backgroundColor" };
+
+            // Assistance profiles — one-click bundles of the same prefs
+            // above (plus two prefs that only exist as part of a bundle:
+            // keyboardNav and colorBlindAssist, no standalone card for
+            // either). A profile's switch shows "on" only when every pref
+            // it sets currently matches — no separate on/off state is
+            // stored for the profile itself, so flipping an individual
+            // card later naturally shows the profile as no longer active.
+            var PROFILE_PREFS = {
+                "seizure-safe": { reduceMotion: true },
+                "vision-impaired": { readableFont: true, visualStyle: "high-contrast", fontStep: 2 },
+                "cognitive": { reduceMotion: true, lineSpacing: true, textAlign: true, highlightHeadings: true },
+                "motor": { keyboardNav: true },
+                "color-blind": { colorBlindAssist: true, highlightLinks: true },
+                "dyslexia": { dyslexiaFont: true, lineSpacing: true, textAlign: true },
+                "adhd": { reduceMotion: true, highlightHeadings: true, highlightLinks: true },
+            };
 
             function loadPrefs() {
                 try {
@@ -251,78 +294,213 @@
             // website_head.html, to avoid a flash of unstyled content —
             // this just syncs the UI to match on this page's load).
             function syncUI(prefs) {
-                toolbar.querySelectorAll("[data-a11y-action='contrast']").forEach(function (btn) {
-                    btn.setAttribute("aria-checked", prefs.contrast ? "true" : "false");
-                    btn.classList.toggle("is-active", !!prefs.contrast);
+                Object.keys(TOGGLE_PREFS).forEach(function (action) {
+                    var on = !!prefs[TOGGLE_PREFS[action]];
+                    toolbar.querySelectorAll("[data-a11y-action='" + action + "']").forEach(function (btn) {
+                        btn.setAttribute("aria-checked", on ? "true" : "false");
+                        btn.classList.toggle("is-active", on);
+                    });
                 });
-                toolbar.querySelectorAll("[data-a11y-action='readable-font']").forEach(function (btn) {
-                    btn.setAttribute("aria-checked", prefs.readableFont ? "true" : "false");
-                    btn.classList.toggle("is-active", !!prefs.readableFont);
+                Object.keys(PROFILE_PREFS).forEach(function (profile) {
+                    var wanted = PROFILE_PREFS[profile];
+                    var on = Object.keys(wanted).every(function (key) { return prefs[key] === wanted[key]; });
+                    toolbar.querySelectorAll("[data-a11y-profile='" + profile + "']").forEach(function (btn) {
+                        btn.setAttribute("aria-checked", on ? "true" : "false");
+                    });
                 });
-                toolbar.querySelectorAll("[data-a11y-action='reduce-motion']").forEach(function (btn) {
-                    btn.setAttribute("aria-checked", prefs.reduceMotion ? "true" : "false");
-                    btn.classList.toggle("is-active", !!prefs.reduceMotion);
+                VISUAL_STYLES.forEach(function (style) {
+                    var on = prefs.visualStyle === style;
+                    toolbar.querySelectorAll("[data-a11y-style='" + style + "']").forEach(function (btn) {
+                        btn.setAttribute("aria-checked", on ? "true" : "false");
+                        btn.classList.toggle("is-active", on);
+                    });
+                });
+                Object.keys(COLOR_KEYS).forEach(function (color) {
+                    var value = prefs[COLOR_KEYS[color]];
+                    var swatch = toolbar.querySelector("[data-a11y-swatch='" + color + "']");
+                    if (swatch) swatch.style.background = value || "";
+                    var input = toolbar.querySelector("[data-a11y-color-input='" + color + "']");
+                    if (input && value) input.value = value;
+                });
+
+                // Small "N active" badges next to each section title — a
+                // quick-glance summary of what's on without opening every
+                // card, matching the counts shown in the reference design.
+                var visualStyleCount = prefs.visualStyle ? 1 : 0;
+                setBadge("visual-style", visualStyleCount);
+                setBadge("reading", ["readableFont", "dyslexiaFont", "lineSpacing", "textAlign"].filter(function (k) { return !!prefs[k]; }).length + (prefs.fontStep ? 1 : 0));
+                setBadge("visual-aids", ["highlightLinks", "highlightHeadings", "invert", "reduceMotion"].filter(function (k) { return !!prefs[k]; }).length);
+            }
+
+            function setBadge(name, count) {
+                toolbar.querySelectorAll("[data-a11y-badge='" + name + "']").forEach(function (badge) {
+                    badge.textContent = count;
+                    badge.hidden = count === 0;
                 });
             }
 
             function apply(prefs) {
                 for (var i = 1; i <= MAX_FONT_STEP; i++) root.classList.remove("a11y-font-" + i);
                 if (prefs.fontStep) root.classList.add("a11y-font-" + prefs.fontStep);
-                root.classList.toggle("a11y-high-contrast", !!prefs.contrast);
+                if (prefs.visualStyle) root.setAttribute("data-a11y-visual-style", prefs.visualStyle);
+                else root.removeAttribute("data-a11y-visual-style");
                 root.classList.toggle("a11y-readable-font", !!prefs.readableFont);
+                root.classList.toggle("a11y-dyslexia-font", !!prefs.dyslexiaFont);
                 root.classList.toggle("a11y-reduce-motion", !!prefs.reduceMotion);
+                root.classList.toggle("a11y-highlight-links", !!prefs.highlightLinks);
+                root.classList.toggle("a11y-highlight-headings", !!prefs.highlightHeadings);
+                root.classList.toggle("a11y-line-spacing", !!prefs.lineSpacing);
+                root.classList.toggle("a11y-text-align", !!prefs.textAlign);
+                root.classList.toggle("a11y-invert", !!prefs.invert);
+                root.classList.toggle("a11y-toolbar-large", !!prefs.toolbarLarge);
+                root.classList.toggle("a11y-keyboard-nav", !!prefs.keyboardNav);
+                root.classList.toggle("a11y-color-blind", !!prefs.colorBlindAssist);
+                root.classList.toggle("a11y-widget-minimized", !!prefs.widgetMinimized);
+
+                root.classList.toggle("a11y-custom-text", !!prefs.textColor);
+                root.classList.toggle("a11y-custom-title", !!prefs.titleColor);
+                root.classList.toggle("a11y-custom-bg", !!prefs.backgroundColor);
+                if (prefs.textColor) root.style.setProperty("--a11y-text-color", prefs.textColor);
+                if (prefs.titleColor) root.style.setProperty("--a11y-title-color", prefs.titleColor);
+                if (prefs.backgroundColor) root.style.setProperty("--a11y-bg-color", prefs.backgroundColor);
+
                 syncUI(prefs);
                 savePrefs(prefs);
+            }
+
+            function openPanel() {
+                toolbar.classList.add("open");
+                toggle.setAttribute("aria-expanded", "true");
+            }
+
+            function closePanel(focusToggle) {
+                toolbar.classList.remove("open");
+                toggle.setAttribute("aria-expanded", "false");
+                if (focusToggle) toggle.focus();
             }
 
             syncUI(loadPrefs());
 
             document.addEventListener("click", function (e) {
-                var t = e.target.closest("#a11yToolbarToggle");
-                if (t) {
-                    var isOpen = toolbar.classList.toggle("open");
-                    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                if (e.target.closest("#a11yToolbarToggle")) {
+                    if (toolbar.classList.contains("open")) {
+                        closePanel(false);
+                    } else {
+                        openPanel();
+                        // Waking the widget back up from "minimized" the
+                        // moment it's used again — it's a visibility
+                        // preference, not a way to lose the feature.
+                        var prefs = loadPrefs();
+                        if (prefs.widgetMinimized) {
+                            prefs.widgetMinimized = false;
+                            apply(prefs);
+                        }
+                    }
+                    return;
+                }
+
+                if (e.target.closest("#a11yPanelClose") || e.target.closest("#a11yBackdrop")) {
+                    closePanel(true);
+                    return;
+                }
+
+                var profilesToggle = e.target.closest("#a11yProfilesToggle");
+                if (profilesToggle) {
+                    var list = document.getElementById("a11yProfilesList");
+                    var isOpen = list.hidden;
+                    list.hidden = !isOpen;
+                    profilesToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                    return;
+                }
+
+                var profile = e.target.closest("[data-a11y-profile]");
+                if (profile) {
+                    var prefs = loadPrefs();
+                    var wanted = PROFILE_PREFS[profile.getAttribute("data-a11y-profile")];
+                    var isOn = Object.keys(wanted).every(function (key) { return prefs[key] === wanted[key]; });
+                    if (isOn) {
+                        // Turn the profile off: reset exactly the keys it set.
+                        Object.keys(wanted).forEach(function (key) {
+                            prefs[key] = key === "fontStep" ? 0 : false;
+                        });
+                    } else {
+                        Object.assign(prefs, wanted);
+                        if (wanted.readableFont) prefs.dyslexiaFont = false;
+                        if (wanted.dyslexiaFont) prefs.readableFont = false;
+                    }
+                    apply(prefs);
+                    return;
+                }
+
+                var styleBtn = e.target.closest("[data-a11y-style]");
+                if (styleBtn) {
+                    var prefs = loadPrefs();
+                    var style = styleBtn.getAttribute("data-a11y-style");
+                    prefs.visualStyle = prefs.visualStyle === style ? "" : style;
+                    apply(prefs);
+                    return;
+                }
+
+                var colorRow = e.target.closest("[data-a11y-color]");
+                if (colorRow) {
+                    var input = toolbar.querySelector("[data-a11y-color-input='" + colorRow.getAttribute("data-a11y-color") + "']");
+                    if (input) input.click();
                     return;
                 }
 
                 var action = e.target.closest("[data-a11y-action]");
                 if (action) {
                     var prefs = loadPrefs();
-                    switch (action.getAttribute("data-a11y-action")) {
+                    var name = action.getAttribute("data-a11y-action");
+                    switch (name) {
                         case "font-increase":
                             prefs.fontStep = Math.min((prefs.fontStep || 0) + 1, MAX_FONT_STEP);
                             break;
                         case "font-decrease":
                             prefs.fontStep = Math.max((prefs.fontStep || 0) - 1, 0);
                             break;
-                        case "contrast":
-                            prefs.contrast = !prefs.contrast;
-                            break;
-                        case "readable-font":
-                            prefs.readableFont = !prefs.readableFont;
-                            break;
-                        case "reduce-motion":
-                            prefs.reduceMotion = !prefs.reduceMotion;
-                            break;
                         case "reset":
                             prefs = {};
                             break;
+                        case "hide-widget":
+                            prefs.widgetMinimized = true;
+                            closePanel(false);
+                            break;
+                        // Readable font and dyslexia font both swap the whole
+                        // page's font-family, so only one can be active —
+                        // turning one on clears the other.
+                        case "readable-font":
+                            prefs.readableFont = !prefs.readableFont;
+                            if (prefs.readableFont) prefs.dyslexiaFont = false;
+                            break;
+                        case "dyslexia-font":
+                            prefs.dyslexiaFont = !prefs.dyslexiaFont;
+                            if (prefs.dyslexiaFont) prefs.readableFont = false;
+                            break;
+                        default:
+                            if (TOGGLE_PREFS[name]) prefs[TOGGLE_PREFS[name]] = !prefs[TOGGLE_PREFS[name]];
                     }
                     apply(prefs);
                     return;
                 }
 
-                if (!toolbar.contains(e.target)) {
-                    toolbar.classList.remove("open");
-                    toggle.setAttribute("aria-expanded", "false");
+                if (toolbar.classList.contains("open") && !panel.contains(e.target) && !toggle.contains(e.target)) {
+                    closePanel(false);
                 }
+            });
+
+            toolbar.addEventListener("input", function (e) {
+                var input = e.target.closest("[data-a11y-color-input]");
+                if (!input) return;
+                var prefs = loadPrefs();
+                var color = input.getAttribute("data-a11y-color-input");
+                prefs[COLOR_KEYS[color]] = input.value;
+                apply(prefs);
             });
 
             document.addEventListener("keydown", function (e) {
                 if (e.key === "Escape" && toolbar.classList.contains("open")) {
-                    toolbar.classList.remove("open");
-                    toggle.setAttribute("aria-expanded", "false");
-                    toggle.focus();
+                    closePanel(true);
                 }
             });
         })();

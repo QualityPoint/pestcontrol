@@ -12,6 +12,11 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+	<!-- Lexend: a research-backed font for reading proficiency, used by the
+	     accessibility toolbar's "Dyslexia font" option. Latin-only — Arabic
+	     text falls through automatically to IBM Plex Sans Arabic via the
+	     font-family fallback stack, per glyph, no lang branching needed. -->
+	<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<!-- Bootstrap Css -->
 	<link href="/assets/pestcontrol/website/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<!-- SlickNav Css -->
@@ -40,9 +45,22 @@
 				var saved = JSON.parse(localStorage.getItem("a11yPrefs") || "{}");
 				var root = document.documentElement;
 				if (saved.fontStep) root.classList.add("a11y-font-" + saved.fontStep);
-				if (saved.contrast) root.classList.add("a11y-high-contrast");
+				if (saved.visualStyle) root.setAttribute("data-a11y-visual-style", saved.visualStyle);
 				if (saved.readableFont) root.classList.add("a11y-readable-font");
+				if (saved.dyslexiaFont) root.classList.add("a11y-dyslexia-font");
 				if (saved.reduceMotion) root.classList.add("a11y-reduce-motion");
+				if (saved.highlightLinks) root.classList.add("a11y-highlight-links");
+				if (saved.highlightHeadings) root.classList.add("a11y-highlight-headings");
+				if (saved.lineSpacing) root.classList.add("a11y-line-spacing");
+				if (saved.textAlign) root.classList.add("a11y-text-align");
+				if (saved.invert) root.classList.add("a11y-invert");
+				if (saved.toolbarLarge) root.classList.add("a11y-toolbar-large");
+				if (saved.keyboardNav) root.classList.add("a11y-keyboard-nav");
+				if (saved.colorBlindAssist) root.classList.add("a11y-color-blind");
+				if (saved.widgetMinimized) root.classList.add("a11y-widget-minimized");
+				if (saved.textColor) { root.classList.add("a11y-custom-text"); root.style.setProperty("--a11y-text-color", saved.textColor); }
+				if (saved.titleColor) { root.classList.add("a11y-custom-title"); root.style.setProperty("--a11y-title-color", saved.titleColor); }
+				if (saved.backgroundColor) { root.classList.add("a11y-custom-bg"); root.style.setProperty("--a11y-bg-color", saved.backgroundColor); }
 			} catch (e) {}
 		})();
 	</script>
