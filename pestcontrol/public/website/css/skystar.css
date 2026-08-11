@@ -826,6 +826,41 @@ html[dir="rtl"] * {
 }
 
 /*
+ * Phone numbers and WhatsApp links are always LTR content ("+966 54 362
+ * 7727"), but sitting inside an RTL page with nothing marking them as
+ * such, the browser's bidi algorithm can visually reorder the space-
+ * separated digit groups (digits/"+" are "weak" bidi characters with no
+ * strong direction of their own to anchor them). `direction: ltr` plus
+ * `unicode-bidi: isolate` forces the number to render in its own
+ * independent left-to-right run, the same fix a native <bdi> tag would
+ * give — applied globally via the href pattern instead of hunting down
+ * every template that prints a phone number.
+ */
+a[href^="tel:"],
+a[href^="https://wa.me/"] {
+	direction: ltr;
+	unicode-bidi: isolate;
+}
+
+/*
+ * Breadcrumb ("Home / Contact us") — Bootstrap's separator is built with
+ * float:left plus padding-left/padding-right, all physical sides that
+ * don't flip for RTL, so the "/" ends up stuck on the wrong edge instead
+ * of sitting between the two items. `float: inline-start` and logical
+ * padding fix both directions from one rule, no separate RTL override.
+ */
+.breadcrumb-item {
+	padding-left: 0;
+	padding-inline-start: var(--bs-breadcrumb-item-padding-x);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+	float: inline-start;
+	padding-right: 0;
+	padding-inline-end: var(--bs-breadcrumb-item-padding-x);
+}
+
+/*
  * Login / signup — full-bleed background photo (admin-configurable via
  * PC Website Settings > Login Page, set inline per-page so it can be a
  * dynamic value; falls back to the same static photo .page-header uses).
