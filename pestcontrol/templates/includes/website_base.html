@@ -7,8 +7,25 @@
 <body>
     <a href="#main-content" class="skip-to-content">{{ _("Skip to main content") }}</a>
 
-    {% include "pestcontrol/templates/includes/website_topbar.html" %}
-    {% include "pestcontrol/templates/includes/website_navbar.html" %}
+    <!-- Preloader Start -->
+    <div class="preloader">
+        <div class="loading-container">
+            <div class="loading"></div>
+            <div id="loading-icon"><img src="/assets/pestcontrol/website/images/loader.svg" alt=""></div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+    <!-- Topbar + navbar pin together as one unit on scroll (function.js
+         watches for .active-sticky-header anywhere in the DOM) — combined
+         here rather than each having its own sticky behavior, since a
+         user explicitly wanted them moving as a single bar. -->
+    <header class="main-header active-sticky-header">
+        <div class="header-sticky">
+            {% include "pestcontrol/templates/includes/website_topbar.html" %}
+            {% include "pestcontrol/templates/includes/website_navbar.html" %}
+        </div>
+    </header>
 
     <main id="main-content">
         {% block page_header %}{% endblock %}

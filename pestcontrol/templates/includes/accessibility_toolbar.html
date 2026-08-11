@@ -1,9 +1,10 @@
 <!-- Accessibility Toolbar Start -->
+<!-- The toggle button itself lives in website_topbar.html now (moved into
+     the topbar's icon row) — everything below is pure overlay (backdrop,
+     panel, modals), all fixed-positioned, so it doesn't matter that it's
+     no longer a DOM sibling of the button. website_scripts.html finds
+     everything by id, not by containment. -->
 <div class="a11y-toolbar" id="a11yToolbar">
-    <button type="button" class="a11y-toolbar-toggle" id="a11yToolbarToggle" aria-haspopup="dialog" aria-expanded="false" aria-controls="a11yPanel" aria-label="{{ _('Accessibility options') }}">
-        <i class="fa-solid fa-universal-access" aria-hidden="true"></i>
-    </button>
-
     <div class="a11y-backdrop" id="a11yBackdrop"></div>
 
     <div id="a11yAnnouncer" class="visually-hidden" aria-live="polite" role="status"></div>

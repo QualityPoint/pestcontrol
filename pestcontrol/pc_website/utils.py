@@ -65,6 +65,13 @@ def get_website_context(context):
 	# session was created (e.g. straight through /api/method/login) — look
 	# it up directly from the User doc instead, which is always accurate.
 	context.user_full_name = frappe.utils.get_fullname() if context.is_logged_in else ""
+	context.user_image_url = ""
+	context.user_initials = ""
+	if context.is_logged_in:
+		context.user_image_url = frappe.db.get_value("User", frappe.session.user, "user_image") or ""
+		if not context.user_image_url:
+			name_parts = (context.user_full_name or frappe.session.user).split()
+			context.user_initials = "".join(part[0] for part in name_parts[:2]).upper()
 	settings = frappe.get_cached_doc("PC Website Settings").as_dict()
 	attach_articles("PC Website Settings", [settings])
 	context.settings = settings

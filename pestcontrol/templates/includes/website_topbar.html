@@ -1,15 +1,6 @@
-    <!-- Preloader Start -->
-	<div class="preloader">
-		<div class="loading-container">
-			<div class="loading"></div>
-			<div id="loading-icon"><img src="/assets/pestcontrol/website/images/loader.svg" alt=""></div>
-		</div>
-	</div>
-	<!-- Preloader End -->
-
     <!-- Topbar Section Start -->
     <div class="topbar">
-        <div class="container">
+        <div class="header-fluid">
             <div class="topbar-inner">
                 <!-- Topbar Contact Information Start -->
                 <div class="topbar-contact-info">
@@ -48,6 +39,12 @@
                         </ul>
                     </div>
                     <!-- Topbar Language Switch End -->
+
+                    <!-- Topbar Accessibility Toggle Start -->
+                    <button type="button" class="topbar-a11y-toggle" id="a11yToolbarToggle" aria-haspopup="dialog" aria-expanded="false" aria-controls="a11yPanel" aria-label="{{ _('Accessibility options') }}">
+                        <i class="fa-solid fa-universal-access" aria-hidden="true"></i>
+                    </button>
+                    <!-- Topbar Accessibility Toggle End -->
                 </div>
             </div>
         </div>

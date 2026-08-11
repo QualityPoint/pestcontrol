@@ -47,38 +47,13 @@
 }
 
 /*
- * Accessibility toolbar — floating button (bottom-corner, opposite side
- * from the magic-cursor's usual reach) that opens a small panel of
- * self-serve display adjustments. Preferences persist via localStorage;
+ * Accessibility toolbar — the toggle button itself lives inline in the
+ * topbar (see .topbar-a11y-toggle further down); this wrapper only holds
+ * the backdrop/panel/modals, each already position:fixed on its own, so it
+ * needs no positioning of its own. Preferences persist via localStorage;
  * see website_head.html for the early-apply script that avoids a flash
  * of unstyled content, and website_scripts.html for the toggle logic.
  */
-.a11y-toolbar{
-	position: fixed;
-	bottom: 24px;
-	inset-inline-end: 24px;
-	z-index: 9998;
-}
-
-.a11y-toolbar-toggle{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 52px;
-	height: 52px;
-	border: none;
-	border-radius: 50%;
-	background: var(--primary-color);
-	color: var(--white-color);
-	font-size: 22px;
-	cursor: pointer;
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-	transition: background 0.3s ease-in-out;
-}
-
-.a11y-toolbar-toggle:hover{
-	background: var(--accent-color);
-}
 
 /* Backdrop behind the open panel — click it (or press Escape, or hit the
    close button) to dismiss, same as any side-drawer pattern. */
@@ -672,39 +647,36 @@ html.a11y-custom-bg body{
    the toolbar's own text (background-color isn't inherited, so no such
    risk there — every toolbar element already paints its own opaque
    background). `revert` un-does just those two !important declarations
-   for anything inside the toolbar, letting its normal styling resume. */
+   for anything inside the toolbar, letting its normal styling resume.
+   The topbar toggle button is included too — it now lives outside
+   .a11y-toolbar (moved into the topbar's icon row) but needs the same
+   protection so a visitor's custom text color can't make it unreadable
+   against the topbar background. */
 html.a11y-custom-text .a11y-toolbar,
 html.a11y-custom-text .a11y-toolbar *,
+html.a11y-custom-text .topbar-a11y-toggle,
 html.a11y-custom-title .a11y-toolbar,
-html.a11y-custom-title .a11y-toolbar *{
+html.a11y-custom-title .a11y-toolbar *,
+html.a11y-custom-title .topbar-a11y-toggle{
 	color: revert !important;
 }
 
-/* Widget minimized ("Hide widget") — shrinks the floating button down to a
-   quiet, low-opacity tab rather than removing it outright. A true
-   disappear-with-no-way-back would make the accessibility tool itself
-   inaccessible once dismissed, so it always stays on-screen, focusable,
-   and above the minimum comfortable tap-target size — brightens back to
-   full strength on hover/focus, and returns to normal the moment it's
-   used again. */
-html.a11y-widget-minimized .a11y-toolbar-toggle{
-	width: 36px;
-	height: 36px;
-	font-size: 16px;
+/* Widget minimized ("Hide widget") — dims the topbar icon to a quiet, low-
+   opacity state rather than removing it outright. A true disappear-with-
+   no-way-back would make the accessibility tool itself inaccessible once
+   dismissed, so it always stays visible, focusable, and full-size —
+   brightens back to full strength on hover/focus, and returns to normal
+   the moment it's used again. */
+html.a11y-widget-minimized .topbar-a11y-toggle{
 	opacity: 0.45;
 }
 
-html.a11y-widget-minimized .a11y-toolbar-toggle:hover,
-html.a11y-widget-minimized .a11y-toolbar-toggle:focus-visible{
+html.a11y-widget-minimized .topbar-a11y-toggle:hover,
+html.a11y-widget-minimized .topbar-a11y-toggle:focus-visible{
 	opacity: 1;
 }
 
 @media only screen and (max-width: 575px){
-	.a11y-toolbar{
-		bottom: 16px;
-		inset-inline-end: 16px;
-	}
-
 	.a11y-panel{
 		width: 100%;
 		max-width: 100%;
@@ -996,6 +968,30 @@ html[dir="rtl"] * {
 	transition: background 0.3s ease-in-out;
 }
 
+/* Accessibility toggle, sitting in the topbar's icon row next to the
+   language switcher — same pill-icon visual language, round instead of
+   oval since it has no label text next to the icon. */
+.topbar-a11y-toggle{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	flex-shrink: 0;
+	border: none;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.15);
+	color: var(--white-color);
+	font-size: 15px;
+	cursor: pointer;
+	transition: background 0.3s ease-in-out;
+}
+
+.topbar-a11y-toggle:hover,
+.topbar-a11y-toggle:focus-visible{
+	background: rgba(255, 255, 255, 0.25);
+}
+
 .lang-switch-toggle:hover{
 	background: rgba(255, 255, 255, 0.25);
 }
@@ -1099,4 +1095,33 @@ html[dir="rtl"] .lang-option{
 	.footer-logo img {
 		width: 170px;
 	}
+}
+
+/*
+ * Logged-in account link — a small round avatar (the user's own uploaded
+ * photo, or their initials on a colored circle when they haven't set one)
+ * next to their name in the nav menu, instead of just plain text.
+ */
+.nav-account-link{
+	display: flex !important;
+	align-items: center;
+	gap: 8px;
+}
+
+.nav-avatar{
+	flex-shrink: 0;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.nav-avatar-initials{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--accent-color);
+	color: var(--white-color);
+	font-size: 12px;
+	font-weight: 700;
 }

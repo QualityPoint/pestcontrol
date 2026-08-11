@@ -504,6 +504,39 @@ body{
 /**** 	   03. Header css		 ****/
 /************************************/
 
+/* Full-width replacement for Bootstrap's .container inside the sticky
+   header only — the header spans the entire browser width edge-to-edge
+   (no centered max-width), just with a fixed side gutter so content
+   doesn't touch the viewport edge. Rest of the page keeps using .container
+   as normal; this is scoped to the topbar/navbar. */
+.header-fluid{
+	width: 100%;
+	padding: 0 40px;
+}
+
+/* Bootstrap's flex layout for the navbar's direct child (logo / menu /
+   toggle laid out in a row) is normally scoped to `.navbar > .container`
+   specifically — reproduced here for `.header-fluid` since it replaces
+   that container inside the nav. */
+.navbar > .header-fluid{
+	display: flex;
+	flex-wrap: inherit;
+	align-items: center;
+	justify-content: space-between;
+}
+
+@media (max-width: 991px){
+	.header-fluid{
+		padding: 0 24px;
+	}
+}
+
+@media only screen and (max-width: 575px){
+	.header-fluid{
+		padding: 0 16px;
+	}
+}
+
 .topbar{
 	background: var(--accent-color);
 	padding: 10px 0;
