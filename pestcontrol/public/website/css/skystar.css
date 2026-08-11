@@ -969,22 +969,48 @@ html[dir="rtl"] * {
 }
 
 /* Accessibility toggle, sitting in the topbar's icon row next to the
-   language switcher — same pill-icon visual language, round instead of
-   oval since it has no label text next to the icon. */
+   language switcher — same pill shape and sizing as .lang-switch-toggle,
+   icon plus a visible label. */
 .topbar-a11y-toggle{
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	width: 32px;
-	height: 32px;
+	gap: 6px;
 	flex-shrink: 0;
 	border: none;
-	border-radius: 50%;
 	background: rgba(255, 255, 255, 0.15);
 	color: var(--white-color);
-	font-size: 15px;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1;
+	padding: 7px 12px;
+	border-radius: 30px;
 	cursor: pointer;
 	transition: background 0.3s ease-in-out;
+}
+
+.topbar-a11y-toggle i{
+	font-size: 15px;
+}
+
+@media only screen and (max-width: 575px){
+	/* Visually collapsed, not display:none — the label stays in the
+	   accessibility tree so the button still has a real accessible name
+	   on narrow screens, it just isn't painted on screen. */
+	.topbar-a11y-toggle span{
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.topbar-a11y-toggle{
+		padding: 7px;
+	}
 }
 
 .topbar-a11y-toggle:hover,
