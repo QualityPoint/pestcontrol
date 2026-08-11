@@ -279,19 +279,7 @@ why choose us,لماذا تختاروننا
 your journey,رحلتكم
 Enlarge tool buttons,تكبير أزرار الأداة
 Assistance profiles,أنماط المساعدة
-Seizure Safe,الوضع الآمن للصرع
-Reduces motion and removes flickering content,تقليل الحركة وإزالة المحتوى الوامض
-Vision Impaired,ضعف الرؤية
 Bigger text and higher contrast,نص أكبر وتباين أعلى
-Cognitive Disability,الإعاقة العقلية
-Helps you focus on the intended content,يساعدك على التركيز على المحتوى المقصود
-Motor Disability,الإعاقة الحركية
-Makes it easier to browse the site using the keyboard,يسهل تصفح الموقع باستخدام لوحة المفاتيح
-Color Blindness,عمى الألوان
-Adjusts colors and marks links so color isn't the only cue,يعدّل الألوان ويميّز الروابط حتى لا يكون اللون هو المؤشر الوحيد
-Reading Difficulties (Dyslexia),صعوبات القراءة (عسر القراءة)
-Custom font for those with reading difficulties,خط مخصص لمن يعانون من صعوبات القراءة
-ADHD Friendly,مناسب لاضطراب فرط الحركة ونقص الانتباه
 Reduces distractions and improves focus,يقلل من عوامل التشتيت ويحسّن التركيز
 Accessibility options,خيارات سهولة الوصول
 Adjust background colors,تعديل ألوان الخلفية
@@ -319,3 +307,38 @@ Smaller text,تصغير النص
 Text align,محاذاة النص
 Visual aids,وسائل مساعدة بصرية
 Visually pleasing experience,تجربة مريحة بصريًا
+Epilepsy Safe Mode,الوضع الآمن لمرضى الصرع
+Dampens color and removes blinks,يخفف الألوان ويزيل الوميض
+More information about Epilepsy Safe Mode,مزيد من المعلومات حول الوضع الآمن لمرضى الصرع
+This mode enables people with epilepsy to use the website safely by eliminating the risk of seizures that result from flashing or blinking animations and risky color combinations.,يتيح هذا الوضع لمرضى الصرع تصفح الموقع بأمان من خلال إزالة خطر النوبات الناتجة عن الرسوم المتحركة الوامضة أو المتقطعة وتركيبات الألوان الخطرة.
+Vision Impaired Mode,وضع ضعف الرؤية
+Cognitive Disability Mode,وضع الإعاقة العقلية
+Helps to focus on specific content,يساعد على التركيز على محتوى معين
+Motor Impaired Mode,وضع الإعاقة الحركية
+More information about Motor Impaired Mode,مزيد من المعلومات حول وضع الإعاقة الحركية
+Allows using the website with a keyboard,يتيح استخدام الموقع بلوحة المفاتيح
+"This mode enables people with motor impairments to operate the website by using the keyboard Tab, Shift+Tab, and the Enter keys. Users can also use speech recognition software such as Dragon Naturally Speaking.",يتيح هذا الوضع لذوي الإعاقة الحركية تصفح الموقع باستخدام مفاتيح Tab وShift+Tab وEnter من لوحة المفاتيح. كما يمكن للمستخدمين استخدام برامج التعرف على الصوت مثل Dragon Naturally Speaking.
+Colorblind Mode,وضع عمى الألوان
+Adjusts the website for colorblind users,يعدّل الموقع لمستخدمي عمى الألوان
+Dyslexia Friendly Mode,وضع مناسب لعسر القراءة
+Helps users with Dyslexia,يساعد المستخدمين الذين يعانون من عسر القراءة
+ADHD Friendly Mode,وضع مناسب لاضطراب فرط الحركة ونقص الانتباه
+Blindness Mode,وضع ضعاف البصر
+Allows using the site with your screen-reader,يتيح استخدام الموقع مع قارئ الشاشة
+Screen reader accessibility mode turned off.,تم إيقاف وضع سهولة الوصول لقارئ الشاشة.
+"Screen reader accessibility mode turned on. This site includes a skip link, labeled form fields, described images, and landmark navigation.",تم تفعيل وضع سهولة الوصول لقارئ الشاشة. يتضمن هذا الموقع رابط تخطي، وحقول نماذج موسومة، وصور موصوفة، وتنقلاً عبر المعالم.
+Show keyboard navigation shortcuts,عرض اختصارات لوحة المفاتيح للتنقل
+Navigation Keys,مفاتيح التنقل
+Press a single key to jump between elements on the page. Hold Shift to go to the previous one.,اضغط على مفتاح واحد للانتقال بين عناصر الصفحة. اضغط مع الاستمرار على Shift للانتقال إلى العنصر السابق.
+Menus,القوائم
+Headings,العناوين
+Forms,النماذج
+Buttons,الأزرار
+Graphics,الصور
+with any key above — jump to the previous element,مع أي من المفاتيح أعلاه — الانتقال إلى العنصر السابق
+open or close this accessibility panel,فتح لوحة سهولة الوصول أو إغلاقها
+activate the focused control,تفعيل العنصر المحدد حاليًا
+Shift,Shift
+Alt,Alt
+Space,مسافة
+Got it,فهمت

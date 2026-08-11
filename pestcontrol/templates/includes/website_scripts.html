@@ -266,13 +266,23 @@
             // stored for the profile itself, so flipping an individual
             // card later naturally shows the profile as no longer active.
             var PROFILE_PREFS = {
-                "seizure-safe": { reduceMotion: true },
+                "seizure-safe": { reduceMotion: true, visualStyle: "low-saturation" },
                 "vision-impaired": { readableFont: true, visualStyle: "high-contrast", fontStep: 2 },
                 "cognitive": { reduceMotion: true, lineSpacing: true, textAlign: true, highlightHeadings: true },
                 "motor": { keyboardNav: true },
                 "color-blind": { colorBlindAssist: true, highlightLinks: true },
                 "dyslexia": { dyslexiaFont: true, lineSpacing: true, textAlign: true },
                 "adhd": { reduceMotion: true, highlightHeadings: true, highlightLinks: true },
+                // Blindness Mode has no visual effect on purpose — a fully
+                // blind visitor doesn't see the page, so CSS toggles don't
+                // help them the way they help low-vision or motor
+                // profiles. The real accessibility work for screen reader
+                // users is the skip link, labeled fields, described
+                // images and ARIA landmarks already built into every page;
+                // this switch just confirms that out loud (see the
+                // announce() call below) rather than pretending a CSS
+                // class can do something it can't.
+                "blindness": { screenReaderMode: true },
             };
 
             function loadPrefs() {
@@ -339,6 +349,16 @@
                 });
             }
 
+            // Speaks a message through the page's screen-reader-only live
+            // region (Blindness Mode's only real effect — see the comment
+            // on PROFILE_PREFS.blindness above).
+            function announce(message) {
+                var region = document.getElementById("a11yAnnouncer");
+                if (!region) return;
+                region.textContent = "";
+                window.setTimeout(function () { region.textContent = message; }, 50);
+            }
+
             function apply(prefs) {
                 for (var i = 1; i <= MAX_FONT_STEP; i++) root.classList.remove("a11y-font-" + i);
                 if (prefs.fontStep) root.classList.add("a11y-font-" + prefs.fontStep);
@@ -379,6 +399,25 @@
                 if (focusToggle) toggle.focus();
             }
 
+            // Navigation Keys guide — opens on demand via the keyboard icon
+            // in the panel header, and automatically whenever Motor
+            // Impaired Mode is turned on (see the profile click handler
+            // below), since keyboard navigation is exactly what that mode
+            // is for.
+            var navKeysModal = document.getElementById("a11yNavKeysModal");
+            var navKeysBackdrop = document.getElementById("a11yNavKeysBackdrop");
+
+            function showNavKeys() {
+                navKeysModal.hidden = false;
+                navKeysBackdrop.hidden = false;
+                document.getElementById("a11yNavKeysClose").focus();
+            }
+
+            function hideNavKeys() {
+                navKeysModal.hidden = true;
+                navKeysBackdrop.hidden = true;
+            }
+
             syncUI(loadPrefs());
 
             document.addEventListener("click", function (e) {
@@ -404,6 +443,30 @@
                     return;
                 }
 
+                if (e.target.closest("#a11yNavKeysOpen")) {
+                    showNavKeys();
+                    return;
+                }
+
+                if (e.target.closest("#a11yNavKeysClose") || e.target.closest("#a11yNavKeysBackdrop")) {
+                    hideNavKeys();
+                    return;
+                }
+
+                if (e.target.closest("#a11yNavKeysGotIt")) {
+                    hideNavKeys();
+                    return;
+                }
+
+                var infoToggle = e.target.closest("[data-a11y-info-toggle]");
+                if (infoToggle) {
+                    var details = document.getElementById(infoToggle.getAttribute("aria-controls"));
+                    var isOpen = details.hidden;
+                    details.hidden = !isOpen;
+                    infoToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                    return;
+                }
+
                 var profilesToggle = e.target.closest("#a11yProfilesToggle");
                 if (profilesToggle) {
                     var list = document.getElementById("a11yProfilesList");
@@ -416,7 +479,8 @@
                 var profile = e.target.closest("[data-a11y-profile]");
                 if (profile) {
                     var prefs = loadPrefs();
-                    var wanted = PROFILE_PREFS[profile.getAttribute("data-a11y-profile")];
+                    var name = profile.getAttribute("data-a11y-profile");
+                    var wanted = PROFILE_PREFS[name];
                     var isOn = Object.keys(wanted).every(function (key) { return prefs[key] === wanted[key]; });
                     if (isOn) {
                         // Turn the profile off: reset exactly the keys it set.
@@ -429,6 +493,18 @@
                         if (wanted.dyslexiaFont) prefs.readableFont = false;
                     }
                     apply(prefs);
+                    if (name === "blindness") {
+                        announce(isOn ?
+                            "{{ _('Screen reader accessibility mode turned off.') }}" :
+                            "{{ _('Screen reader accessibility mode turned on. This site includes a skip link, labeled form fields, described images, and landmark navigation.') }}"
+                        );
+                    }
+                    // Turning on Motor Impaired Mode is exactly the moment
+                    // someone needs to know the keyboard shortcuts exist —
+                    // show the guide every time it's switched on.
+                    if (!isOn && name === "motor") {
+                        showNavKeys();
+                    }
                     return;
                 }
 
@@ -498,9 +574,95 @@
                 apply(prefs);
             });
 
+            // Single-key jump navigation (Navigation Keys) — lets a
+            // keyboard-only visitor jump straight to the next landmark of
+            // a given kind instead of tabbing through everything between
+            // here and there. Elements that aren't natively focusable
+            // (headings, nav landmarks, images) get tabindex="-1" the
+            // first time they're jumped to, so they can receive
+            // programmatic focus without joining the normal Tab order.
+            var NAV_KEY_TARGETS = {
+                m: 'nav, [role="navigation"]',
+                h: "h1, h2, h3, h4, h5, h6",
+                f: "form input, form textarea, form select",
+                b: 'button, [role="button"], a.btn-default, input[type="submit"], input[type="button"]',
+                g: "img",
+            };
+
+            function isEditableTarget(el) {
+                if (!el) return false;
+                var tag = el.tagName;
+                return tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || el.isContentEditable;
+            }
+
+            function jumpTo(type, backward) {
+                var selector = NAV_KEY_TARGETS[type];
+                if (!selector) return;
+                var all = Array.prototype.filter.call(document.querySelectorAll(selector), function (el) {
+                    return el.offsetParent !== null;
+                });
+                if (!all.length) return;
+
+                var currentIndex = all.indexOf(document.activeElement);
+                var nextIndex;
+                if (currentIndex === -1) {
+                    nextIndex = backward ? all.length - 1 : 0;
+                } else {
+                    nextIndex = backward ? currentIndex - 1 : currentIndex + 1;
+                    if (nextIndex < 0) nextIndex = all.length - 1;
+                    if (nextIndex >= all.length) nextIndex = 0;
+                }
+
+                var target = all[nextIndex];
+                if (!target.hasAttribute("tabindex") && !isEditableTarget(target) &&
+                    target.tagName !== "BUTTON" && target.tagName !== "A") {
+                    target.setAttribute("tabindex", "-1");
+                }
+                target.focus();
+                target.scrollIntoView({
+                    behavior: root.classList.contains("a11y-reduce-motion") ? "auto" : "smooth",
+                    block: "center",
+                });
+            }
+
             document.addEventListener("keydown", function (e) {
-                if (e.key === "Escape" && toolbar.classList.contains("open")) {
-                    closePanel(true);
+                if (e.key === "Escape") {
+                    if (!navKeysModal.hidden) {
+                        hideNavKeys();
+                    } else if (toolbar.classList.contains("open")) {
+                        closePanel(true);
+                    }
+                    return;
+                }
+
+                // Alt+9 — open or close the accessibility panel from
+                // anywhere on the page, no mouse needed.
+                if (e.altKey && e.key === "9") {
+                    e.preventDefault();
+                    if (toolbar.classList.contains("open")) closePanel(true);
+                    else openPanel();
+                    return;
+                }
+
+                // Space activates a focused link — buttons already do this
+                // natively, but plain <a> elements only respond to Enter
+                // by default, which trips people up when tabbing through
+                // link-styled actions expecting Space to work everywhere.
+                if (e.code === "Space" && document.activeElement && document.activeElement.tagName === "A" &&
+                    !isEditableTarget(document.activeElement)) {
+                    e.preventDefault();
+                    document.activeElement.click();
+                    return;
+                }
+
+                // The single-key jumps only fire when not typing into a
+                // field and without Ctrl/Cmd/Alt held, so they never
+                // collide with browser shortcuts or normal typing.
+                if (isEditableTarget(document.activeElement) || e.ctrlKey || e.metaKey || e.altKey) return;
+                var key = e.key.toLowerCase();
+                if (NAV_KEY_TARGETS[key]) {
+                    e.preventDefault();
+                    jumpTo(key, e.shiftKey);
                 }
             });
         })();
