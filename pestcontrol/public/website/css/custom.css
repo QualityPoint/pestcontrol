@@ -48,7 +48,11 @@
 	--primary-color				: #002F47;
 	--secondary-color			: #F5F7F2;
 	--text-color				: #3D5A6A;
-	--accent-color				: #299B46;
+	/* Darkened from the original #299B46 (3.58:1 against white — fails
+	   WCAG AA's 4.5:1 minimum for normal text) to clear AA with a safety
+	   margin, since this single variable drives text, links, icons, and
+	   button backgrounds/text site-wide. */
+	--accent-color				: #217D39;
 	--white-color				: #FFFFFF;
 	--divider-color				: #002F471A;
 	--dark-divider-color		: #FFFFFF24;
@@ -405,7 +409,12 @@ body{
 	margin-bottom: 40px;
 }
 
-.section-title h3{
+/* Renamed from an <h3> to a plain <span class="section-kicker"> across all
+   templates — this is a decorative label above the section's real heading,
+   not a subsection heading, and was breaking the page's heading hierarchy
+   for screen reader users (two unrelated things both using <h3>). Styling
+   is unchanged; only the selector moved from the tag to this class. */
+.section-title .section-kicker{
 	position: relative;
 	display: inline-block;
 	font-size: 14px;
@@ -419,7 +428,7 @@ body{
     margin-bottom: 15px;
 }
 
-.section-title h3::before{
+.section-title .section-kicker::before{
 	content: '';
     position: absolute;
     top: 50%;
@@ -461,12 +470,12 @@ body{
 	background-color: var(--secondary-color);
 }
 
-.light-bg-section .section-title h3{
+.light-bg-section .section-title .section-kicker{
 	background: var(--accent-color);
 	color: var(--white-color);
 }
 
-.light-bg-section .section-title h3::before{
+.light-bg-section .section-title .section-kicker::before{
 	background: var(--white-color);
 }
 
@@ -4447,11 +4456,11 @@ header.main-header .header-sticky.active{
 		margin-bottom: 30px;
 	}
 
-	.section-title h3{
+	.section-title .section-kicker{
 		padding: 4px 15px 4px 31px;
 	}
 
-	.section-title h3::before{
+	.section-title .section-kicker::before{
 		left: 15px;
 	}
 
