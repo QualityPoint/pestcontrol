@@ -1,0 +1,27 @@
+[
+ {
+  "article": [
+   {
+    "context": "<div class=\"ql-editor read-mode\"><p>Protect your home from termitesProtect your home from termitesProtect your home from termitesProtect your home from termitesProtect your home from termitesProtect your home from termitesProtect your home from termitesProtect your home from termitesProtect your home from termitesProtect your home from termitesProtect your home from termitesProtect your home from termitesProtect your home from termitesProtect your home from termitesProtect your home from termitesProtect your home from termites </p></div>",
+    "language": "en",
+    "subtitle": "Protect your home from termites",
+    "title": "Termite Control"
+   },
+   {
+    "context": "<div class=\"ql-editor read-mode\"><p>بسيل بلسيبل</p></div>",
+    "language": "ar",
+    "subtitle": "يسبلبسل ",
+    "title": "سبلسبل "
+   }
+  ],
+  "display_order": 0,
+  "docstatus": 0,
+  "doctype": "Website Service",
+  "icon": "/files/sky star icon.png",
+  "image": "/files/sky star logo-01.png",
+  "modified": "2026-08-11 14:14:38.673184",
+  "name": "Termite Control",
+  "published": 1,
+  "route": "service/termite-control"
+ }
+]

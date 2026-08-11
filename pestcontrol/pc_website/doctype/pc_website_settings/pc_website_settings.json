@@ -18,12 +18,15 @@
   "phone",
   "whatsapp",
   "column_break_wsct",
+  "map_embed_url",
   "social_links_tab",
   "instagram_url",
   "facebook_url",
   "column_break_wssl",
   "twitter_url",
   "linkedin_url",
+  "tiktok_url",
+  "linktree_url",
   "footer_tab",
   "column_break_wsft",
   "copyright_text",
@@ -104,6 +107,12 @@
    "fieldtype": "Column Break"
   },
   {
+   "description": "On Google Maps, search your business location, click Share > Embed a map, then copy the src=\"...\" URL from the code shown and paste it here.",
+   "fieldname": "map_embed_url",
+   "fieldtype": "Small Text",
+   "label": "Google Maps Embed URL"
+  },
+  {
    "fieldname": "social_links_tab",
    "fieldtype": "Tab Break",
    "label": "Social Links"
@@ -134,6 +143,18 @@
    "fieldname": "linkedin_url",
    "fieldtype": "Data",
    "label": "LinkedIn URL",
+   "options": "URL"
+  },
+  {
+   "fieldname": "tiktok_url",
+   "fieldtype": "Data",
+   "label": "TikTok URL",
+   "options": "URL"
+  },
+  {
+   "fieldname": "linktree_url",
+   "fieldtype": "Data",
+   "label": "Linktree URL",
    "options": "URL"
   },
   {

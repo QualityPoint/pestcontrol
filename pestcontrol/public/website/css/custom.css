@@ -569,7 +569,7 @@ body{
 .topbar-contact-info ul li i{
 	font-size: 16px;
 	color: var(--white-color);
-	margin-right: 10px;
+	margin-inline-end: 10px;
 }
 
 .topbar-contact-info ul li a{
@@ -595,11 +595,11 @@ body{
 
 .topbar-social-links ul li{
 	display: inline-block;
-	margin-right: 20px;
+	margin-inline-end: 20px;
 }
 
 .topbar-social-links ul li:last-child{
-	margin-right: 0px;
+	margin-inline-end: 0px;
 }
 
 .topbar-social-links ul li a{
@@ -4444,11 +4444,11 @@ header.main-header .header-sticky.active{
 	}
 
 	.topbar-contact-info ul li i{
-		margin-right: 5px;
+		margin-inline-end: 5px;
 	}
 
 	.topbar-social-links ul li{
-		margin-right: 10px;
+		margin-inline-end: 10px;
 	}
 
 	.topbar-social-links ul li a i{

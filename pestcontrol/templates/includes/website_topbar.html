@@ -4,9 +4,10 @@
             <div class="topbar-inner">
                 <!-- Topbar Contact Information Start -->
                 <div class="topbar-contact-info">
+                    {% set business_address = localize(settings, "address") %}
                     <ul>
                         {% if settings.email %}<li><i class="fa-regular fa-envelope"></i><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></li>{% endif %}
-                        {% if settings.address %}<li><i class="fa-solid fa-location-dot"></i>{{ localize(settings, "address") }}</li>{% endif %}
+                        {% if business_address %}<li><i class="fa-solid fa-location-dot"></i>{{ business_address }}</li>{% endif %}
                     </ul>
                 </div>
                 <!-- Topbar Contact Information End -->
@@ -18,6 +19,8 @@
                             {% if settings.instagram_url %}<li><a href="{{ settings.instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Instagram') }}"><i class="fa-brands fa-instagram"></i></a></li>{% endif %}
                             {% if settings.facebook_url %}<li><a href="{{ settings.facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Facebook') }}"><i class="fa-brands fa-facebook-f"></i></a></li>{% endif %}
                             {% if settings.twitter_url %}<li><a href="{{ settings.twitter_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Twitter') }}"><i class="fa-brands fa-x-twitter"></i></a></li>{% endif %}
+                            {% if settings.tiktok_url %}<li><a href="{{ settings.tiktok_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('TikTok') }}"><i class="fa-brands fa-tiktok"></i></a></li>{% endif %}
+                            {% if settings.linktree_url %}<li><a href="{{ settings.linktree_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Linktree') }}"><i class="fa-solid fa-link"></i></a></li>{% endif %}
                         </ul>
                     </div>
                     <!-- Topbar Social Links End -->

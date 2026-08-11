@@ -70,6 +70,31 @@ home_page = "home"
 # automatically create page for each record of this doctype
 website_generators = ["Website Service", "Website Project", "Website Team Member", "Website Blog Post"]
 
+# Fixtures
+# ----------
+
+# Website CMS content, so a fresh install of this app isn't empty — child
+# tables (Website Article translations, Pricing Plan Feature rows, Website
+# About Content) are bundled automatically with their parent doctype's
+# export, no separate listing needed. Deliberately excludes `Website
+# Contact Message` (visitor form submissions — transactional data, not
+# seed content) and the `pc_setup` module's doctypes (unrelated reference
+# config, not website content).
+fixtures = [
+	{"dt": "PC Website Settings"},
+	{"dt": "Website About Page"},
+	{"dt": "Website Service"},
+	{"dt": "Website Project"},
+	{"dt": "Website Team Member"},
+	{"dt": "Website Blog Post"},
+	{"dt": "Website Testimonial"},
+	{"dt": "Website Pricing Plan"},
+	{"dt": "Website FAQ"},
+	{"dt": "Website Gallery Item"},
+	{"dt": "Website Hero Slide"},
+	{"dt": "Language", "filters": [["name", "in", ["en", "ar"]]]},
+]
+
 # Jinja
 # ----------
 
