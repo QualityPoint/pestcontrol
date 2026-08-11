@@ -21,12 +21,14 @@
   "map_embed_url",
   "social_links_tab",
   "instagram_url",
-  "facebook_url",
-  "column_break_wssl",
-  "twitter_url",
-  "linkedin_url",
   "tiktok_url",
+  "linkedin_url",
   "linktree_url",
+  "column_break_wssl",
+  "snapchat_url",
+  "facebook_url",
+  "twitter_url",
+  "youtube_url",
   "footer_tab",
   "column_break_wsft",
   "copyright_text",
@@ -158,6 +160,18 @@
    "options": "URL"
   },
   {
+   "fieldname": "snapchat_url",
+   "fieldtype": "Data",
+   "label": "Snapchat URL",
+   "options": "URL"
+  },
+  {
+   "fieldname": "youtube_url",
+   "fieldtype": "Data",
+   "label": "YouTube URL",
+   "options": "URL"
+  },
+  {
    "fieldname": "footer_tab",
    "fieldtype": "Tab Break",
    "label": "Footer"
@@ -217,7 +231,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-08-08 18:36:23.470283",
+ "modified": "2026-08-11 18:54:52.388126",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "PC Website Settings",
