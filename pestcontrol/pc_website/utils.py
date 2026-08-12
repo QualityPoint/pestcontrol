@@ -57,9 +57,7 @@ def get_website_context(context):
 	# so generating/reading a token there would leak between concurrent guests;
 	# Guest POSTs already work because Frappe skips CSRF when there's no saved
 	# session token at all, which stays true as long as we don't touch it here.
-	context.csrf_token = (
-		frappe.local.session.data.csrf_token if frappe.session.user != "Guest" else ""
-	)
+	context.csrf_token = frappe.local.session.data.csrf_token if frappe.session.user != "Guest" else ""
 	context.is_logged_in = frappe.session.user != "Guest"
 	# session.data.full_name isn't reliably populated depending on how the
 	# session was created (e.g. straight through /api/method/login) — look
