@@ -179,7 +179,7 @@ class VisitEntry(Document):
 				groups.setdefault(row.worker, []).append(row)
 
 		for rows in groups.values():
-			context = _("Worker {0} — ").format(rows[0].worker_name or rows[0].worker)
+			context = _("Worker {0}").format(rows[0].worker_name or rows[0].worker) + " — "
 			self._check_interval_overlap(rows, context)
 
 	def validate_worker_times_within_visit(self):

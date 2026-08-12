@@ -44,6 +44,8 @@ def _query_uoms_by_category(category: str, txt: str = "", page_len: int = 500, s
 
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
-def get_uoms_by_category(doctype, txt, searchfield, start, page_len, filters):
+def get_uoms_by_category(
+	doctype: str, txt: str, searchfield: str, start: int, page_len: int, filters: dict | str
+):
 	category = (filters or {}).get("category", "Length")
 	return _query_uoms_by_category(category, txt=txt, page_len=page_len, start=start)

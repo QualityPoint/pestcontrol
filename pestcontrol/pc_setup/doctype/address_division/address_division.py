@@ -60,12 +60,12 @@ class AddressDivision(NestedSet):
 
 
 @frappe.whitelist()
-def get_parent_division_type(division_type):
+def get_parent_division_type(division_type: str):
 	return frappe.db.get_value("Address Division Type", division_type, "parent_division_type")
 
 
 @frappe.whitelist()
-def get_child_node_info(parent):
+def get_child_node_info(parent: str):
 	"""Return data needed to build the Add Child dialog for a given parent node."""
 	parent_doc = frappe.db.get_value("Address Division", parent, ["division_type", "country"], as_dict=True)
 	if not parent_doc:
@@ -115,7 +115,14 @@ def add_node():
 
 
 @frappe.whitelist()
-def get_children(doctype, parent=None, country=None, division_type=None, is_root=False, is_tree=False):
+def get_children(
+	doctype: str,
+	parent: str | None = None,
+	country: str | None = None,
+	division_type: str | None = None,
+	is_root: bool = False,
+	is_tree: bool = False,
+):
 	filters = []
 	if country and country != "All Countries":
 		filters.append(["country", "=", country])

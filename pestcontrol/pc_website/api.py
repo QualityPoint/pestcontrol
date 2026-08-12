@@ -4,8 +4,11 @@
 import frappe
 
 
-@frappe.whitelist(allow_guest=True)
-def submit_contact_form(fname, lname="", email="", phone="", message=""):
+# Reviewed: intentionally public, this is the site's own contact form
+# endpoint; no permission check applies since anonymous visitors are
+# exactly who's meant to call it.
+@frappe.whitelist(allow_guest=True)  # nosemgrep: guest-whitelisted-method
+def submit_contact_form(fname: str, lname: str = "", email: str = "", phone: str = "", message: str = ""):
 	"""Create a Website Contact Message from the public contact form."""
 	full_name = f"{fname} {lname}".strip()
 	doc = frappe.get_doc(
@@ -19,5 +22,4 @@ def submit_contact_form(fname, lname="", email="", phone="", message=""):
 		}
 	)
 	doc.insert(ignore_permissions=True)
-	frappe.db.commit()
 	return {"success": True}
