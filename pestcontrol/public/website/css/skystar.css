@@ -1130,6 +1130,71 @@ html[dir="rtl"] .lang-option{
 }
 
 /*
+ * "For Deaf" contact dropdown — same open/close dropdown pattern as
+ * .lang-switch above, but using inset-inline-end (logical) instead of a
+ * plain right + a separate html[dir="rtl"] override, so it mirrors
+ * correctly for RTL with one rule instead of two.
+ */
+.deaf-contact{
+	position: relative;
+}
+
+.deaf-contact-menu{
+	position: absolute;
+	top: calc(100% + 10px);
+	inset-inline-end: 0;
+	width: 230px;
+	padding: 14px;
+	background: var(--white-color);
+	border-radius: 10px;
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-8px);
+	transition: all 0.2s ease-in-out;
+	z-index: 999;
+}
+
+.deaf-contact.open .deaf-contact-menu{
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.deaf-contact-intro{
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--text-color);
+	margin: 0 0 10px;
+}
+
+.deaf-contact-link{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--primary-color);
+	font-size: 13px;
+	font-weight: 500;
+	padding: 8px 6px;
+	border-radius: 6px;
+	transition: background 0.2s ease-in-out;
+}
+
+.deaf-contact-link:hover{
+	background: rgba(0, 0, 0, 0.05);
+}
+
+.deaf-contact-link + .deaf-contact-link{
+	margin-top: 2px;
+}
+
+.deaf-contact-link i{
+	width: 16px;
+	text-align: center;
+	color: var(--accent-color);
+}
+
+/*
  * The template was designed for a 193x50 wordmark (~3.86:1) and therefore
  * puts no size constraint on the header logo. icons/skystar-logo.png is
  * 4377x599 (~7.31:1) - nearly twice as wide per unit of height - so it is

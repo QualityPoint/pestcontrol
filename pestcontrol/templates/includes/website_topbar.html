@@ -45,6 +45,36 @@
                     </div>
                     <!-- Topbar Language Switch End -->
 
+                    <!-- Topbar Deaf-Friendly Contact Start -->
+                    {% if settings.whatsapp or settings.email %}
+                    <div class="deaf-contact" id="deafContact">
+                        <button type="button" class="topbar-a11y-toggle" id="deafContactToggle" aria-haspopup="true" aria-expanded="false" aria-controls="deafContactMenu">
+                            <i class="fa-solid fa-hands-asl-interpreting" aria-hidden="true"></i>
+                            <span>{{ _("For Deaf") }}</span>
+                        </button>
+                        <div class="deaf-contact-menu" id="deafContactMenu" role="menu" aria-label="{{ _('Contact without a phone call') }}">
+                            <p class="deaf-contact-intro">{{ _("Reach us without a phone call") }}</p>
+                            {% if settings.whatsapp %}
+                            <a href="https://wa.me/{{ settings.whatsapp | replace(' ', '') | replace('+', '') }}" target="_blank" rel="noopener noreferrer" class="deaf-contact-link" role="menuitem">
+                                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                                <span>{{ _("WhatsApp") }}</span>
+                            </a>
+                            {% endif %}
+                            {% if settings.email %}
+                            <a href="mailto:{{ settings.email }}" class="deaf-contact-link" role="menuitem">
+                                <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                                <span>{{ _("Email") }}</span>
+                            </a>
+                            {% endif %}
+                            <a href="/contact" class="deaf-contact-link" role="menuitem">
+                                <i class="fa-regular fa-comments" aria-hidden="true"></i>
+                                <span>{{ _("Send a message") }}</span>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <!-- Topbar Deaf-Friendly Contact End -->
+
                     <!-- Topbar Accessibility Toggle Start -->
                     <button type="button" class="topbar-a11y-toggle" id="a11yToolbarToggle" aria-haspopup="dialog" aria-expanded="false" aria-controls="a11yPanel">
                         <i class="fa-solid fa-universal-access" aria-hidden="true"></i>

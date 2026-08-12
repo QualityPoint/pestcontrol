@@ -96,6 +96,41 @@
         });
     </script>
 
+    <!-- Deaf-Friendly Contact Dropdown -->
+    <script>
+        document.addEventListener("click", function (e) {
+            var deafContact = document.getElementById("deafContact");
+            if (!deafContact) return;
+
+            var toggle = e.target.closest("#deafContactToggle");
+            if (toggle) {
+                e.preventDefault();
+                var isOpen = deafContact.classList.toggle("open");
+                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                return;
+            }
+
+            if (!deafContact.contains(e.target)) {
+                deafContact.classList.remove("open");
+                var deafContactToggle = document.getElementById("deafContactToggle");
+                if (deafContactToggle) deafContactToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key !== "Escape") return;
+            var deafContact = document.getElementById("deafContact");
+            if (deafContact && deafContact.classList.contains("open")) {
+                deafContact.classList.remove("open");
+                var deafContactToggle = document.getElementById("deafContactToggle");
+                if (deafContactToggle) {
+                    deafContactToggle.setAttribute("aria-expanded", "false");
+                    deafContactToggle.focus();
+                }
+            }
+        });
+    </script>
+
     <!-- Contact Form Submit -->
     <script>
         document.querySelectorAll("#contactForm").forEach(function (form) {
