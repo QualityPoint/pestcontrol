@@ -132,11 +132,6 @@
 		);
 	}
 
-	/* Youtube Background Video JS */
-	if ($("#herovideo").length) {
-		var myPlayer = $("#herovideo").YTPlayer();
-	}
-
 	/* Init Counter */
 	if ($(".counter").length) {
 		$(".counter").counterUp({ delay: 6, time: 3000 });
