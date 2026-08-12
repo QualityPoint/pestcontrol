@@ -47,5 +47,11 @@ def _query_uoms_by_category(category: str, txt: str = "", page_len: int = 500, s
 def get_uoms_by_category(
 	doctype: str, txt: str, searchfield: str, start: int, page_len: int, filters: dict | str
 ):
+	# Real callers (e.g. the diameter_unit Link field's set_query) send
+	# `filters` as a JSON-stringified form field, not a native dict —
+	# same str-vs-native-type situation as pest_category.py's
+	# get_pest_types_for_categories, handled the same way.
+	if isinstance(filters, str):
+		filters = frappe.parse_json(filters) if filters else {}
 	category = (filters or {}).get("category", "Length")
 	return _query_uoms_by_category(category, txt=txt, page_len=page_len, start=start)
