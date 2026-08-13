@@ -13,6 +13,7 @@
   "logo",
   "footer_logo",
   "favicon",
+  "page_header_background",
   "contact_tab",
   "email",
   "phone",
@@ -82,6 +83,12 @@
    "fieldname": "favicon",
    "fieldtype": "Attach Image",
    "label": "Favicon"
+  },
+  {
+   "description": "Background photo behind the banner shown at the top of every inner page (About, Team, Contact, Blog, etc). Falls back to the default template image if left empty.",
+   "fieldname": "page_header_background",
+   "fieldtype": "Attach Image",
+   "label": "Page Header Background"
   },
   {
    "fieldname": "contact_tab",
