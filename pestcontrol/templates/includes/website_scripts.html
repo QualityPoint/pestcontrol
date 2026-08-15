@@ -166,6 +166,41 @@
         });
     </script>
 
+    <!-- Careers Form Submit -->
+    <script>
+        document.querySelectorAll("#careerForm").forEach(function (form) {
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var msgBox = form.querySelector("#msgSubmit");
+                var formData = new FormData(form);
+                fetch("/api/method/pestcontrol.pc_website.api.submit_job_application", {
+                    method: "POST",
+                    body: formData,
+                    headers: { "X-Frappe-CSRF-Token": "{{ csrf_token }}" },
+                })
+                    .then(function (response) {
+                        if (!response.ok) throw new Error("Request failed");
+                        return response.json();
+                    })
+                    .then(function () {
+                        if (msgBox) {
+                            msgBox.classList.remove("hidden");
+                            msgBox.classList.add("text-success");
+                            msgBox.textContent = "Your application has been submitted successfully.";
+                        }
+                        form.reset();
+                    })
+                    .catch(function () {
+                        if (msgBox) {
+                            msgBox.classList.remove("hidden");
+                            msgBox.classList.add("text-danger");
+                            msgBox.textContent = "Something went wrong. Please try again.";
+                        }
+                    });
+            });
+        });
+    </script>
+
     <!-- Login Form Submit -->
     <script>
         var loginForm = document.getElementById("loginForm");

@@ -1,0 +1,81 @@
+{% extends "pestcontrol/templates/includes/website_base.html" %}
+
+{% block title %}{{ _("Careers") }} | Skystar{% endblock %}
+
+{% block page_header %}
+    {% set page_h1 = _("Careers") %}
+    {% set page_breadcrumb = _("careers") %}
+    {% include "pestcontrol/templates/includes/page_header.html" %}
+{% endblock %}
+
+{% block content %}
+    <!-- Careers Form Section Start -->
+    <div class="contact-form-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Careers Box Start -->
+                    <div class="contact-us-box">
+                        <!-- Careers Form Start -->
+                        <div class="contact-us-form">
+                            <!-- Section Title Start -->
+                            <div class="section-title">
+                                <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Join our team -") }} <span>{{ _("apply today!") }}</span></h2>
+                                <p class="wow fadeInUp" data-wow-delay="0.2s">{{ _("Tell us about yourself and attach your resume. We'll be in touch if there's a fit.") }}</p>
+                            </div>
+                            <!-- Section Title End -->
+
+                            <form id="careerForm" action="#" method="POST" enctype="multipart/form-data" data-toggle="validator" class="contact-form wow fadeInUp">
+                                <div class="row">
+                                    <div class="form-group col-md-6 mb-4">
+                                        <label for="full_name" class="visually-hidden">{{ _('Full name') }}</label>
+                                        <input type="text" name="full_name" class="form-control" id="full_name" placeholder="{{ _('Full name') }}" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+
+                                    <div class="form-group col-md-6 mb-4">
+                                        <label for="career_email" class="visually-hidden">{{ _('E-mail') }}</label>
+                                        <input type="email" name="email" class="form-control" id="career_email" placeholder="{{ _('E-mail') }}" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+
+                                    <div class="form-group col-md-6 mb-4">
+                                        <label for="career_phone" class="visually-hidden">{{ _('Phone no.') }}</label>
+                                        <input type="text" name="phone" class="form-control" id="career_phone" placeholder="{{ _('Phone no.') }}" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+
+                                    <div class="form-group col-md-6 mb-4">
+                                        <label for="position_applied_for" class="visually-hidden">{{ _('Position applying for') }}</label>
+                                        <input type="text" name="position_applied_for" class="form-control" id="position_applied_for" placeholder="{{ _('Position applying for') }}">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+
+                                    <div class="form-group col-md-12 mb-4">
+                                        <label for="career_message" class="visually-hidden">{{ _('Message') }}</label>
+                                        <textarea name="message" class="form-control" id="career_message" rows="4" placeholder="{{ _('Tell us a bit about yourself') }}"></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+
+                                    <div class="form-group col-md-12 mb-5">
+                                        <label for="resume" class="form-label">{{ _('Resume / CV') }}</label>
+                                        <input type="file" name="resume" class="form-control" id="resume" accept=".pdf,.doc,.docx">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn-default"><span>{{ _("submit application") }}</span></button>
+                                        <div id="msgSubmit" class="h3 hidden"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Careers Form End -->
+                    </div>
+                    <!-- Careers Box End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Careers Form Section End -->
+{% endblock %}

@@ -92,6 +92,8 @@ fixtures = [
 	{"dt": "Website FAQ"},
 	{"dt": "Website Gallery Item"},
 	{"dt": "Website Hero Slide"},
+	{"dt": "Website Feature"},
+	{"dt": "Website List Item"},
 	{"dt": "Language", "filters": [["name", "in", ["en", "ar"]]]},
 ]
 
