@@ -1,0 +1,88 @@
+    <!-- Topbar Section Start -->
+    <div class="topbar">
+        <div class="header-fluid">
+            <div class="topbar-inner">
+                <!-- Topbar Contact Information Start -->
+                <div class="topbar-contact-info">
+                    {% set business_address = localize(settings, "address") %}
+                    <ul>
+                        {% if settings.email %}<li><i class="fa-regular fa-envelope"></i><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></li>{% endif %}
+                        {% if business_address %}<li><i class="fa-solid fa-location-dot"></i>{{ business_address }}</li>{% endif %}
+                    </ul>
+                </div>
+                <!-- Topbar Contact Information End -->
+
+                <div class="topbar-right">
+                    <!-- Topbar Social Links Start -->
+                    <div class="topbar-social-links">
+                        <ul>
+                            {% if settings.instagram_url %}<li><a href="{{ settings.instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Instagram') }}"><i class="fa-brands fa-instagram"></i></a></li>{% endif %}
+                            {% if settings.facebook_url %}<li><a href="{{ settings.facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Facebook') }}"><i class="fa-brands fa-facebook-f"></i></a></li>{% endif %}
+                            {% if settings.twitter_url %}<li><a href="{{ settings.twitter_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Twitter') }}"><i class="fa-brands fa-x-twitter"></i></a></li>{% endif %}
+                            {% if settings.tiktok_url %}<li><a href="{{ settings.tiktok_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('TikTok') }}"><i class="fa-brands fa-tiktok"></i></a></li>{% endif %}
+                            {% if settings.linktree_url %}<li><a href="{{ settings.linktree_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Linktree') }}"><i class="fa-solid fa-link"></i></a></li>{% endif %}
+                            {% if settings.snapchat_url %}<li><a href="{{ settings.snapchat_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Snapchat') }}"><i class="fa-brands fa-snapchat"></i></a></li>{% endif %}
+                            {% if settings.youtube_url %}<li><a href="{{ settings.youtube_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('YouTube') }}"><i class="fa-brands fa-youtube"></i></a></li>{% endif %}
+                        </ul>
+                    </div>
+                    <!-- Topbar Social Links End -->
+
+                    <!-- Topbar Language Switch Start -->
+                    <div class="lang-switch" id="langSwitch">
+                        <button type="button" class="lang-switch-toggle" id="langSwitchToggle" aria-haspopup="true" aria-expanded="false" aria-label="{{ _('Select language') }}">
+                            <span class="lang-code">{{ current_language.label|upper }}</span>
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <ul class="lang-switch-menu" role="menu">
+                            {% for l in languages %}
+                            <li role="none">
+                                <button type="button" role="menuitem" class="lang-option{{ ' active' if l.code == lang else '' }}" data-set-lang="{{ l.code }}"{{ ' aria-current="true"' if l.code == lang else '' }}>
+                                    {{ l.label }}
+                                </button>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <!-- Topbar Language Switch End -->
+
+                    <!-- Topbar Deaf-Friendly Contact Start -->
+                    {% if settings.whatsapp or settings.email %}
+                    <div class="deaf-contact" id="deafContact">
+                        <button type="button" class="topbar-a11y-toggle" id="deafContactToggle" aria-haspopup="true" aria-expanded="false" aria-controls="deafContactMenu">
+                            <i class="fa-solid fa-hands-asl-interpreting" aria-hidden="true"></i>
+                            <span>{{ _("For Deaf") }}</span>
+                        </button>
+                        <div class="deaf-contact-menu" id="deafContactMenu" role="menu" aria-label="{{ _('Contact without a phone call') }}">
+                            <p class="deaf-contact-intro">{{ _("Reach us without a phone call") }}</p>
+                            {% if settings.whatsapp %}
+                            <a href="https://wa.me/{{ settings.whatsapp | replace(' ', '') | replace('+', '') }}" target="_blank" rel="noopener noreferrer" class="deaf-contact-link" role="menuitem">
+                                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                                <span>{{ _("WhatsApp") }}</span>
+                            </a>
+                            {% endif %}
+                            {% if settings.email %}
+                            <a href="mailto:{{ settings.email }}" class="deaf-contact-link" role="menuitem">
+                                <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                                <span>{{ _("Email") }}</span>
+                            </a>
+                            {% endif %}
+                            <a href="/contact" class="deaf-contact-link" role="menuitem">
+                                <i class="fa-regular fa-comments" aria-hidden="true"></i>
+                                <span>{{ _("Send a message") }}</span>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <!-- Topbar Deaf-Friendly Contact End -->
+
+                    <!-- Topbar Accessibility Toggle Start -->
+                    <button type="button" class="topbar-a11y-toggle" id="a11yToolbarToggle" aria-haspopup="dialog" aria-expanded="false" aria-controls="a11yPanel">
+                        <i class="fa-solid fa-universal-access" aria-hidden="true"></i>
+                        <span>{{ _("Accessibility Tool") }}</span>
+                    </button>
+                    <!-- Topbar Accessibility Toggle End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar Section End -->

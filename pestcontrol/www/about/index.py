@@ -1,14 +1,33 @@
 import frappe
 
+from pestcontrol.pc_website.utils import get_language_row, get_translated_list, get_website_context
+
 
 def get_context(context):
-	context.year = frappe.utils.now_datetime().year
+	get_website_context(context)
+	context.no_cache = 1
 
-	# Check if user is logged in
-	user = frappe.session.user
-	context.is_logged_in = user != "Guest"
+	about_page = frappe.get_cached_doc("Website About Page").as_dict()
+	context.about = get_language_row(about_page.get("content") or [])
 
-	if context.is_logged_in:
-		user_doc = frappe.get_doc("User", user)
-		# note: the field in User is named 'user_image'
-		context.user_image_url = user_doc.get("user_image") or None
+	context.team_members = get_translated_list(
+		"Website Team Member",
+		filters={"published": 1},
+		fields="*",
+		order_by="display_order asc",
+		limit_page_length=4,
+	)
+	context.faqs = get_translated_list(
+		"Website FAQ",
+		filters={"published": 1},
+		fields="*",
+		order_by="display_order asc",
+		limit_page_length=5,
+	)
+	context.testimonials = get_translated_list(
+		"Website Testimonial",
+		filters={"published": 1},
+		fields="*",
+		order_by="display_order asc",
+		limit_page_length=4,
+	)

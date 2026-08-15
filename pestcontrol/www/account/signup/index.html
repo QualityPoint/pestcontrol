@@ -1,0 +1,50 @@
+{% extends "pestcontrol/templates/includes/website_base_minimal.html" %}
+
+{% block title %}{{ _("Sign Up") }} | Skystar{% endblock %}
+
+{% block content %}
+    <!-- Auth Page Start -->
+    <div class="auth-page" style="background-image: url('{{ settings.auth_background_image or '/assets/pestcontrol/website/images/page-header-bg.jpg' }}');">
+        <div class="container">
+            <div class="auth-page-info">
+                <h1>{{ about.auth_heading or _("Your Shield Against Unwanted Guests") }}</h1>
+                <p>{{ about.auth_text or _("Create an account to manage your services, track requests, and stay connected with us.") }}</p>
+            </div>
+
+            <div class="auth-page-box">
+                <a href="/" class="auth-page-logo">
+                    <img src="{{ settings.logo or '/assets/pestcontrol/website/icons/skystar-logo.png' }}" alt="{{ settings.site_name or 'Skystar' }}">
+                </a>
+
+                {% if disable_signup %}
+                <h2>{{ _("Sign ups are closed") }}</h2>
+                <p>{{ _("New account registration isn't available right now. Please contact us if you need access.") }}</p>
+                <p class="auth-switch"><a href="/contact">{{ _("Contact us") }}</a></p>
+                {% else %}
+                <h2>{{ _("Create an account") }}</h2>
+                <p>{{ _("Sign up to get started") }}</p>
+
+                <form id="signupForm" data-redirect-to="{{ redirect_to }}" action="#" method="POST" data-toggle="validator" class="contact-form">
+                    <div class="form-group mb-4">
+                        <label for="full_name" class="visually-hidden">{{ _('Full name') }}</label>
+                        <input type="text" name="full_name" class="form-control" id="full_name" placeholder="{{ _('Full name') }}" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="email" class="visually-hidden">{{ _('E-mail') }}</label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="{{ _('E-mail') }}" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <button type="submit" class="btn-default"><span>{{ _("Sign up") }}</span></button>
+                    <div id="signupMsg" class="h3 hidden"></div>
+                </form>
+
+                <p class="auth-switch">{{ _("Already have an account?") }} <a href="/account/login{{ ('?redirect-to=' ~ redirect_to) if redirect_to else '' }}">{{ _("Login") }}</a></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- Auth Page End -->
+{% endblock %}

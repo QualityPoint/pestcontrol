@@ -1,14 +1,18 @@
-import frappe
+from pestcontrol.pc_website.utils import get_translated_list, get_website_context
 
 
 def get_context(context):
-	context.year = frappe.utils.now_datetime().year
+	get_website_context(context)
+	context.no_cache = 1
 
-	# Check if user is logged in
-	user = frappe.session.user
-	context.is_logged_in = user != "Guest"
+	faqs = get_translated_list(
+		"Website FAQ",
+		filters={"published": 1},
+		fields="*",
+		order_by="faq_group asc, display_order asc",
+	)
 
-	if context.is_logged_in:
-		user_doc = frappe.get_doc("User", user)
-		# note: the field in User is named 'user_image'
-		context.user_image_url = user_doc.get("user_image") or None
+	groups = {}
+	for faq in faqs:
+		groups.setdefault(faq.faq_group or "General", []).append(faq)
+	context.faq_groups = groups

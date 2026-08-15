@@ -4,6 +4,1197 @@
  */
 
 /*
+ * Standard "visually hidden but still announced by screen readers"
+ * technique — used for form <label>s that are redundant on-screen
+ * (the placeholder already shows the same text) but still need a real
+ * accessible name, since placeholders alone aren't a reliable label:
+ * they vanish once typing starts and aren't read consistently by every
+ * screen reader.
+ */
+.visually-hidden{
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	white-space: nowrap !important;
+	border: 0 !important;
+}
+
+/*
+ * Skip-to-content link — off-screen until keyboard-focused (it's the
+ * first focusable element on every page), so keyboard/screen-reader
+ * visitors can jump past the repeated topbar+nav instead of tabbing
+ * through it on every single page.
+ */
+.skip-to-content{
+	position: absolute;
+	top: -80px;
+	inset-inline-start: 0;
+	z-index: 10000;
+	padding: 14px 24px;
+	background: var(--primary-color);
+	color: var(--white-color) !important;
+	font-weight: 600;
+	border-radius: 0 0 8px 0;
+	transition: top 0.2s ease-in-out;
+}
+
+.skip-to-content:focus{
+	top: 0;
+}
+
+/*
+ * Accessibility toolbar — the toggle button itself lives inline in the
+ * topbar (see .topbar-a11y-toggle further down); this wrapper only holds
+ * the backdrop/panel/modals, each already position:fixed on its own, so it
+ * needs no positioning of its own. Preferences persist via localStorage;
+ * see website_head.html for the early-apply script that avoids a flash
+ * of unstyled content, and website_scripts.html for the toggle logic.
+ */
+
+/* Backdrop behind the open panel — click it (or press Escape, or hit the
+   close button) to dismiss, same as any side-drawer pattern. */
+.a11y-backdrop{
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.15);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+	z-index: 9997;
+}
+
+.a11y-toolbar.open .a11y-backdrop{
+	opacity: 1;
+	visibility: visible;
+}
+
+/* The panel itself is a full-height drawer, not a small popup — animated
+   by sliding `inset-inline-end` in from off-screen. Using the logical
+   inset (rather than `right`/transform) means it slides in from the
+   correct physical edge automatically in RTL, with no JS or extra rule
+   needed for the mirrored case. */
+.a11y-panel{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	inset-inline-end: -400px;
+	width: 380px;
+	max-width: 92vw;
+	background: var(--white-color);
+	box-shadow: -20px 0 50px rgba(0, 0, 0, 0.2);
+	z-index: 9999;
+	display: flex;
+	flex-direction: column;
+	transition: inset-inline-end 0.3s ease-in-out;
+}
+
+html[dir="rtl"] .a11y-panel{
+	box-shadow: 20px 0 50px rgba(0, 0, 0, 0.2);
+}
+
+.a11y-toolbar.open .a11y-panel{
+	inset-inline-end: 0;
+}
+
+.a11y-panel-header{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px 24px;
+	border-bottom: 1px solid var(--divider-color);
+}
+
+.a11y-panel-header h2{
+	font-size: 18px;
+	margin: 0;
+	color: var(--primary-color);
+}
+
+.a11y-panel-header-actions{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.a11y-panel-close{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border: none;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.05);
+	color: var(--primary-color);
+	font-size: 14px;
+	cursor: pointer;
+	transition: background 0.2s ease-in-out;
+}
+
+.a11y-panel-close:hover{
+	background: rgba(0, 0, 0, 0.1);
+}
+
+.a11y-panel-body{
+	flex: 1;
+	overflow-y: auto;
+	padding: 8px 24px 16px;
+}
+
+.a11y-panel-section-title{
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--text-color);
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	margin: 20px 0 10px;
+}
+
+.a11y-panel-section-title:first-child{
+	margin-top: 16px;
+}
+
+/* A standard on/off switch (WAI-ARIA "switch" pattern) — used for the
+   "enlarge tool buttons" row and each assistance profile below. Position
+   uses inset-inline-start on the thumb rather than left/transform, so it
+   mirrors correctly in RTL with no extra rule needed. */
+.a11y-switch{
+	position: relative;
+	flex-shrink: 0;
+	width: 44px;
+	height: 24px;
+	border: none;
+	border-radius: 30px;
+	background: rgba(0, 0, 0, 0.15);
+	cursor: pointer;
+	transition: background 0.2s ease-in-out;
+}
+
+.a11y-switch-thumb{
+	position: absolute;
+	top: 3px;
+	inset-inline-start: 3px;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: var(--white-color);
+	transition: inset-inline-start 0.2s ease-in-out;
+}
+
+.a11y-switch[aria-checked="true"]{
+	background: var(--accent-color);
+}
+
+.a11y-switch[aria-checked="true"] .a11y-switch-thumb{
+	inset-inline-start: 23px;
+}
+
+.a11y-switch-row{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 16px 0;
+	border-bottom: 1px solid var(--divider-color);
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--primary-color);
+}
+
+.a11y-profiles-toggle{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	border: none;
+	background: transparent;
+	padding: 16px 0;
+	border-bottom: 1px solid var(--divider-color);
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--primary-color);
+	cursor: pointer;
+}
+
+.a11y-profiles-toggle[aria-expanded="true"] i{
+	transform: rotate(180deg);
+}
+
+.a11y-profiles-toggle i{
+	transition: transform 0.2s ease-in-out;
+}
+
+.a11y-profiles-list{
+	border-bottom: 1px solid var(--divider-color);
+}
+
+.a11y-profile{
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 14px 0;
+}
+
+.a11y-profile + .a11y-profile{
+	border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.a11y-profile-icon{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: rgba(11, 163, 96, 0.1);
+	color: var(--accent-color);
+	font-size: 15px;
+}
+
+.a11y-profile-text{
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.a11y-profile-title-row{
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.a11y-profile-title{
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--primary-color);
+}
+
+.a11y-profile-info-btn{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 18px;
+	height: 18px;
+	border: none;
+	background: transparent;
+	color: var(--text-color);
+	font-size: 13px;
+	cursor: pointer;
+}
+
+.a11y-profile-info-btn:hover,
+.a11y-profile-info-btn[aria-expanded="true"]{
+	color: var(--accent-color);
+}
+
+.a11y-profile-desc{
+	font-size: 12px;
+	color: var(--text-color);
+	line-height: 1.4;
+}
+
+.a11y-profile-full{
+	display: block;
+	margin-top: 6px;
+	padding: 10px;
+	border-radius: 8px;
+	background: rgba(11, 163, 96, 0.06);
+	font-size: 12px;
+	line-height: 1.5;
+	color: var(--text-color);
+}
+
+.a11y-grid{
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+}
+
+.a11y-card{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	border: none;
+	background: rgba(11, 163, 96, 0.06);
+	border-radius: 14px;
+	padding: 16px 8px;
+	cursor: pointer;
+	color: var(--primary-color);
+	font-size: 12px;
+	font-weight: 500;
+	text-align: center;
+	line-height: 1.3;
+	transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.a11y-card-icon{
+	font-size: 20px;
+}
+
+.a11y-card:hover{
+	background: rgba(11, 163, 96, 0.14);
+}
+
+.a11y-card.is-active{
+	background: var(--accent-color);
+	color: var(--white-color);
+}
+
+/* Radio-style cards (the "visually pleasing experience" group) get a
+   visible selection ring in addition to the fill, so the single active
+   choice among several is unmistakable even for someone not distinguishing
+   the fill color well — the exact audience this widget serves. */
+.a11y-grid [role="radio"].is-active{
+	box-shadow: 0 0 0 2px var(--white-color), 0 0 0 4px var(--accent-color);
+}
+
+.a11y-panel-section-title{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.a11y-badge{
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 18px;
+	height: 18px;
+	padding: 0 5px;
+	border-radius: 999px;
+	background: #F0A63C;
+	color: var(--white-color);
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: none;
+	letter-spacing: normal;
+}
+
+.a11y-color-list{
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.a11y-color-row{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	width: 100%;
+	border: none;
+	background: rgba(11, 163, 96, 0.06);
+	border-radius: 10px;
+	padding: 12px 14px;
+	cursor: pointer;
+	color: var(--primary-color);
+	font-size: 13px;
+	font-weight: 500;
+	transition: background 0.2s ease-in-out;
+}
+
+.a11y-color-row:hover{
+	background: rgba(11, 163, 96, 0.14);
+}
+
+.a11y-color-swatch{
+	flex-shrink: 0;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background: repeating-conic-gradient(#ccc 0% 25%, #fff 0% 50%) 50% / 10px 10px;
+	border: 2px solid var(--white-color);
+	box-shadow: 0 0 0 1px var(--divider-color);
+}
+
+/* The real <input type="color"> stays functional (so clicking a row can
+   trigger the browser's native color picker via .click()) but invisible —
+   opacity/size, not display:none, so the click-to-open still works
+   consistently across browsers. */
+.a11y-color-input{
+	position: absolute;
+	width: 0;
+	height: 0;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.a11y-panel-footer{
+	display: flex;
+	gap: 10px;
+	padding: 16px 24px;
+	border-top: 1px solid var(--divider-color);
+}
+
+.a11y-footer-btn{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	flex: 1;
+	border: 1px solid var(--divider-color);
+	background: transparent;
+	color: var(--primary-color);
+	font-weight: 600;
+	font-size: 13px;
+	padding: 12px;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: background 0.2s ease-in-out;
+}
+
+.a11y-footer-btn:hover{
+	background: rgba(0, 0, 0, 0.05);
+}
+
+.a11y-footer-btn-primary{
+	border-color: transparent;
+	background: var(--primary-color);
+	color: var(--white-color);
+}
+
+.a11y-footer-btn-primary:hover{
+	background: var(--accent-color);
+}
+
+/* Text size — scales the whole page proportionally (text, spacing,
+   images together), same mechanism the browser's own zoom uses. The
+   theme's CSS is written in fixed px, not rem, so a font-size change on
+   <html> wouldn't cascade into it; zoom scales the rendered page instead
+   regardless of what units the underlying CSS happens to use. */
+html.a11y-font-1{ zoom: 1.15; }
+html.a11y-font-2{ zoom: 1.3; }
+html.a11y-font-3{ zoom: 1.45; }
+
+/* Visually pleasing experience — a single-select group (prefs.visualStyle),
+   applied via a data attribute rather than five separate classes since only
+   one of these whole-page treatments makes sense active at a time. */
+
+/* High contrast — the theme already routes almost all of its color
+   through these custom properties, so redefining them here retrofits
+   high-contrast mode without touching every individual rule. */
+html[data-a11y-visual-style="high-contrast"]{
+	--primary-color: #000000;
+	--secondary-color: #FFFFFF;
+	--text-color: #000000;
+	--accent-color: #0B6B32;
+	--white-color: #FFFFFF;
+	--divider-color: #000000;
+}
+
+html[data-a11y-visual-style="high-contrast"] body{
+	background-color: #FFFFFF;
+}
+
+html[data-a11y-visual-style="high-contrast"] img{
+	filter: contrast(1.1);
+}
+
+html[data-a11y-visual-style="monochrome"] body{
+	filter: grayscale(1);
+}
+
+html[data-a11y-visual-style="light-contrast"] body{
+	filter: contrast(1.15) brightness(1.06);
+}
+
+html[data-a11y-visual-style="low-saturation"] body{
+	filter: saturate(0.5);
+}
+
+html[data-a11y-visual-style="high-saturation"] body{
+	filter: saturate(1.8);
+}
+
+/* Invert colors — a separate effect from high contrast: flips every
+   color on the page, then flips images/video back so photos still look
+   normal instead of looking like an X-ray. Standard trick used by most
+   browser-level accessibility tools. */
+html.a11y-invert{
+	filter: invert(1) hue-rotate(180deg);
+}
+
+html.a11y-invert img,
+html.a11y-invert video,
+html.a11y-invert iframe,
+html.a11y-invert picture{
+	filter: invert(1) hue-rotate(180deg);
+}
+
+/* Color blindness assist — bundled into the "Color Blindness" profile
+   alongside highlighted links. This isn't a true per-type (protanopia/
+   deuteranopia/tritanopia) correction filter — that needs a precise SVG
+   color matrix per type, which the toolbar doesn't ask the visitor to
+   choose between. Instead it boosts overall saturation/contrast so
+   similar hues separate more, while the paired "highlight links" toggle
+   makes sure links are never identified by color alone. */
+html.a11y-color-blind body{
+	filter: saturate(1.6) contrast(1.08);
+}
+
+/* Keyboard navigation aid (used by the "Motor Disability" profile) — the
+   theme's default focus style is faint, easy to lose track of when
+   tabbing through a page without a mouse. This makes it unmissable. */
+html.a11y-keyboard-nav :focus{
+	outline: 3px solid var(--accent-color) !important;
+	outline-offset: 2px !important;
+}
+
+/* Enlarge tool buttons — scales the accessibility widget's own toggle
+   button and panel (icons, text, switches, spacing all together), for
+   visitors who need the widget itself to be easier to see and hit. */
+html.a11y-toolbar-large .a11y-toolbar-toggle,
+html.a11y-toolbar-large .a11y-panel{
+	zoom: 1.2;
+}
+
+/* Readable font — a plain, high-legibility system font stack, swapped
+   in for the theme's decorative display font. */
+html.a11y-readable-font body{
+	font-family: Arial, "Segoe UI", Helvetica, sans-serif !important;
+}
+
+/* Dyslexia font — Lexend, a font shown in reading-proficiency research to
+   help readers (including dyslexic readers) read faster and more
+   accurately. It only covers Latin glyphs; Arabic characters fall
+   straight through to IBM Plex Sans Arabic automatically, since font
+   fallback in CSS happens per-glyph, not per-language. */
+html.a11y-dyslexia-font body{
+	font-family: "Lexend", "IBM Plex Sans Arabic", sans-serif !important;
+}
+
+/* Highlight links / headings — outlines them so they're easy to spot
+   while scanning a page, useful for low-vision users and for anyone
+   navigating primarily by landmarks rather than reading everything. */
+html.a11y-highlight-links a{
+	outline: 2px solid var(--accent-color) !important;
+	background-color: rgba(255, 235, 59, 0.25) !important;
+	text-decoration: underline !important;
+}
+
+html.a11y-highlight-headings h1,
+html.a11y-highlight-headings h2,
+html.a11y-highlight-headings h3,
+html.a11y-highlight-headings h4,
+html.a11y-highlight-headings h5,
+html.a11y-highlight-headings h6{
+	outline: 2px dashed var(--accent-color) !important;
+	background-color: rgba(11, 163, 96, 0.08) !important;
+}
+
+/* Line spacing — extra breathing room between lines, helps readers keep
+   their place, particularly for dyslexia and low vision. */
+html.a11y-line-spacing body,
+html.a11y-line-spacing p,
+html.a11y-line-spacing li{
+	line-height: 2 !important;
+}
+
+/* Text align — forces body copy to start-aligned (rather than centered
+   or justified), since ragged edges are easier to track line-to-line
+   than justified text with uneven word spacing. `start` rather than
+   `left` so it still does the right thing in RTL. */
+html.a11y-text-align body,
+html.a11y-text-align p{
+	text-align: start !important;
+}
+
+/* Reduce motion — strips CSS transitions/animations site-wide. This
+   covers hover effects and the WOW.js scroll-reveal animations (which
+   are CSS @keyframes triggered by a class), but not motion driven
+   entirely by JS libraries (Swiper autoplay, GSAP/SplitText) — those
+   keep running since stopping them safely needs hooking into each
+   library's own instance, which the toolbar doesn't currently do. */
+html.a11y-reduce-motion *{
+	animation-duration: 0.001ms !important;
+	animation-iteration-count: 1 !important;
+	transition-duration: 0.001ms !important;
+	scroll-behavior: auto !important;
+}
+
+/* Custom text / title / background colors — set from the color pickers in
+   the "Color settings" section. Values live in --a11y-* custom properties
+   (set inline on <html> by JS) so the same rule works for any color the
+   visitor happens to pick, no per-color CSS needed. */
+html.a11y-custom-text body{
+	color: var(--a11y-text-color) !important;
+}
+
+html.a11y-custom-title h1,
+html.a11y-custom-title h2,
+html.a11y-custom-title h3,
+html.a11y-custom-title h4,
+html.a11y-custom-title h5,
+html.a11y-custom-title h6{
+	color: var(--a11y-title-color) !important;
+}
+
+html.a11y-custom-bg body{
+	background-color: var(--a11y-bg-color) !important;
+}
+
+/* `color` is inherited, so the two rules above would otherwise bleed into
+   the toolbar's own text (background-color isn't inherited, so no such
+   risk there — every toolbar element already paints its own opaque
+   background). `revert` un-does just those two !important declarations
+   for anything inside the toolbar, letting its normal styling resume.
+   The topbar toggle button is included too — it now lives outside
+   .a11y-toolbar (moved into the topbar's icon row) but needs the same
+   protection so a visitor's custom text color can't make it unreadable
+   against the topbar background. */
+html.a11y-custom-text .a11y-toolbar,
+html.a11y-custom-text .a11y-toolbar *,
+html.a11y-custom-text .topbar-a11y-toggle,
+html.a11y-custom-title .a11y-toolbar,
+html.a11y-custom-title .a11y-toolbar *,
+html.a11y-custom-title .topbar-a11y-toggle{
+	color: revert !important;
+}
+
+/* Widget minimized ("Hide widget") — dims the topbar icon to a quiet, low-
+   opacity state rather than removing it outright. A true disappear-with-
+   no-way-back would make the accessibility tool itself inaccessible once
+   dismissed, so it always stays visible, focusable, and full-size —
+   brightens back to full strength on hover/focus, and returns to normal
+   the moment it's used again. */
+html.a11y-widget-minimized .topbar-a11y-toggle{
+	opacity: 0.45;
+}
+
+html.a11y-widget-minimized .topbar-a11y-toggle:hover,
+html.a11y-widget-minimized .topbar-a11y-toggle:focus-visible{
+	opacity: 1;
+}
+
+@media only screen and (max-width: 575px){
+	.a11y-panel{
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.a11y-grid{
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.a11y-navkeys-modal{
+		width: calc(100% - 32px);
+		padding: 24px;
+	}
+}
+
+/* Navigation Keys — single-key shortcuts to jump between page landmarks
+   (see the click/keydown handlers in website_scripts.html) and the
+   one-time onboarding dialog explaining them. Centered modal, separate
+   from the side-drawer panel, with its own backdrop so it can be shown on
+   top of the panel (its usual trigger) or entirely on its own. */
+.a11y-navkeys-backdrop{
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.35);
+	z-index: 10000;
+}
+
+.a11y-navkeys-modal{
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 440px;
+	max-width: calc(100% - 32px);
+	max-height: calc(100vh - 64px);
+	overflow-y: auto;
+	background: var(--white-color);
+	border-radius: 20px;
+	padding: 28px 32px;
+	box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+	z-index: 10001;
+}
+
+.a11y-navkeys-backdrop[hidden],
+.a11y-navkeys-modal[hidden]{
+	display: none;
+}
+
+.a11y-navkeys-header{
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+.a11y-navkeys-header h2{
+	flex: 1;
+	font-size: 20px;
+	margin: 0;
+	color: var(--primary-color);
+}
+
+.a11y-navkeys-icon{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	background: var(--accent-color);
+	color: var(--white-color);
+	font-size: 14px;
+}
+
+.a11y-navkeys-intro{
+	font-size: 14px;
+	color: var(--text-color);
+	line-height: 1.5;
+	margin-bottom: 20px;
+}
+
+.a11y-navkeys-list{
+	border-top: 1px solid var(--divider-color);
+}
+
+.a11y-navkeys-list-modifiers{
+	margin-top: 12px;
+}
+
+.a11y-navkeys-row{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 12px 0;
+	border-bottom: 1px solid var(--divider-color);
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--primary-color);
+}
+
+.a11y-navkeys-combo{
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex-direction: row-reverse;
+}
+
+.a11y-navkeys-row kbd{
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 28px;
+	padding: 4px 8px;
+	border: 1px solid var(--divider-color);
+	border-radius: 6px;
+	background: rgba(0, 0, 0, 0.04);
+	font-family: inherit;
+	font-size: 12px;
+	font-weight: 700;
+	color: var(--primary-color);
+}
+
+.a11y-navkeys-footer{
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-top: 20px;
+}
+
+.a11y-navkeys-footer .a11y-footer-btn{
+	flex: none;
+	padding: 12px 24px;
+}
+
+/*
+ * Chromium/WebKit disable complex-script shaping (Arabic letter joining)
+ * on any element with a non-zero letter-spacing, even a small negative
+ * tracking value used purely for Latin headings. That makes Arabic text
+ * render as isolated, disconnected letters. Force it back to normal
+ * across the whole page whenever we're in an RTL (Arabic) context.
+ */
+html[dir="rtl"] * {
+	letter-spacing: normal !important;
+}
+
+/*
+ * Phone numbers and WhatsApp links are always LTR content ("+966 54 362
+ * 7727"), but sitting inside an RTL page with nothing marking them as
+ * such, the browser's bidi algorithm can visually reorder the space-
+ * separated digit groups (digits/"+" are "weak" bidi characters with no
+ * strong direction of their own to anchor them). `direction: ltr` plus
+ * `unicode-bidi: isolate` forces the number to render in its own
+ * independent left-to-right run, the same fix a native <bdi> tag would
+ * give — applied globally via the href pattern instead of hunting down
+ * every template that prints a phone number.
+ */
+a[href^="tel:"],
+a[href^="https://wa.me/"] {
+	direction: ltr;
+	unicode-bidi: isolate;
+}
+
+/*
+ * Breadcrumb ("Home / Contact us") — Bootstrap's separator is built with
+ * float:left plus padding-left/padding-right, all physical sides that
+ * don't flip for RTL, so the "/" ends up stuck on the wrong edge instead
+ * of sitting between the two items. `float: inline-start` and logical
+ * padding fix both directions from one rule, no separate RTL override.
+ */
+.breadcrumb-item {
+	padding-left: 0;
+	padding-inline-start: var(--bs-breadcrumb-item-padding-x);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+	float: inline-start;
+	padding-right: 0;
+	padding-inline-end: var(--bs-breadcrumb-item-padding-x);
+}
+
+/*
+ * Login / signup — full-bleed background photo (admin-configurable via
+ * PC Website Settings > Login Page, set inline per-page so it can be a
+ * dynamic value; falls back to the same static photo .page-header uses).
+ * .container is a two-item flex row: the info text and the white card.
+ * Because they're plain flex items (not manually positioned left/right),
+ * they naturally swap sides for RTL along with everything else on the
+ * site — the card ends up on the "near" edge, the text fills the rest.
+ */
+.auth-page{
+	position: relative;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	padding: 60px 0;
+	overflow: hidden;
+}
+
+.auth-page .container{
+	position: relative;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 40px;
+	flex-wrap: wrap;
+}
+
+.auth-page-info{
+	flex: 1 1 360px;
+	color: var(--white-color);
+}
+
+.auth-page-info h1{
+	color: var(--white-color);
+	font-size: 42px;
+	line-height: 1.2em;
+	margin-bottom: 16px;
+	text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+}
+
+.auth-page-info p{
+	font-size: 17px;
+	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.auth-page-box{
+	flex: 0 1 440px;
+	width: 100%;
+	max-width: 440px;
+	background: var(--white-color);
+	border-radius: 24px;
+	padding: 50px 40px;
+	box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+	text-align: center;
+}
+
+.auth-page-logo{
+	display: inline-block;
+	margin-bottom: 24px;
+}
+
+.auth-page-logo img{
+	width: 160px;
+	max-width: 100%;
+	height: auto;
+}
+
+.auth-page-box h2{
+	color: var(--primary-color);
+	font-size: 32px;
+	margin-bottom: 8px;
+}
+
+.auth-page-box > p{
+	color: var(--text-color);
+	margin-bottom: 24px;
+}
+
+.auth-page-box .btn-default{
+	width: 100%;
+	margin-right: 0;
+	text-align: center;
+}
+
+.auth-page-box .btn-default::before,
+.auth-page-box .btn-default::after{
+	display: none;
+}
+
+.auth-switch{
+	margin: 20px 0 0;
+	color: var(--text-color);
+}
+
+.auth-switch a{
+	color: var(--accent-color);
+	font-weight: 500;
+}
+
+@media only screen and (max-width: 767px){
+	.auth-page{
+		min-height: auto;
+		padding: 40px 0;
+	}
+
+	.auth-page-info{
+		display: none;
+	}
+
+	.auth-page-box{
+		padding: 35px 25px;
+	}
+}
+
+/*
+ * Topbar language dropdown. Built to scale past two languages: the list
+ * is rendered from the `languages` context list (see pc_website/utils.py),
+ * so adding a new language means adding one entry there, not touching CSS.
+ */
+.lang-switch{
+	position: relative;
+}
+
+.lang-switch-toggle{
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	border: none;
+	background: rgba(255, 255, 255, 0.15);
+	color: var(--white-color);
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1;
+	padding: 7px 12px;
+	border-radius: 30px;
+	cursor: pointer;
+	transition: background 0.3s ease-in-out;
+}
+
+/* Accessibility toggle, sitting in the topbar's icon row next to the
+   language switcher — same pill shape and sizing as .lang-switch-toggle,
+   icon plus a visible label. */
+.topbar-a11y-toggle{
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex-shrink: 0;
+	border: none;
+	background: rgba(255, 255, 255, 0.15);
+	color: var(--white-color);
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1;
+	padding: 7px 12px;
+	border-radius: 30px;
+	cursor: pointer;
+	transition: background 0.3s ease-in-out;
+}
+
+.topbar-a11y-toggle i{
+	font-size: 15px;
+}
+
+@media only screen and (max-width: 575px){
+	/* Visually collapsed, not display:none — the label stays in the
+	   accessibility tree so the button still has a real accessible name
+	   on narrow screens, it just isn't painted on screen. */
+	.topbar-a11y-toggle span{
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.topbar-a11y-toggle{
+		padding: 7px;
+	}
+}
+
+.topbar-a11y-toggle:hover,
+.topbar-a11y-toggle:focus-visible{
+	background: rgba(255, 255, 255, 0.25);
+}
+
+.lang-switch-toggle:hover{
+	background: rgba(255, 255, 255, 0.25);
+}
+
+.lang-switch-toggle i{
+	font-size: 10px;
+	transition: transform 0.25s ease-in-out;
+}
+
+.lang-switch.open .lang-switch-toggle i{
+	transform: rotate(180deg);
+}
+
+.lang-switch-menu{
+	position: absolute;
+	top: calc(100% + 10px);
+	right: 0;
+	min-width: 160px;
+	margin: 0;
+	padding: 6px;
+	list-style: none;
+	background: var(--white-color);
+	border-radius: 10px;
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-8px);
+	transition: all 0.2s ease-in-out;
+	z-index: 999;
+}
+
+html[dir="rtl"] .lang-switch-menu{
+	right: auto;
+	left: 0;
+}
+
+.lang-switch.open .lang-switch-menu{
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.lang-switch-menu li + li{
+	margin-top: 2px;
+}
+
+.lang-option{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	width: 100%;
+	border: none;
+	background: transparent;
+	color: var(--primary-color);
+	font-size: 13px;
+	font-weight: 500;
+	text-align: left;
+	padding: 8px 10px;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background 0.2s ease-in-out;
+}
+
+html[dir="rtl"] .lang-option{
+	text-align: right;
+}
+
+.lang-option:hover{
+	background: rgba(0, 0, 0, 0.05);
+}
+
+.lang-option.active{
+	background: var(--accent-color);
+	color: var(--white-color);
+}
+
+/*
+ * "For Deaf" contact dropdown — same open/close dropdown pattern as
+ * .lang-switch above, but using inset-inline-end (logical) instead of a
+ * plain right + a separate html[dir="rtl"] override, so it mirrors
+ * correctly for RTL with one rule instead of two.
+ */
+.deaf-contact{
+	position: relative;
+}
+
+.deaf-contact-menu{
+	position: absolute;
+	top: calc(100% + 10px);
+	inset-inline-end: 0;
+	width: 230px;
+	padding: 14px;
+	background: var(--white-color);
+	border-radius: 10px;
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-8px);
+	transition: all 0.2s ease-in-out;
+	z-index: 999;
+}
+
+.deaf-contact.open .deaf-contact-menu{
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.deaf-contact-intro{
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--text-color);
+	margin: 0 0 10px;
+}
+
+.deaf-contact-link{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--primary-color);
+	font-size: 13px;
+	font-weight: 500;
+	padding: 8px 6px;
+	border-radius: 6px;
+	transition: background 0.2s ease-in-out;
+}
+
+.deaf-contact-link:hover{
+	background: rgba(0, 0, 0, 0.05);
+}
+
+.deaf-contact-link + .deaf-contact-link{
+	margin-top: 2px;
+}
+
+.deaf-contact-link i{
+	width: 16px;
+	text-align: center;
+	color: var(--accent-color);
+}
+
+/*
  * The template was designed for a 193x50 wordmark (~3.86:1) and therefore
  * puts no size constraint on the header logo. icons/skystar-logo.png is
  * 4377x599 (~7.31:1) - nearly twice as wide per unit of height - so it is
@@ -30,4 +1221,33 @@
 	.footer-logo img {
 		width: 170px;
 	}
+}
+
+/*
+ * Logged-in account link — a small round avatar (the user's own uploaded
+ * photo, or their initials on a colored circle when they haven't set one)
+ * next to their name in the nav menu, instead of just plain text.
+ */
+.nav-account-link{
+	display: flex !important;
+	align-items: center;
+	gap: 8px;
+}
+
+.nav-avatar{
+	flex-shrink: 0;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.nav-avatar-initials{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--accent-color);
+	color: var(--white-color);
+	font-size: 12px;
+	font-weight: 700;
 }

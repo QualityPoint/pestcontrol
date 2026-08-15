@@ -27,16 +27,18 @@ def get_all_pest_categories():
 
 
 @frappe.whitelist()
-def get_pest_types_for_categories(categories):
+def get_pest_types_for_categories(categories: str | list):
 	"""Return the union of pest types belonging to the given pest categories.
 
 	`categories` may be a JSON list (from frappe.xcall) or a newline-joined
 	string. Used to expand selected categories into pest types on a facility row.
 	"""
 	if isinstance(categories, str):
-		categories = frappe.parse_json(categories) if categories.strip().startswith("[") else [
-			c.strip() for c in categories.splitlines() if c.strip()
-		]
+		categories = (
+			frappe.parse_json(categories)
+			if categories.strip().startswith("[")
+			else [c.strip() for c in categories.splitlines() if c.strip()]
+		)
 
 	pests = set()
 	for name in categories or []:

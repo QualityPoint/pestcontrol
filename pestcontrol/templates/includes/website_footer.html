@@ -1,0 +1,110 @@
+    <!-- Main Footer Start -->
+    <footer class="main-footer dark-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <!-- About Footer Start -->
+                    <div class="about-footer footer-links">
+                        <h3>{{ _("About") }} {{ settings.site_name or "Skystar" }}</h3>
+                        <p>{{ localize(settings, "about_footer_text") }}</p>
+                    </div>
+                    <!-- About Footer End -->
+                </div>
+
+                <div class="col-lg-2 col-md-3">
+                    <!-- Footer Links Start -->
+                    <div class="footer-links">
+                        <h3>{{ _("services") }}</h3>
+                        <ul>
+                            <li><a href="/about">{{ _("About company") }}</a></li>
+                            <li><a href="/services">{{ _("Our services") }}</a></li>
+                            <li><a href="/projects">{{ _("Our projects") }}</a></li>
+                            <li><a href="/blog">{{ _("Our blogs") }}</a></li>
+                            <li><a href="/contact">{{ _("Contact us") }}</a></li>
+                        </ul>
+                    </div>
+                    <!-- Footer Links End -->
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <!-- Footer Links Start -->
+                    <div class="footer-links">
+                        <h3>{{ _("Links") }}</h3>
+                        <ul>
+                            <li><a href="/services">{{ _("Home Pest Control") }}</a></li>
+                            <li><a href="/services">{{ _("Commercial Pest") }}</a></li>
+                            <li><a href="/services">{{ _("Termite & Rodent") }}</a></li>
+                            <li><a href="/services">{{ _("Eco-Friendly Pest") }}</a></li>
+                            <li><a href="/services">{{ _("Wildlife Removal") }}</a></li>
+                        </ul>
+                    </div>
+                    <!-- Footer Links End -->
+                </div>
+
+                <div class="col-lg-3 col-md-5">
+                    <div class="footer-links">
+                        <h3>{{ _("contact us") }}</h3>
+                        {% if settings.phone %}
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-contact-item">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div class="footer-contact-content">
+                                <p><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></p>
+                            </div>
+                        </div>
+                        <!-- Footer Contact Item End -->
+                        {% endif %}
+
+                        {% if settings.email %}
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-contact-item">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="footer-contact-content">
+                                <p><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></p>
+                            </div>
+                        </div>
+                        <!-- Footer Contact Item End -->
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <!-- Footer Copyright Start -->
+                    <div class="footer-copyright">
+                        <!-- Footer Logo Start -->
+                        <div class="footer-logo">
+                            <img src="{{ settings.footer_logo or '/assets/pestcontrol/website/icons/skystar-logo.png' }}" alt="{{ settings.site_name or 'Skystar' }}">
+                        </div>
+                        <!-- Footer Logo End -->
+
+                        <!-- Footer Social Links Start -->
+                        <div class="footer-social-links">
+                            <ul>
+                                {% if settings.instagram_url %}<li><a href="{{ settings.instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Instagram') }}"><i class="fa-brands fa-instagram"></i></a></li>{% endif %}
+                                {% if settings.facebook_url %}<li><a href="{{ settings.facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Facebook') }}"><i class="fa-brands fa-facebook-f"></i></a></li>{% endif %}
+                                {% if settings.twitter_url %}<li><a href="{{ settings.twitter_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Twitter') }}"><i class="fa-brands fa-x-twitter"></i></a></li>{% endif %}
+                                {% if settings.linkedin_url %}<li><a href="{{ settings.linkedin_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('LinkedIn') }}"><i class="fa-brands fa-linkedin-in"></i></a></li>{% endif %}
+                                {% if settings.tiktok_url %}<li><a href="{{ settings.tiktok_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('TikTok') }}"><i class="fa-brands fa-tiktok"></i></a></li>{% endif %}
+                                {% if settings.linktree_url %}<li><a href="{{ settings.linktree_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Linktree') }}"><i class="fa-solid fa-link"></i></a></li>{% endif %}
+                                {% if settings.snapchat_url %}<li><a href="{{ settings.snapchat_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('Snapchat') }}"><i class="fa-brands fa-snapchat"></i></a></li>{% endif %}
+                                {% if settings.youtube_url %}<li><a href="{{ settings.youtube_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ _('YouTube') }}"><i class="fa-brands fa-youtube"></i></a></li>{% endif %}
+                            </ul>
+                        </div>
+                        <!-- Footer Social Links End -->
+
+                        <!-- Footer Copyright Text Start -->
+                        <div class="footer-copyright-text">
+                            <p>{{ settings.copyright_text or _("Copyright © ") ~ year ~ " " ~ (settings.site_name or "Skystar") ~ _(". All Rights Reserved.") }}</p>
+                        </div>
+                        <!-- Footer Copyright Text End -->
+                    </div>
+                    <!-- Footer Copyright End -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Main Footer End -->

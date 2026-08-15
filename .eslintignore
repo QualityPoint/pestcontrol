@@ -1,0 +1,6 @@
+# Third-party vendor libraries and the purchased theme's own bundled
+# scripts (jQuery, Bootstrap, Swiper, GSAP, SlickNav, etc.) — none of this
+# is code we author or maintain, so it shouldn't be held to this project's
+# lint rules. This is separate from public/js/, which holds our own desk
+# customizations and stays linted normally.
+pestcontrol/public/website/js/

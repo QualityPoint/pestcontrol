@@ -48,15 +48,11 @@ pestcontrol.mount_amenity_pest_row = function (frm, cdt, cdn, grid_field) {
 		link_doctype: "Pest Category",
 		on_change: (categories) => {
 			if (!categories.length || !type_ctrl) return;
-			frappe
-				.xcall(pestcontrol.PESTS_FOR_CATEGORIES_METHOD, { categories })
-				.then((pests) => {
-					const merged = Array.from(
-						new Set([...(type_ctrl.get_values() || []), ...pests])
-					);
-					type_ctrl.set_formatted_input(merged); // update pills, no change event
-					frappe.model.set_value(cdt, cdn, "pest_type", merged.join(pestcontrol.PILL_SEP));
-				});
+			frappe.xcall(pestcontrol.PESTS_FOR_CATEGORIES_METHOD, { categories }).then((pests) => {
+				const merged = Array.from(new Set([...(type_ctrl.get_values() || []), ...pests]));
+				type_ctrl.set_formatted_input(merged); // update pills, no change event
+				frappe.model.set_value(cdt, cdn, "pest_type", merged.join(pestcontrol.PILL_SEP));
+			});
 		},
 	});
 };
@@ -93,19 +89,22 @@ pestcontrol._mount_row_pills = function (grid_row, cdt, cdn, opts) {
 				if (opts.search_filters) {
 					args.filters = JSON.stringify(opts.search_filters);
 				}
-				return frappe
-					.xcall("frappe.desk.search.search_link", args)
-					.then((results) =>
-						results.map((d) => ({
-							value: d.value,
-							label: d.label || __(d.value),
-							description: d.description,
-						}))
-					);
+				return frappe.xcall("frappe.desk.search.search_link", args).then((results) =>
+					results.map((d) => ({
+						value: d.value,
+						label: d.label || __(d.value),
+						description: d.description,
+					}))
+				);
 			},
 			change: () => {
 				const values = control.get_values() || [];
-				frappe.model.set_value(cdt, cdn, opts.store_field, values.join(pestcontrol.PILL_SEP));
+				frappe.model.set_value(
+					cdt,
+					cdn,
+					opts.store_field,
+					values.join(pestcontrol.PILL_SEP)
+				);
 				opts.on_change && opts.on_change(values);
 			},
 		},

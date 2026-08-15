@@ -1,3 +1,3 @@
-frappe.provide('pestcontrol.queries');
+frappe.provide("pestcontrol.queries");
 
-pestcontrol.queries = {}
+pestcontrol.queries = {};

@@ -1,0 +1,143 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-09 12:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "language",
+  "section_break_wact1",
+  "intro_heading",
+  "intro_text",
+  "section_break_wact2",
+  "approach_heading",
+  "approach_text",
+  "column_break_wact3",
+  "vision_text",
+  "mission_text",
+  "section_break_wact4",
+  "drives_heading",
+  "drives_text",
+  "section_break_wact5",
+  "legacy_heading",
+  "legacy_text",
+  "section_break_wact6",
+  "auth_heading",
+  "auth_text"
+ ],
+ "fields": [
+  {
+   "fieldname": "language",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Language",
+   "options": "Language",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_wact1",
+   "fieldtype": "Section Break",
+   "label": "Intro"
+  },
+  {
+   "fieldname": "intro_heading",
+   "fieldtype": "Data",
+   "label": "Heading"
+  },
+  {
+   "fieldname": "intro_text",
+   "fieldtype": "Small Text",
+   "label": "Text"
+  },
+  {
+   "fieldname": "section_break_wact2",
+   "fieldtype": "Section Break",
+   "label": "Our Approach"
+  },
+  {
+   "fieldname": "approach_heading",
+   "fieldtype": "Data",
+   "label": "Heading"
+  },
+  {
+   "fieldname": "approach_text",
+   "fieldtype": "Small Text",
+   "label": "Text"
+  },
+  {
+   "fieldname": "column_break_wact3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vision_text",
+   "fieldtype": "Small Text",
+   "label": "Our Vision Text"
+  },
+  {
+   "fieldname": "mission_text",
+   "fieldtype": "Small Text",
+   "label": "Our Mission Text"
+  },
+  {
+   "fieldname": "section_break_wact4",
+   "fieldtype": "Section Break",
+   "label": "What Drives Us"
+  },
+  {
+   "fieldname": "drives_heading",
+   "fieldtype": "Data",
+   "label": "Heading"
+  },
+  {
+   "fieldname": "drives_text",
+   "fieldtype": "Small Text",
+   "label": "Text"
+  },
+  {
+   "fieldname": "section_break_wact5",
+   "fieldtype": "Section Break",
+   "label": "Our Legacy"
+  },
+  {
+   "fieldname": "legacy_heading",
+   "fieldtype": "Data",
+   "label": "Heading"
+  },
+  {
+   "fieldname": "legacy_text",
+   "fieldtype": "Small Text",
+   "label": "Text"
+  },
+  {
+   "fieldname": "section_break_wact6",
+   "fieldtype": "Section Break",
+   "label": "Login / Sign Up Page"
+  },
+  {
+   "fieldname": "auth_heading",
+   "fieldtype": "Data",
+   "label": "Heading"
+  },
+  {
+   "fieldname": "auth_text",
+   "fieldtype": "Small Text",
+   "label": "Text"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-08-09 12:00:00",
+ "modified_by": "Administrator",
+ "module": "PC Website",
+ "name": "Website About Content",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

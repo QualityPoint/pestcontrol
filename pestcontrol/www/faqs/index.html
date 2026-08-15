@@ -1,159 +1,14 @@
-<!DOCTYPE html>
-<html lang="zxx">
-<head>
-	<!-- Meta -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="author" content="Skystar">
-	<!-- Page Title -->
-    <title>FAQs | Skystar</title>
-	<!-- Favicon Icon -->
-	<link rel="shortcut icon" type="image/x-icon" href="/assets/pestcontrol/website/images/favicon.png">
-	<!-- Google Fonts Css-->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
-	<!-- Bootstrap Css -->
-	<link href="/assets/pestcontrol/website/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<!-- SlickNav Css -->
-	<link href="/assets/pestcontrol/website/css/slicknav.min.css" rel="stylesheet">
-	<!-- Swiper Css -->
-	<link rel="stylesheet" href="/assets/pestcontrol/website/css/swiper-bundle.min.css">
-	<!-- Font Awesome Icon Css-->
-	<link href="/assets/pestcontrol/website/css/all.min.css" rel="stylesheet" media="screen">
-	<!-- Animated Css -->
-	<link href="/assets/pestcontrol/website/css/animate.css" rel="stylesheet">
-    <!-- Magnific Popup Core Css File -->
-	<link rel="stylesheet" href="/assets/pestcontrol/website/css/magnific-popup.css">
-	<!-- Mouse Cursor Css File -->
-	<link rel="stylesheet" href="/assets/pestcontrol/website/css/mousecursor.css">
-	<!-- Main Custom Css -->
-	<link href="/assets/pestcontrol/website/css/custom.css" rel="stylesheet" media="screen">
+{% extends "pestcontrol/templates/includes/website_base.html" %}
 
-	<!-- Skystar Brand Overrides -->
-	<link href="/assets/pestcontrol/website/css/skystar.css" rel="stylesheet" media="screen">
-</head>
-<body>
+{% block title %}{{ _("FAQs") }} | Skystar{% endblock %}
 
-    <!-- Preloader Start -->
-	<div class="preloader">
-		<div class="loading-container">
-			<div class="loading"></div>
-			<div id="loading-icon"><img src="/assets/pestcontrol/website/images/loader.svg" alt=""></div>
-		</div>
-	</div>
-	<!-- Preloader End -->
+{% block page_header %}
+    {% set page_h1 = _("Frequently asked question") %}
+    {% set page_breadcrumb = _("FAQs") %}
+    {% include "pestcontrol/templates/includes/page_header.html" %}
+{% endblock %}
 
-    <!-- Topbar Section Start -->
-    <div class="topbar">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-9">
-                    <!-- Topbar Contact Information Start -->
-                    <div class="topbar-contact-info">
-                        <ul>
-                            <li><i class="fa-regular fa-envelope"></i><a href="mailto:info@the-skystar.com">info@the-skystar.com</a></li>
-                            <li><i class="fa-solid fa-location-dot"></i>6391 Elgin St. Celina, Delaware 10299</li>
-                        </ul>
-                    </div>
-                    <!-- Topbar Contact Information End -->
-                </div>
-
-                <div class="col-md-3">
-                    <!-- Topbar Social Links Start -->
-                    <div class="topbar-social-links">
-                        <ul>
-                            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
-                        </ul>
-                    </div>
-                    <!-- Topbar Social Links End -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Topbar Section End -->
-
-    <!-- Header Start -->
-	<header class="main-header">
-		<div class="header-sticky">
-			<nav class="navbar navbar-expand-lg">
-				<div class="container">
-					<!-- Logo Start -->
-					<a class="navbar-brand" href="/">
-						<img src="/assets/pestcontrol/website/icons/skystar-logo.png" alt="Skystar">
-					</a>
-					<!-- Logo End -->
-
-					<!-- Main Menu Start -->
-					<div class="collapse navbar-collapse main-menu">
-                        <div class="nav-menu-wrapper">
-                            <ul class="navbar-nav mr-auto" id="menu">
-                                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>                                
-                                <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
-                                <li class="nav-item submenu"><a class="nav-link" href="#">Pages</a>
-                                    <ul>                                        
-                                        <li class="nav-item"><a class="nav-link" href="/service-single">Service Details</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/blog-single">Blog Details</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/project-single">Project Details</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/team">Team</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/team-single">Team Details</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/pricing">Pricing Plan</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/testimonials">Testimonials</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/image-gallery">Image Gallery</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/video-gallery">Video Gallery</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/faqs">FAQs</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/404">404</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>                          
-                            </ul>
-                        </div>
-
-                        <!-- Header Btn Start -->
-                        <div class="header-btn">
-                            <a href="/contact" class="btn-default">get a quote</a>
-                        </div>
-                        <!-- Header Btn End -->                 
-					</div>
-					<!-- Main Menu End -->
-					<div class="navbar-toggle"></div>
-				</div>
-			</nav>
-			<div class="responsive-menu"></div>
-		</div>
-	</header>
-	<!-- Header End -->
-
-    <!-- Page Header Start -->
-    <div class="page-header parallaxie">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Page Header Box Start -->
-                    <div class="page-header-box">
-                        <h1 class="text-anime-style-2" data-cursor="-opaque">Frequently asked question</h1>
-                        <nav class="wow fadeInUp">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">FAQs</li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <!-- Page Header Box End -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Page Header End -->
-
+{% block content %}
     <!-- Page Faqs Start -->
     <div class="page-faqs">
         <div class="container">
@@ -164,10 +19,9 @@
                         <!-- Page Category List Start -->
                         <div class="page-catagery-list wow fadeInUp">
                             <ul>
-                                <li><a href="#faq_1">Pest Control Basics</a></li>
-                                <li><a href="#faq_2">Eco-Friendly Solutions</a></li>
-                                <li><a href="#faq_3">Pricing & Services</a></li>
-                                <li><a href="#faq_4">Residential & Commercial</a></li>
+                                {% for group_name in faq_groups %}
+                                <li><a href="#faq_{{ loop.index }}">{{ group_name }}</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <!-- Page Category List End -->
@@ -176,19 +30,19 @@
                         <div class="page-cta-box sidebar-cta-box wow fadeInUp" data-wow-delay="0.2s">
                             <!-- Page Cta Box Info Start -->
                             <div class="page-cta-box-info">
-                                <h3>Take Back Your Home From Pests. Today!</h3>
+                                <h3>{{ _("Take Back Your Home From Pests. Today!") }}</h3>
                             </div>
                             <!-- Page Cta Box Info End -->
 
                             <!-- Cta Contact Box Start -->
                             <div class="cta-contact-box">
-                                <p>call now</p>
+                                <p>{{ _("call now") }}</p>
                                 <div class="cta-contact-item">
                                     <div class="icon-box">
                                         <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">
                                     </div>
                                     <div class="cta-contact-item-content">
-                                        <h3><a href="tel:+966567407779">+966 56 740 7779</a></h3>
+                                        <h3><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></h3>
                                     </div>
                                 </div>
                             </div>
@@ -202,350 +56,36 @@
                 <div class="col-lg-8">
                     <!-- Page FAQs Catagery Start -->
                     <div class="page-faqs-catagery">
+                        {% for group_name, group_faqs in faq_groups.items() %}
+                        {% set group_index = loop.index %}
                         <!-- FAQs section start -->
-                        <div class="page-single-faqs page-faq-accordion" id="faq_1">
+                        <div class="page-single-faqs page-faq-accordion" id="faq_{{ group_index }}">
                             <div class="section-title">
-                                <h2 class="text-anime-style-2" data-cursor="-opaque">Pest control <span>basics</span></h2>
+                                <h2 class="text-anime-style-2" data-cursor="-opaque">{{ group_name }}</h2>
                             </div>
                             <!-- FAQ Accordion Start -->
-                            <div class="faq-accordion" id="accordion">
+                            <div class="faq-accordion" id="accordion{{ group_index }}">
+                                {% for faq in group_faqs %}
                                 <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp">
-                                    <h2 class="accordion-header" id="heading1">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                            What types of treatments do you offer?
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
+                                    <h2 class="accordion-header" id="heading{{ group_index }}-{{ loop.index }}">
+                                        <button class="accordion-button{{ '' if loop.first else ' collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ group_index }}-{{ loop.index }}" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="collapse{{ group_index }}-{{ loop.index }}">
+                                            {{ localize(faq, "question") }}
                                         </button>
                                     </h2>
-                                    <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#accordion">
+                                    <div id="collapse{{ group_index }}-{{ loop.index }}" class="accordion-collapse collapse{{ ' show' if loop.first else '' }}" aria-labelledby="heading{{ group_index }}-{{ loop.index }}" data-bs-parent="#accordion{{ group_index }}">
                                         <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
+                                            <p>{{ localize(faq, "answer") }}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
-                                    <h2 class="accordion-header" id="heading2">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                            Do I need a consultation before getting treatment?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#accordion">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
-                                    <h2 class="accordion-header" id="heading3">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                            Are your treatments suitable for all skin types?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordion">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
-                                    <h2 class="accordion-header" id="heading4">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                            Do you offer cosmetic dermatology services?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordion">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
-                                    <h2 class="accordion-header" id="heading5">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                                            What should I expect during my first visit?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#accordion">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
+                                {% endfor %}
                             </div>
                             <!-- FAQ Accordion End -->
                         </div>
                         <!-- FAQs section End -->
-
-                        <!-- FAQs section start -->
-                        <div class="page-single-faqs page-faq-accordion" id="faq_2">
-                            <div class="section-title">
-                                <h2 class="text-anime-style-2" data-cursor="-opaque">Eco - friendly <span>solutions</span></h2>
-                            </div>
-                            <!-- FAQ Accordion Start -->
-                            <div class="faq-accordion" id="accordion1">
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp">
-                                    <h2 class="accordion-header" id="heading6">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="true" aria-controls="collapse6">
-                                            What types of treatments do you offer?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse6" class="accordion-collapse collapse show" aria-labelledby="heading6" data-bs-parent="#accordion1">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
-                                    <h2 class="accordion-header" id="heading7">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
-                                            Do I need a consultation before getting treatment?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="heading7" data-bs-parent="#accordion1">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
-                                    <h2 class="accordion-header" id="heading8">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
-                                            Are your treatments suitable for all skin types?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse8" class="accordion-collapse collapse" aria-labelledby="heading8" data-bs-parent="#accordion1">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
-                                    <h2 class="accordion-header" id="heading9">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
-                                            Do you offer cosmetic dermatology services?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse9" class="accordion-collapse collapse" aria-labelledby="heading9" data-bs-parent="#accordion1">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
-                                    <h2 class="accordion-header" id="heading10">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
-                                            What should I expect during my first visit?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse10" class="accordion-collapse collapse" aria-labelledby="heading10" data-bs-parent="#accordion1">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                            </div>
-                            <!-- FAQ Accordion End -->
-                        </div>
-                        <!-- FAQs section End -->
-
-                        <!-- FAQs section start -->
-                        <div class="page-single-faqs page-faq-accordion" id="faq_3">
-                            <div class="section-title">
-                                <h2 class="text-anime-style-2" data-cursor="-opaque">Pricing & <span>services</span></h2>
-                            </div>
-                            <!-- FAQ Accordion Start -->
-                            <div class="faq-accordion" id="accordion2">
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp">
-                                    <h2 class="accordion-header" id="heading11">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse11" aria-expanded="true" aria-controls="collapse11">
-                                            What types of treatments do you offer?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse11" class="accordion-collapse collapse show" aria-labelledby="heading11" data-bs-parent="#accordion2">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
-                                    <h2 class="accordion-header" id="heading12">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse12" aria-expanded="false" aria-controls="collapse12">
-                                            Do I need a consultation before getting treatment?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse12" class="accordion-collapse collapse" aria-labelledby="heading12" data-bs-parent="#accordion2">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
-                                    <h2 class="accordion-header" id="heading13">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse13" aria-expanded="false" aria-controls="collapse13">
-                                            Are your treatments suitable for all skin types?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse13" class="accordion-collapse collapse" aria-labelledby="heading13" data-bs-parent="#accordion2">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
-                                    <h2 class="accordion-header" id="heading14">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse14" aria-expanded="false" aria-controls="collapse14">
-                                            Do you offer cosmetic dermatology services?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse14" class="accordion-collapse collapse" aria-labelledby="heading14" data-bs-parent="#accordion2">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
-                                    <h2 class="accordion-header" id="heading15">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse15" aria-expanded="false" aria-controls="collapse15">
-                                            What should I expect during my first visit?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse15" class="accordion-collapse collapse" aria-labelledby="heading15" data-bs-parent="#accordion2">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-                            </div>
-                            <!-- FAQ Accordion End -->
-                        </div>
-                        <!-- FAQs section End -->
-
-                        <!-- FAQs section start -->
-                        <div class="page-single-faqs page-faq-accordion" id="faq_4">
-                            <div class="section-title">
-                                <h2 class="text-anime-style-2" data-cursor="-opaque">Residential & <span>Commercial</span></h2>
-                            </div>
-                            <!-- FAQ Accordion Start -->
-                            <div class="faq-accordion" id="accordion3">
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp">
-                                    <h2 class="accordion-header" id="heading16">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse16" aria-expanded="false" aria-controls="collapse16">
-                                            What types of treatments do you offer?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse16" class="accordion-collapse collapse show" aria-labelledby="heading16" data-bs-parent="#accordion3">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
-                                    <h2 class="accordion-header" id="heading17">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse17" aria-expanded="true" aria-controls="collapse17">
-                                            Do I need a consultation before getting treatment?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse17" class="accordion-collapse collapse" aria-labelledby="heading17" data-bs-parent="#accordion3">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
-                                    <h2 class="accordion-header" id="heading18">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse18" aria-expanded="false" aria-controls="collapse18">
-                                            Are your treatments suitable for all skin types?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse18" class="accordion-collapse collapse" aria-labelledby="heading18" data-bs-parent="#accordion3">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
-                                    <h2 class="accordion-header" id="heading19">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse19" aria-expanded="true" aria-controls="collapse19">
-                                            Do you offer cosmetic dermatology services?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse19" class="accordion-collapse collapse" aria-labelledby="heading19" data-bs-parent="#accordion3">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-
-                                <!-- FAQ Item Start -->
-                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
-                                    <h2 class="accordion-header" id="heading20">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse20" aria-expanded="false" aria-controls="collapse20">
-                                            What should I expect during my first visit?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse20" class="accordion-collapse collapse" aria-labelledby="heading20" data-bs-parent="#accordion3">
-                                        <div class="accordion-body">
-                                            <p>We offer a wide range of dermatology treatments, including acne care, psoriasis management, skin cancer screening, cosmetic procedures like Botox etc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FAQ Item End -->
-                            </div>
-                            <!-- FAQ Accordion End -->
-                        </div>
-                        <!-- FAQs section End -->
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -553,142 +93,4 @@
     </div>
     <!-- Page Faqs End -->
 
-
-    <!-- Main Footer Start -->
-    <footer class="main-footer dark-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5">
-                    <!-- About Footer Start -->
-                    <div class="about-footer footer-links">
-                        <h3>About Skystar</h3>
-                        <p>we are dedicated to creating safe, pest-free environments for homes and businesses alike. With years of experience in the pest control industry.</p>
-                        <p>we pride ourselves on delivering effective, eco-friendly solutions tailored to your needs.</p>
-                    </div>
-                    <!-- About Footer End -->
-                </div>
-
-                <div class="col-lg-2 col-md-3">
-                    <!-- Footer Links Start -->
-                    <div class="footer-links">
-                        <h3>services</h3>
-                        <ul>
-                            <li><a href="/about">About company</a></li>
-                            <li><a href="/services">Our services</a></li>
-                            <li><a href="/projects">Our projects</a></li>
-                            <li><a href="/blog">Our blogs</a></li>
-                            <li><a href="/contact">Contact us</a></li>
-                        </ul>
-                    </div>
-                    <!-- Footer Links End -->
-                </div>
-                
-                <div class="col-lg-2 col-md-4">
-                    <!-- Footer Links Start -->
-                    <div class="footer-links">
-                        <h3>Links</h3>
-                        <ul>
-                            <li><a href="/project-single">Home Pest Control</a></li>
-                            <li><a href="/project-single">Commercial Pest</a></li>
-                            <li><a href="/project-single">Termite & Rodent</a></li>
-                            <li><a href="/project-single">Eco-Friendly Pest</a></li>
-                            <li><a href="/project-single">Wildlife Removal</a></li>
-                        </ul>
-                    </div>
-                    <!-- Footer Links End -->
-                </div>
-
-                <div class="col-lg-3 col-md-5">
-                    <div class="footer-links">
-                        <h3>contact us</h3>                        
-                        <!-- Footer Contact Item Start -->
-                        <div class="footer-contact-item">
-                            <div class="icon-box">
-                                <i class="fa-solid fa-envelope"></i>
-                            </div>
-                            <div class="footer-contact-content">
-                                <p><a href="tel:+966567407779">+966 56 740 7779</a></p>
-                            </div>
-                        </div>
-                        <!-- Footer Contact Item End -->
-                        
-                        <!-- Footer Contact Item Start -->
-                        <div class="footer-contact-item">
-                            <div class="icon-box">
-                                <i class="fa-solid fa-phone"></i>
-                            </div>
-                            <div class="footer-contact-content">
-                                <p><a href="mailto:info@the-skystar.com">info@the-skystar.com</a></p>
-                            </div>
-                        </div>
-                        <!-- Footer Contact Item End -->
-                    </div>
-                </div>
-
-                <div class="col-lg-12">
-                    <!-- Footer Copyright Start -->
-                    <div class="footer-copyright">
-                        <!-- Footer Logo Start -->
-                        <div class="footer-logo">
-                            <img src="/assets/pestcontrol/website/icons/skystar-logo.png" alt="Skystar">
-                        </div>
-                        <!-- Footer Logo End -->
-
-                        <!-- Footer Social Links Start -->
-                        <div class="footer-social-links">
-                            <ul>
-                                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
-                            </ul>
-                        </div>
-                        <!-- Footer Social Links End -->
-
-                        <!-- Footer Copyright Text Start -->
-                        <div class="footer-copyright-text">
-                            <p>Copyright © {{ year }} Skystar. All Rights Reserved.</p>
-                        </div>
-                        <!-- Footer Copyright Text End -->                        
-                    </div>
-                    <!-- Footer Copyright End -->
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Main Footer End -->
-
-    <!-- Jquery Library File -->
-    <script src="/assets/pestcontrol/website/js/jquery-3.7.1.min.js"></script>
-    <!-- Bootstrap js file -->
-    <script src="/assets/pestcontrol/website/js/bootstrap.min.js"></script>
-    <!-- Validator js file -->
-    <script src="/assets/pestcontrol/website/js/validator.min.js"></script>
-    <!-- SlickNav js file -->
-    <script src="/assets/pestcontrol/website/js/jquery.slicknav.js"></script>
-    <!-- Swiper js file -->
-    <script src="/assets/pestcontrol/website/js/swiper-bundle.min.js"></script>
-    <!-- Counter js file -->
-    <script src="/assets/pestcontrol/website/js/jquery.waypoints.min.js"></script>
-    <script src="/assets/pestcontrol/website/js/jquery.counterup.min.js"></script>
-    <!-- Isotop js file -->
-	<script src="/assets/pestcontrol/website/js/isotope.min.js"></script>
-    <!-- Magnific js file -->
-    <script src="/assets/pestcontrol/website/js/jquery.magnific-popup.min.js"></script>
-    <!-- SmoothScroll -->
-    <script src="/assets/pestcontrol/website/js/SmoothScroll.js"></script>
-    <!-- Parallax js -->
-    <script src="/assets/pestcontrol/website/js/parallaxie.js"></script>
-    <!-- MagicCursor js file -->
-    <script src="/assets/pestcontrol/website/js/gsap.min.js"></script>
-    <script src="/assets/pestcontrol/website/js/magiccursor.js"></script>
-    <!-- Text Effect js file -->
-    <script src="/assets/pestcontrol/website/js/SplitText.js"></script>
-    <script src="/assets/pestcontrol/website/js/ScrollTrigger.min.js"></script>
-    <!-- YTPlayer js File -->
-    <script src="/assets/pestcontrol/website/js/jquery.mb.YTPlayer.min.js"></script>
-    <!-- Wow js file -->
-    <script src="/assets/pestcontrol/website/js/wow.min.js"></script>
-    <!-- Main Custom js file -->
-    <script src="/assets/pestcontrol/website/js/function.js"></script>
-</body>
-</html>
+{% endblock %}

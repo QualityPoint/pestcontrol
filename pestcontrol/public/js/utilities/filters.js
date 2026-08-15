@@ -1,3 +1,3 @@
-frappe.provide('pestcontrol.filters');
+frappe.provide("pestcontrol.filters");
 
-pestcontrol.filters = {}
+pestcontrol.filters = {};

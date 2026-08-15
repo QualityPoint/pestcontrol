@@ -1,0 +1,702 @@
+    <!-- Jquery Library File -->
+    <script src="/assets/pestcontrol/website/js/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap js file -->
+    <script src="/assets/pestcontrol/website/js/bootstrap.min.js"></script>
+    <!-- Validator js file -->
+    <script src="/assets/pestcontrol/website/js/validator.min.js"></script>
+    <!-- SlickNav js file -->
+    <script src="/assets/pestcontrol/website/js/jquery.slicknav.js"></script>
+    <!-- Swiper js file -->
+    <script src="/assets/pestcontrol/website/js/swiper-bundle.min.js"></script>
+    <!-- Counter js file -->
+    <script src="/assets/pestcontrol/website/js/jquery.waypoints.min.js"></script>
+    <script src="/assets/pestcontrol/website/js/jquery.counterup.min.js"></script>
+    <!-- Isotop js file -->
+	<script src="/assets/pestcontrol/website/js/isotope.min.js"></script>
+    <!-- Magnific js file -->
+    <script src="/assets/pestcontrol/website/js/jquery.magnific-popup.min.js"></script>
+    <!-- SmoothScroll -->
+    <script src="/assets/pestcontrol/website/js/SmoothScroll.js"></script>
+    <!-- Parallax js -->
+    <script src="/assets/pestcontrol/website/js/parallaxie.js"></script>
+    <!-- MagicCursor js file -->
+    <script src="/assets/pestcontrol/website/js/gsap.min.js"></script>
+    <script src="/assets/pestcontrol/website/js/magiccursor.js"></script>
+    <!-- Text Effect js file -->
+    <script src="/assets/pestcontrol/website/js/SplitText.js"></script>
+    <script src="/assets/pestcontrol/website/js/ScrollTrigger.min.js"></script>
+    <!-- Wow js file -->
+    <script src="/assets/pestcontrol/website/js/wow.min.js"></script>
+    <!-- Main Custom js file -->
+    <script src="/assets/pestcontrol/website/js/function.js?v={{ asset_version('website/js/function.js') }}"></script>
+
+    <!-- Mobile Menu Toggle Accessibility -->
+    <!-- SlickNav (vendored) generates its own toggle button with no
+         accessible name and no aria-expanded state — patched here instead
+         of editing the library file. -->
+    <script>
+        var slicknavBtn = document.querySelector(".slicknav_btn");
+        if (slicknavBtn) slicknavBtn.setAttribute("aria-label", "{{ _('Toggle navigation menu') }}");
+
+        document.addEventListener("click", function (e) {
+            var toggle = e.target.closest(".slicknav_btn");
+            if (!toggle) return;
+            setTimeout(function () {
+                toggle.setAttribute("aria-expanded", toggle.classList.contains("slicknav_open") ? "true" : "false");
+            }, 0);
+        });
+    </script>
+
+    <!-- Language Switcher -->
+    <script>
+        document.addEventListener("click", function (e) {
+            var langSwitch = document.getElementById("langSwitch");
+
+            var option = e.target.closest("[data-set-lang]");
+            if (option) {
+                e.preventDefault();
+                var lang = option.getAttribute("data-set-lang");
+                document.cookie = "preferred_language=" + lang + ";path=/;max-age=31536000";
+                // The cookie alone is ignored by Frappe for logged-in users
+                // (it only reads it for Guests) — the _lang query param is
+                // checked first and always wins, so use it to force the
+                // switch immediately regardless of session state.
+                var url = new URL(window.location.href);
+                url.searchParams.set("_lang", lang);
+                window.location.href = url.toString();
+                return;
+            }
+
+            var toggle = e.target.closest("#langSwitchToggle");
+            if (toggle) {
+                e.preventDefault();
+                var isOpen = langSwitch.classList.toggle("open");
+                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                return;
+            }
+
+            if (langSwitch && !langSwitch.contains(e.target)) {
+                langSwitch.classList.remove("open");
+                var langSwitchToggle = document.getElementById("langSwitchToggle");
+                if (langSwitchToggle) langSwitchToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key !== "Escape") return;
+            var langSwitch = document.getElementById("langSwitch");
+            if (langSwitch && langSwitch.classList.contains("open")) {
+                langSwitch.classList.remove("open");
+                var langSwitchToggle = document.getElementById("langSwitchToggle");
+                if (langSwitchToggle) {
+                    langSwitchToggle.setAttribute("aria-expanded", "false");
+                    langSwitchToggle.focus();
+                }
+            }
+        });
+    </script>
+
+    <!-- Deaf-Friendly Contact Dropdown -->
+    <script>
+        document.addEventListener("click", function (e) {
+            var deafContact = document.getElementById("deafContact");
+            if (!deafContact) return;
+
+            var toggle = e.target.closest("#deafContactToggle");
+            if (toggle) {
+                e.preventDefault();
+                var isOpen = deafContact.classList.toggle("open");
+                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                return;
+            }
+
+            if (!deafContact.contains(e.target)) {
+                deafContact.classList.remove("open");
+                var deafContactToggle = document.getElementById("deafContactToggle");
+                if (deafContactToggle) deafContactToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key !== "Escape") return;
+            var deafContact = document.getElementById("deafContact");
+            if (deafContact && deafContact.classList.contains("open")) {
+                deafContact.classList.remove("open");
+                var deafContactToggle = document.getElementById("deafContactToggle");
+                if (deafContactToggle) {
+                    deafContactToggle.setAttribute("aria-expanded", "false");
+                    deafContactToggle.focus();
+                }
+            }
+        });
+    </script>
+
+    <!-- Contact Form Submit -->
+    <script>
+        document.querySelectorAll("#contactForm").forEach(function (form) {
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var msgBox = form.querySelector("#msgSubmit");
+                var formData = new FormData(form);
+                fetch("/api/method/pestcontrol.pc_website.api.submit_contact_form", {
+                    method: "POST",
+                    body: formData,
+                    headers: { "X-Frappe-CSRF-Token": "{{ csrf_token }}" },
+                })
+                    .then(function (response) {
+                        if (!response.ok) throw new Error("Request failed");
+                        return response.json();
+                    })
+                    .then(function () {
+                        if (msgBox) {
+                            msgBox.classList.remove("hidden");
+                            msgBox.classList.add("text-success");
+                            msgBox.textContent = "Your message has been sent successfully.";
+                        }
+                        form.reset();
+                    })
+                    .catch(function () {
+                        if (msgBox) {
+                            msgBox.classList.remove("hidden");
+                            msgBox.classList.add("text-danger");
+                            msgBox.textContent = "Something went wrong. Please try again.";
+                        }
+                    });
+            });
+        });
+    </script>
+
+    <!-- Login Form Submit -->
+    <script>
+        var loginForm = document.getElementById("loginForm");
+        if (loginForm) {
+            loginForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var msgBox = document.getElementById("loginMsg");
+                var formData = new FormData(loginForm);
+                fetch("/api/method/login", {
+                    method: "POST",
+                    body: formData,
+                    headers: { "X-Frappe-CSRF-Token": "{{ csrf_token }}" },
+                })
+                    .then(function (response) {
+                        return response.json().then(function (data) {
+                            if (!response.ok) throw new Error((data.message && data.message.message) || "Invalid login");
+                            return data;
+                        });
+                    })
+                    .then(function () {
+                        var redirectTo = loginForm.getAttribute("data-redirect-to");
+                        window.location.href = redirectTo || "/";
+                    })
+                    .catch(function (err) {
+                        if (msgBox) {
+                            msgBox.classList.remove("hidden");
+                            msgBox.classList.add("text-danger");
+                            msgBox.textContent = err.message || "Invalid email or password.";
+                        }
+                    });
+            });
+        }
+    </script>
+
+    <!-- Signup Form Submit -->
+    <script>
+        var signupForm = document.getElementById("signupForm");
+        if (signupForm) {
+            signupForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var msgBox = document.getElementById("signupMsg");
+                var formData = new FormData(signupForm);
+                formData.append("redirect_to", signupForm.getAttribute("data-redirect-to") || "");
+                fetch("/api/method/frappe.core.doctype.user.user.sign_up", {
+                    method: "POST",
+                    body: formData,
+                    headers: { "X-Frappe-CSRF-Token": "{{ csrf_token }}" },
+                })
+                    .then(function (response) {
+                        return response.json().then(function (data) {
+                            if (!response.ok) throw new Error((data.message && data.message.message) || "Sign up failed");
+                            return data;
+                        });
+                    })
+                    .then(function (data) {
+                        var result = data.message || [];
+                        var ok = result[0] === 1 || result[0] === 2;
+                        if (msgBox) {
+                            msgBox.classList.remove("hidden");
+                            msgBox.classList.add(ok ? "text-success" : "text-danger");
+                            msgBox.textContent = result[1] || "Something went wrong.";
+                        }
+                        if (ok) signupForm.reset();
+                    })
+                    .catch(function (err) {
+                        if (msgBox) {
+                            msgBox.classList.remove("hidden");
+                            msgBox.classList.add("text-danger");
+                            msgBox.textContent = err.message || "Something went wrong. Please try again.";
+                        }
+                    });
+            });
+        }
+    </script>
+
+    <!-- Logout -->
+    <script>
+        document.addEventListener("click", function (e) {
+            var logoutLink = e.target.closest("#logoutLink");
+            if (!logoutLink) return;
+            e.preventDefault();
+            fetch("/api/method/logout", {
+                method: "POST",
+                headers: { "X-Frappe-CSRF-Token": "{{ csrf_token }}" },
+            }).then(function () {
+                window.location.href = "/";
+            });
+        });
+    </script>
+
+    <!-- Accessibility Toolbar -->
+    <script>
+        (function () {
+            var root = document.documentElement;
+            var toolbar = document.getElementById("a11yToolbar");
+            if (!toolbar) return;
+            var toggle = document.getElementById("a11yToolbarToggle");
+            var panel = document.getElementById("a11yPanel");
+            var MAX_FONT_STEP = 3;
+
+            // Maps each toggle card's data-a11y-action to the prefs key it
+            // reads/writes, so syncUI/apply don't need one-off code per
+            // feature — add a new toggle card in accessibility_toolbar.html
+            // and one CSS rule, and it works without touching this script.
+            var TOGGLE_PREFS = {
+                "readable-font": "readableFont",
+                "dyslexia-font": "dyslexiaFont",
+                "invert": "invert",
+                "highlight-links": "highlightLinks",
+                "highlight-headings": "highlightHeadings",
+                "line-spacing": "lineSpacing",
+                "text-align": "textAlign",
+                "reduce-motion": "reduceMotion",
+                "toolbar-large": "toolbarLarge",
+            };
+
+            // "Visually pleasing experience" is a radio group, not a set of
+            // independent toggles — only one whole-page color/contrast
+            // treatment makes sense at a time — so it's stored as a single
+            // prefs.visualStyle string rather than in TOGGLE_PREFS.
+            var VISUAL_STYLES = ["high-contrast", "monochrome", "light-contrast", "low-saturation", "high-saturation"];
+
+            // Custom color pickers — each stores a hex string (or is unset).
+            var COLOR_KEYS = { "text": "textColor", "title": "titleColor", "background": "backgroundColor" };
+
+            // Assistance profiles — one-click bundles of the same prefs
+            // above (plus two prefs that only exist as part of a bundle:
+            // keyboardNav and colorBlindAssist, no standalone card for
+            // either). A profile's switch shows "on" only when every pref
+            // it sets currently matches — no separate on/off state is
+            // stored for the profile itself, so flipping an individual
+            // card later naturally shows the profile as no longer active.
+            var PROFILE_PREFS = {
+                "seizure-safe": { reduceMotion: true, visualStyle: "low-saturation" },
+                "vision-impaired": { readableFont: true, visualStyle: "high-contrast", fontStep: 2 },
+                "cognitive": { reduceMotion: true, lineSpacing: true, textAlign: true, highlightHeadings: true },
+                "motor": { keyboardNav: true },
+                "color-blind": { colorBlindAssist: true, highlightLinks: true },
+                "dyslexia": { dyslexiaFont: true, lineSpacing: true, textAlign: true },
+                "adhd": { reduceMotion: true, highlightHeadings: true, highlightLinks: true },
+                // Blindness Mode has no visual effect on purpose — a fully
+                // blind visitor doesn't see the page, so CSS toggles don't
+                // help them the way they help low-vision or motor
+                // profiles. The real accessibility work for screen reader
+                // users is the skip link, labeled fields, described
+                // images and ARIA landmarks already built into every page;
+                // this switch just confirms that out loud (see the
+                // announce() call below) rather than pretending a CSS
+                // class can do something it can't.
+                "blindness": { screenReaderMode: true },
+            };
+
+            function loadPrefs() {
+                try {
+                    return JSON.parse(localStorage.getItem("a11yPrefs") || "{}");
+                } catch (e) {
+                    return {};
+                }
+            }
+
+            function savePrefs(prefs) {
+                try {
+                    localStorage.setItem("a11yPrefs", JSON.stringify(prefs));
+                } catch (e) {}
+            }
+
+            // Reflect the current saved state onto the panel's buttons
+            // (the classes on <html> were already applied early, in
+            // website_head.html, to avoid a flash of unstyled content —
+            // this just syncs the UI to match on this page's load).
+            function syncUI(prefs) {
+                Object.keys(TOGGLE_PREFS).forEach(function (action) {
+                    var on = !!prefs[TOGGLE_PREFS[action]];
+                    toolbar.querySelectorAll("[data-a11y-action='" + action + "']").forEach(function (btn) {
+                        btn.setAttribute("aria-checked", on ? "true" : "false");
+                        btn.classList.toggle("is-active", on);
+                    });
+                });
+                Object.keys(PROFILE_PREFS).forEach(function (profile) {
+                    var wanted = PROFILE_PREFS[profile];
+                    var on = Object.keys(wanted).every(function (key) { return prefs[key] === wanted[key]; });
+                    toolbar.querySelectorAll("[data-a11y-profile='" + profile + "']").forEach(function (btn) {
+                        btn.setAttribute("aria-checked", on ? "true" : "false");
+                    });
+                });
+                VISUAL_STYLES.forEach(function (style) {
+                    var on = prefs.visualStyle === style;
+                    toolbar.querySelectorAll("[data-a11y-style='" + style + "']").forEach(function (btn) {
+                        btn.setAttribute("aria-checked", on ? "true" : "false");
+                        btn.classList.toggle("is-active", on);
+                    });
+                });
+                Object.keys(COLOR_KEYS).forEach(function (color) {
+                    var value = prefs[COLOR_KEYS[color]];
+                    var swatch = toolbar.querySelector("[data-a11y-swatch='" + color + "']");
+                    if (swatch) swatch.style.background = value || "";
+                    var input = toolbar.querySelector("[data-a11y-color-input='" + color + "']");
+                    if (input && value) input.value = value;
+                });
+
+                // Small "N active" badges next to each section title — a
+                // quick-glance summary of what's on without opening every
+                // card, matching the counts shown in the reference design.
+                var visualStyleCount = prefs.visualStyle ? 1 : 0;
+                setBadge("visual-style", visualStyleCount);
+                setBadge("reading", ["readableFont", "dyslexiaFont", "lineSpacing", "textAlign"].filter(function (k) { return !!prefs[k]; }).length + (prefs.fontStep ? 1 : 0));
+                setBadge("visual-aids", ["highlightLinks", "highlightHeadings", "invert", "reduceMotion"].filter(function (k) { return !!prefs[k]; }).length);
+            }
+
+            function setBadge(name, count) {
+                toolbar.querySelectorAll("[data-a11y-badge='" + name + "']").forEach(function (badge) {
+                    badge.textContent = count;
+                    badge.hidden = count === 0;
+                });
+            }
+
+            // Speaks a message through the page's screen-reader-only live
+            // region (Blindness Mode's only real effect — see the comment
+            // on PROFILE_PREFS.blindness above).
+            function announce(message) {
+                var region = document.getElementById("a11yAnnouncer");
+                if (!region) return;
+                region.textContent = "";
+                window.setTimeout(function () { region.textContent = message; }, 50);
+            }
+
+            function apply(prefs) {
+                for (var i = 1; i <= MAX_FONT_STEP; i++) root.classList.remove("a11y-font-" + i);
+                if (prefs.fontStep) root.classList.add("a11y-font-" + prefs.fontStep);
+                if (prefs.visualStyle) root.setAttribute("data-a11y-visual-style", prefs.visualStyle);
+                else root.removeAttribute("data-a11y-visual-style");
+                root.classList.toggle("a11y-readable-font", !!prefs.readableFont);
+                root.classList.toggle("a11y-dyslexia-font", !!prefs.dyslexiaFont);
+                root.classList.toggle("a11y-reduce-motion", !!prefs.reduceMotion);
+                root.classList.toggle("a11y-highlight-links", !!prefs.highlightLinks);
+                root.classList.toggle("a11y-highlight-headings", !!prefs.highlightHeadings);
+                root.classList.toggle("a11y-line-spacing", !!prefs.lineSpacing);
+                root.classList.toggle("a11y-text-align", !!prefs.textAlign);
+                root.classList.toggle("a11y-invert", !!prefs.invert);
+                root.classList.toggle("a11y-toolbar-large", !!prefs.toolbarLarge);
+                root.classList.toggle("a11y-keyboard-nav", !!prefs.keyboardNav);
+                root.classList.toggle("a11y-color-blind", !!prefs.colorBlindAssist);
+                root.classList.toggle("a11y-widget-minimized", !!prefs.widgetMinimized);
+
+                root.classList.toggle("a11y-custom-text", !!prefs.textColor);
+                root.classList.toggle("a11y-custom-title", !!prefs.titleColor);
+                root.classList.toggle("a11y-custom-bg", !!prefs.backgroundColor);
+                if (prefs.textColor) root.style.setProperty("--a11y-text-color", prefs.textColor);
+                if (prefs.titleColor) root.style.setProperty("--a11y-title-color", prefs.titleColor);
+                if (prefs.backgroundColor) root.style.setProperty("--a11y-bg-color", prefs.backgroundColor);
+
+                syncUI(prefs);
+                savePrefs(prefs);
+            }
+
+            function openPanel() {
+                toolbar.classList.add("open");
+                toggle.setAttribute("aria-expanded", "true");
+            }
+
+            function closePanel(focusToggle) {
+                toolbar.classList.remove("open");
+                toggle.setAttribute("aria-expanded", "false");
+                if (focusToggle) toggle.focus();
+            }
+
+            // Navigation Keys guide — opens on demand via the keyboard icon
+            // in the panel header, and automatically whenever Motor
+            // Impaired Mode is turned on (see the profile click handler
+            // below), since keyboard navigation is exactly what that mode
+            // is for.
+            var navKeysModal = document.getElementById("a11yNavKeysModal");
+            var navKeysBackdrop = document.getElementById("a11yNavKeysBackdrop");
+
+            function showNavKeys() {
+                navKeysModal.hidden = false;
+                navKeysBackdrop.hidden = false;
+                document.getElementById("a11yNavKeysClose").focus();
+            }
+
+            function hideNavKeys() {
+                navKeysModal.hidden = true;
+                navKeysBackdrop.hidden = true;
+            }
+
+            syncUI(loadPrefs());
+
+            document.addEventListener("click", function (e) {
+                if (e.target.closest("#a11yToolbarToggle")) {
+                    if (toolbar.classList.contains("open")) {
+                        closePanel(false);
+                    } else {
+                        openPanel();
+                        // Waking the widget back up from "minimized" the
+                        // moment it's used again — it's a visibility
+                        // preference, not a way to lose the feature.
+                        var prefs = loadPrefs();
+                        if (prefs.widgetMinimized) {
+                            prefs.widgetMinimized = false;
+                            apply(prefs);
+                        }
+                    }
+                    return;
+                }
+
+                if (e.target.closest("#a11yPanelClose") || e.target.closest("#a11yBackdrop")) {
+                    closePanel(true);
+                    return;
+                }
+
+                if (e.target.closest("#a11yNavKeysOpen")) {
+                    showNavKeys();
+                    return;
+                }
+
+                if (e.target.closest("#a11yNavKeysClose") || e.target.closest("#a11yNavKeysBackdrop")) {
+                    hideNavKeys();
+                    return;
+                }
+
+                if (e.target.closest("#a11yNavKeysGotIt")) {
+                    hideNavKeys();
+                    return;
+                }
+
+                var infoToggle = e.target.closest("[data-a11y-info-toggle]");
+                if (infoToggle) {
+                    var details = document.getElementById(infoToggle.getAttribute("aria-controls"));
+                    var isOpen = details.hidden;
+                    details.hidden = !isOpen;
+                    infoToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                    return;
+                }
+
+                var profilesToggle = e.target.closest("#a11yProfilesToggle");
+                if (profilesToggle) {
+                    var list = document.getElementById("a11yProfilesList");
+                    var isOpen = list.hidden;
+                    list.hidden = !isOpen;
+                    profilesToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                    return;
+                }
+
+                var profile = e.target.closest("[data-a11y-profile]");
+                if (profile) {
+                    var prefs = loadPrefs();
+                    var name = profile.getAttribute("data-a11y-profile");
+                    var wanted = PROFILE_PREFS[name];
+                    var isOn = Object.keys(wanted).every(function (key) { return prefs[key] === wanted[key]; });
+                    if (isOn) {
+                        // Turn the profile off: reset exactly the keys it set.
+                        Object.keys(wanted).forEach(function (key) {
+                            prefs[key] = key === "fontStep" ? 0 : false;
+                        });
+                    } else {
+                        Object.assign(prefs, wanted);
+                        if (wanted.readableFont) prefs.dyslexiaFont = false;
+                        if (wanted.dyslexiaFont) prefs.readableFont = false;
+                    }
+                    apply(prefs);
+                    if (name === "blindness") {
+                        announce(isOn ?
+                            "{{ _('Screen reader accessibility mode turned off.') }}" :
+                            "{{ _('Screen reader accessibility mode turned on. This site includes a skip link, labeled form fields, described images, and landmark navigation.') }}"
+                        );
+                    }
+                    // Turning on Motor Impaired Mode is exactly the moment
+                    // someone needs to know the keyboard shortcuts exist —
+                    // show the guide every time it's switched on.
+                    if (!isOn && name === "motor") {
+                        showNavKeys();
+                    }
+                    return;
+                }
+
+                var styleBtn = e.target.closest("[data-a11y-style]");
+                if (styleBtn) {
+                    var prefs = loadPrefs();
+                    var style = styleBtn.getAttribute("data-a11y-style");
+                    prefs.visualStyle = prefs.visualStyle === style ? "" : style;
+                    apply(prefs);
+                    return;
+                }
+
+                var colorRow = e.target.closest("[data-a11y-color]");
+                if (colorRow) {
+                    var input = toolbar.querySelector("[data-a11y-color-input='" + colorRow.getAttribute("data-a11y-color") + "']");
+                    if (input) input.click();
+                    return;
+                }
+
+                var action = e.target.closest("[data-a11y-action]");
+                if (action) {
+                    var prefs = loadPrefs();
+                    var name = action.getAttribute("data-a11y-action");
+                    switch (name) {
+                        case "font-increase":
+                            prefs.fontStep = Math.min((prefs.fontStep || 0) + 1, MAX_FONT_STEP);
+                            break;
+                        case "font-decrease":
+                            prefs.fontStep = Math.max((prefs.fontStep || 0) - 1, 0);
+                            break;
+                        case "reset":
+                            prefs = {};
+                            break;
+                        case "hide-widget":
+                            prefs.widgetMinimized = true;
+                            closePanel(false);
+                            break;
+                        // Readable font and dyslexia font both swap the whole
+                        // page's font-family, so only one can be active —
+                        // turning one on clears the other.
+                        case "readable-font":
+                            prefs.readableFont = !prefs.readableFont;
+                            if (prefs.readableFont) prefs.dyslexiaFont = false;
+                            break;
+                        case "dyslexia-font":
+                            prefs.dyslexiaFont = !prefs.dyslexiaFont;
+                            if (prefs.dyslexiaFont) prefs.readableFont = false;
+                            break;
+                        default:
+                            if (TOGGLE_PREFS[name]) prefs[TOGGLE_PREFS[name]] = !prefs[TOGGLE_PREFS[name]];
+                    }
+                    apply(prefs);
+                    return;
+                }
+
+                if (toolbar.classList.contains("open") && !panel.contains(e.target) && !toggle.contains(e.target)) {
+                    closePanel(false);
+                }
+            });
+
+            toolbar.addEventListener("input", function (e) {
+                var input = e.target.closest("[data-a11y-color-input]");
+                if (!input) return;
+                var prefs = loadPrefs();
+                var color = input.getAttribute("data-a11y-color-input");
+                prefs[COLOR_KEYS[color]] = input.value;
+                apply(prefs);
+            });
+
+            // Single-key jump navigation (Navigation Keys) — lets a
+            // keyboard-only visitor jump straight to the next landmark of
+            // a given kind instead of tabbing through everything between
+            // here and there. Elements that aren't natively focusable
+            // (headings, nav landmarks, images) get tabindex="-1" the
+            // first time they're jumped to, so they can receive
+            // programmatic focus without joining the normal Tab order.
+            var NAV_KEY_TARGETS = {
+                m: 'nav, [role="navigation"]',
+                h: "h1, h2, h3, h4, h5, h6",
+                f: "form input, form textarea, form select",
+                b: 'button, [role="button"], a.btn-default, input[type="submit"], input[type="button"]',
+                g: "img",
+            };
+
+            function isEditableTarget(el) {
+                if (!el) return false;
+                var tag = el.tagName;
+                return tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || el.isContentEditable;
+            }
+
+            function jumpTo(type, backward) {
+                var selector = NAV_KEY_TARGETS[type];
+                if (!selector) return;
+                var all = Array.prototype.filter.call(document.querySelectorAll(selector), function (el) {
+                    return el.offsetParent !== null;
+                });
+                if (!all.length) return;
+
+                var currentIndex = all.indexOf(document.activeElement);
+                var nextIndex;
+                if (currentIndex === -1) {
+                    nextIndex = backward ? all.length - 1 : 0;
+                } else {
+                    nextIndex = backward ? currentIndex - 1 : currentIndex + 1;
+                    if (nextIndex < 0) nextIndex = all.length - 1;
+                    if (nextIndex >= all.length) nextIndex = 0;
+                }
+
+                var target = all[nextIndex];
+                if (!target.hasAttribute("tabindex") && !isEditableTarget(target) &&
+                    target.tagName !== "BUTTON" && target.tagName !== "A") {
+                    target.setAttribute("tabindex", "-1");
+                }
+                target.focus();
+                target.scrollIntoView({
+                    behavior: root.classList.contains("a11y-reduce-motion") ? "auto" : "smooth",
+                    block: "center",
+                });
+            }
+
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape") {
+                    if (!navKeysModal.hidden) {
+                        hideNavKeys();
+                    } else if (toolbar.classList.contains("open")) {
+                        closePanel(true);
+                    }
+                    return;
+                }
+
+                // Alt+9 — open or close the accessibility panel from
+                // anywhere on the page, no mouse needed.
+                if (e.altKey && e.key === "9") {
+                    e.preventDefault();
+                    if (toolbar.classList.contains("open")) closePanel(true);
+                    else openPanel();
+                    return;
+                }
+
+                // Space activates a focused link — buttons already do this
+                // natively, but plain <a> elements only respond to Enter
+                // by default, which trips people up when tabbing through
+                // link-styled actions expecting Space to work everywhere.
+                if (e.code === "Space" && document.activeElement && document.activeElement.tagName === "A" &&
+                    !isEditableTarget(document.activeElement)) {
+                    e.preventDefault();
+                    document.activeElement.click();
+                    return;
+                }
+
+                // The single-key jumps only fire when not typing into a
+                // field and without Ctrl/Cmd/Alt held, so they never
+                // collide with browser shortcuts or normal typing.
+                if (isEditableTarget(document.activeElement) || e.ctrlKey || e.metaKey || e.altKey) return;
+                var key = e.key.toLowerCase();
+                if (NAV_KEY_TARGETS[key]) {
+                    e.preventDefault();
+                    jumpTo(key, e.shiftKey);
+                }
+            });
+        })();
+    </script>

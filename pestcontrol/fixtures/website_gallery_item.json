@@ -1,0 +1,158 @@
+[
+ {
+  "article": [
+   {
+    "context": null,
+    "language": "en",
+    "subtitle": null,
+    "title": "Our Fleet"
+   },
+   {
+    "context": null,
+    "language": "ar",
+    "subtitle": null,
+    "title": "أسطول مركباتنا"
+   }
+  ],
+  "category": "Fleet",
+  "display_order": 20,
+  "docstatus": 0,
+  "doctype": "Website Gallery Item",
+  "image": "/files/2A4A6868.jpg30c2c4.webp",
+  "media_type": "Image",
+  "modified": "2026-08-12 16:58:04.847723",
+  "name": "lq05b7gp3o",
+  "published": 1,
+  "video_url": null
+ },
+ {
+  "article": [
+   {
+    "context": null,
+    "language": "en",
+    "subtitle": null,
+    "title": "Our Team & Equipment"
+   },
+   {
+    "context": null,
+    "language": "ar",
+    "subtitle": null,
+    "title": "فريقنا ومعداتنا"
+   }
+  ],
+  "category": "Team",
+  "display_order": 30,
+  "docstatus": 0,
+  "doctype": "Website Gallery Item",
+  "image": "/files/1489a454.webp",
+  "media_type": "Image",
+  "modified": "2026-08-12 16:58:04.865627",
+  "name": "lq0s60e09l",
+  "published": 1,
+  "video_url": null
+ },
+ {
+  "article": [
+   {
+    "context": null,
+    "language": "en",
+    "subtitle": null,
+    "title": "Field Team On-Site"
+   },
+   {
+    "context": null,
+    "language": "ar",
+    "subtitle": null,
+    "title": "فريق الميدان في الموقع"
+   }
+  ],
+  "category": "Team",
+  "display_order": 40,
+  "docstatus": 0,
+  "doctype": "Website Gallery Item",
+  "image": "/files/162308e2.webp",
+  "media_type": "Image",
+  "modified": "2026-08-12 16:58:04.880922",
+  "name": "lq0ciurekp",
+  "published": 1,
+  "video_url": null
+ },
+ {
+  "article": [
+   {
+    "context": null,
+    "language": "en",
+    "subtitle": null,
+    "title": "Fleet & Field Team"
+   },
+   {
+    "context": null,
+    "language": "ar",
+    "subtitle": null,
+    "title": "الأسطول وفريق الميدان"
+   }
+  ],
+  "category": "Fleet",
+  "display_order": 50,
+  "docstatus": 0,
+  "doctype": "Website Gallery Item",
+  "image": "/files/18731935.webp",
+  "media_type": "Image",
+  "modified": "2026-08-12 16:58:04.892933",
+  "name": "lq028vl33n",
+  "published": 1,
+  "video_url": null
+ },
+ {
+  "article": [
+   {
+    "context": null,
+    "language": "en",
+    "subtitle": null,
+    "title": "Sanitization & Spraying Equipment"
+   },
+   {
+    "context": null,
+    "language": "ar",
+    "subtitle": null,
+    "title": "معدات التعقيم والرش"
+   }
+  ],
+  "category": "Equipment",
+  "display_order": 60,
+  "docstatus": 0,
+  "doctype": "Website Gallery Item",
+  "image": "/files/2A4A6887.jpgcc3fc6.webp",
+  "media_type": "Image",
+  "modified": "2026-08-12 16:58:04.904084",
+  "name": "lq00rrtbrb",
+  "published": 1,
+  "video_url": null
+ },
+ {
+  "article": [
+   {
+    "context": null,
+    "language": "en",
+    "subtitle": null,
+    "title": "Rodent Inspection"
+   },
+   {
+    "context": null,
+    "language": "ar",
+    "subtitle": null,
+    "title": "فحص القوارض"
+   }
+  ],
+  "category": "Fieldwork",
+  "display_order": 70,
+  "docstatus": 0,
+  "doctype": "Website Gallery Item",
+  "image": "/files/29d09cbe.webp",
+  "media_type": "Image",
+  "modified": "2026-08-12 16:58:04.914557",
+  "name": "lq1tock4e3",
+  "published": 1,
+  "video_url": null
+ }
+]

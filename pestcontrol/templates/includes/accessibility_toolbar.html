@@ -1,0 +1,301 @@
+<!-- Accessibility Toolbar Start -->
+<!-- The toggle button itself lives in website_topbar.html now (moved into
+     the topbar's icon row) — everything below is pure overlay (backdrop,
+     panel, modals), all fixed-positioned, so it doesn't matter that it's
+     no longer a DOM sibling of the button. website_scripts.html finds
+     everything by id, not by containment. -->
+<div class="a11y-toolbar" id="a11yToolbar">
+    <div class="a11y-backdrop" id="a11yBackdrop"></div>
+
+    <div id="a11yAnnouncer" class="visually-hidden" aria-live="polite" role="status"></div>
+
+    <div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="{{ _('Accessibility options') }}">
+        <div class="a11y-panel-header">
+            <h2>{{ _("Accessibility options") }}</h2>
+            <div class="a11y-panel-header-actions">
+                <button type="button" class="a11y-panel-close" id="a11yNavKeysOpen" aria-label="{{ _('Show keyboard navigation shortcuts') }}">
+                    <i class="fa-solid fa-keyboard" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="a11y-panel-close" id="a11yPanelClose" aria-label="{{ _('Close') }}">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="a11y-panel-body">
+            <div class="a11y-switch-row">
+                <span>{{ _("Enlarge tool buttons") }}</span>
+                <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y-action="toolbar-large">
+                    <span class="a11y-switch-thumb"></span>
+                </button>
+            </div>
+
+            <button type="button" class="a11y-profiles-toggle" id="a11yProfilesToggle" aria-expanded="false" aria-controls="a11yProfilesList">
+                {{ _("Assistance profiles") }}
+                <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+
+            <div class="a11y-profiles-list" id="a11yProfilesList" hidden>
+                <div class="a11y-profile">
+                    <span class="a11y-profile-icon"><i class="fa-solid fa-bolt-lightning" aria-hidden="true"></i></span>
+                    <span class="a11y-profile-text">
+                        <span class="a11y-profile-title-row">
+                            <span class="a11y-profile-title">{{ _("Epilepsy Safe Mode") }}</span>
+                            <button type="button" class="a11y-profile-info-btn" aria-expanded="false" aria-controls="a11yProfileInfoEpilepsy" aria-label="{{ _('More information about Epilepsy Safe Mode') }}" data-a11y-info-toggle>
+                                <i class="fa-solid fa-info-circle" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                        <span class="a11y-profile-desc">{{ _("Dampens color and removes blinks") }}</span>
+                        <span class="a11y-profile-full" id="a11yProfileInfoEpilepsy" hidden>{{ _("This mode enables people with epilepsy to use the website safely by eliminating the risk of seizures that result from flashing or blinking animations and risky color combinations.") }}</span>
+                    </span>
+                    <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y-profile="seizure-safe">
+                        <span class="a11y-switch-thumb"></span>
+                    </button>
+                </div>
+                <div class="a11y-profile">
+                    <span class="a11y-profile-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></span>
+                    <span class="a11y-profile-text">
+                        <span class="a11y-profile-title">{{ _("Vision Impaired Mode") }}</span>
+                        <span class="a11y-profile-desc">{{ _("Bigger text and higher contrast") }}</span>
+                    </span>
+                    <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y-profile="vision-impaired">
+                        <span class="a11y-switch-thumb"></span>
+                    </button>
+                </div>
+                <div class="a11y-profile">
+                    <span class="a11y-profile-icon"><i class="fa-solid fa-puzzle-piece" aria-hidden="true"></i></span>
+                    <span class="a11y-profile-text">
+                        <span class="a11y-profile-title">{{ _("Cognitive Disability Mode") }}</span>
+                        <span class="a11y-profile-desc">{{ _("Helps to focus on specific content") }}</span>
+                    </span>
+                    <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y-profile="cognitive">
+                        <span class="a11y-switch-thumb"></span>
+                    </button>
+                </div>
+                <div class="a11y-profile">
+                    <span class="a11y-profile-icon"><i class="fa-solid fa-wheelchair" aria-hidden="true"></i></span>
+                    <span class="a11y-profile-text">
+                        <span class="a11y-profile-title-row">
+                            <span class="a11y-profile-title">{{ _("Motor Impaired Mode") }}</span>
+                            <button type="button" class="a11y-profile-info-btn" aria-expanded="false" aria-controls="a11yProfileInfoMotor" aria-label="{{ _('More information about Motor Impaired Mode') }}" data-a11y-info-toggle>
+                                <i class="fa-solid fa-info-circle" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                        <span class="a11y-profile-desc">{{ _("Allows using the website with a keyboard") }}</span>
+                        <span class="a11y-profile-full" id="a11yProfileInfoMotor" hidden>{{ _("This mode enables people with motor impairments to operate the website by using the keyboard Tab, Shift+Tab, and the Enter keys. Users can also use speech recognition software such as Dragon Naturally Speaking.") }}</span>
+                    </span>
+                    <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y-profile="motor">
+                        <span class="a11y-switch-thumb"></span>
+                    </button>
+                </div>
+                <div class="a11y-profile">
+                    <span class="a11y-profile-icon"><i class="fa-solid fa-tint" aria-hidden="true"></i></span>
+                    <span class="a11y-profile-text">
+                        <span class="a11y-profile-title">{{ _("Colorblind Mode") }}</span>
+                        <span class="a11y-profile-desc">{{ _("Adjusts the website for colorblind users") }}</span>
+                    </span>
+                    <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y-profile="color-blind">
+                        <span class="a11y-switch-thumb"></span>
+                    </button>
+                </div>
+                <div class="a11y-profile">
+                    <span class="a11y-profile-icon"><i class="fa-solid fa-spell-check" aria-hidden="true"></i></span>
+                    <span class="a11y-profile-text">
+                        <span class="a11y-profile-title">{{ _("Dyslexia Friendly Mode") }}</span>
+                        <span class="a11y-profile-desc">{{ _("Helps users with Dyslexia") }}</span>
+                    </span>
+                    <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y-profile="dyslexia">
+                        <span class="a11y-switch-thumb"></span>
+                    </button>
+                </div>
+                <div class="a11y-profile">
+                    <span class="a11y-profile-icon"><i class="fa-solid fa-bullseye" aria-hidden="true"></i></span>
+                    <span class="a11y-profile-text">
+                        <span class="a11y-profile-title">{{ _("ADHD Friendly Mode") }}</span>
+                        <span class="a11y-profile-desc">{{ _("Reduces distractions and improves focus") }}</span>
+                    </span>
+                    <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y-profile="adhd">
+                        <span class="a11y-switch-thumb"></span>
+                    </button>
+                </div>
+                <div class="a11y-profile">
+                    <span class="a11y-profile-icon"><i class="fa-solid fa-audio-description" aria-hidden="true"></i></span>
+                    <span class="a11y-profile-text">
+                        <span class="a11y-profile-title">{{ _("Blindness Mode") }}</span>
+                        <span class="a11y-profile-desc">{{ _("Allows using the site with your screen-reader") }}</span>
+                    </span>
+                    <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y-profile="blindness">
+                        <span class="a11y-switch-thumb"></span>
+                    </button>
+                </div>
+            </div>
+
+            <p class="a11y-panel-section-title">
+                {{ _("Visually pleasing experience") }}
+                <span class="a11y-badge" data-a11y-badge="visual-style" hidden>0</span>
+            </p>
+            <div class="a11y-grid" role="radiogroup" aria-label="{{ _('Visually pleasing experience') }}">
+                <button type="button" class="a11y-card" role="radio" aria-checked="false" data-a11y-style="high-contrast">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("High contrast") }}</span>
+                </button>
+                <button type="button" class="a11y-card" role="radio" aria-checked="false" data-a11y-style="monochrome">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-palette" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("Monochrome") }}</span>
+                </button>
+                <button type="button" class="a11y-card" role="radio" aria-checked="false" data-a11y-style="light-contrast">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-sun" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("Light contrast") }}</span>
+                </button>
+                <button type="button" class="a11y-card" role="radio" aria-checked="false" data-a11y-style="low-saturation">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-tint-slash" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("Low saturation") }}</span>
+                </button>
+                <button type="button" class="a11y-card" role="radio" aria-checked="false" data-a11y-style="high-saturation">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-tint" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("High saturation") }}</span>
+                </button>
+            </div>
+
+            <p class="a11y-panel-section-title">{{ _("Color settings") }}</p>
+            <div class="a11y-color-list">
+                <button type="button" class="a11y-color-row" data-a11y-color="text">
+                    <span>{{ _("Adjust text colors") }}</span>
+                    <span class="a11y-color-swatch" data-a11y-swatch="text"></span>
+                </button>
+                <button type="button" class="a11y-color-row" data-a11y-color="title">
+                    <span>{{ _("Adjust title colors") }}</span>
+                    <span class="a11y-color-swatch" data-a11y-swatch="title"></span>
+                </button>
+                <button type="button" class="a11y-color-row" data-a11y-color="background">
+                    <span>{{ _("Adjust background colors") }}</span>
+                    <span class="a11y-color-swatch" data-a11y-swatch="background"></span>
+                </button>
+            </div>
+            <input type="color" class="a11y-color-input" data-a11y-color-input="text" aria-label="{{ _('Adjust text colors') }}">
+            <input type="color" class="a11y-color-input" data-a11y-color-input="title" aria-label="{{ _('Adjust title colors') }}">
+            <input type="color" class="a11y-color-input" data-a11y-color-input="background" aria-label="{{ _('Adjust background colors') }}">
+
+            <p class="a11y-panel-section-title">
+                {{ _("Comfortable reading") }}
+                <span class="a11y-badge" data-a11y-badge="reading" hidden>0</span>
+            </p>
+            <div class="a11y-grid" role="group" aria-label="{{ _('Comfortable reading') }}">
+                <button type="button" class="a11y-card" role="menuitemcheckbox" aria-checked="false" data-a11y-action="readable-font">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-font" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("Readable font") }}</span>
+                </button>
+                <button type="button" class="a11y-card" role="menuitemcheckbox" aria-checked="false" data-a11y-action="dyslexia-font">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-spell-check" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("Dyslexia font") }}</span>
+                </button>
+                <button type="button" class="a11y-card" role="menuitem" data-a11y-action="font-decrease">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-search-minus" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("Smaller text") }}</span>
+                </button>
+                <button type="button" class="a11y-card" role="menuitem" data-a11y-action="font-increase">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-search-plus" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("Bigger text") }}</span>
+                </button>
+                <button type="button" class="a11y-card" role="menuitemcheckbox" aria-checked="false" data-a11y-action="line-spacing">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-text-height" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("Line spacing") }}</span>
+                </button>
+                <button type="button" class="a11y-card" role="menuitemcheckbox" aria-checked="false" data-a11y-action="text-align">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-align-left" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("Text align") }}</span>
+                </button>
+            </div>
+
+            <p class="a11y-panel-section-title">
+                {{ _("Visual aids") }}
+                <span class="a11y-badge" data-a11y-badge="visual-aids" hidden>0</span>
+            </p>
+            <div class="a11y-grid" role="group" aria-label="{{ _('Visual aids') }}">
+                <button type="button" class="a11y-card" role="menuitemcheckbox" aria-checked="false" data-a11y-action="highlight-links">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-link" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("Highlight links") }}</span>
+                </button>
+                <button type="button" class="a11y-card" role="menuitemcheckbox" aria-checked="false" data-a11y-action="highlight-headings">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-heading" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("Highlight headings") }}</span>
+                </button>
+                <button type="button" class="a11y-card" role="menuitemcheckbox" aria-checked="false" data-a11y-action="invert">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-circle-half-stroke fa-rotate-180" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("Invert colors") }}</span>
+                </button>
+                <button type="button" class="a11y-card" role="menuitemcheckbox" aria-checked="false" data-a11y-action="reduce-motion">
+                    <span class="a11y-card-icon"><i class="fa-solid fa-walking" aria-hidden="true"></i></span>
+                    <span class="a11y-card-label">{{ _("Reduce motion") }}</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="a11y-panel-footer">
+            <button type="button" class="a11y-footer-btn" data-a11y-action="hide-widget">
+                <i class="fa-solid fa-eye-slash" aria-hidden="true"></i> {{ _("Hide widget") }}
+            </button>
+            <button type="button" class="a11y-footer-btn a11y-footer-btn-primary" data-a11y-action="reset">
+                <i class="fa-solid fa-undo" aria-hidden="true"></i> {{ _("Reset all") }}
+            </button>
+        </div>
+    </div>
+
+    <div class="a11y-navkeys-backdrop" id="a11yNavKeysBackdrop" hidden></div>
+
+    <div class="a11y-navkeys-modal" id="a11yNavKeysModal" role="dialog" aria-label="{{ _('Navigation Keys') }}" hidden>
+        <div class="a11y-navkeys-header">
+            <button type="button" class="a11y-panel-close" id="a11yNavKeysClose" aria-label="{{ _('Close') }}">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <h2>{{ _("Navigation Keys") }}</h2>
+            <span class="a11y-navkeys-icon"><i class="fa-solid fa-keyboard" aria-hidden="true"></i></span>
+        </div>
+
+        <p class="a11y-navkeys-intro">{{ _("Press a single key to jump between elements on the page. Hold Shift to go to the previous one.") }}</p>
+
+        <div class="a11y-navkeys-list">
+            <div class="a11y-navkeys-row">
+                <span>{{ _("Menus") }}</span>
+                <kbd>M</kbd>
+            </div>
+            <div class="a11y-navkeys-row">
+                <span>{{ _("Headings") }}</span>
+                <kbd>H</kbd>
+            </div>
+            <div class="a11y-navkeys-row">
+                <span>{{ _("Forms") }}</span>
+                <kbd>F</kbd>
+            </div>
+            <div class="a11y-navkeys-row">
+                <span>{{ _("Buttons") }}</span>
+                <kbd>B</kbd>
+            </div>
+            <div class="a11y-navkeys-row">
+                <span>{{ _("Graphics") }}</span>
+                <kbd>G</kbd>
+            </div>
+        </div>
+
+        <div class="a11y-navkeys-list a11y-navkeys-list-modifiers">
+            <div class="a11y-navkeys-row">
+                <span>{{ _("with any key above — jump to the previous element") }}</span>
+                <kbd>{{ _("Shift") }}</kbd>
+            </div>
+            <div class="a11y-navkeys-row">
+                <span>{{ _("open or close this accessibility panel") }}</span>
+                <span class="a11y-navkeys-combo"><kbd>9</kbd> + <kbd>{{ _("Alt") }}</kbd></span>
+            </div>
+            <div class="a11y-navkeys-row">
+                <span>{{ _("activate the focused control") }}</span>
+                <kbd>{{ _("Space") }}</kbd>
+            </div>
+        </div>
+
+        <div class="a11y-navkeys-footer">
+            <button type="button" class="a11y-footer-btn a11y-footer-btn-primary" id="a11yNavKeysGotIt">{{ _("Got it") }}</button>
+        </div>
+    </div>
+
+</div>
+<!-- Accessibility Toolbar End -->

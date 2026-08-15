@@ -1,147 +1,19 @@
-<!DOCTYPE html>
-<html lang="zxx">
-<head>
-	<!-- Meta -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="author" content="Skystar">
-	<!-- Page Title -->
-    <title>Skystar - Environmental Services</title>
-	<!-- Favicon Icon -->
-	<link rel="shortcut icon" type="image/x-icon" href="/assets/pestcontrol/website/images/favicon.png">
-	<!-- Google Fonts Css-->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
-	<!-- Bootstrap Css -->
-	<link href="/assets/pestcontrol/website/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<!-- SlickNav Css -->
-	<link href="/assets/pestcontrol/website/css/slicknav.min.css" rel="stylesheet">
-	<!-- Swiper Css -->
-	<link rel="stylesheet" href="/assets/pestcontrol/website/css/swiper-bundle.min.css">
-	<!-- Font Awesome Icon Css-->
-	<link href="/assets/pestcontrol/website/css/all.min.css" rel="stylesheet" media="screen">
-	<!-- Animated Css -->
-	<link href="/assets/pestcontrol/website/css/animate.css" rel="stylesheet">
-    <!-- Magnific Popup Core Css File -->
-	<link rel="stylesheet" href="/assets/pestcontrol/website/css/magnific-popup.css">
-	<!-- Mouse Cursor Css File -->
-	<link rel="stylesheet" href="/assets/pestcontrol/website/css/mousecursor.css">
-	<!-- Main Custom Css -->
-	<link href="/assets/pestcontrol/website/css/custom.css" rel="stylesheet" media="screen">
+{% extends "pestcontrol/templates/includes/website_base.html" %}
 
-	<!-- Skystar Brand Overrides -->
-	<link href="/assets/pestcontrol/website/css/skystar.css" rel="stylesheet" media="screen">
-</head>
-<body>
+{% block title %}Skystar - {{ _("Environmental Services") }}{% endblock %}
 
-    <!-- Preloader Start -->
-	<div class="preloader">
-		<div class="loading-container">
-			<div class="loading"></div>
-			<div id="loading-icon"><img src="/assets/pestcontrol/website/images/loader.svg" alt=""></div>
-		</div>
-	</div>
-	<!-- Preloader End -->
-
-    <!-- Topbar Section Start -->
-    <div class="topbar">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-9">
-                    <!-- Topbar Contact Information Start -->
-                    <div class="topbar-contact-info">
-                        <ul>
-                            <li><i class="fa-regular fa-envelope"></i><a href="mailto:info@the-skystar.com">info@the-skystar.com</a></li>
-                            <li><i class="fa-solid fa-location-dot"></i>6391 Elgin St. Celina, Delaware 10299</li>
-                        </ul>
-                    </div>
-                    <!-- Topbar Contact Information End -->
-                </div>
-
-                <div class="col-md-3">
-                    <!-- Topbar Social Links Start -->
-                    <div class="topbar-social-links">
-                        <ul>
-                            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
-                        </ul>
-                    </div>
-                    <!-- Topbar Social Links End -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Topbar Section End -->
-
-    <!-- Header Start -->
-	<header class="main-header">
-		<div class="header-sticky">
-			<nav class="navbar navbar-expand-lg">
-				<div class="container">
-					<!-- Logo Start -->
-					<a class="navbar-brand" href="/">
-						<img src="/assets/pestcontrol/website/icons/skystar-logo.png" alt="Skystar">
-					</a>
-					<!-- Logo End -->
-
-					<!-- Main Menu Start -->
-					<div class="collapse navbar-collapse main-menu">
-                        <div class="nav-menu-wrapper">
-                            <ul class="navbar-nav mr-auto" id="menu">
-                                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>                                
-                                <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
-                                <li class="nav-item submenu"><a class="nav-link" href="#">Pages</a>
-                                    <ul>                                        
-                                        <li class="nav-item"><a class="nav-link" href="/service-single">Service Details</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/blog-single">Blog Details</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/project-single">Project Details</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/team">Team</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/team-single">Team Details</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/pricing">Pricing Plan</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/testimonials">Testimonials</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/image-gallery">Image Gallery</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/video-gallery">Video Gallery</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/faqs">FAQs</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/404">404</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>                          
-                            </ul>
-                        </div>
-
-                        <!-- Header Btn Start -->
-                        <div class="header-btn">
-                            <a href="/contact" class="btn-default">get a quote</a>
-                        </div>
-                        <!-- Header Btn End -->                 
-					</div>
-					<!-- Main Menu End -->
-					<div class="navbar-toggle"></div>
-				</div>
-			</nav>
-			<div class="responsive-menu"></div>
-		</div>
-	</header>
-	<!-- Header End -->
-
+{% block content %}
     <!-- Hero Section Start -->
     <div class="hero hero-slider-layout dark-section parallaxie">
         <div class="swiper">
             <div class="swiper-wrapper">
+                {% for slide in hero_slides %}
                 <!-- Hero Slide Start -->
                 <div class="swiper-slide">
                     <div class="hero-slide">
                         <!-- Slider Image Start -->
                         <div class="hero-slider-image">
-                            <img src="/assets/pestcontrol/website/images/hero-bg.jpg" alt="">
+                            <img src="{{ slide.background_image }}" alt="">
                         </div>
                         <!-- Slider Image End -->
 
@@ -152,27 +24,27 @@
                                     <div class="hero-content">
                                         <!-- Section Title Start -->
                                         <div class="section-title">
-                                            <h3 class="wow fadeInUp">Your Shield Against Unwanted Guests</h3>
-                                            <h1 class="text-anime-style-2" data-cursor="-opaque">Reliable pest & bug control services you can trust</h1>
-                                            <p class="wow fadeInUp" data-wow-delay="0.2s">Protect your home and business with our effective pest control solutions. From termites to rodents we eliminate pest quickly & safely.</p>
+                                            <span class="section-kicker wow fadeInUp">{{ localize(slide, "kicker") }}</span>
+                                            <h1 class="text-anime-style-2" data-cursor="-opaque">{{ localize(slide, "heading") }}</h1>
+                                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ localize(slide, "description") }}</p>
                                         </div>
                                         <!-- Section Title End -->
-                                        
+
                                         <!-- Hero Button Start -->
                                         <div class="hero-btn wow fadeInUp" data-wow-delay="0.4s">
-                                            <a href="/contact" class="btn-default btn-highlighted">book a service</a>
-                                            <a href="/services" class="hero-service-btn">View All Services</a>                            
+                                            <a href="/contact" class="btn-default btn-highlighted">{{ _("book a service") }}</a>
+                                            <a href="/services" class="hero-service-btn">{{ _("View All Services") }}</a>
                                         </div>
                                         <!-- Hero Button End -->
                                     </div>
                                     <!-- Hero Content End -->
                                 </div>
-                
+
                                 <div class="col-lg-6">
                                     <!-- Hero Image Start -->
                                     <div class="hero-image">
                                         <figure>
-                                            <img src="/assets/pestcontrol/website/images/hero-image.png" alt="">
+                                            <img src="{{ slide.foreground_image }}" alt="">
                                         </figure>
                                     </div>
                                     <!-- Hero Image End -->
@@ -182,55 +54,10 @@
                     </div>
                 </div>
                 <!-- Hero Slide End -->
-
-                <!-- Hero Slide Start -->
-                <div class="swiper-slide">
-                    <div class="hero-slide">
-                        <!-- Slider Image Start -->
-                        <div class="hero-slider-image">
-                            <img src="/assets/pestcontrol/website/images/hero-bg-2.jpg" alt="">
-                        </div>
-                        <!-- Slider Image End -->
-
-                        <div class="container">
-                            <div class="row align-items-center">
-                                <div class="col-lg-6">
-                                    <!-- Hero Content Start -->
-                                    <div class="hero-content">
-                                        <!-- Section Title Start -->
-                                        <div class="section-title">
-                                            <h3 class="wow fadeInUp">Your Shield Against Unwanted Guests</h3>
-                                            <h1 class="text-anime-style-2" data-cursor="-opaque">Reliable pest & bug control services you can trust</h1>
-                                            <p class="wow fadeInUp" data-wow-delay="0.2s">Protect your home and business with our effective pest control solutions. From termites to rodents we eliminate pest quickly & safely.</p>
-                                        </div>
-                                        <!-- Section Title End -->
-                                        
-                                        <!-- Hero Button Start -->
-                                        <div class="hero-btn wow fadeInUp" data-wow-delay="0.4s">
-                                            <a href="/contact" class="btn-default btn-highlighted">book a service</a>
-                                            <a href="/services" class="hero-service-btn">View All Services</a>                            
-                                        </div>
-                                        <!-- Hero Button End -->
-                                    </div>
-                                    <!-- Hero Content End -->
-                                </div>
-                
-                                <div class="col-lg-6">
-                                    <!-- Hero Image Start -->
-                                    <div class="hero-image">
-                                        <figure>
-                                            <img src="/assets/pestcontrol/website/images/hero-image.png" alt="">
-                                        </figure>
-                                    </div>
-                                    <!-- Hero Image End -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Hero Slide End -->
+                {% endfor %}
             </div>
-        </div>        
+            <div class="hero-pagination"></div>
+        </div>
     </div>
     <!-- Hero Section End -->
 
@@ -247,8 +74,8 @@
                                 <img src="/assets/pestcontrol/website/images/icon-best-service-1.svg" alt="">
                             </div>
                             <div class="best-service-item-content">
-                                <h3>Comprehensive Coverage</h3>
-                                <a href="/contact" class="readmore-btn">read more</a>
+                                <h3>{{ _("Comprehensive Coverage") }}</h3>
+                                <a href="/contact" class="readmore-btn">{{ _("read more") }}</a>
                             </div>
                         </div>
                         <!-- Best Service Item End -->
@@ -259,8 +86,8 @@
                                 <img src="/assets/pestcontrol/website/images/icon-best-service-2.svg" alt="">
                             </div>
                             <div class="best-service-item-content">
-                                <h3>Fast Response Times</h3>
-                                <a href="/contact" class="readmore-btn">read more</a>
+                                <h3>{{ _("Fast Response Times") }}</h3>
+                                <a href="/contact" class="readmore-btn">{{ _("read more") }}</a>
                             </div>
                         </div>
                         <!-- Best Service Item End -->
@@ -271,8 +98,8 @@
                                 <img src="/assets/pestcontrol/website/images/icon-best-service-3.svg" alt="">
                             </div>
                             <div class="best-service-item-content">
-                                <h3>Commercial Services</h3>
-                                <a href="/contact" class="readmore-btn">read more</a>
+                                <h3>{{ _("Commercial Services") }}</h3>
+                                <a href="/contact" class="readmore-btn">{{ _("read more") }}</a>
                             </div>
                         </div>
                         <!-- Best Service Item End -->
@@ -283,8 +110,8 @@
                                 <img src="/assets/pestcontrol/website/images/icon-best-service-4.svg" alt="">
                             </div>
                             <div class="best-service-item-content">
-                                <h3>24/7 Emergency Services</h3>
-                                <a href="/contact" class="readmore-btn">read more</a>
+                                <h3>{{ _("24/7 Emergency Services") }}</h3>
+                                <a href="/contact" class="readmore-btn">{{ _("read more") }}</a>
                             </div>
                         </div>
                         <!-- Best Service Item End -->
@@ -306,15 +133,15 @@
                         <!-- About Us Image Start -->
                         <div class="about-us-image">
                             <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/about-us-image.jpg" alt="">
-                            </figure>                            
-                        </div>  
-                        <!-- About Us Image End -->    
+                                <img src="/assets/pestcontrol/website/images/about-us-real.webp" alt="">
+                            </figure>
+                        </div>
+                        <!-- About Us Image End -->
 
                         <!-- About Us Circle Image Start -->
                         <div class="about-us-circle-img-1">
                             <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/about-circle-img-1.jpg" alt="">
+                                <img src="/assets/pestcontrol/website/images/about-circle-real-1.webp" alt="">
                             </figure>
                         </div>
                         <!-- About Us Circle Image End -->
@@ -322,7 +149,7 @@
                         <!-- About Us Circle Image Start -->
                         <div class="about-us-circle-img-2">
                             <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/about-circle-img-2.jpg" alt="">
+                                <img src="/assets/pestcontrol/website/images/about-circle-real-2.webp" alt="">
                             </figure>
                         </div>
                         <!-- About Us Circle Image End -->
@@ -335,68 +162,68 @@
                     <div class="about-us-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">about us</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Protecting home, businesses, <span>and communities</span></h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">Our mission is simple: to provide dependable pest management services that ensure a clean, safe, and comfortable environment for everyone. With years of expertise and a customer-first approach ,we go above and beyond to eliminate pests and prevent their return.</p>
+                            <span class="section-kicker wow fadeInUp">{{ _("about us") }}</span>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">{{ about.intro_heading or _("Protecting home, businesses, and communities") }}</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ about.intro_text or _("Our mission is simple: to provide dependable pest management services that ensure a clean, safe, and comfortable environment for everyone. With years of expertise and a customer-first approach ,we go above and beyond to eliminate pests and prevent their return.") }}</p>
                         </div>
                         <!-- Section Title End -->
 
                         <div class="about-us-body">
                             <div class="about-us-list wow fadeInUp" data-wow-delay="0.4s">
                                 <ul>
-                                    <li>Expertise You Can Trust</li>
-                                    <li>24/7 Availability</li>
-                                    <li>Certified Professionals</li>
-                                    <li>Affordable Solutions</li>
-                                    <li>Eco-Friendly Approach</li>
-                                    <li>Advanced Techniques</li>
-                                    <li>Customer-Focused Service</li>
-                                    <li>Commitment to Excellence</li>
+                                    <li>{{ _("Expertise You Can Trust") }}</li>
+                                    <li>{{ _("24/7 Availability") }}</li>
+                                    <li>{{ _("Certified Professionals") }}</li>
+                                    <li>{{ _("Affordable Solutions") }}</li>
+                                    <li>{{ _("Eco-Friendly Approach") }}</li>
+                                    <li>{{ _("Advanced Techniques") }}</li>
+                                    <li>{{ _("Customer-Focused Service") }}</li>
+                                    <li>{{ _("Commitment to Excellence") }}</li>
                                 </ul>
                             </div>
 
                             <div class="about-us-video-image wow fadeInUp" data-wow-delay="0.4s">
                                 <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/about-us-video-image.jpg" alt="">
+                                    <img src="/assets/pestcontrol/website/images/about-video-real.webp" alt="">
                                 </figure>
 
                                 <!-- Video Play Button Start -->
                                 <div class="video-play-button">
-                                    <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video" data-cursor-text="Play">
+                                    <a href="{{ settings.youtube_url or '/contact' }}" target="_blank" rel="noopener noreferrer" data-cursor-text="Play">
                                         <i class="fa-solid fa-play"></i>
                                     </a>
                                 </div>
                                 <!-- Video Play Button End -->
                             </div>
                         </div>
-                         
+
                         <!-- About Counter List Start -->
                         <div class="about-counter-list">
                             <!-- About Counter Item Start -->
                             <div class="about-counter-item">
-                               <h2><span class="counter">29</span>+</h2>
-                               <p>Years Of Experience</p>
-                            </div>
-                            <!-- About Counter Item End -->
-                            
-                            <!-- About Counter Item Start -->
-                            <div class="about-counter-item">
-                                <h2><span class="counter">2</span>K</h2>
-                                <p>Projects Completed</p>
+                               <h2><span class="counter">{{ settings.years_experience or 0 }}</span>+</h2>
+                               <p>{{ _("Years Of Experience") }}</p>
                             </div>
                             <!-- About Counter Item End -->
 
                             <!-- About Counter Item Start -->
                             <div class="about-counter-item">
-                                <h2><span class="counter">50</span></h2>
-                                <p>Dedicated Team</p>
+                                <h2>{{ settings.projects_completed or "0" }}</h2>
+                                <p>{{ _("Projects Completed") }}</p>
                             </div>
                             <!-- About Counter Item End -->
 
                             <!-- About Counter Item Start -->
                             <div class="about-counter-item">
-                                <h2><span class="counter">98</span>%</h2>
-                                <p>Happy Customers</p>
+                                <h2><span class="counter">{{ settings.team_size or 0 }}</span></h2>
+                                <p>{{ _("Dedicated Team") }}</p>
+                            </div>
+                            <!-- About Counter Item End -->
+
+                            <!-- About Counter Item Start -->
+                            <div class="about-counter-item">
+                                <h2><span class="counter">{{ settings.satisfaction_rate or 0 }}</span>%</h2>
+                                <p>{{ _("Happy Customers") }}</p>
                             </div>
                             <!-- About Counter Item End -->
                         </div>
@@ -416,8 +243,8 @@
                 <div class="col-lg-12">
                     <!-- Section Title Start -->
                     <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">services</h3>
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">Expert solutions for every <span>pest problem</span></h2>
+                        <span class="section-kicker wow fadeInUp">{{ _("services") }}</span>
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Expert solutions for every") }} <span>{{ _("pest problem") }}</span></h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
@@ -429,170 +256,40 @@
                     <div class="services-slider">
                         <div class="swiper">
                             <div class="swiper-wrapper">
+                                {% for service in services %}
                                 <!-- Services Slide Start -->
                                 <div class="swiper-slide">
                                     <!-- Service Item Start -->
                                     <div class="service-item">
                                         <!-- Service Image Start -->
                                         <div class="service-image">
-                                            <a href="/service-single" data-cursor-text="View">
+                                            <a href="/{{ service.route }}" data-cursor-text="View">
                                                 <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/service-image-1.jpg" alt="">
+                                                    <img src="{{ service.image }}" alt="{{ localize(service, 'service_name') }}">
                                                 </figure>
-                                            </a>                            
+                                            </a>
                                         </div>
                                         <!-- Service Image End -->
 
                                         <!-- Service Body Start -->
                                         <div class="service-body">
                                             <div class="icon-box">
-                                                <img src="/assets/pestcontrol/website/images/icon-service-item-1.svg" alt="">
-                                            </div>        
+                                                <img src="{{ service.icon }}" alt="">
+                                            </div>
                                             <div class="service-content">
-                                                <h3><a href="/service-single">Residential Pest Control</a></h3>
-                                                <p>Tailored solutions to protect your home from common pests.</p>
+                                                <h3><a href="/{{ service.route }}">{{ localize(service, "service_name") }}</a></h3>
+                                                <p>{{ localize(service, "short_description") }}</p>
                                             </div>
                                             <div class="service-btn">
-                                                <a href="/service-single" class="readmore-btn">read More</a>
-                                            </div>                      
+                                                <a href="/{{ service.route }}" class="readmore-btn">{{ _("read More") }}</a>
+                                            </div>
                                         </div>
                                         <!-- Service Body End -->
                                     </div>
                                     <!-- Service Item End -->
                                 </div>
                                 <!-- Services Slide End -->
-
-                                <!-- Services Slide Start -->
-                                <div class="swiper-slide">
-                                    <!-- Service Item Start -->
-                                    <div class="service-item">
-                                        <!-- Service Image Start -->
-                                        <div class="service-image">
-                                            <a href="/service-single" data-cursor-text="View">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/service-image-2.jpg" alt="">
-                                                </figure>
-                                            </a>                            
-                                        </div>
-                                        <!-- Service Image End -->
-
-                                        <!-- Service Body Start -->
-                                        <div class="service-body">
-                                            <div class="icon-box">
-                                                <img src="/assets/pestcontrol/website/images/icon-service-item-2.svg" alt="">
-                                            </div>        
-                                            <div class="service-content">
-                                                <h3><a href="/service-single">Commercial Pest Solutions</a></h3>
-                                                <p>Tailored solutions to protect your home from common pests.</p>
-                                            </div>
-                                            <div class="service-btn">
-                                                <a href="/service-single" class="readmore-btn">read More</a>
-                                            </div>                       
-                                        </div>
-                                        <!-- Service Body End -->
-                                    </div>
-                                    <!-- Service Item End -->
-                                </div>
-                                <!-- Services Slide End -->
-
-                                <!-- Services Slide Start -->
-                                <div class="swiper-slide">
-                                    <!-- Service Item Start -->
-                                    <div class="service-item">
-                                        <!-- Service Image Start -->
-                                        <div class="service-image">
-                                            <a href="/service-single" data-cursor-text="View">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/service-image-3.jpg" alt="">
-                                                </figure>
-                                            </a>                            
-                                        </div>
-                                        <!-- Service Image End -->
-
-                                        <!-- Service Body Start -->
-                                        <div class="service-body">
-                                            <div class="icon-box">
-                                                <img src="/assets/pestcontrol/website/images/icon-service-item-3.svg" alt="">
-                                            </div>        
-                                            <div class="service-content">
-                                                <h3><a href="/service-single">Termite & Rodent Control</a></h3>
-                                                <p>Tailored solutions to protect your home from common pests.</p>
-                                            </div>
-                                            <div class="service-btn">
-                                                <a href="/service-single" class="readmore-btn">read More</a>
-                                            </div>                         
-                                        </div>
-                                        <!-- Service Body End -->
-                                    </div>
-                                    <!-- Service Item End -->
-                                </div>
-                                <!-- Services Slide End -->  
-                                 
-                                <!-- Services Slide Start -->
-                                <div class="swiper-slide">
-                                    <!-- Service Item Start -->
-                                    <div class="service-item">
-                                        <!-- Service Image Start -->
-                                        <div class="service-image">
-                                            <a href="/service-single" data-cursor-text="View">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/service-image-4.jpg" alt="">
-                                                </figure>
-                                            </a>                            
-                                        </div>
-                                        <!-- Service Image End -->
-
-                                        <!-- Service Body Start -->
-                                        <div class="service-body">
-                                            <div class="icon-box">
-                                                <img src="/assets/pestcontrol/website/images/icon-service-item-4.svg" alt="">
-                                            </div>        
-                                            <div class="service-content">
-                                                <h3><a href="/service-single">Outdoor Pest Control</a></h3>
-                                                <p>Tailored solutions to protect your home from common pests.</p>
-                                            </div>
-                                            <div class="service-btn">
-                                                <a href="/service-single" class="readmore-btn">read More</a>
-                                            </div>                      
-                                        </div>
-                                        <!-- Service Body End -->
-                                    </div>
-                                    <!-- Service Item End -->
-                                </div>
-                                <!-- Services Slide End -->
-
-                                <!-- Services Slide Start -->
-                                <div class="swiper-slide">
-                                    <!-- Service Item Start -->
-                                    <div class="service-item">
-                                        <!-- Service Image Start -->
-                                        <div class="service-image">
-                                            <a href="/service-single" data-cursor-text="View">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/service-image-5.jpg" alt="">
-                                                </figure>
-                                            </a>                            
-                                        </div>
-                                        <!-- Service Image End -->
-
-                                        <!-- Service Body Start -->
-                                        <div class="service-body">
-                                            <div class="icon-box">
-                                                <img src="/assets/pestcontrol/website/images/icon-service-item-5.svg" alt="">
-                                            </div>        
-                                            <div class="service-content">
-                                                <h3><a href="/service-single">Smart Home Integration</a></h3>
-                                                <p>Tailored solutions to protect your home from common pests.</p>
-                                            </div>
-                                            <div class="service-btn">
-                                                <a href="/service-single" class="readmore-btn">read More</a>
-                                            </div>                       
-                                        </div>
-                                        <!-- Service Body End -->
-                                    </div>
-                                    <!-- Service Item End -->
-                                </div>
-                                <!-- Services Slide End -->
+                                {% endfor %}
                             </div>
                             <div class="services-pagination"></div>
                         </div>
@@ -603,11 +300,11 @@
                 <div class="col-lg-12">
                     <!-- Section Footer Text Start -->
                     <div class="section-footer-text wow fadeInUp" data-wow-delay="0.2s">
-                        <p>Ready for a Pest-Free Home? <a href="/contact">Reach Out to Us Today!</a></p>
+                        <p>{{ _("Ready for a Pest-Free Home?") }} <a href="/contact">{{ _("Reach Out to Us Today!") }}</a></p>
                     </div>
                     <!-- Section Footer Text End -->
                 </div>
-            </div>          
+            </div>
         </div>
     </div>
     <!-- Our Services Section End -->
@@ -620,9 +317,9 @@
                     <div class="our-features-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">Our Features</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Your trusted partner in pest <span>control excellence</span></h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">We understand how frustrating and disruptive pests can be, which is why we're committed to providing fast, reliable, and effective solutions. With a team of certified experts, eco-friendly methods, and unmatched customer care.</p>
+                            <span class="section-kicker wow fadeInUp">{{ _("Our Features") }}</span>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Your trusted partner in pest") }} <span>{{ _("control excellence") }}</span></h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ _("We understand how frustrating and disruptive pests can be, which is why we're committed to providing fast, reliable, and effective solutions. With a team of certified experts, eco-friendly methods, and unmatched customer care.") }}</p>
                         </div>
                         <!-- Section Title End -->
 
@@ -634,8 +331,8 @@
                                     <img src="/assets/pestcontrol/website/images/icon-features-item-1.svg" alt="">
                                 </div>
                                 <div class="features-item-content">
-                                    <h3>Emergency Services</h3>
-                                    <p>We are available round the clock to address.</p>
+                                    <h3>{{ _("Emergency Services") }}</h3>
+                                    <p>{{ _("We are available round the clock to address.") }}</p>
                                 </div>
                             </div>
                             <!-- Features Item End -->
@@ -646,8 +343,8 @@
                                     <img src="/assets/pestcontrol/website/images/icon-features-item-2.svg" alt="">
                                 </div>
                                 <div class="features-item-content">
-                                    <h3>Customized Treatment</h3>
-                                    <p>Every property is unique, so we offer personalized pest.</p>
+                                    <h3>{{ _("Customized Treatment") }}</h3>
+                                    <p>{{ _("Every property is unique, so we offer personalized pest.") }}</p>
                                 </div>
                             </div>
                             <!-- Features Item End -->
@@ -658,8 +355,8 @@
                                     <img src="/assets/pestcontrol/website/images/icon-features-item-3.svg" alt="">
                                 </div>
                                 <div class="features-item-content">
-                                    <h3>Certified Professionals</h3>
-                                    <p>Our team is fully trained, certified, and experienced.</p>
+                                    <h3>{{ _("Certified Professionals") }}</h3>
+                                    <p>{{ _("Our team is fully trained, certified, and experienced.") }}</p>
                                 </div>
                             </div>
                             <!-- Features Item End -->
@@ -670,8 +367,8 @@
                                     <img src="/assets/pestcontrol/website/images/icon-features-item-4.svg" alt="">
                                 </div>
                                 <div class="features-item-content">
-                                    <h3>Guaranteed Results</h3>
-                                    <p>We stand behind our service with a satisfaction guarante.</p>
+                                    <h3>{{ _("Guaranteed Results") }}</h3>
+                                    <p>{{ _("We stand behind our service with a satisfaction guarante.") }}</p>
                                 </div>
                             </div>
                             <!-- Features Item End -->
@@ -684,7 +381,7 @@
                     <!-- Features Image Start -->
                     <div class="features-image">
                         <figure class="image-anime reveal">
-                            <img src="/assets/pestcontrol/website/images/features-image.jpg" alt="">
+                            <img src="/assets/pestcontrol/website/images/features-real.webp" alt="">
                         </figure>
 
                         <!-- Contact Us Circle Start -->
@@ -709,8 +406,8 @@
                 <div class="col-lg-12">
                     <!-- Section Title Start -->
                     <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">Our Portfolio</h3>
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">Explore our proven track record of <span>pest-free solutions</span></h2>
+                        <span class="section-kicker wow fadeInUp">{{ _("Our Portfolio") }}</span>
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Explore our proven track record of") }} <span>{{ _("pest-free solutions") }}</span></h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
@@ -721,12 +418,10 @@
 					<!-- Choose Our Projects Nav start -->
 					<div class="our-project-nav wow fadeInUp" data-wow-delay="0.25s">
 						<ul>
-							<li><a href="#" class="active-btn" data-filter="*">all</a></li>
-							<li><a href="#" data-filter=".home">Home Pest</a></li>
-							<li><a href="#" data-filter=".commercial">Commercial Pest</a></li>
-							<li><a href="#" data-filter=".eco-friendly">Eco-Friendly Pest</a></li>
-							<li><a href="#" data-filter=".termite">Termite & Rodent</a></li>
-                            <li><a href="#" data-filter=".outdoor">Outdoor Pest</a></li>
+							<li><a href="#" class="active-btn" data-filter="*">{{ _("all") }}</a></li>
+							{% for category in project_categories %}
+							<li><a href="#" data-filter=".{{ category_class(category) }}">{{ category }}</a></li>
+							{% endfor %}
 						</ul>
 					</div>
 					<!-- Choose Our Projects Nav End -->
@@ -735,101 +430,23 @@
                 <div class="col-lg-12">
 					<!-- Project Item Boxes start -->
 					<div class="row project-item-boxes align-items-center">
-						<div class="col-lg-4 col-md-6 project-item-box eco-friendly">
+						{% for project in projects %}
+						<div class="col-lg-4 col-md-6 project-item-box {{ category_class(project.category) }}">
                             <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp">
+                            <div class="project-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                                 <div class="project-image">
                                     <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-1.jpg" alt="">
+                                        <img src="{{ project.image }}" alt="{{ localize(project, 'project_name') }}">
                                     </figure>
                                 </div>
                                 <div class="project-content">
-                                    <h3>Home Sweet Home Pest Protection</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
+                                    <h3>{{ localize(project, "project_name") }}</h3>
+                                    <a href="/{{ project.route }}"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
                                 </div>
                             </div>
                             <!-- Project Item End -->
                         </div>
-
-                        <div class="col-lg-4 col-md-6 project-item-box termite">
-                            <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp" data-wow-delay="0.2s">
-                                <div class="project-image">
-                                    <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-2.jpg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="project-content">
-                                    <h3>Non-Toxic Insect Repellents Methods</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
-                                </div>
-                            </div>
-                            <!-- Project Item End -->
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 project-item-box outdoor">
-                            <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp" data-wow-delay="0.4s">
-                                <div class="project-image">
-                                    <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-3.jpg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="project-content">
-                                    <h3>Indoor Pest Prevention Techniques</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
-                                </div>
-                            </div>
-                            <!-- Project Item End -->
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 project-item-box commercial">
-                            <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp" data-wow-delay="0.6s">
-                                <div class="project-image">
-                                    <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-4.jpg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="project-content">
-                                    <h3>Pest Control Using Nanotechnology</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
-                                </div>
-                            </div>
-                            <!-- Project Item End -->
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 project-item-box home">
-                            <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp" data-wow-delay="0.8s">
-                                <div class="project-image">
-                                    <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-5.jpg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="project-content">
-                                    <h3>Chemical-Free Mosquito Management</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
-                                </div>
-                            </div>
-                            <!-- Project Item End -->
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 project-item-box home">
-                            <!-- Project Item Start -->
-                            <div class="project-item wow fadeInUp" data-wow-delay="1s">
-                                <div class="project-image">
-                                    <figure>
-                                        <img src="/assets/pestcontrol/website/images/project-6.jpg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="project-content">
-                                    <h3>Biorational Pest Control Approaches</h3>
-                                    <a href="/project-single"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
-                                </div>
-                            </div>
-                            <!-- Project Item End -->
-                        </div>
+                        {% endfor %}
                     </div>
                     <!-- Project Item Boxes End -->
                 </div>
@@ -837,7 +454,7 @@
                 <div class="col-lg-12">
                     <!-- Our Project Button Start -->
                     <div class="our-project-btn wow fadeInUp" data-wow-delay="0.2s">
-                        <a href="/projects" class="btn-default">View All Projects</a>
+                        <a href="/projects" class="btn-default">{{ _("View All Projects") }}</a>
                     </div>
                     <!-- Our Project Button End -->
                 </div>
@@ -853,114 +470,52 @@
                 <div class="col-lg-12">
                     <!-- Section Title Start -->
                     <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">our pricing plan</h3>
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">Quality pest control services at <span>competitive rates</span></h2>
+                        <span class="section-kicker wow fadeInUp">{{ _("our pricing plan") }}</span>
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Quality pest control services at") }} <span>{{ _("competitive rates") }}</span></h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
             </div>
-            
+
             <div class="row">
+                {% for plan in plans %}
                 <div class="col-lg-4 col-md-6">
                     <!-- Pricing Item Start -->
-                    <div class="pricing-item wow fadeInUp">
+                    <div class="pricing-item{{ ' highlighted-box' if plan.is_featured else '' }} wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                         <!-- Pricing Header Start -->
                         <div class="pricing-header">
-                            <h3>Basic Plan</h3>
-                            <h2>$99.00</h2>
+                            <h3>{{ localize(plan, "plan_name") }}</h3>
+                            <h2>${{ "%.2f"|format(plan.price) }}{{ "/" ~ plan.billing_period if plan.billing_period else "" }}</h2>
                         </div>
                         <!-- Pricing Header End -->
 
                         <!-- Pricing Body Start -->
                         <div class="pricing-body">
                             <ul>
-                                <li>Full-service pest control</li>
-                                <li>Detailed inspection</li>
-                                <li>Customized treatment plan</li>
-                                <li>Coverage for larger properties</li>
-                                <li>Priority emergency service.</li>
+                                {% for feature in plan.features %}
+                                <li{{ ' class="not-included"' if not feature.is_included else '' }}>{{ feature.feature_text }}</li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <!-- Pricing Body End -->
 
                         <!-- Pricing Button Start -->
                         <div class="pricing-btn">
-                            <a href="/contact" class="btn-default">Get Started Now</a>
+                            <a href="{{ plan.cta_url or '/contact' }}" class="btn-default{{ ' btn-highlighted' if plan.is_featured else '' }}">{{ plan.cta_text or _("Get Started Now") }}</a>
                         </div>
                         <!-- Pricing Button End -->
                     </div>
                     <!-- Pricing Item End -->
                 </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Pricing Item Start -->
-                    <div class="pricing-item highlighted-box wow fadeInUp" data-wow-delay="0.2s">
-                        <!-- Pricing Header Start -->
-                        <div class="pricing-header">
-                            <h3>Premium Plan</h3>
-                            <h2>$399.00</h2>
-                        </div>
-                        <!-- Pricing Header End -->
-
-                        <!-- Pricing Body Start -->
-                        <div class="pricing-body">
-                            <ul>
-                                <li>Full-service pest control</li>
-                                <li>Detailed inspection</li>
-                                <li>Customized treatment plan</li>
-                                <li>Coverage for larger properties</li>
-                                <li>Priority emergency service.</li>
-                            </ul>
-                        </div>
-                        <!-- Pricing Body End -->
-
-                        <!-- Pricing Button Start -->
-                        <div class="pricing-btn">
-                            <a href="/contact" class="btn-default btn-highlighted">Get Started Now</a>
-                        </div>
-                        <!-- Pricing Button End -->
-                    </div>
-                    <!-- Pricing Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Pricing Item Start -->
-                    <div class="pricing-item wow fadeInUp" data-wow-delay="0.4s">
-                        <!-- Pricing Header Start -->
-                        <div class="pricing-header">
-                            <h3>Standard Plan</h3>
-                            <h2>$199.00</h2>
-                        </div>
-                        <!-- Pricing Header End -->
-
-                        <!-- Pricing Body Start -->
-                        <div class="pricing-body">
-                            <ul>
-                                <li>Full-service pest control</li>
-                                <li>Detailed inspection</li>
-                                <li>Customized treatment plan</li>
-                                <li>Coverage for larger properties</li>
-                                <li>Priority emergency service.</li>
-                            </ul>
-                        </div>
-                        <!-- Pricing Body End -->
-
-                        <!-- Pricing Button Start -->
-                        <div class="pricing-btn">
-                            <a href="/contact" class="btn-default">Get Started Now</a>
-                        </div>
-                        <!-- Pricing Button End -->
-                    </div>
-                    <!-- Pricing Item End -->
-                </div>
+                {% endfor %}
 
                 <div class="col-lg-12">
                     <!-- Pricing Benefit List Start -->
                     <div class="pricing-benefit-list wow fadeInUp" data-wow-delay="0.4s">
                         <ul>
-                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-1.svg" alt="">Get 30 day free trial</li>
-                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-2.svg" alt="">No any hidden fees pay</li>
-                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-3.svg" alt="">You can  cancel anytime </li>
+                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-1.svg" alt="">{{ _("Get 30 day free trial") }}</li>
+                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-2.svg" alt="">{{ _("No any hidden fees pay") }}</li>
+                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-3.svg" alt="">{{ _("You can  cancel anytime ") }}</li>
                         </ul>
                     </div>
                     <!-- Pricing Benefit List End -->
@@ -977,14 +532,14 @@
                 <div class="col-lg-12">
                     <!-- Section Title Start -->
                     <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">why choose us</h3>
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">What makes us the best <span>choice for you</span></h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.2s">We understand how frustrating and disruptive pests can be, which is why we're committed to providing fast, reliable, and effective solutions.</p>
+                        <span class="section-kicker wow fadeInUp">{{ _("why choose us") }}</span>
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("What makes us the best") }} <span>{{ _("choice for you") }}</span></h2>
+                        <p class="wow fadeInUp" data-wow-delay="0.2s">{{ _("We understand how frustrating and disruptive pests can be, which is why we're committed to providing fast, reliable, and effective solutions.") }}</p>
                     </div>
                     <!-- Section Title End -->
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-lg-12">
                     <!-- Why Choose Box Start -->
@@ -995,8 +550,8 @@
                                 <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
                             </div>
                             <div class="why-choose-item-content">
-                                <h3>Emergency Services</h3>
-                                <p>We are available round the clock to address.</p>
+                                <h3>{{ _("Emergency Services") }}</h3>
+                                <p>{{ _("We are available round the clock to address.") }}</p>
                             </div>
                         </div>
                         <!-- Why Choose Item End -->
@@ -1007,8 +562,8 @@
                                 <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
                             </div>
                             <div class="why-choose-item-content">
-                                <h3>Customized Treatments</h3>
-                                <p>We are available round the clock to address.</p>
+                                <h3>{{ _("Customized Treatments") }}</h3>
+                                <p>{{ _("We are available round the clock to address.") }}</p>
                             </div>
                         </div>
                         <!-- Why Choose Item End -->
@@ -1019,8 +574,8 @@
                                 <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
                             </div>
                             <div class="why-choose-item-content">
-                                <h3>Certified Professionals</h3>
-                                <p>We are available round the clock to address.</p>
+                                <h3>{{ _("Certified Professionals") }}</h3>
+                                <p>{{ _("We are available round the clock to address.") }}</p>
                             </div>
                         </div>
                         <!-- Why Choose Item End -->
@@ -1029,19 +584,19 @@
                         <div class="page-cta-box wow fadeInUp" data-wow-delay="0.6s">
                             <!-- Page Cta Box Info Start -->
                             <div class="page-cta-box-info">
-                                <h3>Take Back Your Home From Pests. Today!</h3>
+                                <h3>{{ _("Take Back Your Home From Pests. Today!") }}</h3>
                             </div>
                             <!-- Page Cta Box Info End -->
-        
+
                             <!-- Cta Contact Box Start -->
                             <div class="cta-contact-box">
-                                <p>call now</p>
+                                <p>{{ _("call now") }}</p>
                                 <div class="cta-contact-item">
                                     <div class="icon-box">
                                         <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">
                                     </div>
                                     <div class="cta-contact-item-content">
-                                        <h3><a href="tel:+966567407779">+966 56 740 7779</a></h3>
+                                        <h3><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></h3>
                                     </div>
                                 </div>
                             </div>
@@ -1055,7 +610,7 @@
                 <div class="col-lg-12">
                     <!-- Section Footer Text Start -->
                     <div class="section-footer-text wow fadeInUp" data-wow-delay="0.8s">
-                        <p><span>Free</span>Let's create a pest-free environment - <a href="/contact">Contact us today!</a></p>
+                        <p><span>{{ _("Free") }}</span>{{ _("Let's create a pest-free environment -") }} <a href="/contact">{{ _("Contact us today!") }}</a></p>
                     </div>
                     <!-- Section Footer Text End -->
                 </div>
@@ -1074,24 +629,24 @@
                         <!-- Faqs Image 1 Start -->
                         <div class="faqs-img-1">
                             <figure class="image-anime reveal">
-                                <img src="/assets/pestcontrol/website/images/faqs-img-1.jpg" alt="">
-                            </figure>     
+                                <img src="/assets/pestcontrol/website/images/faqs-real-1.webp" alt="">
+                            </figure>
                         </div>
                         <!-- Faqs Image 1 End -->
 
                         <!-- Faqs Image 2 Start -->
                         <div class="faqs-img-2">
                             <figure class="image-anime reveal">
-                                <img src="/assets/pestcontrol/website/images/faqs-img-2.jpg" alt="">
+                                <img src="/assets/pestcontrol/website/images/faqs-real-2.webp" alt="">
                             </figure>
                         </div>
                         <!-- Faqs Image 2 End -->
-                         
+
                         <!-- Faqs Image 3 Start -->
                         <div class="faqs-img-3">
                             <figure class="image-anime reveal">
-                                <img src="/assets/pestcontrol/website/images/faqs-img-3.jpg" alt="">
-                            </figure>     
+                                <img src="/assets/pestcontrol/website/images/faqs-real-3.webp" alt="">
+                            </figure>
                         </div>
                         <!-- Faqs Image 3 End -->
                     </div>
@@ -1103,92 +658,34 @@
                     <div class="our-faqs-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">frequently asked questions</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Find helpful answers to your pest <span>control concerns</span></h2>
+                            <span class="section-kicker wow fadeInUp">{{ _("frequently asked questions") }}</span>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Find helpful answers to your pest") }} <span>{{ _("control concerns") }}</span></h2>
                         </div>
                         <!-- Section Title End -->
 
                         <!-- FAQ Accordion Start -->
                         <div class="faq-accordion" id="accordion">
+                            {% for faq in faqs %}
                             <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp">
-                                <h2 class="accordion-header" id="heading1">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                        1. What types of pests do you treat?
+                            <div class="accordion-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
+                                <h2 class="accordion-header" id="heading{{ loop.index }}">
+                                    <button class="accordion-button{{ '' if loop.first else ' collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="collapse{{ loop.index }}">
+                                        {{ loop.index }}. {{ localize(faq, "question") }}
                                     </button>
                                 </h2>
-                                <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#accordion">
+                                <div id="collapse{{ loop.index }}" class="accordion-collapse collapse{{ ' show' if loop.first else '' }}" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#accordion">
                                     <div class="accordion-body">
-                                        <p>We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.</p>
+                                        <p>{{ localize(faq, "answer") }}</p>
                                     </div>
                                 </div>
                             </div>
                             <!-- FAQ Item End -->
-
-                            <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
-                                <h2 class="accordion-header" id="heading2">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                        2. Are your pest control methods safe for my pets?
-                                    </button>
-                                </h2>
-                                <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#accordion">
-                                    <div class="accordion-body">
-                                        <p>We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- FAQ Item End -->
-
-                            <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
-                                <h2 class="accordion-header" id="heading3">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                        3. How often should I schedule pest control services?
-                                    </button>
-                                </h2>
-                                <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordion">
-                                    <div class="accordion-body">
-                                        <p>We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- FAQ Item End -->
-
-                            <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
-                                <h2 class="accordion-header" id="heading4">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                        4. Do you offer emergency pest control services?
-                                    </button>
-                                </h2>
-                                <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordion">
-                                    <div class="accordion-body">
-                                        <p>We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- FAQ Item End -->
-
-                            <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
-                                <h2 class="accordion-header" id="heading5">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                                        5. How do I know if I have a pest infestation?
-                                    </button>
-                                </h2>
-                                <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#accordion">
-                                    <div class="accordion-body">
-                                        <p>We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- FAQ Item End -->
+                            {% endfor %}
                         </div>
                         <!-- FAQ Accordion End -->
                     </div>
                     <!-- Our Faqs Content End -->
-                </div>               
+                </div>
             </div>
         </div>
     </div>
@@ -1201,8 +698,8 @@
                 <div class="col-lg-12">
                     <!-- Section Title Start -->
                     <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">testimonials</h3>
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">Trusted by hundreds for reliable <span>pest control solutions</span></h2>
+                        <span class="section-kicker wow fadeInUp">{{ _("testimonials") }}</span>
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Trusted by hundreds for reliable") }} <span>{{ _("pest control solutions") }}</span></h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
@@ -1214,117 +711,31 @@
                     <div class="testimonial-slider">
                         <div class="swiper">
                             <div class="swiper-wrapper" data-cursor-text="Drag">
+                                {% for testimonial in testimonials %}
                                 <!-- Testimonial Slide Start -->
                                 <div class="swiper-slide">
                                     <div class="testimonial-item">
                                         <div class="testimonial-author">
                                             <div class="author-image">
                                                 <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-1.jpg" alt="">
+                                                    <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}">
                                                 </figure>
                                             </div>
                                             <div class="author-content">
-                                                <h3>Oliver Spaltn</h3>
-                                                <p>CEO at D.B.A Pvt. Ltd</p>
+                                                <h3>{{ testimonial.client_name }}</h3>
+                                                <p>{{ localize(testimonial, "designation") }}</p>
                                             </div>
                                         </div>
                                         <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
+                                            {% for i in range(5) %}<i class="fa-{{ 'solid' if i < (testimonial.rating * 5)|round(0, 'floor') else 'regular' }} fa-star"></i>{% endfor %}
                                         </div>
                                         <div class="testimonial-content">
-                                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>								
+                                            <p>"{{ localize(testimonial, "testimonial_text") }}"</p>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Testimonial Slide End -->
-                                
-                                <!-- Testimonial Slide Start -->
-                                <div class="swiper-slide">
-                                    <div class="testimonial-item">
-                                        <div class="testimonial-author">
-                                            <div class="author-image">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-2.jpg" alt="">
-                                                </figure>
-                                            </div>
-                                            <div class="author-content">
-                                                <h3>Ronald Richards</h3>
-                                                <p>MD at D.B.A Pvt. Ltd</p>
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>								
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Testimonial Slide End -->
-                                
-                                <!-- Testimonial Slide Start -->
-                                <div class="swiper-slide">
-                                    <div class="testimonial-item">
-                                        <div class="testimonial-author">
-                                            <div class="author-image">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-3.jpg" alt="">
-                                                </figure>
-                                            </div>
-                                            <div class="author-content">
-                                                <h3>Brooklyn Simmons</h3>
-                                                <p>BOD at D.B.A Pvt. Ltd</p>
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>								
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Testimonial Slide End -->
-
-                                <!-- Testimonial Slide Start -->
-                                <div class="swiper-slide">
-                                    <div class="testimonial-item">
-                                        <div class="testimonial-author">
-                                            <div class="author-image">
-                                                <figure class="image-anime">
-                                                    <img src="/assets/pestcontrol/website/images/author-4.jpg" alt="">
-                                                </figure>
-                                            </div>
-                                            <div class="author-content">
-                                                <h3>emily williams</h3>
-                                                <p>Chairman</p>
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>"Excellent service! We had a major ant problem, and they took care of it quickly and professionally.!"</p>								
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Testimonial Slide End -->
+                                {% endfor %}
                             </div>
                             <div class="testimonial-pagination"></div>
                         </div>
@@ -1335,7 +746,7 @@
         </div>
     </div>
     <!-- Our Testimonials Section End -->
-    
+
     <!-- CTA Box Section Start -->
     <div class="cta-box dark-section parallaxie">
         <div class="container">
@@ -1343,7 +754,7 @@
                 <div class="col-lg-7 col-md-6 order-md-1 order-2">
                     <!-- CTA Box Image Start -->
                     <div class="cta-box-image">
-                        <img src="/assets/pestcontrol/website/images/cta-box-image.png" alt="">
+                        <img src="/assets/pestcontrol/website/images/cta-box-real.webp" alt="">
                     </div>
                     <!-- CTA Box Image End -->
                 </div>
@@ -1353,23 +764,23 @@
                     <div class="cta-box-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Let's talk about your <span>pest control needs</span></h2>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Let's talk about your") }} <span>{{ _("pest control needs") }}</span></h2>
                         </div>
                         <!-- Section Title End -->
-                        
+
                         <!-- Cta Box Body Start -->
                         <div class="cta-box-body wow fadeInUp">
                             <ul>
-                                <li>Schedule Your Free Inspection</li>
-                                <li>Prevent Future Infestations</li>
-                                <li>Simple and Fast Booking</li>
+                                <li>{{ _("Schedule Your Free Inspection") }}</li>
+                                <li>{{ _("Prevent Future Infestations") }}</li>
+                                <li>{{ _("Simple and Fast Booking") }}</li>
                             </ul>
                         </div>
                         <!-- Cta Box Body End -->
-                        
+
                         <!-- Cta Button Start -->
                         <div class="cta-btn wow fadeInUp" data-wow-delay="0.2s">
-                            <a href="/contact" class="btn-default btn-highlighted">Get Membership</a>
+                            <a href="/contact" class="btn-default btn-highlighted">{{ _("Get Membership") }}</a>
                         </div>
                         <!-- Cta Button End -->
                     </div>
@@ -1387,22 +798,23 @@
                 <div class="col-lg-12">
                     <!-- Section Title Start -->
                     <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">Latest blog</h3>
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">Stay up to date with our latest <span>pest control advice</span></h2>
+                        <span class="section-kicker wow fadeInUp">{{ _("Latest blog") }}</span>
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">{{ _("Stay up to date with our latest") }} <span>{{ _("pest control advice") }}</span></h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
             </div>
 
             <div class="row">
+                {% for post in blog_posts %}
                 <div class="col-lg-4 col-md-6">
                     <!-- Post Item Start -->
-                    <div class="post-item wow fadeInUp">
+                    <div class="post-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                         <!-- Post Featured Image Start-->
                         <div class="post-featured-image">
-                            <a href="/blog-single" data-cursor-text="View">
+                            <a href="/{{ post.route }}" data-cursor-text="View">
                                 <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/post-1.jpg" alt="">
+                                    <img src="{{ post.cover_image }}" alt="{{ localize(post, 'title') }}">
                                 </figure>
                             </a>
                         </div>
@@ -1412,13 +824,13 @@
                         <div class="post-item-body">
                             <!-- Post Item Content Start -->
                             <div class="post-item-content">
-                                <h2><a href="/blog-single">How to Keep Your Home Pest-Free This Winter</a></h2>
+                                <h2><a href="/{{ post.route }}">{{ localize(post, "title") }}</a></h2>
                             </div>
                             <!-- Post Item Content End -->
 
                             <!-- Blog Item Button Start -->
                             <div class="post-item-btn">
-                                <a href="/blog-single" class="readmore-btn">read more</a>
+                                <a href="/{{ post.route }}" class="readmore-btn">{{ _("read more") }}</a>
                             </div>
                             <!-- Blog Item Button End -->
                         </div>
@@ -1426,210 +838,10 @@
                     </div>
                     <!-- Post Item End -->
                 </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <!-- Post Item Start -->
-                    <div class="post-item wow fadeInUp" data-wow-delay="0.2s">
-                        <!-- Post Featured Image Start-->
-                        <div class="post-featured-image">
-                            <a href="/blog-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/post-2.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Post Featured Image End -->
-
-                        <!-- Post Item Body Start -->
-                        <div class="post-item-body">
-                            <!-- Post Item Content Start -->
-                            <div class="post-item-content">
-                                <h2><a href="/blog-single">5 Eco-Friendly Pest Control Method You Should Know About</a></h2>
-                            </div>
-                            <!-- Post Item Content End -->
-
-                            <!-- Blog Item Button Start -->
-                            <div class="post-item-btn">
-                                <a href="/blog-single" class="readmore-btn">read more</a>
-                            </div>
-                            <!-- Blog Item Button End -->
-                        </div>
-                        <!-- Post Item Body End -->
-                    </div>
-                    <!-- Post Item End -->
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <!-- Post Item Start -->
-                    <div class="post-item wow fadeInUp" data-wow-delay="0.4s">
-                        <!-- Post Featured Image Start-->
-                        <div class="post-featured-image">
-                            <a href="/blog-single" data-cursor-text="View">
-                                <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/post-3.jpg" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Post Featured Image End -->
-
-                        <!-- Post Item Body Start -->
-                        <div class="post-item-body">
-                            <!-- Post Item Content Start -->
-                            <div class="post-item-content">
-                                <h2><a href="/blog-single">Signs You Have a Termite Problem and How to Handle It</a></h2>
-                            </div>
-                            <!-- Post Item Content End -->
-
-                            <!-- Blog Item Button Start -->
-                            <div class="post-item-btn">
-                                <a href="/blog-single" class="readmore-btn">read more</a>
-                            </div>
-                            <!-- Blog Item Button End -->
-                        </div>
-                        <!-- Post Item Body End -->
-                    </div>
-                    <!-- Post Item End -->
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
     <!-- Our Blog Section End -->
 
-    <!-- Main Footer Start -->
-    <footer class="main-footer dark-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5">
-                    <!-- About Footer Start -->
-                    <div class="about-footer footer-links">
-                        <h3>About Skystar</h3>
-                        <p>we are dedicated to creating safe, pest-free environments for homes and businesses alike. With years of experience in the pest control industry.</p>
-                        <p>we pride ourselves on delivering effective, eco-friendly solutions tailored to your needs.</p>
-                    </div>
-                    <!-- About Footer End -->
-                </div>
-
-                <div class="col-lg-2 col-md-3">
-                    <!-- Footer Links Start -->
-                    <div class="footer-links">
-                        <h3>services</h3>
-                        <ul>
-                            <li><a href="/about">About company</a></li>
-                            <li><a href="/services">Our services</a></li>
-                            <li><a href="/projects">Our projects</a></li>
-                            <li><a href="/blog">Our blogs</a></li>
-                            <li><a href="/contact">Contact us</a></li>
-                        </ul>
-                    </div>
-                    <!-- Footer Links End -->
-                </div>
-                
-                <div class="col-lg-2 col-md-4">
-                    <!-- Footer Links Start -->
-                    <div class="footer-links">
-                        <h3>Links</h3>
-                        <ul>
-                            <li><a href="/project-single">Home Pest Control</a></li>
-                            <li><a href="/project-single">Commercial Pest</a></li>
-                            <li><a href="/project-single">Termite & Rodent</a></li>
-                            <li><a href="/project-single">Eco-Friendly Pest</a></li>
-                            <li><a href="/project-single">Wildlife Removal</a></li>
-                        </ul>
-                    </div>
-                    <!-- Footer Links End -->
-                </div>
-
-                <div class="col-lg-3 col-md-5">
-                    <div class="footer-links">
-                        <h3>contact us</h3>                        
-                        <!-- Footer Contact Item Start -->
-                        <div class="footer-contact-item">
-                            <div class="icon-box">
-                                <i class="fa-solid fa-envelope"></i>
-                            </div>
-                            <div class="footer-contact-content">
-                                <p><a href="tel:+966567407779">+966 56 740 7779</a></p>
-                            </div>
-                        </div>
-                        <!-- Footer Contact Item End -->
-                        
-                        <!-- Footer Contact Item Start -->
-                        <div class="footer-contact-item">
-                            <div class="icon-box">
-                                <i class="fa-solid fa-phone"></i>
-                            </div>
-                            <div class="footer-contact-content">
-                                <p><a href="mailto:info@the-skystar.com">info@the-skystar.com</a></p>
-                            </div>
-                        </div>
-                        <!-- Footer Contact Item End -->
-                    </div>
-                </div>
-
-                <div class="col-lg-12">
-                    <!-- Footer Copyright Start -->
-                    <div class="footer-copyright">
-                        <!-- Footer Logo Start -->
-                        <div class="footer-logo">
-                            <img src="/assets/pestcontrol/website/icons/skystar-logo.png" alt="Skystar">
-                        </div>
-                        <!-- Footer Logo End -->
-
-                        <!-- Footer Social Links Start -->
-                        <div class="footer-social-links">
-                            <ul>
-                                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
-                            </ul>
-                        </div>
-                        <!-- Footer Social Links End -->
-
-                        <!-- Footer Copyright Text Start -->
-                        <div class="footer-copyright-text">
-                            <p>Copyright © {{ year }} Skystar. All Rights Reserved.</p>
-                        </div>
-                        <!-- Footer Copyright Text End -->                        
-                    </div>
-                    <!-- Footer Copyright End -->
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Main Footer End -->
-
-    <!-- Jquery Library File -->
-    <script src="/assets/pestcontrol/website/js/jquery-3.7.1.min.js"></script>
-    <!-- Bootstrap js file -->
-    <script src="/assets/pestcontrol/website/js/bootstrap.min.js"></script>
-    <!-- Validator js file -->
-    <script src="/assets/pestcontrol/website/js/validator.min.js"></script>
-    <!-- SlickNav js file -->
-    <script src="/assets/pestcontrol/website/js/jquery.slicknav.js"></script>
-    <!-- Swiper js file -->
-    <script src="/assets/pestcontrol/website/js/swiper-bundle.min.js"></script>
-    <!-- Counter js file -->
-    <script src="/assets/pestcontrol/website/js/jquery.waypoints.min.js"></script>
-    <script src="/assets/pestcontrol/website/js/jquery.counterup.min.js"></script>
-    <!-- Isotop js file -->
-	<script src="/assets/pestcontrol/website/js/isotope.min.js"></script>
-    <!-- Magnific js file -->
-    <script src="/assets/pestcontrol/website/js/jquery.magnific-popup.min.js"></script>
-    <!-- SmoothScroll -->
-    <script src="/assets/pestcontrol/website/js/SmoothScroll.js"></script>
-    <!-- Parallax js -->
-    <script src="/assets/pestcontrol/website/js/parallaxie.js"></script>
-    <!-- MagicCursor js file -->
-    <script src="/assets/pestcontrol/website/js/gsap.min.js"></script>
-    <script src="/assets/pestcontrol/website/js/magiccursor.js"></script>
-    <!-- Text Effect js file -->
-    <script src="/assets/pestcontrol/website/js/SplitText.js"></script>
-    <script src="/assets/pestcontrol/website/js/ScrollTrigger.min.js"></script>
-    <!-- YTPlayer js File -->
-    <script src="/assets/pestcontrol/website/js/jquery.mb.YTPlayer.min.js"></script>
-    <!-- Wow js file -->
-    <script src="/assets/pestcontrol/website/js/wow.min.js"></script>
-    <!-- Main Custom js file -->
-    <script src="/assets/pestcontrol/website/js/function.js"></script>
-</body>
-</html>
+{% endblock %}

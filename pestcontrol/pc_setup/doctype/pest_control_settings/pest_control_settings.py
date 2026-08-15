@@ -6,48 +6,52 @@ from frappe.model.document import Document
 
 
 class PestControlSettings(Document):
-    def validate(self):
-        self.validate_diameter_unit()
-        self.validate_default_division_types()
+	def validate(self):
+		self.validate_diameter_unit()
+		self.validate_default_division_types()
 
-    def validate_diameter_unit(self):
-        if not self.check_visit_location_remoteness:
-            return
-        valid_uoms = {row[0] for row in _query_uoms_by_category("Length")}
-        if self.diameter_unit not in valid_uoms:
-            frappe.throw(
-                frappe._("{0} is not a valid Length unit").format(
-                    frappe.bold(self.diameter_unit))
-            )
+	def validate_diameter_unit(self):
+		if not self.check_visit_location_remoteness:
+			return
+		valid_uoms = {row[0] for row in _query_uoms_by_category("Length")}
+		if self.diameter_unit not in valid_uoms:
+			frappe.throw(frappe._("{0} is not a valid Length unit").format(frappe.bold(self.diameter_unit)))
 
-    def validate_default_division_types(self):
-        for row in self.default_division_types:
-            country = frappe.db.get_value(
-                "Address Division Type", row.division_type, "country")
-            if country != row.country:
-                frappe.throw(
-                    frappe._(
-                        "Row #{0}: Division Type {1} does not belong to country {2}"
-                    ).format(row.idx, frappe.bold(row.division_type), frappe.bold(row.country))
-                )
+	def validate_default_division_types(self):
+		for row in self.default_division_types:
+			country = frappe.db.get_value("Address Division Type", row.division_type, "country")
+			if country != row.country:
+				frappe.throw(
+					frappe._("Row #{0}: Division Type {1} does not belong to country {2}").format(
+						row.idx, frappe.bold(row.division_type), frappe.bold(row.country)
+					)
+				)
 
 
 def _query_uoms_by_category(category: str, txt: str = "", page_len: int = 500, start: int = 0):
-    UCF = frappe.qb.DocType("UOM Conversion Factor")
-    return (
-        frappe.qb.from_(UCF)
-        .select(UCF.to_uom)
-        .distinct()
-        .where(UCF.category == category)
-        .where(UCF.to_uom.like(f"%{txt}%"))
-        .limit(page_len)
-        .offset(start)
-        .run()
-    )
+	UCF = frappe.qb.DocType("UOM Conversion Factor")
+	return (
+		frappe.qb.from_(UCF)
+		.select(UCF.to_uom)
+		.distinct()
+		.where(UCF.category == category)
+		.where(UCF.to_uom.like(f"%{txt}%"))
+		.limit(page_len)
+		.offset(start)
+		.run()
+	)
 
 
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
-def get_uoms_by_category(doctype, txt, searchfield, start, page_len, filters):
-    category = (filters or {}).get("category", "Length")
-    return _query_uoms_by_category(category, txt=txt, page_len=page_len, start=start)
+def get_uoms_by_category(
+	doctype: str, txt: str, searchfield: str, start: int, page_len: int, filters: dict | str
+):
+	# Real callers (e.g. the diameter_unit Link field's set_query) send
+	# `filters` as a JSON-stringified form field, not a native dict —
+	# same str-vs-native-type situation as pest_category.py's
+	# get_pest_types_for_categories, handled the same way.
+	if isinstance(filters, str):
+		filters = frappe.parse_json(filters) if filters else {}
+	category = (filters or {}).get("category", "Length")
+	return _query_uoms_by_category(category, txt=txt, page_len=page_len, start=start)
