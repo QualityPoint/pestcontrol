@@ -16,6 +16,7 @@
   "location",
   "duration",
   "column_break_bjeh",
+  "display_order",
   "published",
   "section_break_art_roject",
   "article"
@@ -60,6 +61,12 @@
    "fieldname": "duration",
    "fieldtype": "Data",
    "label": "Duration"
+  },
+  {
+   "fieldname": "display_order",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Display Order"
   },
   {
    "default": "1",
