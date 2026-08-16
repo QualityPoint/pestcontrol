@@ -73,27 +73,19 @@ website_generators = ["Website Service", "Website Project", "Website Team Member
 # Fixtures
 # ----------
 
-# Website CMS content, so a fresh install of this app isn't empty — child
-# tables (Website Article translations, Pricing Plan Feature rows, Website
-# About Content) are bundled automatically with their parent doctype's
-# export, no separate listing needed. Deliberately excludes `Website
-# Contact Message` (visitor form submissions — transactional data, not
-# seed content) and the `pc_setup` module's doctypes (unrelated reference
-# config, not website content).
+# Deliberately does NOT include the website CMS content doctypes (PC
+# Website Settings, Website Service, Website Blog Post, etc). They used to
+# be listed here so a fresh install wasn't empty, but once the site went
+# live, that became actively harmful: `bench migrate` re-imports every
+# fixture unconditionally on every run, so any live edit made directly on
+# production (a new photo, a service description tweak, an About page
+# change...) would get silently overwritten back to whatever the last
+# `bench export-fixtures` snapshot in this repo happened to contain the
+# next time code was deployed. Production's database is now the sole
+# source of truth for all of that content — nothing here pushes into it.
+# Only genuinely static, identical-everywhere reference data belongs in
+# this list.
 fixtures = [
-	{"dt": "PC Website Settings"},
-	{"dt": "Website About Page"},
-	{"dt": "Website Service"},
-	{"dt": "Website Project"},
-	{"dt": "Website Team Member"},
-	{"dt": "Website Blog Post"},
-	{"dt": "Website Testimonial"},
-	{"dt": "Website Pricing Plan"},
-	{"dt": "Website FAQ"},
-	{"dt": "Website Gallery Item"},
-	{"dt": "Website Hero Slide"},
-	{"dt": "Website Feature"},
-	{"dt": "Website List Item"},
 	{"dt": "Language", "filters": [["name", "in", ["en", "ar"]]]},
 ]
 
