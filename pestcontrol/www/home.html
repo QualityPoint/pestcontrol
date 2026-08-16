@@ -274,7 +274,7 @@
                                         <!-- Service Body Start -->
                                         <div class="service-body">
                                             <div class="icon-box">
-                                                <img src="{{ service.icon }}" alt="">
+                                                <img src="{{ service.icon or settings.favicon }}" alt="{{ localize(service, 'service_name') }}">
                                             </div>
                                             <div class="service-content">
                                                 <h3><a href="/{{ service.route }}">{{ localize(service, "service_name") }}</a></h3>

@@ -85,9 +85,9 @@ website_generators = ["Website Service", "Website Project", "Website Team Member
 # source of truth for all of that content — nothing here pushes into it.
 # Only genuinely static, identical-everywhere reference data belongs in
 # this list.
-fixtures = [
-	{"dt": "Language", "filters": [["name", "in", ["en", "ar"]]]},
-]
+# fixtures = [
+# 	{"dt": "Language", "filters": [["name", "in", ["en", "ar"]]]},
+# ]
 
 # Jinja
 # ----------
