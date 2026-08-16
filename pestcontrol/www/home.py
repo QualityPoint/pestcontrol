@@ -1,10 +1,12 @@
 import frappe
+from frappe import _
 
 from pestcontrol.pc_website.utils import (
 	filter_by_language,
 	get_language_row,
 	get_translated_list,
 	get_website_context,
+	localize,
 	make_route,
 )
 
@@ -72,3 +74,60 @@ def get_context(context):
 		order_by="published_on desc, creation desc",
 		limit_page_length=3,
 	)
+
+	context.best_services = get_translated_list(
+		"Website Feature",
+		filters={"section": "Best Services", "published": 1},
+		fields="*",
+		order_by="display_order asc",
+	)
+	context.features = get_translated_list(
+		"Website Feature",
+		filters={"section": "Features", "published": 1},
+		fields="*",
+		order_by="display_order asc",
+	)
+	context.why_choose_us = get_translated_list(
+		"Website Feature",
+		filters={"section": "Why Choose Us", "published": 1},
+		fields="*",
+		order_by="display_order asc",
+	)
+	context.about_list = get_translated_list(
+		"Website List Item",
+		filters={"list_key": "About List", "published": 1},
+		fields="*",
+		order_by="display_order asc",
+	)
+	context.pricing_benefits = get_translated_list(
+		"Website List Item",
+		filters={"list_key": "Pricing Benefits", "published": 1},
+		fields="*",
+		order_by="display_order asc",
+	)
+	context.cta_benefits = get_translated_list(
+		"Website List Item",
+		filters={"list_key": "CTA Benefits", "published": 1},
+		fields="*",
+		order_by="display_order asc",
+	)
+
+	# Fixed fallback labels used position-by-position until an admin seeds
+	# real "Counter Labels" rows — keeps the 4 slots aligned with PC Website
+	# Settings' fixed years/projects/team/satisfaction field order.
+	counter_label_defaults = [
+		_("Years Of Experience"),
+		_("Projects Completed"),
+		_("Dedicated Team"),
+		_("Happy Customers"),
+	]
+	counter_label_rows = get_translated_list(
+		"Website List Item",
+		filters={"list_key": "Counter Labels", "published": 1},
+		fields="*",
+		order_by="display_order asc",
+	)
+	context.counter_labels = [
+		localize(counter_label_rows[i], "title") if i < len(counter_label_rows) else counter_label_defaults[i]
+		for i in range(4)
+	]

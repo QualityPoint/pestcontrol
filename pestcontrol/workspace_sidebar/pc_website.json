@@ -150,6 +150,30 @@
    "type": "Link"
   },
   {
+   "child": 1,
+   "collapsible": 1,
+   "icon": "layout",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Website Feature",
+   "link_to": "Website Feature",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
+   "icon": "list",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Website List Item",
+   "link_to": "Website List Item",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
    "child": 0,
    "collapsible": 1,
    "icon": "inbox",
@@ -171,9 +195,21 @@
    "link_type": "DocType",
    "show_arrow": 0,
    "type": "Link"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
+   "icon": "briefcase",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Job Application",
+   "link_to": "Job Application",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-08-05 12:00:00.000000",
+ "modified": "2026-08-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "PC Website",

@@ -41,6 +41,8 @@ ARTICLE_FIELD_MAP = {
 	"Website Gallery Item": {"title": "title"},
 	"Website Blog Post": {"title": "title", "blog_intro": "subtitle", "content": "context"},
 	"Website Hero Slide": {"heading": "title", "kicker": "subtitle", "description": "context"},
+	"Website Feature": {"title": "title", "description": "context"},
+	"Website List Item": {"title": "title"},
 }
 
 
