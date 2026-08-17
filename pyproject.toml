@@ -6,6 +6,7 @@ authors = [
 description = "A comprehensive pest control management system built on Frappe, streamlining service scheduling, technician dispatch, chemical inventory tracking, and client reporting"
 requires-python = ">=3.14"
 readme = "README.md"
+license = { file = "license.txt" }
 dynamic = ["version"]
 dependencies = [
     # "frappe~=16.0.0" # Installed and managed by bench.

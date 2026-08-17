@@ -1,9 +1,9 @@
 app_name = "pestcontrol"
 app_title = "Pest Control"
-app_publisher = "QP"
+app_publisher = "QualityPoint"
 app_description = "A comprehensive pest control management system built on Frappe, streamlining service scheduling, technician dispatch, chemical inventory tracking, and client reporting"
-app_email = "assem.bahnasy@qp.sa"
-app_license = "agpl-3.0"
+app_email = "erp@qp.sa"
+app_license = "gpl-3.0"
 
 # Apps
 # ------------------
