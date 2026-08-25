@@ -62,3 +62,17 @@ def submit_job_application(
 
 	doc.notify_admin()
 	return {"success": True}
+
+
+@frappe.whitelist()
+def get_portal_document(doctype: str, name: str):
+	"""Read-only JSON pass-through for the customer dashboard's detail view.
+
+	Re-exposes the same check erpnext.templates.pages.order.py already uses
+	to gate /orders/<name> etc. — grants nothing new, just makes that
+	existing permission decision reachable as JSON instead of a Jinja page.
+	"""
+	doc = frappe.get_doc(doctype, name)
+	if not frappe.has_website_permission(doc):
+		frappe.throw(frappe._("Not Permitted"), frappe.PermissionError)
+	return doc.as_dict()

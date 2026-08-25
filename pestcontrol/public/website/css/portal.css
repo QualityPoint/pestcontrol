@@ -1,0 +1,303 @@
+/* -----------------------------------------------------------------------
+ * Customer portal branding (My Account, Orders, Quotations, Invoices,
+ * Addresses and their detail pages).
+ *
+ * These pages are rendered entirely through Frappe/ERPNext's own core
+ * templates (frappe/www/me.html, frappe/www/portal.html,
+ * erpnext/templates/pages/order.html, ...) and never extend pestcontrol's
+ * website_base.html — so none of custom.css/skystar.css, the brand fonts,
+ * or the :root color tokens reach these pages. This stylesheet is loaded
+ * separately via the `web_include_css` hook and has to be self-contained:
+ * it repeats the same tokens/font as custom.css rather than relying on it.
+ * -------------------------------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
+
+:root {
+	--primary-color: #002F47;
+	--secondary-color: #F5F7F2;
+	--text-color: #3D5A6A;
+	--accent-color: #217D39;
+	--white-color: #FFFFFF;
+	--divider-color: #002F471A;
+	--dark-divider-color: #FFFFFF24;
+	--error-color: rgb(230, 87, 87);
+	--warning-color: #B8860B;
+	--default-font: "IBM Plex Sans Arabic", sans-serif;
+}
+
+/* frappe/www/me.html sets an inline body{background:var(--subtle-fg)} in the
+   page itself, which loads after this stylesheet's <link> in source order —
+   `html body` (two type selectors) outranks a bare `body` rule regardless of
+   order, so this wins without needing !important. */
+html body {
+	background-color: var(--secondary-color);
+	font-family: var(--default-font);
+	color: var(--text-color);
+}
+
+.page-content-wrapper a,
+.page-content-wrapper button {
+	font-family: var(--default-font);
+}
+
+.page-content-wrapper h1,
+.page-content-wrapper h2,
+.page-content-wrapper h3,
+.page-content-wrapper h4,
+.page-content-wrapper h5,
+.page-content-wrapper h6 {
+	color: var(--primary-color);
+	font-weight: 700;
+}
+
+/* -----------------------------------------------------------------------
+ * Shared page chrome
+ * -------------------------------------------------------------------- */
+
+.page-header-wrapper .page-header {
+	border-bottom: 1px solid var(--divider-color);
+}
+
+.my-account-header,
+.page-header-wrapper h1 {
+	color: var(--primary-color);
+	font-weight: 700;
+}
+
+.page-breadcrumbs .breadcrumb a {
+	color: var(--text-color);
+}
+
+.page-breadcrumbs .breadcrumb a:hover {
+	color: var(--accent-color);
+}
+
+/* -----------------------------------------------------------------------
+ * Sidebar
+ * -------------------------------------------------------------------- */
+
+.web-sidebar {
+	background: var(--white-color);
+	border: 1px solid var(--divider-color);
+	border-radius: 16px;
+	padding: 8px;
+}
+
+.web-sidebar .sidebar-group h6 {
+	color: var(--text-color);
+	opacity: 0.7;
+	font-family: var(--default-font);
+}
+
+.web-sidebar .sidebar-item a {
+	color: var(--text-color);
+	border-radius: 10px;
+	font-family: var(--default-font);
+}
+
+.web-sidebar .sidebar-item a:hover {
+	background: var(--secondary-color);
+	color: var(--primary-color);
+}
+
+.web-sidebar .sidebar-item a.active {
+	background: var(--accent-color);
+	color: var(--white-color);
+}
+
+.web-sidebar .sidebar-item a.active .sidebar-item-icon {
+	fill: var(--white-color);
+}
+
+/* -----------------------------------------------------------------------
+ * My Account (/me)
+ * -------------------------------------------------------------------- */
+
+.portal-container {
+	background: var(--white-color);
+	border: 1px solid var(--divider-color);
+	border-radius: 24px;
+	box-shadow: 0px 0px 30px 0px #002F471A;
+	overflow: hidden;
+}
+
+.portal-section.head {
+	background: var(--secondary-color);
+	padding: 40px 30px;
+}
+
+.portal-section.head .title {
+	color: var(--text-color);
+	opacity: 0.7;
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.my-account-name {
+	color: var(--primary-color);
+	font-weight: 700;
+	font-size: 20px;
+}
+
+.portal-items .portal-section {
+	border-bottom: 1px solid var(--divider-color);
+}
+
+.my-account-item-link a {
+	color: var(--text-color);
+}
+
+.my-account-item-link a:hover,
+.my-account-item-link a:hover .item-link-text {
+	color: var(--accent-color);
+}
+
+.my-account-item-link svg,
+.edit-profile-icon,
+.right-icon {
+	fill: var(--accent-color);
+}
+
+.portal-footer {
+	background: var(--secondary-color);
+	border-top: 1px solid var(--divider-color);
+}
+
+.portal-footer a {
+	color: var(--text-color);
+}
+
+.portal-footer a:hover {
+	color: var(--accent-color);
+}
+
+/* -----------------------------------------------------------------------
+ * List pages (/orders, /quotations, /invoices, /addresses, /portal)
+ * -------------------------------------------------------------------- */
+
+.website-list {
+	background: transparent;
+}
+
+.web-list-item,
+.transaction-list-item,
+.address-card {
+	background: var(--white-color);
+	border: 1px solid var(--divider-color);
+	border-radius: 16px;
+	box-shadow: 0px 0px 11.8px 0px #0000000F;
+	margin-bottom: 16px;
+	transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.web-list-item:hover,
+.transaction-list-item:hover,
+.address-card:hover {
+	box-shadow: 0px 0px 30px 0px #002F471A;
+	transform: translateY(-2px);
+}
+
+.address-card.active {
+	border-color: var(--accent-color);
+}
+
+.list-item-name,
+.transaction-list-item .items-preview {
+	color: var(--primary-color);
+}
+
+.list-item-name a {
+	color: var(--primary-color);
+	font-weight: 600;
+}
+
+.list-item-name a:hover {
+	color: var(--accent-color);
+}
+
+/* Status pills keep their semantic meaning (paid/overdue/draft/...) but pick
+   up the brand palette instead of Frappe's default indicator hues. */
+.indicator-pill {
+	font-family: var(--default-font);
+	border-radius: 100px;
+}
+
+.indicator-pill.green {
+	background: color-mix(in srgb, var(--accent-color) 15%, transparent);
+	color: var(--accent-color);
+}
+
+.indicator-pill.red {
+	background: color-mix(in srgb, var(--error-color) 15%, transparent);
+	color: var(--error-color);
+}
+
+.indicator-pill.orange,
+.indicator-pill.yellow {
+	background: color-mix(in srgb, var(--warning-color) 15%, transparent);
+	color: var(--warning-color);
+}
+
+.indicator-pill.gray,
+.indicator-pill.grey,
+.indicator-pill.darkgrey {
+	background: var(--secondary-color);
+	color: var(--text-color);
+}
+
+.indicator-pill.blue,
+.indicator-pill.light-blue {
+	background: color-mix(in srgb, var(--primary-color) 12%, transparent);
+	color: var(--primary-color);
+}
+
+/* -----------------------------------------------------------------------
+ * Detail pages (/orders/<name>, /quotations/<name>, /invoices/<name>, ...)
+ * -------------------------------------------------------------------- */
+
+#page-order .order-container,
+.order-container {
+	background: var(--white-color);
+	border: 1px solid var(--divider-color);
+	border-radius: 24px;
+	box-shadow: 0px 0px 30px 0px #002F471A;
+	padding: 40px;
+}
+
+.order-item-header,
+.transaction-subheading {
+	color: var(--primary-color);
+	font-weight: 700;
+}
+
+.order-item-name {
+	color: var(--primary-color);
+}
+
+.order-items .order-item {
+	border-bottom: 1px solid var(--divider-color);
+}
+
+/* -----------------------------------------------------------------------
+ * Buttons — reuse the site's pill-button language for portal actions
+ * (Pay, Track, filters, ...) without pulling in the full marketing
+ * .btn-default (animated arrow badge, fixed 50px margin) meant for CTAs.
+ * -------------------------------------------------------------------- */
+
+.page-content-wrapper .btn-primary,
+.page-content-wrapper .primary-action {
+	background: var(--accent-color);
+	border-color: var(--accent-color);
+	color: var(--white-color);
+	border-radius: 100px;
+	font-weight: 600;
+	padding: 10px 24px;
+}
+
+.page-content-wrapper .btn-primary:hover,
+.page-content-wrapper .primary-action:hover {
+	background: var(--primary-color);
+	border-color: var(--primary-color);
+}

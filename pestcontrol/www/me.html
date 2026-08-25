@@ -1,0 +1,24 @@
+<!--
+  Overrides frappe/www/me.html. frappe/www/me.py's get_context() is NOT
+  overridden — it already guards Guest access and supplies `current_user`;
+  this just swaps the markup for the React-rendered account page.
+-->
+<!doctype html>
+<html lang="{{ lang }}" dir="{{ 'rtl' if is_rtl() else 'ltr' }}">
+
+<head>
+  {% include "templates/includes/dashboard_assets.html" %}
+  <title>My Account | Sky Star</title>
+</head>
+
+<body>
+  <div
+    id="root"
+    data-page-type="account"
+    data-full-name="{{ current_user.full_name }}"
+    data-email="{{ current_user.email }}"
+    {% if current_user.user_image %}data-avatar-url="{{ current_user.user_image }}"{% endif %}
+  ></div>
+</body>
+
+</html>

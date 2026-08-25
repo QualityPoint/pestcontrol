@@ -1,0 +1,33 @@
+<!--
+  Overrides frappe/www/portal.html. Handles bare /portal (Overview) and,
+  via erpnext's website_route_rules, /orders, /quotations, /invoices (list
+  pages) — frappe/www/portal.py's get_context() is NOT overridden, so all
+  permission filtering/list logic stays exactly as ERPNext wrote it. When a
+  doctype is requested, get_context() already computes `raw_result` as a
+  pre-serialized JSON string of the correctly-filtered rows (see
+  frappe/www/portal.py's get()) — embedded directly below, no client fetch.
+-->
+<!doctype html>
+<html lang="{{ lang }}" dir="{{ 'rtl' if is_rtl() else 'ltr' }}">
+
+<head>
+  {% include "templates/includes/dashboard_assets.html" %}
+  <title>{% if doctype %}{{ _(doctype) }}{% else %}My Dashboard{% endif %} | Sky Star</title>
+</head>
+
+{% set me = portal_user_info() %}
+<body>
+  <div
+    id="root"
+    data-page-type="{{ 'list' if doctype else 'overview' }}"
+    {% if doctype %}data-doctype="{{ doctype }}"{% endif %}
+    data-full-name="{{ me.full_name }}"
+    data-email="{{ me.email }}"
+    {% if me.user_image %}data-avatar-url="{{ me.user_image }}"{% endif %}
+  ></div>
+  {% if doctype %}
+  <script id="portal-data" type="application/json">{{ raw_result }}</script>
+  {% endif %}
+</body>
+
+</html>

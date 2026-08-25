@@ -113,6 +113,25 @@ def asset_version(path):
 		return 0
 
 
+def portal_user_info():
+	"""Full name/email/avatar for the logged-in session user — used by the
+	dashboard header (avatar shortcut) on the portal.html and order.html
+	overrides, which don't otherwise carry a `current_user`-like context
+	var the way frappe/www/me.py does."""
+	return frappe.db.get_value(
+		"User", frappe.session.user, ["full_name", "email", "user_image"], as_dict=True
+	)
+
+
+def doc_to_json(doc):
+	"""Serialize a Document for embedding in a <script type="application/json">
+	block — used by the portal detail-page override so the customer
+	dashboard's React island renders from the same already permission-
+	checked document the page itself computed, instead of a second
+	client-side fetch."""
+	return frappe.as_json(doc.as_dict())
+
+
 def attach_articles(doctype, items):
 	"""Batch-fetch Website Article rows for a list of already-fetched items
 	and stash them on each item for localize() to read — one query per page,
@@ -211,6 +230,43 @@ def validate_unique_language(doc, fieldname="article"):
 
 def validate_articles(doc):
 	validate_unique_language(doc, "article")
+
+
+def sync_portal_user_on_login():
+	"""Ensure the logged-in Website User is listed in their Customer's Portal
+	User table, so the customer portal and the pestcontrol dashboard actually
+	show their own documents.
+
+	ERPNext's own on_session_creation hook (create_customer_or_supplier)
+	creates the Customer + Contact link on a self-registered customer's
+	first login, but never populates Portal User itself — and Portal User is
+	what get_transaction_list's customer-scoping filter actually reads
+	(erpnext.controllers.website_list_for_contact.get_parents_for_user).
+	Without this, a self-registered customer's portal (Orders/Quotations/
+	Invoices) stays empty even though their documents genuinely exist and are
+	correctly linked to them."""
+	user = frappe.session.user
+	if frappe.db.get_value("User", user, "user_type") != "Website User":
+		return
+
+	contact_name = frappe.db.get_value("Contact", {"email_id": user})
+	if not contact_name:
+		return
+
+	customer = frappe.db.get_value(
+		"Dynamic Link",
+		{"parenttype": "Contact", "parent": contact_name, "link_doctype": "Customer"},
+		"link_name",
+	)
+	if not customer:
+		return
+
+	if frappe.db.exists("Portal User", {"parenttype": "Customer", "parent": customer, "user": user}):
+		return
+
+	customer_doc = frappe.get_doc("Customer", customer)
+	customer_doc.append("portal_users", {"user": user})
+	customer_doc.save(ignore_permissions=True)
 
 
 def get_language_row(rows):
