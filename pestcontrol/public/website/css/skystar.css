@@ -838,7 +838,6 @@ html[dir="rtl"] * {
  */
 a[href^="tel:"],
 a[href^="https://wa.me/"] {
-	direction: ltr;
 	unicode-bidi: isolate;
 }
 
@@ -992,20 +991,21 @@ a[href^="https://wa.me/"] {
 	align-items: center;
 	gap: 6px;
 	border: none;
-	background: rgba(255, 255, 255, 0.15);
-	color: var(--white-color);
+	background: var(--white-color);
+	color: var(--primary-color);
 	font-size: 13px;
 	font-weight: 600;
 	line-height: 1;
 	padding: 7px 12px;
 	border-radius: 30px;
 	cursor: pointer;
-	transition: background 0.3s ease-in-out;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	transition: background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 /* Accessibility toggle, sitting in the topbar's icon row next to the
    language switcher — same pill shape and sizing as .lang-switch-toggle,
-   icon plus a visible label. */
+   but ghost/translucent rather than solid, icon plus a visible label. */
 .topbar-a11y-toggle{
 	display: flex;
 	align-items: center;
@@ -1053,23 +1053,30 @@ a[href^="https://wa.me/"] {
 	background: rgba(255, 255, 255, 0.25);
 }
 
-.lang-switch-toggle:hover{
-	background: rgba(255, 255, 255, 0.25);
+.lang-switch-toggle:hover,
+.lang-switch-toggle:focus-visible{
+	background: #f0f2f1;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.lang-switch-toggle i{
+.lang-switch-toggle .lang-switch-icon{
+	font-size: 13px;
+	color: var(--accent-color);
+}
+
+.lang-switch-toggle .lang-switch-caret{
 	font-size: 10px;
 	transition: transform 0.25s ease-in-out;
 }
 
-.lang-switch.open .lang-switch-toggle i{
+.lang-switch.open .lang-switch-toggle .lang-switch-caret{
 	transform: rotate(180deg);
 }
 
 .lang-switch-menu{
 	position: absolute;
 	top: calc(100% + 10px);
-	right: 0;
+	/* right: 0; */
 	min-width: 160px;
 	margin: 0;
 	padding: 6px;
@@ -1084,10 +1091,6 @@ a[href^="https://wa.me/"] {
 	z-index: 999;
 }
 
-html[dir="rtl"] .lang-switch-menu{
-	right: auto;
-	left: 0;
-}
 
 .lang-switch.open .lang-switch-menu{
 	opacity: 1;
@@ -1153,6 +1156,7 @@ html[dir="rtl"] .lang-option{
 	transform: translateY(-8px);
 	transition: all 0.2s ease-in-out;
 	z-index: 999;
+	left: -120px; /* override the theme's .dropdown-menu left: 0 */
 }
 
 .deaf-contact.open .deaf-contact-menu{
