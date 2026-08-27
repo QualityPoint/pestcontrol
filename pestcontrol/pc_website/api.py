@@ -3,6 +3,7 @@
 
 import frappe
 from frappe import _
+from frappe.utils import flt
 from frappe.utils.file_manager import save_file
 
 
@@ -38,6 +39,11 @@ def submit_job_application(
 	position_applied_for: str = "",
 	job_opening: str = "",
 	message: str = "",
+	country: str = "",
+	resume_link: str = "",
+	salary_min: str = "",
+	salary_max: str = "",
+	salary_currency: str = "",
 ):
 	"""Create an HRMS Job Applicant from the public careers form, attaching the
 	resume file (if provided) as a private File once the applicant's name exists.
@@ -48,7 +54,12 @@ def submit_job_application(
 	just-closed one, and Job Applicant.before_insert throws hard on a closed
 	opening. When no opening is linked (e.g. the free-text fallback shown when
 	there are no open positions), the typed position is preserved in the cover
-	letter instead."""
+	letter instead.
+
+	`country` / `salary_currency` are validated against their link targets
+	before use so a tampered POST can't inject an arbitrary link value; the
+	expected-salary range is optional and only recorded when a positive number
+	is given."""
 	linked_opening = None
 	if job_opening:
 		row = frappe.db.get_value("Job Opening", job_opening, ["name", "status"], as_dict=True)
@@ -58,6 +69,13 @@ def submit_job_application(
 	cover_letter = message or ""
 	if not linked_opening and position_applied_for:
 		cover_letter = f"{_('Position applied for')}: {position_applied_for}\n\n{cover_letter}".strip()
+
+	lower_range = flt(salary_min)
+	upper_range = flt(salary_max)
+	has_salary = lower_range > 0 or upper_range > 0
+	currency = None
+	if has_salary:
+		currency = salary_currency if frappe.db.exists("Currency", salary_currency) else None
 
 	doc = frappe.get_doc(
 		{
@@ -70,6 +88,11 @@ def submit_job_application(
 			"status": "Open",
 			"source": "Website Listing",
 			"cover_letter": cover_letter or None,
+			"country": country if country and frappe.db.exists("Country", country) else None,
+			"resume_link": (resume_link or "").strip() or None,
+			"currency": currency,
+			"lower_range": lower_range if has_salary else 0,
+			"upper_range": upper_range if has_salary else 0,
 		}
 	)
 	doc.insert(ignore_permissions=True)

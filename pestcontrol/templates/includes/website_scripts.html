@@ -172,6 +172,10 @@
             form.addEventListener("submit", function (e) {
                 e.preventDefault();
                 var msgBox = form.querySelector("#msgSubmit");
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
                 var formData = new FormData(form);
                 fetch("/api/method/pestcontrol.pc_website.api.submit_job_application", {
                     method: "POST",
