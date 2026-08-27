@@ -31,17 +31,37 @@ def submit_contact_form(fname: str, lname: str = "", email: str = "", phone: str
 # exactly who's meant to call it.
 @frappe.whitelist(allow_guest=True)  # nosemgrep: guest-whitelisted-method
 def submit_job_application(
-	full_name: str, email: str, phone: str, position_applied_for: str = "", message: str = ""
+	full_name: str,
+	email: str,
+	phone: str,
+	position_applied_for: str = "",
+	job_opening: str = "",
+	message: str = "",
 ):
 	"""Create a Job Application from the public careers form, attaching the
-	resume file (if provided) as a private File once the doc's name exists."""
+	resume file (if provided) as a private File once the doc's name exists.
+
+	The careers form's position selector is populated from HRMS Job Openings, so
+	it POSTs a `job_opening` id. When that id resolves to a real opening we link
+	it and snapshot its title into `position_applied_for` (never trusting a
+	client-sent title); otherwise we fall back to the free-text value, which is
+	also what the form sends when there are no open positions to list."""
+	title = position_applied_for
+	linked_opening = None
+	if job_opening:
+		row = frappe.db.get_value("Job Opening", job_opening, ["name", "job_title"], as_dict=True)
+		if row:
+			linked_opening = row.name
+			title = row.job_title
+
 	doc = frappe.get_doc(
 		{
 			"doctype": "Job Application",
 			"full_name": full_name,
 			"email": email,
 			"phone": phone,
-			"position_applied_for": position_applied_for,
+			"position_applied_for": title,
+			"job_opening": linked_opening,
 			"message": message,
 			"status": "New",
 		}

@@ -12,6 +12,7 @@
   "phone",
   "column_break_jamg",
   "position_applied_for",
+  "job_opening",
   "status",
   "section_break_jamh",
   "message",
@@ -48,6 +49,12 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Position Applied For"
+  },
+  {
+   "fieldname": "job_opening",
+   "fieldtype": "Link",
+   "label": "Job Opening",
+   "options": "Job Opening"
   },
   {
    "default": "New",

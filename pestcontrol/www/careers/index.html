@@ -47,7 +47,16 @@
 
                                     <div class="form-group col-md-6 mb-4">
                                         <label for="position_applied_for" class="visually-hidden">{{ _('Position applying for') }}</label>
+                                        {% if job_openings %}
+                                        <select name="job_opening" class="form-control" id="position_applied_for">
+                                            <option value="">{{ _('Select a position') }}</option>
+                                            {% for jo in job_openings %}
+                                            <option value="{{ jo.name }}">{{ jo.job_title }}{% if jo.location %} — {{ jo.location }}{% endif %}</option>
+                                            {% endfor %}
+                                        </select>
+                                        {% else %}
                                         <input type="text" name="position_applied_for" class="form-control" id="position_applied_for" placeholder="{{ _('Position applying for') }}">
+                                        {% endif %}
                                         <div class="help-block with-errors"></div>
                                     </div>
 
