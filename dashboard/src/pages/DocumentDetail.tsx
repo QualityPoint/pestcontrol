@@ -1,11 +1,15 @@
 import { Box, Card, CardContent, Typography, Button, Stack, Divider } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForwardIos';
 import dayjs from 'dayjs';
+import 'dayjs/locale/ar';
 import StatusChip from '../components/StatusChip';
+import { t, type Lang } from '../i18n';
 
 interface DocumentDetailProps {
 	doc: Record<string, unknown>;
 	backHref?: string;
+	lang: Lang;
 }
 
 interface DocItem {
@@ -16,19 +20,21 @@ interface DocItem {
 	amount?: number;
 }
 
-export default function DocumentDetail({ doc, backHref }: DocumentDetailProps) {
+export default function DocumentDetail({ doc, backHref, lang }: DocumentDetailProps) {
+	const s = t(lang);
 	const currency = (doc.currency as string | undefined) ?? '';
 	const items = (doc.items as DocItem[] | undefined) ?? [];
+	const isRtl = lang === 'ar';
 
 	return (
 		<Box>
 			<Button
-				startIcon={<ArrowBackIcon />}
+				startIcon={isRtl ? <ArrowForwardIcon /> : <ArrowBackIcon />}
 				component="a"
 				href={backHref ?? '/portal'}
 				sx={{ mb: 2 }}
 			>
-				Back
+				{s.back}
 			</Button>
 
 			<Card>
@@ -37,7 +43,9 @@ export default function DocumentDetail({ doc, backHref }: DocumentDetailProps) {
 						<Box>
 							<Typography variant="h4">{String(doc.name ?? '')}</Typography>
 							<Typography color="text.secondary">
-								{dayjs((doc.transaction_date ?? doc.posting_date) as string).format('DD MMMM YYYY')}
+								{dayjs((doc.transaction_date ?? doc.posting_date) as string)
+									.locale(lang)
+									.format('DD MMMM YYYY')}
 							</Typography>
 						</Box>
 						<StatusChip status={doc.status as string | undefined} />
@@ -61,7 +69,7 @@ export default function DocumentDetail({ doc, backHref }: DocumentDetailProps) {
 					<Divider sx={{ mb: 2 }} />
 
 					<Stack direction="row" justifyContent="space-between">
-						<Typography variant="h6">Grand Total</Typography>
+						<Typography variant="h6">{s.grandTotal}</Typography>
 						<Typography variant="h6" color="secondary.main">
 							{currency} {((doc.grand_total as number | undefined) ?? 0).toLocaleString()}
 						</Typography>

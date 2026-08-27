@@ -3,19 +3,36 @@ import EditIcon from '@mui/icons-material/Edit';
 import LockIcon from '@mui/icons-material/Lock';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { getInitials } from '../utils/initials';
+import { t, type Lang } from '../i18n';
 
 interface AccountPageProps {
 	fullName?: string;
 	email?: string;
 	avatarUrl?: string;
+	lang: Lang;
 }
 
-export default function AccountPage({ fullName, email, avatarUrl }: AccountPageProps) {
+async function handleLogout(e: React.MouseEvent) {
+	e.preventDefault();
+	// /api/method/logout is a whitelisted RPC method (POST-only) — a plain
+	// <a href> GET navigation gets rejected with a 403 "Not Permitted"
+	// (frappe.throw_permission_error via is_valid_http_method), and since
+	// the request never runs, the session is never actually cleared.
+	await fetch('/api/method/logout', {
+		method: 'POST',
+		credentials: 'include',
+		headers: { 'X-Frappe-CSRF-Token': window.frappe?.csrf_token ?? '' }
+	});
+	window.location.href = '/';
+}
+
+export default function AccountPage({ fullName, email, avatarUrl, lang }: AccountPageProps) {
+	const s = t(lang);
 	const initials = getInitials(fullName, email);
 	return (
 		<Box sx={{ maxWidth: 480 }}>
 			<Typography variant="h4" sx={{ mb: 3 }}>
-				My Account
+				{s.myAccountTitle}
 			</Typography>
 
 			<Card>
@@ -35,19 +52,19 @@ export default function AccountPage({ fullName, email, avatarUrl }: AccountPageP
 							<ListItemIcon>
 								<EditIcon />
 							</ListItemIcon>
-							<ListItemText primary="Edit Profile" />
+							<ListItemText primary={s.editProfile} />
 						</ListItemButton>
 						<ListItemButton component="a" href="/update-password">
 							<ListItemIcon>
 								<LockIcon />
 							</ListItemIcon>
-							<ListItemText primary="Reset Password" />
+							<ListItemText primary={s.resetPassword} />
 						</ListItemButton>
-						<ListItemButton component="a" href="/api/method/logout">
+						<ListItemButton component="a" href="/api/method/logout" onClick={handleLogout}>
 							<ListItemIcon>
 								<LogoutIcon />
 							</ListItemIcon>
-							<ListItemText primary="Logout" />
+							<ListItemText primary={s.logout} />
 						</ListItemButton>
 					</List>
 				</CardContent>

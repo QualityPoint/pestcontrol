@@ -5,6 +5,7 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import DescriptionIcon from '@mui/icons-material/Description';
 import { fetchPortalRows, type PortalListRow } from '../api/portal';
+import { t, type Lang } from '../i18n';
 
 function StatCard({
 	icon,
@@ -46,7 +47,8 @@ function StatCard({
 	);
 }
 
-export default function Overview() {
+export default function Overview({ lang }: { lang: Lang }) {
+	const s = t(lang);
 	const [orders, setOrders] = useState<PortalListRow[]>([]);
 	const [quotations, setQuotations] = useState<PortalListRow[]>([]);
 	const [invoices, setInvoices] = useState<PortalListRow[]>([]);
@@ -84,32 +86,29 @@ export default function Overview() {
 	return (
 		<Box>
 			<Typography variant="h4" sx={{ mb: 3 }}>
-				Welcome back
+				{s.welcomeBack}
 			</Typography>
 
 			<Grid container spacing={3} sx={{ mb: 3 }}>
 				<Grid item xs={12} sm={4}>
-					<StatCard icon={<ReceiptLongIcon />} label="Orders" value={orders.length} loading={loading} />
+					<StatCard icon={<ReceiptLongIcon />} label={s.navOrders} value={orders.length} loading={loading} />
 				</Grid>
 				<Grid item xs={12} sm={4}>
-					<StatCard icon={<RequestQuoteIcon />} label="Quotations" value={quotations.length} loading={loading} />
+					<StatCard icon={<RequestQuoteIcon />} label={s.navQuotations} value={quotations.length} loading={loading} />
 				</Grid>
 				<Grid item xs={12} sm={4}>
-					<StatCard icon={<DescriptionIcon />} label="Invoices" value={invoices.length} loading={loading} />
+					<StatCard icon={<DescriptionIcon />} label={s.navInvoices} value={invoices.length} loading={loading} />
 				</Grid>
 			</Grid>
 
 			<Card>
 				<CardContent>
 					<Typography variant="h6" sx={{ mb: 2 }}>
-						Status breakdown
+						{s.statusBreakdown}
 					</Typography>
 					{loading && <Skeleton height={260} />}
 					{!loading && !hasAnyData && (
-						<Typography color="text.secondary">
-							Nothing to show yet — once you have orders, quotations, or invoices, their status
-							breakdown will appear here.
-						</Typography>
+						<Typography color="text.secondary">{s.noStatusDataYet}</Typography>
 					)}
 					{!loading && hasAnyData && (
 						<PieChart

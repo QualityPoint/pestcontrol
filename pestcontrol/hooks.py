@@ -100,6 +100,7 @@ jinja = {
 		"pestcontrol.pc_website.utils.asset_version",
 		"pestcontrol.pc_website.utils.doc_to_json",
 		"pestcontrol.pc_website.utils.portal_user_info",
+		"pestcontrol.pc_website.utils.current_lang",
 	],
 }
 
@@ -237,7 +238,7 @@ on_session_creation = "pestcontrol.pc_website.utils.sync_portal_user_on_login"
 
 # Request Events
 # ----------------
-# before_request = ["pestcontrol.utils.before_request"]
+before_request = ["pestcontrol.pc_website.utils.apply_preferred_language_cookie_on_request"]
 # after_request = ["pestcontrol.utils.after_request"]
 
 # Job Events

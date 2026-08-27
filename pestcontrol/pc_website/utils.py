@@ -50,7 +50,7 @@ def get_website_context(context):
 	"""Common context every pestcontrol www/ page needs: current year,
 	the site-wide settings singleton, and the active language."""
 	languages = get_site_languages()
-	_apply_preferred_language_cookie(languages)
+	apply_preferred_language_cookie(languages)
 	context.year = frappe.utils.now_datetime().year
 	# Our pages are standalone (never extend Frappe's own base template), so
 	# `window.frappe`/`frappe.csrf_token` never exists client-side. Forms that
@@ -86,20 +86,40 @@ def get_website_context(context):
 	)
 
 
-def _apply_preferred_language_cookie(languages):
+def apply_preferred_language_cookie(languages):
 	"""Frappe's own language resolution only honors the `preferred_language`
 	cookie for Guest visitors — a logged-in user (e.g. an admin testing the
 	site in the same browser as the desk) falls back to their profile
 	language instead, silently dropping the switcher's choice on every
 	navigation that doesn't explicitly carry ?_lang. Override that here so
 	the cookie sticks site-wide, regardless of session state, matching what
-	a public marketing site visitor expects."""
+	a public marketing site visitor expects.
+
+	Also applied globally via the before_request hook (see
+	apply_preferred_language_cookie_on_request) so it reaches the dashboard
+	pages too — those don't call get_website_context() themselves, and for
+	/orders, /quotations, /invoices specifically, ListPage hardcodes
+	get_context() resolution to frappe's own www/portal.py regardless of
+	pestcontrol's override (frappe/website/page_renderers/template_page.py's
+	set_standard_path forces self.app = "frappe"), so a per-page call in
+	pestcontrol's own www/portal.py wouldn't even reach those routes."""
 	if frappe.form_dict.get("_lang"):
 		return  # explicit request always wins; core already applied it
 	cookie_lang = frappe.request.cookies.get("preferred_language")
 	valid_codes = {l["code"] for l in languages}
 	if cookie_lang and cookie_lang in valid_codes:
 		frappe.local.lang = cookie_lang
+
+
+def apply_preferred_language_cookie_on_request():
+	"""before_request hook. Runs after frappe's own init_request() has
+	already set frappe.local.lang from the session/user (see
+	frappe.auth.HTTPRequest.set_lang) but before any page's get_context() or
+	template render — so overriding it here reaches every route uniformly,
+	regardless of which app's controller/template ends up handling the
+	request. See apply_preferred_language_cookie for why this can't just
+	live in each page's own get_context() instead."""
+	apply_preferred_language_cookie(get_site_languages())
 
 
 def asset_version(path):
@@ -111,6 +131,17 @@ def asset_version(path):
 		return int(os.path.getmtime(full_path))
 	except OSError:
 		return 0
+
+
+def current_lang():
+	"""frappe.local.lang, exposed as a jinja method for the dashboard page
+	overrides (portal.html/order.html/me.html) — there is no reliable bare
+	`lang` global for normal www-page rendering (only a `frappe.lang`
+	nested under a *different*, restricted jinja globals set used
+	elsewhere); is_rtl() works because it's registered as a real global
+	function via frappe/hooks.py, so this mirrors that instead of
+	depending on an undefined bare `lang`."""
+	return frappe.local.lang
 
 
 def portal_user_info():

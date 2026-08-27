@@ -8,7 +8,7 @@
   frappe/www/portal.py's get()) — embedded directly below, no client fetch.
 -->
 <!doctype html>
-<html lang="{{ lang }}" dir="{{ 'rtl' if is_rtl() else 'ltr' }}">
+<html lang="{{ current_lang() }}" dir="{{ 'rtl' if is_rtl() else 'ltr' }}">
 
 <head>
   {% include "templates/includes/dashboard_assets.html" %}
@@ -21,6 +21,7 @@
     id="root"
     data-page-type="{{ 'list' if doctype else 'overview' }}"
     {% if doctype %}data-doctype="{{ doctype }}"{% endif %}
+    data-lang="{{ current_lang() }}"
     data-full-name="{{ me.full_name }}"
     data-email="{{ me.email }}"
     {% if me.user_image %}data-avatar-url="{{ me.user_image }}"{% endif %}

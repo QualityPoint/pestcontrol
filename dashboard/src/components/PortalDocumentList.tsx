@@ -1,15 +1,20 @@
 import { Card, CardContent, Typography, List, ListItemButton, ListItemText, Box, Stack } from '@mui/material';
 import dayjs from 'dayjs';
+import 'dayjs/locale/ar';
 import type { PortalListRow } from '../api/portal';
 import StatusChip from './StatusChip';
+import { t, type Lang } from '../i18n';
 
 interface PortalDocumentListProps {
 	rows: PortalListRow[];
 	title: string;
 	basePath: string;
+	lang: Lang;
 }
 
-export default function PortalDocumentList({ rows, title, basePath }: PortalDocumentListProps) {
+export default function PortalDocumentList({ rows, title, basePath, lang }: PortalDocumentListProps) {
+	const s = t(lang);
+
 	return (
 		<Box>
 			<Typography variant="h4" sx={{ mb: 3 }}>
@@ -20,7 +25,7 @@ export default function PortalDocumentList({ rows, title, basePath }: PortalDocu
 				<CardContent sx={{ p: 0, '&:last-child': { pb: 0 } }}>
 					{rows.length === 0 && (
 						<Box sx={{ p: 4, textAlign: 'center' }}>
-							<Typography color="text.secondary">No {title.toLowerCase()} yet.</Typography>
+							<Typography color="text.secondary">{s.noItemsYet(title)}</Typography>
 						</Box>
 					)}
 
@@ -36,7 +41,9 @@ export default function PortalDocumentList({ rows, title, basePath }: PortalDocu
 									primary={row.name}
 									secondary={
 										row.transaction_date || row.posting_date
-											? dayjs((row.transaction_date ?? row.posting_date) as string).format('DD MMM YYYY')
+											? dayjs((row.transaction_date ?? row.posting_date) as string)
+													.locale(lang)
+													.format('DD MMM YYYY')
 											: undefined
 									}
 								/>

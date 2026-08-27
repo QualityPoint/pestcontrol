@@ -5,4 +5,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="/assets/pestcontrol/website/images/favicon.png" type="image/x-icon">
+<script>
+	// Required for POST requests (e.g. logout) — these pages don't extend
+	// base.html so don't otherwise get window.frappe/frappe.csrf_token set
+	// up. `csrf_token` comes from each page's Python get_context() (see
+	// pestcontrol/www/portal.py, www/me.py, templates/pages/order.py) —
+	// deliberately NOT a jinja-method call: generating a token for a
+	// session that doesn't have one yet is a DB write (session_obj.update),
+	// and Jinja rendering runs under a read-only SQL guard, so calling
+	// get_csrf_token() straight from the template throws "Read-Only
+	// queries are allowed" the first time a given session needs one.
+	window.frappe = window.frappe || {};
+	frappe.csrf_token = "{{ csrf_token }}";
+</script>
 <script type="module" src="/assets/pestcontrol/dashboard/assets/main.js?v={{ asset_version('dashboard/assets/main.js') }}"></script>

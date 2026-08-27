@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { CacheProvider } from '@emotion/react';
 import {
 	ThemeProvider,
 	CssBaseline,
@@ -24,7 +25,9 @@ import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import DescriptionIcon from '@mui/icons-material/Description';
 import PersonIcon from '@mui/icons-material/Person';
 import { createDashboardTheme } from './theme';
+import { createEmotionCache } from './emotionCache';
 import { getInitials } from './utils/initials';
+import { t, type Lang } from './i18n';
 import Overview from './pages/Overview';
 import PortalDocumentList from './components/PortalDocumentList';
 import DocumentDetail from './pages/DocumentDetail';
@@ -35,16 +38,9 @@ export type PageType = 'overview' | 'list' | 'detail' | 'account';
 
 const DRAWER_WIDTH = 260;
 
-const NAV_ITEMS = [
-	{ href: '/portal', label: 'Overview', icon: <DashboardIcon /> },
-	{ href: '/orders', label: 'Orders', icon: <ReceiptLongIcon /> },
-	{ href: '/quotations', label: 'Quotations', icon: <RequestQuoteIcon /> },
-	{ href: '/invoices', label: 'Invoices', icon: <DescriptionIcon /> },
-	{ href: '/me', label: 'My Account', icon: <PersonIcon /> }
-];
-
 interface AppProps {
 	direction: 'ltr' | 'rtl';
+	lang: Lang;
 	pageType: PageType;
 	doctype?: string;
 	docName?: string;
@@ -57,10 +53,10 @@ interface AppProps {
 	};
 }
 
-const LIST_TITLES: Record<string, { title: string; basePath: string }> = {
-	'Sales Order': { title: 'Orders', basePath: '/orders' },
-	Quotation: { title: 'Quotations', basePath: '/quotations' },
-	'Sales Invoice': { title: 'Invoices', basePath: '/invoices' }
+const LIST_META: Record<string, { titleKey: 'navOrders' | 'navQuotations' | 'navInvoices'; basePath: string }> = {
+	'Sales Order': { titleKey: 'navOrders', basePath: '/orders' },
+	Quotation: { titleKey: 'navQuotations', basePath: '/quotations' },
+	'Sales Invoice': { titleKey: 'navInvoices', basePath: '/invoices' }
 };
 
 function currentPath() {
@@ -71,10 +67,19 @@ function DashboardShell(props: AppProps) {
 	const isDesktop = useMediaQuery('(min-width:900px)');
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const path = currentPath();
+	const s = t(props.lang);
+
+	const navItems = [
+		{ href: '/portal', label: s.navOverview, icon: <DashboardIcon /> },
+		{ href: '/orders', label: s.navOrders, icon: <ReceiptLongIcon /> },
+		{ href: '/quotations', label: s.navQuotations, icon: <RequestQuoteIcon /> },
+		{ href: '/invoices', label: s.navInvoices, icon: <DescriptionIcon /> },
+		{ href: '/me', label: s.navAccount, icon: <PersonIcon /> }
+	];
 
 	const nav = (
 		<List sx={{ pt: 2 }}>
-			{NAV_ITEMS.map((item) => {
+			{navItems.map((item) => {
 				const active = item.href === '/portal' ? path === '/portal' : path.startsWith(item.href);
 				return (
 					<ListItemButton
@@ -99,10 +104,23 @@ function DashboardShell(props: AppProps) {
 		</List>
 	);
 
-	const listMeta = props.doctype ? LIST_TITLES[props.doctype] : undefined;
+	const listMeta = props.doctype ? LIST_META[props.doctype] : undefined;
 
 	return (
-		<Box sx={{ display: 'flex', minHeight: '100vh' }}>
+		<Box
+			sx={{
+				display: 'flex',
+				// The Drawer's Paper renders position:fixed even for
+				// variant="permanent" (confirmed in MUI's own source) — flex
+				// order/direction has no effect on a fixed element's own
+				// position, but empirically this row-reverse + the main
+				// content's explicit width (not just flexGrow) together are
+				// what's needed for the layout to not overlap/clip in RTL;
+				// removing either reintroduces clipping on the leading edge.
+				flexDirection: props.direction === 'rtl' ? 'row-reverse' : 'row',
+				minHeight: '100vh'
+			}}
+		>
 			<AppBar position="fixed" sx={{ zIndex: (t) => t.zIndex.drawer + 1 }} elevation={0}>
 				<Toolbar>
 					{!isDesktop && (
@@ -111,15 +129,15 @@ function DashboardShell(props: AppProps) {
 						</IconButton>
 					)}
 					<Typography variant="h6" component="div" sx={{ fontWeight: 700, flexGrow: 1 }}>
-						My Dashboard
+						{s.appTitle}
 					</Typography>
 
-					<Tooltip title="Back to site">
+					<Tooltip title={s.homeTooltip}>
 						<IconButton component="a" href="/" sx={{ color: 'inherit' }}>
 							<HomeIcon />
 						</IconButton>
 					</Tooltip>
-					<Tooltip title="My Account">
+					<Tooltip title={s.accountTooltip}>
 						<IconButton component="a" href="/me" sx={{ ml: 1 }}>
 							<Avatar
 								src={props.account.avatarUrl}
@@ -134,6 +152,7 @@ function DashboardShell(props: AppProps) {
 
 			<Drawer
 				variant={isDesktop ? 'permanent' : 'temporary'}
+				anchor={props.direction === 'rtl' ? 'right' : 'left'}
 				open={isDesktop ? true : mobileOpen}
 				onClose={() => setMobileOpen(false)}
 				sx={{
@@ -148,17 +167,31 @@ function DashboardShell(props: AppProps) {
 
 			<Box
 				component="main"
-				sx={{ flexGrow: 1, p: { xs: 2, md: 4 }, width: { md: `calc(100% - ${DRAWER_WIDTH}px)` } }}
+				sx={{
+					flexGrow: 1,
+					minWidth: 0,
+					p: { xs: 2, md: 4 },
+					width: { md: `calc(100% - ${DRAWER_WIDTH}px)` }
+				}}
 			>
 				<Toolbar />
-				{props.pageType === 'overview' && <Overview />}
+				{props.pageType === 'overview' && <Overview lang={props.lang} />}
 				{props.pageType === 'list' && listMeta && (
-					<PortalDocumentList rows={props.listRows} title={listMeta.title} basePath={listMeta.basePath} />
+					<PortalDocumentList
+						rows={props.listRows}
+						title={s[listMeta.titleKey]}
+						basePath={listMeta.basePath}
+						lang={props.lang}
+					/>
 				)}
 				{props.pageType === 'detail' && props.detailDoc && (
-					<DocumentDetail doc={props.detailDoc} backHref={props.doctype ? LIST_TITLES[props.doctype]?.basePath : undefined} />
+					<DocumentDetail
+						doc={props.detailDoc}
+						backHref={props.doctype ? LIST_META[props.doctype]?.basePath : undefined}
+						lang={props.lang}
+					/>
 				)}
-				{props.pageType === 'account' && <AccountPage {...props.account} />}
+				{props.pageType === 'account' && <AccountPage {...props.account} lang={props.lang} />}
 			</Box>
 		</Box>
 	);
@@ -166,11 +199,14 @@ function DashboardShell(props: AppProps) {
 
 export default function App(props: AppProps) {
 	const theme = useMemo(() => createDashboardTheme(props.direction), [props.direction]);
+	const cache = useMemo(() => createEmotionCache(props.direction), [props.direction]);
 
 	return (
-		<ThemeProvider theme={theme}>
-			<CssBaseline />
-			<DashboardShell {...props} />
-		</ThemeProvider>
+		<CacheProvider value={cache}>
+			<ThemeProvider theme={theme}>
+				<CssBaseline />
+				<DashboardShell {...props} />
+			</ThemeProvider>
+		</CacheProvider>
 	);
 }

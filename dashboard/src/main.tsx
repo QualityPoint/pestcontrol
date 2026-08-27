@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App, { type PageType } from './App';
 import type { PortalListRow } from './api/portal';
+import type { Lang } from './i18n';
 
 const rootEl = document.getElementById('root');
 
@@ -10,6 +11,7 @@ if (rootEl) {
 	const doctype = rootEl.dataset.doctype;
 	const docName = rootEl.dataset.name;
 	const direction = (document.documentElement.getAttribute('dir') as 'ltr' | 'rtl') || 'ltr';
+	const lang = (rootEl.dataset.lang as Lang | undefined) ?? 'en';
 
 	const dataEl = document.getElementById('portal-data');
 	const embedded = dataEl?.textContent ? JSON.parse(dataEl.textContent) : undefined;
@@ -22,6 +24,7 @@ if (rootEl) {
 		<StrictMode>
 			<App
 				direction={direction}
+				lang={lang}
 				pageType={pageType}
 				doctype={doctype}
 				docName={docName}

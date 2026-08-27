@@ -9,7 +9,7 @@
   pestcontrol.pc_website.utils.doc_to_json (registered as a jinja method).
 -->
 <!doctype html>
-<html lang="{{ lang }}" dir="{{ 'rtl' if is_rtl() else 'ltr' }}">
+<html lang="{{ current_lang() }}" dir="{{ 'rtl' if is_rtl() else 'ltr' }}">
 
 <head>
   {% include "templates/includes/dashboard_assets.html" %}
@@ -23,6 +23,7 @@
     data-page-type="detail"
     data-doctype="{{ doc.doctype }}"
     data-name="{{ doc.name }}"
+    data-lang="{{ current_lang() }}"
     data-full-name="{{ me.full_name }}"
     data-email="{{ me.email }}"
     {% if me.user_image %}data-avatar-url="{{ me.user_image }}"{% endif %}
