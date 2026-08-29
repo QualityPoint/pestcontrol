@@ -28,7 +28,9 @@ def get_all_pest_categories():
 
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
-def pest_type_by_category(doctype, txt, searchfield, start, page_len, filters):
+def pest_type_by_category(
+	doctype: str, txt: str, searchfield: str, start: int, page_len: int, filters: dict | str
+):
 	"""Link-query for a `pest_type` field that should only offer Pest Types
 	belonging to a chosen Pest Category (e.g. Website Pest's pest_type field).
 
