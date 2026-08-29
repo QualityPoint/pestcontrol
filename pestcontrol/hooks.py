@@ -68,7 +68,13 @@ home_page = "home"
 # ----------
 
 # automatically create page for each record of this doctype
-website_generators = ["Website Service", "Website Project", "Website Team Member", "Website Blog Post"]
+website_generators = [
+	"Website Service",
+	"Website Project",
+	"Website Team Member",
+	"Website Blog Post",
+	"Website Pest",
+]
 
 
 # Fixtures

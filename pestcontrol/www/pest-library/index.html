@@ -1,0 +1,74 @@
+{% extends "pestcontrol/templates/includes/website_base.html" %}
+
+{% block title %}{{ _("Pest Library") }} | Skystar{% endblock %}
+
+{% block page_header %}
+    {% set page_h1 = _("Pest Library") %}
+    {% set page_breadcrumb = _("pest library") %}
+    {% include "pestcontrol/templates/includes/page_header.html" %}
+{% endblock %}
+
+{% block content %}
+    <!-- Page Pest Library Start -->
+    <div class="page-blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <!-- Choose Category Nav start -->
+                    <div class="our-blog-nav wow fadeInUp" data-wow-delay="0.25s">
+                        <ul>
+                            <li><a href="#" class="active-btn" data-filter="*">{{ _("all") }}</a></li>
+                            {% for category in categories %}
+                            <li><a href="#" data-filter=".{{ category_class(category) }}">{{ category }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <!-- Choose Category Nav End -->
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="row blog-item-boxes align-items-center">
+                        {% for pest in pests %}
+                        <div class="col-lg-4 col-md-6 blog-item-box {{ category_class(pest.category) }}">
+                            <!-- Pest Item Start -->
+                            <div class="post-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
+                                <!-- Pest Featured Image Start-->
+                                <div class="post-featured-image">
+                                    <a href="/{{ pest.route }}" data-cursor-text="View">
+                                        <figure class="image-anime">
+                                            <img src="{{ pest.cover_image }}" alt="{{ localize(pest, 'pest_name') }}">
+                                        </figure>
+                                    </a>
+                                </div>
+                                <!-- Pest Featured Image End -->
+
+                                <!-- Pest Item Body Start -->
+                                <div class="post-item-body">
+                                    <!-- Pest Item Content Start -->
+                                    <div class="post-item-content">
+                                        <h2><a href="/{{ pest.route }}">{{ localize(pest, "pest_name") }}</a></h2>
+                                        {% if localize(pest, "short_description") %}
+                                        <p>{{ localize(pest, "short_description") }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <!-- Pest Item Content End -->
+
+                                    <!-- Pest Item Button Start -->
+                                    <div class="post-item-btn">
+                                        <a href="/{{ pest.route }}" class="readmore-btn">{{ _("read more") }}</a>
+                                    </div>
+                                    <!-- Pest Item Button End -->
+                                </div>
+                                <!-- Pest Item Body End -->
+                            </div>
+                            <!-- Pest Item End -->
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Pest Library End -->
+
+{% endblock %}
