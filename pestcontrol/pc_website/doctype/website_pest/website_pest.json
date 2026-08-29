@@ -8,14 +8,14 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "pest_info_section",
   "column_break_wpst",
   "cover_image",
   "category",
+  "pest_type",
   "display_order",
   "route",
   "published",
-  "column_break_ixtg",
-  "pest_type",
   "section_break_wpct",
   "article"
  ],
@@ -23,7 +23,8 @@
   {
    "fieldname": "route",
    "fieldtype": "Data",
-   "label": "Route"
+   "label": "Route",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_wpst",
@@ -75,15 +76,16 @@
    "reqd": 1
   },
   {
-   "fieldname": "column_break_ixtg",
-   "fieldtype": "Column Break"
+   "fieldname": "pest_info_section",
+   "fieldtype": "Section Break",
+   "label": "Pest info"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2026-08-29 13:48:51.379652",
+ "modified": "2026-08-29 14:10:09.563562",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Pest",
