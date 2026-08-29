@@ -27,6 +27,36 @@ def get_all_pest_categories():
 
 
 @frappe.whitelist()
+@frappe.validate_and_sanitize_search_inputs
+def pest_type_by_category(
+	doctype: str, txt: str, searchfield: str, start: int, page_len: int, filters: dict | str
+):
+	"""Link-query for a `pest_type` field that should only offer Pest Types
+	belonging to a chosen Pest Category (e.g. Website Pest's pest_type field).
+
+	`filters` arrives JSON-stringified from the Link field's set_query, same as
+	pest_control_settings.get_uoms_by_category.
+	"""
+	if isinstance(filters, str):
+		filters = frappe.parse_json(filters) if filters else {}
+	category = (filters or {}).get("category")
+	if not category:
+		return []
+	names = [p.pest_type for p in frappe.get_cached_doc("Pest Category", category).pests if p.pest_type]
+	if not names:
+		return []
+	return frappe.get_all(
+		"Pest Type",
+		filters={"name": ["in", names], "disabled": 0, "pest_name": ["like", f"%{txt}%"]},
+		fields=["name"],
+		order_by="pest_name asc",
+		start=start,
+		page_length=page_len,
+		as_list=True,
+	)
+
+
+@frappe.whitelist()
 def get_pest_types_for_categories(categories: str | list):
 	"""Return the union of pest types belonging to the given pest categories.
 

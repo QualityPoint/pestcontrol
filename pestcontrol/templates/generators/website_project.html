@@ -39,7 +39,7 @@
                         <div class="page-catagery-list project-sidebar wow fadeInUp">
                             <h3>{{ _("Project Information") }}</h3>
                             <ul>
-                                {% if doc.category %}<li>{{ _("Category :") }} <span>{{ doc.category }}</span></li>{% endif %}
+                                {% if doc.category %}<li>{{ _("Category :") }} <span>{{ _(doc.category) }}</span></li>{% endif %}
                                 {% if doc.client_name %}<li>{{ _("Customer :") }} <span>{{ doc.client_name }}</span></li>{% endif %}
                                 {% if doc.location %}<li>{{ _("Location :") }} <span>{{ doc.location }}</span></li>{% endif %}
                                 {% if doc.duration %}<li>{{ _("Duration :") }} <span>{{ doc.duration }}</span></li>{% endif %}

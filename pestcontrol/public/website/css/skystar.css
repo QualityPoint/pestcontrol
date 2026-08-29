@@ -678,7 +678,7 @@ html.a11y-widget-minimized .topbar-a11y-toggle:focus-visible{
 
 @media only screen and (max-width: 575px){
 	.a11y-panel{
-		width: 100%;
+		/* width: 100%; */
 		max-width: 100%;
 	}
 
@@ -838,7 +838,6 @@ html[dir="rtl"] * {
  */
 a[href^="tel:"],
 a[href^="https://wa.me/"] {
-	direction: ltr;
 	unicode-bidi: isolate;
 }
 
@@ -992,20 +991,21 @@ a[href^="https://wa.me/"] {
 	align-items: center;
 	gap: 6px;
 	border: none;
-	background: rgba(255, 255, 255, 0.15);
-	color: var(--white-color);
+	background: var(--white-color);
+	color: var(--primary-color);
 	font-size: 13px;
 	font-weight: 600;
 	line-height: 1;
 	padding: 7px 12px;
 	border-radius: 30px;
 	cursor: pointer;
-	transition: background 0.3s ease-in-out;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	transition: background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 /* Accessibility toggle, sitting in the topbar's icon row next to the
    language switcher — same pill shape and sizing as .lang-switch-toggle,
-   icon plus a visible label. */
+   but ghost/translucent rather than solid, icon plus a visible label. */
 .topbar-a11y-toggle{
 	display: flex;
 	align-items: center;
@@ -1053,23 +1053,30 @@ a[href^="https://wa.me/"] {
 	background: rgba(255, 255, 255, 0.25);
 }
 
-.lang-switch-toggle:hover{
-	background: rgba(255, 255, 255, 0.25);
+.lang-switch-toggle:hover,
+.lang-switch-toggle:focus-visible{
+	background: #f0f2f1;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.lang-switch-toggle i{
+.lang-switch-toggle .lang-switch-icon{
+	font-size: 13px;
+	color: var(--accent-color);
+}
+
+.lang-switch-toggle .lang-switch-caret{
 	font-size: 10px;
 	transition: transform 0.25s ease-in-out;
 }
 
-.lang-switch.open .lang-switch-toggle i{
+.lang-switch.open .lang-switch-toggle .lang-switch-caret{
 	transform: rotate(180deg);
 }
 
 .lang-switch-menu{
 	position: absolute;
 	top: calc(100% + 10px);
-	right: 0;
+	/* right: 0; */
 	min-width: 160px;
 	margin: 0;
 	padding: 6px;
@@ -1084,10 +1091,6 @@ a[href^="https://wa.me/"] {
 	z-index: 999;
 }
 
-html[dir="rtl"] .lang-switch-menu{
-	right: auto;
-	left: 0;
-}
 
 .lang-switch.open .lang-switch-menu{
 	opacity: 1;
@@ -1153,6 +1156,7 @@ html[dir="rtl"] .lang-option{
 	transform: translateY(-8px);
 	transition: all 0.2s ease-in-out;
 	z-index: 999;
+	left: -120px; /* override the theme's .dropdown-menu left: 0 */
 }
 
 .deaf-contact.open .deaf-contact-menu{
@@ -1250,4 +1254,178 @@ html[dir="rtl"] .lang-option{
 	color: var(--white-color);
 	font-size: 12px;
 	font-weight: 700;
+}
+
+/*
+ * Careers page - redesigned application form.
+ * A two-panel card: a branded "why join us" aside next to a sectioned
+ * form. Applications post to pestcontrol.pc_website.api.submit_job_application
+ * and become HRMS Job Applicant records. Field `name` attributes are the
+ * API's kwargs, so markup and endpoint must stay in sync.
+ */
+.careers-section .careers-box{
+	align-items: stretch;
+}
+
+.careers-aside{
+	width: 50%;
+	padding: 48px 44px;
+	background-color: var(--primary-color);
+	color: var(--white-color);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.careers-aside .section-title{
+	margin-bottom: 0;
+}
+
+.careers-aside .section-title h2,
+.careers-aside .section-title p{
+	color: var(--white-color);
+}
+
+.careers-aside .section-title h2 span{
+	color: #6FD08C;
+}
+
+.careers-aside .section-title p{
+	margin-top: 16px;
+	opacity: 0.85;
+	line-height: 1.6em;
+}
+
+.careers-perks{
+	list-style: none;
+	padding: 0;
+	margin: 32px 0 0;
+}
+
+.careers-perks li{
+	position: relative;
+	padding-left: 30px;
+	margin-bottom: 14px;
+	line-height: 1.55em;
+	opacity: 0.92;
+}
+
+.careers-perks li:last-child{
+	margin-bottom: 0;
+}
+
+.careers-perks li::before{
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 3px;
+	width: 18px;
+	height: 18px;
+	background: no-repeat center / contain
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M3.75 9.5L7.25 13L14.25 5.5' stroke='%236FD08C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+html[dir="rtl"] .careers-perks li{
+	padding-left: 0;
+	padding-right: 30px;
+}
+
+html[dir="rtl"] .careers-perks li::before{
+	left: auto;
+	right: 0;
+}
+
+.careers-form-panel{
+	width: 50%;
+}
+
+.careers-fieldset{
+	margin-bottom: 32px;
+}
+
+.careers-fieldset:last-of-type{
+	margin-bottom: 20px;
+}
+
+.careers-legend{
+	margin: 0 0 20px;
+	padding-bottom: 10px;
+	font-size: 13px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: var(--accent-color);
+	border-bottom: 1px solid var(--divider-color);
+}
+
+.careers-field-label{
+	display: block;
+	margin-bottom: 10px;
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--primary-color);
+}
+
+.careers-optional{
+	font-weight: 400;
+	font-size: 13px;
+	color: var(--text-color);
+}
+
+/* Native selects, restyled to match .contact-form .form-control */
+.careers-form select.form-control{
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	padding-right: 44px;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%233D5A6A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 18px center;
+}
+
+html[dir="rtl"] .careers-form select.form-control{
+	padding-right: 20px;
+	padding-left: 44px;
+	background-position: left 18px center;
+}
+
+.careers-form .form-control:focus{
+	border-color: var(--accent-color);
+}
+
+.careers-salary{
+	display: grid;
+	grid-template-columns: 1fr 1fr 110px;
+	gap: 12px;
+}
+
+.careers-form input[type="file"].form-control{
+	padding: 12px 20px;
+	line-height: 1.4em;
+	cursor: pointer;
+}
+
+.careers-submit{
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin-top: 8px;
+}
+
+@media only screen and (max-width: 991px){
+	.careers-aside,
+	.careers-form-panel{
+		width: 100%;
+	}
+
+	.careers-aside{
+		padding: 32px 30px;
+	}
+}
+
+@media only screen and (max-width: 575px){
+	.careers-salary{
+		grid-template-columns: 1fr;
+	}
 }

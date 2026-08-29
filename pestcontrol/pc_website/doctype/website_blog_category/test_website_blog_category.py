@@ -11,9 +11,9 @@ EXTRA_TEST_RECORD_DEPENDENCIES = []  # eg. ["User"]
 IGNORE_TEST_RECORD_DEPENDENCIES = []  # eg. ["User"]
 
 
-class IntegrationTestJobApplication(IntegrationTestCase):
+class IntegrationTestWebsiteBlogCategory(IntegrationTestCase):
 	"""
-	Integration tests for JobApplication.
+	Integration tests for WebsiteBlogCategory.
 	Use this class for testing interactions between multiple components.
 	"""
 

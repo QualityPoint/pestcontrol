@@ -8,7 +8,7 @@ app_license = "gpl-3.0"
 # Apps
 # ------------------
 
-required_apps = ["erpnext"]
+required_apps = ["erpnext", "hrms"]
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -29,7 +29,7 @@ app_include_css = "/assets/pestcontrol/css/pestcontrol.css"
 app_include_js = "pestcontrol.bundle.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/pestcontrol/css/pestcontrol.css"
+web_include_css = "/assets/pestcontrol/website/css/portal.css"
 # web_include_js = "/assets/pestcontrol/js/pestcontrol.js"
 
 # include custom scss in every website theme (without file extension ".scss")
@@ -68,7 +68,14 @@ home_page = "home"
 # ----------
 
 # automatically create page for each record of this doctype
-website_generators = ["Website Service", "Website Project", "Website Team Member", "Website Blog Post"]
+website_generators = [
+	"Website Service",
+	"Website Project",
+	"Website Team Member",
+	"Website Blog Post",
+	"Website Pest",
+]
+
 
 # Fixtures
 # ----------
@@ -97,6 +104,9 @@ jinja = {
 	"methods": [
 		"pestcontrol.pc_website.utils.localize",
 		"pestcontrol.pc_website.utils.asset_version",
+		"pestcontrol.pc_website.utils.doc_to_json",
+		"pestcontrol.pc_website.utils.portal_user_info",
+		"pestcontrol.pc_website.utils.current_lang",
 	],
 }
 
@@ -159,6 +169,17 @@ after_install = "pestcontrol.install.after_install"
 # override_doctype_class = {
 # 	"ToDo": "custom_app.overrides.CustomToDo"
 # }
+
+# Session
+# ---------------
+
+# ERPNext's own on_session_creation (create_customer_or_supplier) links a
+# self-registered customer's Contact to a Customer but never adds them to
+# that Customer's Portal User table — which is what the customer portal
+# (and the pestcontrol dashboard) actually filters on. Without this, a
+# self-registered customer's own Orders/Quotations/Invoices stay invisible
+# to them. See pestcontrol.pc_website.utils.sync_portal_user_on_login.
+on_session_creation = "pestcontrol.pc_website.utils.sync_portal_user_on_login"
 
 # Document Events
 # ---------------
@@ -223,7 +244,7 @@ after_install = "pestcontrol.install.after_install"
 
 # Request Events
 # ----------------
-# before_request = ["pestcontrol.utils.before_request"]
+before_request = ["pestcontrol.pc_website.utils.apply_preferred_language_cookie_on_request"]
 # after_request = ["pestcontrol.utils.after_request"]
 
 # Job Events

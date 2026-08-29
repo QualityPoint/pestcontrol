@@ -2,6 +2,8 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
+from frappe.utils import flt
 from frappe.utils.file_manager import save_file
 
 
@@ -31,19 +33,66 @@ def submit_contact_form(fname: str, lname: str = "", email: str = "", phone: str
 # exactly who's meant to call it.
 @frappe.whitelist(allow_guest=True)  # nosemgrep: guest-whitelisted-method
 def submit_job_application(
-	full_name: str, email: str, phone: str, position_applied_for: str = "", message: str = ""
+	full_name: str,
+	email: str,
+	phone: str,
+	position_applied_for: str = "",
+	job_opening: str = "",
+	message: str = "",
+	country: str = "",
+	resume_link: str = "",
+	salary_min: str = "",
+	salary_max: str = "",
+	salary_currency: str = "",
 ):
-	"""Create a Job Application from the public careers form, attaching the
-	resume file (if provided) as a private File once the doc's name exists."""
+	"""Create an HRMS Job Applicant from the public careers form, attaching the
+	resume file (if provided) as a private File once the applicant's name exists.
+
+	The careers form's position selector is populated from HRMS Job Openings, so
+	it POSTs a `job_opening` id. We link it only if it is still Open — the
+	dropdown only lists Open+published openings, but a race could send a
+	just-closed one, and Job Applicant.before_insert throws hard on a closed
+	opening. When no opening is linked (e.g. the free-text fallback shown when
+	there are no open positions), the typed position is preserved in the cover
+	letter instead.
+
+	`country` / `salary_currency` are validated against their link targets
+	before use so a tampered POST can't inject an arbitrary link value; the
+	expected-salary range is optional and only recorded when a positive number
+	is given."""
+	linked_opening = None
+	if job_opening:
+		row = frappe.db.get_value("Job Opening", job_opening, ["name", "status"], as_dict=True)
+		if row and row.status == "Open":
+			linked_opening = row.name
+
+	cover_letter = message or ""
+	if not linked_opening and position_applied_for:
+		cover_letter = f"{_('Position applied for')}: {position_applied_for}\n\n{cover_letter}".strip()
+
+	lower_range = flt(salary_min)
+	upper_range = flt(salary_max)
+	has_salary = lower_range > 0 or upper_range > 0
+	currency = None
+	if has_salary:
+		currency = salary_currency if frappe.db.exists("Currency", salary_currency) else None
+
 	doc = frappe.get_doc(
 		{
-			"doctype": "Job Application",
-			"full_name": full_name,
-			"email": email,
-			"phone": phone,
-			"position_applied_for": position_applied_for,
-			"message": message,
-			"status": "New",
+			"doctype": "Job Applicant",
+			"applicant_name": full_name,
+			"email_id": email,
+			"phone_number": phone,
+			# Link -> Job Opening; `designation` auto-fetches from it
+			"job_title": linked_opening,
+			"status": "Open",
+			"source": "Website Listing",
+			"cover_letter": cover_letter or None,
+			"country": country if country and frappe.db.exists("Country", country) else None,
+			"resume_link": (resume_link or "").strip() or None,
+			"currency": currency,
+			"lower_range": lower_range if has_salary else 0,
+			"upper_range": upper_range if has_salary else 0,
 		}
 	)
 	doc.insert(ignore_permissions=True)
@@ -53,12 +102,25 @@ def submit_job_application(
 		file_doc = save_file(
 			resume_file.filename,
 			resume_file.read(),
-			"Job Application",
+			"Job Applicant",
 			doc.name,
 			is_private=1,
-			df="resume",
+			df="resume_attachment",
 		)
-		doc.db_set("resume", file_doc.file_url, update_modified=False)
+		doc.db_set("resume_attachment", file_doc.file_url, update_modified=False)
 
-	doc.notify_admin()
 	return {"success": True}
+
+
+@frappe.whitelist()
+def get_portal_document(doctype: str, name: str):
+	"""Read-only JSON pass-through for the customer dashboard's detail view.
+
+	Re-exposes the same check erpnext.templates.pages.order.py already uses
+	to gate /orders/<name> etc. — grants nothing new, just makes that
+	existing permission decision reachable as JSON instead of a Jinja page.
+	"""
+	doc = frappe.get_doc(doctype, name)
+	if not frappe.has_website_permission(doc):
+		frappe.throw(frappe._("Not Permitted"), frappe.PermissionError)
+	return doc.as_dict()

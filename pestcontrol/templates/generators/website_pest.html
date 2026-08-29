@@ -1,0 +1,79 @@
+{% extends "pestcontrol/templates/includes/website_base.html" %}
+
+{% block title %}{{ localize(doc, "pest_name") }} | {{ settings.site_name or "Skystar" }}{% endblock %}
+
+{% block page_header %}
+    <!-- Page Header Start -->
+    <div class="page-header parallaxie"{% if settings.page_header_background %} style="background-image: url('{{ settings.page_header_background }}');"{% endif %}>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Page Header Box Start -->
+                    <div class="page-header-box">
+                        <h1 class="text-anime-style-2" data-cursor="-opaque">{{ localize(doc, "pest_name") }}</h1>
+                        <nav class="wow fadeInUp">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">{{ _("home") }}</a></li>
+                                <li class="breadcrumb-item"><a href="/pest-library">{{ _("pest library") }}</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ localize(doc, "pest_name") }}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Page Header Box End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+{% endblock %}
+
+{% block content %}
+    <!-- Page Single Post Start -->
+    <div class="page-single-post">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% if doc.category %}
+                    <div class="post-single-meta wow fadeInUp">
+                        <ol class="breadcrumb">
+                            <li><i class="fa-solid fa-bug"></i> {{ _(doc.category) }}</li>
+                        </ol>
+                    </div>
+                    {% endif %}
+
+                    {% if doc.cover_image %}
+                    <!-- Post Featured Image Start -->
+                    <div class="post-image">
+                        <figure class="image-anime reveal">
+                            <img src="{{ doc.cover_image }}" alt="{{ localize(doc, 'pest_name') }}">
+                        </figure>
+                    </div>
+                    <!-- Post Featured Image End -->
+                    {% endif %}
+
+                    <!-- Post Single Content Start -->
+                    <div class="post-content">
+                        <!-- Post Entry Start -->
+                        <div class="post-entry">
+                            {% if localize(doc, "short_description") %}
+                            <p class="wow fadeInUp">{{ localize(doc, "short_description") }}</p>
+                            {% endif %}
+
+                            {{ localize(doc, "description") }}
+                        </div>
+                        <!-- Post Entry End -->
+                    </div>
+                    <!-- Post Single Content End -->
+
+                    <!-- Back Link Start -->
+                    <div class="post-item-btn wow fadeInUp">
+                        <a href="/pest-library" class="readmore-btn">{{ _("back to pest library") }}</a>
+                    </div>
+                    <!-- Back Link End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Single Post End -->
+
+{% endblock %}

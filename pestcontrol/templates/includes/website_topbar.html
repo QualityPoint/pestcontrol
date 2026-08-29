@@ -30,8 +30,9 @@
                     <!-- Topbar Language Switch Start -->
                     <div class="lang-switch" id="langSwitch">
                         <button type="button" class="lang-switch-toggle" id="langSwitchToggle" aria-haspopup="true" aria-expanded="false" aria-label="{{ _('Select language') }}">
+                            <i class="fa-solid fa-globe lang-switch-icon" aria-hidden="true"></i>
                             <span class="lang-code">{{ current_language.label|upper }}</span>
-                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                            <i class="fa-solid fa-chevron-down lang-switch-caret" aria-hidden="true"></i>
                         </button>
                         <ul class="lang-switch-menu" role="menu">
                             {% for l in languages %}

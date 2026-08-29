@@ -1,0 +1,34 @@
+<!--
+  Overrides erpnext/templates/pages/order.html — the single shared detail
+  template for /orders/<name>, /quotations/<name>, /invoices/<name> (see
+  erpnext/hooks.py's website_route_rules, all three map to "order").
+  erpnext/templates/pages/order.py's get_context() is NOT overridden: it
+  already does `if not frappe.has_website_permission(context.doc): frappe.throw(...)`
+  before this template ever renders, so the permission check is unchanged —
+  this only swaps the markup, embedding the already-checked doc as JSON via
+  pestcontrol.pc_website.utils.doc_to_json (registered as a jinja method).
+-->
+<!doctype html>
+<html lang="{{ current_lang() }}" dir="{{ 'rtl' if is_rtl() else 'ltr' }}">
+
+<head>
+  {% include "templates/includes/dashboard_assets.html" %}
+  <title>{{ doc.name }} | Sky Star</title>
+</head>
+
+{% set me = portal_user_info() %}
+<body>
+  <div
+    id="root"
+    data-page-type="detail"
+    data-doctype="{{ doc.doctype }}"
+    data-name="{{ doc.name }}"
+    data-lang="{{ current_lang() }}"
+    data-full-name="{{ me.full_name }}"
+    data-email="{{ me.email }}"
+    {% if me.user_image %}data-avatar-url="{{ me.user_image }}"{% endif %}
+  ></div>
+  <script id="portal-data" type="application/json">{{ doc_to_json(doc) }}</script>
+</body>
+
+</html>

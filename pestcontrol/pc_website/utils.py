@@ -40,6 +40,7 @@ ARTICLE_FIELD_MAP = {
 	"Website FAQ": {"question": "title", "answer": "context"},
 	"Website Gallery Item": {"title": "title"},
 	"Website Blog Post": {"title": "title", "blog_intro": "subtitle", "content": "context"},
+	"Website Pest": {"pest_name": "title", "short_description": "subtitle", "description": "context"},
 	"Website Hero Slide": {"heading": "title", "kicker": "subtitle", "description": "context"},
 	"Website Feature": {"title": "title", "description": "context"},
 	"Website List Item": {"title": "title"},
@@ -50,7 +51,7 @@ def get_website_context(context):
 	"""Common context every pestcontrol www/ page needs: current year,
 	the site-wide settings singleton, and the active language."""
 	languages = get_site_languages()
-	_apply_preferred_language_cookie(languages)
+	apply_preferred_language_cookie(languages)
 	context.year = frappe.utils.now_datetime().year
 	# Our pages are standalone (never extend Frappe's own base template), so
 	# `window.frappe`/`frappe.csrf_token` never exists client-side. Forms that
@@ -86,20 +87,40 @@ def get_website_context(context):
 	)
 
 
-def _apply_preferred_language_cookie(languages):
+def apply_preferred_language_cookie(languages):
 	"""Frappe's own language resolution only honors the `preferred_language`
 	cookie for Guest visitors — a logged-in user (e.g. an admin testing the
 	site in the same browser as the desk) falls back to their profile
 	language instead, silently dropping the switcher's choice on every
 	navigation that doesn't explicitly carry ?_lang. Override that here so
 	the cookie sticks site-wide, regardless of session state, matching what
-	a public marketing site visitor expects."""
+	a public marketing site visitor expects.
+
+	Also applied globally via the before_request hook (see
+	apply_preferred_language_cookie_on_request) so it reaches the dashboard
+	pages too — those don't call get_website_context() themselves, and for
+	/orders, /quotations, /invoices specifically, ListPage hardcodes
+	get_context() resolution to frappe's own www/portal.py regardless of
+	pestcontrol's override (frappe/website/page_renderers/template_page.py's
+	set_standard_path forces self.app = "frappe"), so a per-page call in
+	pestcontrol's own www/portal.py wouldn't even reach those routes."""
 	if frappe.form_dict.get("_lang"):
 		return  # explicit request always wins; core already applied it
 	cookie_lang = frappe.request.cookies.get("preferred_language")
 	valid_codes = {l["code"] for l in languages}
 	if cookie_lang and cookie_lang in valid_codes:
 		frappe.local.lang = cookie_lang
+
+
+def apply_preferred_language_cookie_on_request():
+	"""before_request hook. Runs after frappe's own init_request() has
+	already set frappe.local.lang from the session/user (see
+	frappe.auth.HTTPRequest.set_lang) but before any page's get_context() or
+	template render — so overriding it here reaches every route uniformly,
+	regardless of which app's controller/template ends up handling the
+	request. See apply_preferred_language_cookie for why this can't just
+	live in each page's own get_context() instead."""
+	apply_preferred_language_cookie(get_site_languages())
 
 
 def asset_version(path):
@@ -111,6 +132,36 @@ def asset_version(path):
 		return int(os.path.getmtime(full_path))
 	except OSError:
 		return 0
+
+
+def current_lang():
+	"""frappe.local.lang, exposed as a jinja method for the dashboard page
+	overrides (portal.html/order.html/me.html) — there is no reliable bare
+	`lang` global for normal www-page rendering (only a `frappe.lang`
+	nested under a *different*, restricted jinja globals set used
+	elsewhere); is_rtl() works because it's registered as a real global
+	function via frappe/hooks.py, so this mirrors that instead of
+	depending on an undefined bare `lang`."""
+	return frappe.local.lang
+
+
+def portal_user_info():
+	"""Full name/email/avatar for the logged-in session user — used by the
+	dashboard header (avatar shortcut) on the portal.html and order.html
+	overrides, which don't otherwise carry a `current_user`-like context
+	var the way frappe/www/me.py does."""
+	return frappe.db.get_value(
+		"User", frappe.session.user, ["full_name", "email", "user_image"], as_dict=True
+	)
+
+
+def doc_to_json(doc):
+	"""Serialize a Document for embedding in a <script type="application/json">
+	block — used by the portal detail-page override so the customer
+	dashboard's React island renders from the same already permission-
+	checked document the page itself computed, instead of a second
+	client-side fetch."""
+	return frappe.as_json(doc.as_dict())
 
 
 def attach_articles(doctype, items):
@@ -211,6 +262,43 @@ def validate_unique_language(doc, fieldname="article"):
 
 def validate_articles(doc):
 	validate_unique_language(doc, "article")
+
+
+def sync_portal_user_on_login():
+	"""Ensure the logged-in Website User is listed in their Customer's Portal
+	User table, so the customer portal and the pestcontrol dashboard actually
+	show their own documents.
+
+	ERPNext's own on_session_creation hook (create_customer_or_supplier)
+	creates the Customer + Contact link on a self-registered customer's
+	first login, but never populates Portal User itself — and Portal User is
+	what get_transaction_list's customer-scoping filter actually reads
+	(erpnext.controllers.website_list_for_contact.get_parents_for_user).
+	Without this, a self-registered customer's portal (Orders/Quotations/
+	Invoices) stays empty even though their documents genuinely exist and are
+	correctly linked to them."""
+	user = frappe.session.user
+	if frappe.db.get_value("User", user, "user_type") != "Website User":
+		return
+
+	contact_name = frappe.db.get_value("Contact", {"email_id": user})
+	if not contact_name:
+		return
+
+	customer = frappe.db.get_value(
+		"Dynamic Link",
+		{"parenttype": "Contact", "parent": contact_name, "link_doctype": "Customer"},
+		"link_name",
+	)
+	if not customer:
+		return
+
+	if frappe.db.exists("Portal User", {"parenttype": "Customer", "parent": customer, "user": user}):
+		return
+
+	customer_doc = frappe.get_doc("Customer", customer)
+	customer_doc.append("portal_users", {"user": user})
+	customer_doc.save(ignore_permissions=True)
 
 
 def get_language_row(rows):

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="theme-color" content="#002F47">
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard (dev)</title>
+</head>
+
+<body>
+  <!--
+    Dev-only mock — production pages don't use this file at all; they're
+    real Frappe/ERPNext pages (frappe/www/portal.html, erpnext's
+    templates/pages/order.html, frappe/www/me.html) overridden by pestcontrol
+    to render this same bundle, each embedding real server-computed data via
+    data-* attributes + a #portal-data JSON script tag. This file just gives
+    `yarn dev` something to render locally without a live login session.
+  -->
+  <div
+    id="root"
+    data-page-type="overview"
+  ></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

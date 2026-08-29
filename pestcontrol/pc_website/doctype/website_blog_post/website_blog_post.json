@@ -38,9 +38,11 @@
   },
   {
    "fieldname": "blog_category",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Category"
+   "label": "Category",
+   "options": "Website Blog Category",
+   "reqd": 1
   },
   {
    "fieldname": "author_name",
@@ -90,7 +92,7 @@
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2026-08-09 16:02:24.531016",
+ "modified": "2026-08-29 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Blog Post",
@@ -105,7 +107,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Pestcontrol Manager",
+   "role": "Website Manager",
    "share": 1,
    "write": 1
   }

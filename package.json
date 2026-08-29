@@ -1,0 +1,17 @@
+{
+  "name": "pestcontrol",
+  "description": "A comprehensive pest control management system built on Frappe",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QualityPoint/pestcontrol.git"
+  },
+  "author": "QualityPoint <erp@qp.sa>",
+  "license": "GPL-3.0",
+  "scripts": {
+    "postinstall": "cd dashboard && yarn install",
+    "dev": "cd dashboard && yarn dev",
+    "build": "cd dashboard && yarn build"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

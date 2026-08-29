@@ -1,0 +1,113 @@
+{
+ "actions": [],
+ "allow_guest_to_view": 1,
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2026-08-29 12:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "pest_info_section",
+  "column_break_wpst",
+  "cover_image",
+  "category",
+  "pest_type",
+  "display_order",
+  "route",
+  "published",
+  "section_break_wpct",
+  "article"
+ ],
+ "fields": [
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_wpst",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cover_image",
+   "fieldtype": "Attach Image",
+   "label": "Cover Image"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Category",
+   "options": "Pest Category",
+   "reqd": 1
+  },
+  {
+   "description": "Optional link to the operational Pest Type record for cross-reference.",
+   "fieldname": "pest_type",
+   "fieldtype": "Link",
+   "label": "Pest Type",
+   "options": "Pest Type"
+  },
+  {
+   "fieldname": "display_order",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Display Order"
+  },
+  {
+   "default": "1",
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Published"
+  },
+  {
+   "fieldname": "section_break_wpct",
+   "fieldtype": "Section Break",
+   "label": "Content"
+  },
+  {
+   "fieldname": "article",
+   "fieldtype": "Table",
+   "label": "Article",
+   "options": "Website Article",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pest_info_section",
+   "fieldtype": "Section Break",
+   "label": "Pest info"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_published_field": "published",
+ "links": [],
+ "modified": "2026-08-29 14:10:09.563562",
+ "modified_by": "Administrator",
+ "module": "PC Website",
+ "name": "Website Pest",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Website Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
