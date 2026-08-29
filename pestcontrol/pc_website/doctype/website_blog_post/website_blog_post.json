@@ -38,9 +38,11 @@
   },
   {
    "fieldname": "blog_category",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Category"
+   "label": "Category",
+   "options": "Website Blog Category",
+   "reqd": 1
   },
   {
    "fieldname": "author_name",
@@ -90,7 +92,7 @@
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2026-08-27 13:45:48.230827",
+ "modified": "2026-08-29 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Blog Post",

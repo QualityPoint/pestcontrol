@@ -19,7 +19,7 @@
                         <ul>
                             <li><a href="#" class="active-btn" data-filter="*">{{ _("all") }}</a></li>
                             {% for category in categories %}
-                            <li><a href="#" data-filter=".{{ category_class(category) }}">{{ category }}</a></li>
+                            <li><a href="#" data-filter=".{{ category_class(category) }}">{{ _(category) }}</a></li>
                             {% endfor %}
                         </ul>
                     </div>

@@ -39,10 +39,11 @@
   },
   {
    "fieldname": "category",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Category",
-   "options": "\nHome Pest\nCommercial\nEco-Friendly\nTermite & Rodent\nOutdoor"
+   "options": "Website Project Category",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_wprl",
@@ -97,7 +98,7 @@
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2026-08-27 17:19:32.954819",
+ "modified": "2026-08-29 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Project",
