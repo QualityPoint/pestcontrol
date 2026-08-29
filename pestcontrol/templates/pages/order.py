@@ -1,5 +1,5 @@
-from frappe.sessions import get_csrf_token
 from erpnext.templates.pages.order import get_context as _get_context
+from frappe.sessions import get_csrf_token
 
 # Same reason as pestcontrol/www/me.py: overriding only order.html leaves
 # erpnext's get_context() (permission check, payment/loyalty details, etc.)

@@ -23,12 +23,8 @@ def execute():
 		if not frappe.db.table_exists(doctype):
 			continue
 		values = {
-			(value or "").strip()
-			for value in frappe.get_all(doctype, pluck=field)
-			if (value or "").strip()
+			(value or "").strip() for value in frappe.get_all(doctype, pluck=field) if (value or "").strip()
 		}
 		for title in sorted(values):
 			if not frappe.db.exists(master, title):
-				frappe.get_doc({"doctype": master, master_field: title}).insert(
-					ignore_permissions=True
-				)
+				frappe.get_doc({"doctype": master, master_field: title}).insert(ignore_permissions=True)
