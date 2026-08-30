@@ -4,58 +4,30 @@
  "allow_import": 1,
  "allow_rename": 1,
  "autoname": "hash",
- "creation": "2026-08-29 12:00:00",
+ "creation": "2026-08-30 12:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "pest_info_section",
-  "column_break_wpst",
-  "cover_image",
-  "header_image",
-  "category",
-  "pest_type",
+  "phone",
+  "column_break_wbrc",
   "display_order",
-  "route",
   "published",
-  "section_break_wpct",
+  "column_break_wbrd",
+  "map_embed_url",
+  "section_break_wbra",
   "article"
  ],
  "fields": [
   {
-   "fieldname": "route",
+   "fieldname": "phone",
    "fieldtype": "Data",
-   "label": "Route",
-   "read_only": 1
-  },
-  {
-   "fieldname": "column_break_wpst",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "cover_image",
-   "fieldtype": "Attach Image",
-   "label": "Cover Image"
-  },
-  {
-   "description": "Background image for this page's header band. Leave empty to use the site-wide default.",
-   "fieldname": "header_image",
-   "fieldtype": "Attach Image",
-   "label": "Header Image"
-  },
-  {
-   "fieldname": "category",
-   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Category",
-   "options": "Pest Category",
-   "reqd": 1
+   "label": "Phone",
+   "options": "Phone"
   },
   {
-   "description": "Optional link to the operational Pest Type record for cross-reference.",
-   "fieldname": "pest_type",
-   "fieldtype": "Link",
-   "label": "Pest Type",
-   "options": "Pest Type"
+   "fieldname": "column_break_wbrc",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "display_order",
@@ -71,31 +43,37 @@
    "label": "Published"
   },
   {
-   "fieldname": "section_break_wpct",
+   "fieldname": "column_break_wbrd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Google Maps → Share → Embed a map → copy the src URL from the <iframe> snippet.",
+   "fieldname": "map_embed_url",
+   "fieldtype": "Small Text",
+   "label": "Google Maps Embed URL"
+  },
+  {
+   "fieldname": "section_break_wbra",
    "fieldtype": "Section Break",
    "label": "Content"
   },
   {
+   "description": "One row per language. Title = branch name, Subtitle = city, Context = address.",
    "fieldname": "article",
    "fieldtype": "Table",
    "label": "Article",
    "options": "Website Article",
    "reqd": 1
-  },
-  {
-   "fieldname": "pest_info_section",
-   "fieldtype": "Section Break",
-   "label": "Pest info"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2026-08-29 16:00:00.000000",
+ "modified": "2026-08-30 13:00:00.000000",
  "modified_by": "Administrator",
  "module": "PC Website",
- "name": "Website Pest",
+ "name": "Website Branch",
  "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [
@@ -114,7 +92,7 @@
  ],
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
- "sort_field": "creation",
- "sort_order": "DESC",
+ "sort_field": "display_order",
+ "sort_order": "ASC",
  "states": []
 }

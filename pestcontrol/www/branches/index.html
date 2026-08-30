@@ -1,0 +1,44 @@
+{% extends "pestcontrol/templates/includes/website_base.html" %}
+
+{% block title %}{{ _("Our Branches") }} | Skystar{% endblock %}
+
+{% block page_header %}
+{% set page_h1 = _("Our Branches") %}
+{% set page_breadcrumb = _("branches") %}
+{% include "pestcontrol/templates/includes/page_header.html" %}
+{% endblock %}
+
+{% block content %}
+<!-- Page Branches Start -->
+<div class="branches-page">
+    <div class="container">
+        <div class="row">
+            {% for b in branches %}
+            {% set branch_city = localize(b, "city") %}
+            <div class="col-lg-4 col-md-6">
+                <!-- Branch Card Start -->
+                <div class="branch-card wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.15 }}s">
+                    {% if b.map_embed_url %}
+                    <div class="branch-card-map">
+                        <iframe src="{{ b.map_embed_url }}" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="{{ localize(b, 'branch_name') }}"></iframe>
+                    </div>
+                    {% endif %}
+                    <div class="branch-card-body">
+                        <h3>{{ localize(b, "branch_name") }}</h3>
+                        {% if branch_city %}<span class="branch-card-city"><i class="fa-solid fa-location-dot"></i> {{
+                            branch_city }}</span>{% endif %}
+                        <div class="branch-card-address">{{ localize(b, "address") }}</div>
+                        {% if b.phone %}<p class="branch-card-phone"><a href="tel:{{ b.phone }}"><i
+                                    class="fa-solid fa-phone"></i> {{ b.phone }}</a></p>{% endif %}
+                    </div>
+                </div>
+                <!-- Branch Card End -->
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Page Branches End -->
+{% endblock %}
