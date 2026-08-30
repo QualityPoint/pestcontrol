@@ -44,14 +44,16 @@
                 <div class="col-lg-3 col-md-5">
                     <div class="footer-links">
                         <h3>{{ _("contact us") }}</h3>
-                        {% if settings.phone %}
+                        {% if settings.phone_numbers %}
                         <!-- Footer Contact Item Start -->
                         <div class="footer-contact-item">
                             <div class="icon-box">
                                 <i class="fa-solid fa-phone"></i>
                             </div>
                             <div class="footer-contact-content">
-                                <p><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></p>
+                                {% for p in settings.phone_numbers %}
+                                <p><a href="tel:{{ p.phone_number }}">{{ p.phone_number }}</a></p>
+                                {% endfor %}
                             </div>
                         </div>
                         <!-- Footer Contact Item End -->

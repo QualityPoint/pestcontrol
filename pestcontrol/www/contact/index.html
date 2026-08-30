@@ -35,7 +35,9 @@
                             </div>
                             <div class="contact-info-content">
                                 <h3>{{ _("Contact Us") }}</h3>
-                                <p><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></p>
+                                {% for p in settings.phone_numbers %}
+                                <p><a href="tel:{{ p.phone_number }}">{{ p.phone_number }}</a></p>
+                                {% endfor %}
                                 {% if settings.whatsapp %}<p><a href="https://wa.me/{{ settings.whatsapp }}">{{ settings.whatsapp }}</a></p>{% endif %}
                             </div>
                         </div>

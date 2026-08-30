@@ -75,6 +75,11 @@ def get_website_context(context):
 			context.user_initials = "".join(part[0] for part in name_parts[:2]).upper()
 	settings = frappe.get_cached_doc("PC Website Settings").as_dict()
 	attach_articles("PC Website Settings", [settings])
+	# `phone` is now a `phone_numbers` child table; expose the primary (or first)
+	# number as `settings.phone` so the single-number templates keep working.
+	phones = settings.get("phone_numbers") or []
+	primary = next((p for p in phones if p.get("is_primary")), phones[0] if phones else None)
+	settings["phone"] = (primary or {}).get("phone_number", "")
 	context.settings = settings
 	context.hero_slides = get_translated_list(
 		"Website Hero Slide", filters={"published": 1}, fields="*", order_by="display_order asc"
