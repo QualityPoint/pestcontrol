@@ -12,6 +12,7 @@
   "column_break_wsvc",
   "icon",
   "image",
+  "header_image",
   "display_order",
   "published",
   "section_break_vfhu",
@@ -37,6 +38,12 @@
    "fieldname": "image",
    "fieldtype": "Attach Image",
    "label": "Image"
+  },
+  {
+   "description": "Background image for this page's header band. Leave empty to use the site-wide default.",
+   "fieldname": "header_image",
+   "fieldtype": "Attach Image",
+   "label": "Header Image"
   },
   {
    "fieldname": "display_order",
@@ -67,7 +74,7 @@
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2026-08-27 13:45:39.403067",
+ "modified": "2026-08-29 16:00:00.000000",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Service",

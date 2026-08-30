@@ -11,6 +11,7 @@
   "pest_info_section",
   "column_break_wpst",
   "cover_image",
+  "header_image",
   "category",
   "pest_type",
   "display_order",
@@ -34,6 +35,12 @@
    "fieldname": "cover_image",
    "fieldtype": "Attach Image",
    "label": "Cover Image"
+  },
+  {
+   "description": "Background image for this page's header band. Leave empty to use the site-wide default.",
+   "fieldname": "header_image",
+   "fieldtype": "Attach Image",
+   "label": "Header Image"
   },
   {
    "fieldname": "category",
@@ -85,7 +92,7 @@
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2026-08-29 14:10:09.563562",
+ "modified": "2026-08-29 16:00:00.000000",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Pest",
