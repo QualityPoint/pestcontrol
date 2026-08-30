@@ -2444,12 +2444,19 @@ header.main-header .header-sticky.active{
 	margin: 0;
 }
 
+.footer-contact-content p + p{
+	margin-top: 6px;
+}
+
 .footer-contact-content p a{
 	color: inherit;
 	transition: all 0.3s ease-in-out;
 }
 
-.footer-contact-item:hover .footer-contact-content p a{
+/* Highlight only the number/link actually being pointed at. Scoping this to
+   the anchor (instead of `.footer-contact-item:hover ... a`) keeps a list of
+   several phone numbers from all lighting up together on hover. */
+.footer-contact-content p a:hover{
 	color: var(--accent-color);
 }
 
