@@ -2451,6 +2451,7 @@ header.main-header .header-sticky.active{
 .footer-contact-content p a{
 	color: inherit;
 	transition: all 0.3s ease-in-out;
+	direction: ltr;
 }
 
 /* Highlight only the number/link actually being pointed at. Scoping this to
@@ -6055,6 +6056,7 @@ header.main-header .header-sticky.active{
 	color: var(--primary-color);
 	font-weight: 600;
 	transition: color 0.4s ease-in-out;
+	direction: ltr;
 }
 
 .branch-card-phone a:hover{
