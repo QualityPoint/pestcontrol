@@ -4,7 +4,7 @@
             <div class="topbar-inner">
                 <!-- Topbar Contact Information Start -->
                 <div class="topbar-contact-info">
-                    {% set business_address = localize(settings, "address") %}
+                    {% set business_address = (localize(branches[0], "address") if branches else None) or localize(settings, "address") %}
                     <ul>
                         {% if settings.email %}<li><i class="fa-regular fa-envelope"></i><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></li>{% endif %}
                         {% if business_address %}<li><i class="fa-solid fa-location-dot"></i>{{ business_address }}</li>{% endif %}

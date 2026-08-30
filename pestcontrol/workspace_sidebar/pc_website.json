@@ -140,6 +140,18 @@
   {
    "child": 1,
    "collapsible": 1,
+   "icon": "map-pin",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Website Branch",
+   "link_to": "Website Branch",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
    "icon": "star",
    "indent": 0,
    "keep_closed": 0,
@@ -233,7 +245,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-08-29 13:00:00.000000",
+ "modified": "2026-08-30 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "PC Website",

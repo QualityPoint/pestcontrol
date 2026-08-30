@@ -43,6 +43,23 @@
                         </div>
                         <!-- Contact Info Item End -->
 
+                        {% if branches %}
+                        {% for b in branches %}
+                        {% set branch_city = localize(b, "city") %}
+                        <!-- Contact Info Item Start -->
+                        <div class="contact-info-item wow fadeInUp" data-wow-delay="{{ 0.4 + loop.index0 * 0.15 }}s">
+                            <div class="icon-box">
+                                <img src="/assets/pestcontrol/website/images/icon-location.svg" alt="">
+                            </div>
+                            <div class="contact-info-content">
+                                <h3>{{ localize(b, "branch_name") }}{% if branch_city %} &mdash; {{ branch_city }}{% endif %}</h3>
+                                <p>{{ localize(b, "address") }}</p>
+                                {% if b.phone %}<p><a href="tel:{{ b.phone }}">{{ b.phone }}</a></p>{% endif %}
+                            </div>
+                        </div>
+                        <!-- Contact Info Item End -->
+                        {% endfor %}
+                        {% else %}
                         <!-- Contact Info Item Start -->
                         <div class="contact-info-item wow fadeInUp" data-wow-delay="0.4s">
                             <div class="icon-box">
@@ -54,6 +71,7 @@
                             </div>
                         </div>
                         <!-- Contact Info Item End -->
+                        {% endif %}
 
                         <!-- Contact Info Item Start -->
                         <div class="contact-info-item wow fadeInUp" data-wow-delay="0.6s">
@@ -153,7 +171,8 @@
                 <div class="col-lg-12">
                     <!-- Google Map IFrame Start -->
                     <div class="google-map-iframe">
-                        <iframe src="{{ settings.map_embed_url or 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96737.10562045308!2d-74.08535042841811!3d40.739265258395164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1703158537552!5m2!1sen!2sin' }}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        {% set contact_map = (branches[0].map_embed_url if branches and branches[0].map_embed_url else settings.map_embed_url) %}
+                        <iframe src="{{ contact_map or 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96737.10562045308!2d-74.08535042841811!3d40.739265258395164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1703158537552!5m2!1sen!2sin' }}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <!-- Google Map IFrame End -->
                 </div>

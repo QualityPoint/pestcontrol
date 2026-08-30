@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "allow_guest_to_view": 1,
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2026-08-30 12:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "phone",
+  "column_break_wbrc",
+  "display_order",
+  "published",
+  "column_break_wbrd",
+  "map_embed_url",
+  "section_break_wbra",
+  "article"
+ ],
+ "fields": [
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Phone",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "column_break_wbrc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "display_order",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Display Order"
+  },
+  {
+   "default": "1",
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Published"
+  },
+  {
+   "fieldname": "column_break_wbrd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Google Maps → Share → Embed a map → copy the src URL from the <iframe> snippet.",
+   "fieldname": "map_embed_url",
+   "fieldtype": "Small Text",
+   "label": "Google Maps Embed URL"
+  },
+  {
+   "fieldname": "section_break_wbra",
+   "fieldtype": "Section Break",
+   "label": "Content"
+  },
+  {
+   "description": "One row per language. Title = branch name, Subtitle = city, Context = address.",
+   "fieldname": "article",
+   "fieldtype": "Table",
+   "label": "Article",
+   "options": "Website Article",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_published_field": "published",
+ "links": [],
+ "modified": "2026-08-30 13:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "PC Website",
+ "name": "Website Branch",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Website Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "display_order",
+ "sort_order": "ASC",
+ "states": []
+}

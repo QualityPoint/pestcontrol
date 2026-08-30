@@ -44,6 +44,7 @@ ARTICLE_FIELD_MAP = {
 	"Website Hero Slide": {"heading": "title", "kicker": "subtitle", "description": "context"},
 	"Website Feature": {"title": "title", "description": "context"},
 	"Website List Item": {"title": "title"},
+	"Website Branch": {"branch_name": "title", "city": "subtitle", "address": "context"},
 }
 
 
@@ -83,6 +84,12 @@ def get_website_context(context):
 	context.settings = settings
 	context.hero_slides = get_translated_list(
 		"Website Hero Slide", filters={"published": 1}, fields="*", order_by="display_order asc"
+	)
+	# Branch name / city / address are translated via each row's `article`
+	# (Website Article) bundle — read with localize(). Available site-wide for
+	# the topbar, contact page and /branches.
+	context.branches = get_translated_list(
+		"Website Branch", filters={"published": 1}, fields="*", order_by="display_order asc"
 	)
 	context.lang = frappe.local.lang
 	context.languages = languages

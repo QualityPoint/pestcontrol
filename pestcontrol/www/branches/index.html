@@ -1,0 +1,39 @@
+{% extends "pestcontrol/templates/includes/website_base.html" %}
+
+{% block title %}{{ _("Our Branches") }} | Skystar{% endblock %}
+
+{% block page_header %}
+    {% set page_h1 = _("Our Branches") %}
+    {% set page_breadcrumb = _("branches") %}
+    {% include "pestcontrol/templates/includes/page_header.html" %}
+{% endblock %}
+
+{% block content %}
+    <!-- Page Branches Start -->
+    <div class="page-contact-us">
+        <div class="container">
+            <div class="row">
+                {% for b in branches %}
+                <div class="col-lg-4 col-md-6">
+                    <!-- Branch Item Start -->
+                    {% set branch_city = localize(b, "city") %}
+                    <div class="contact-info-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.15 }}s" style="display:block;">
+                        <div class="contact-info-content">
+                            <h3>{{ localize(b, "branch_name") }}{% if branch_city %} <span>&mdash; {{ branch_city }}</span>{% endif %}</h3>
+                            <p>{{ localize(b, "address") }}</p>
+                            {% if b.phone %}<p><a href="tel:{{ b.phone }}">{{ b.phone }}</a></p>{% endif %}
+                        </div>
+                        {% if b.map_embed_url %}
+                        <div class="google-map-iframe" style="margin-top:20px;">
+                            <iframe src="{{ b.map_embed_url }}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <!-- Branch Item End -->
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Page Branches End -->
+{% endblock %}
