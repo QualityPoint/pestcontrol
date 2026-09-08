@@ -85,6 +85,12 @@ website_generators = [
 # working for whatever already links to it.
 website_redirects = []
 
+# Fills in the search-engine metadata frappe does not derive on its own --
+# canonical, og:url/og:site_name/og:locale, robots -- and lets frappe's own
+# MetaTags build the rest from context.title/description/image. Runs after
+# each page's get_context(), so it can see context.doc and context.title.
+update_website_context = "pestcontrol.pc_website.seo.build_seo_context"
+
 
 # Fixtures
 # ----------

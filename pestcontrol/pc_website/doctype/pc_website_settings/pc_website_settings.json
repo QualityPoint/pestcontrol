@@ -39,6 +39,28 @@
   "column_break_wsco",
   "team_size",
   "satisfaction_rate",
+  "seo_tab",
+  "seo_section",
+  "default_language",
+  "canonical_base_url",
+  "default_og_image",
+  "column_break_seo",
+  "twitter_handle",
+  "google_business_profile_url",
+  "analytics_section",
+  "ga4_measurement_id",
+  "gtm_container_id",
+  "column_break_analytics",
+  "google_site_verification",
+  "bing_site_verification",
+  "business_section",
+  "organization_legal_name",
+  "cr_number",
+  "vat_number",
+  "column_break_business",
+  "founding_year",
+  "currency",
+  "price_range",
   "section_break_art_ttings",
   "article"
  ],
@@ -233,13 +255,134 @@
    "label": "Article",
    "options": "Website Article",
    "reqd": 1
+  },
+  {
+   "fieldname": "seo_tab",
+   "fieldtype": "Tab Break",
+   "label": "SEO & Analytics"
+  },
+  {
+   "fieldname": "seo_section",
+   "fieldtype": "Section Break",
+   "label": "Search Engines"
+  },
+  {
+   "description": "Language served at the site root and used as the hreflang x-default. Set this instead of hardcoding a language anywhere.",
+   "fieldname": "default_language",
+   "fieldtype": "Link",
+   "label": "Default Language",
+   "options": "Language"
+  },
+  {
+   "description": "Public site URL used to build canonical and sitemap links, e.g. https://skystar.com.sa. Leave blank to use the site's own URL.",
+   "fieldname": "canonical_base_url",
+   "fieldtype": "Data",
+   "label": "Canonical Base URL"
+  },
+  {
+   "description": "Used when a page has no image of its own. 1200x630 works best.",
+   "fieldname": "default_og_image",
+   "fieldtype": "Attach Image",
+   "label": "Default Share Image"
+  },
+  {
+   "fieldname": "column_break_seo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Including the @.",
+   "fieldname": "twitter_handle",
+   "fieldtype": "Data",
+   "label": "X (Twitter) Handle"
+  },
+  {
+   "description": "Links the site to your Google listing in structured data. Important for local search.",
+   "fieldname": "google_business_profile_url",
+   "fieldtype": "Data",
+   "label": "Google Business Profile URL"
+  },
+  {
+   "fieldname": "analytics_section",
+   "fieldtype": "Section Break",
+   "label": "Analytics & Verification"
+  },
+  {
+   "description": "Looks like G-XXXXXXXXXX. Leave blank to disable analytics.",
+   "fieldname": "ga4_measurement_id",
+   "fieldtype": "Data",
+   "label": "GA4 Measurement ID"
+  },
+  {
+   "description": "Looks like GTM-XXXXXXX. Takes precedence over the GA4 ID if both are set.",
+   "fieldname": "gtm_container_id",
+   "fieldtype": "Data",
+   "label": "Google Tag Manager ID"
+  },
+  {
+   "fieldname": "column_break_analytics",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "The content value of the google-site-verification meta tag.",
+   "fieldname": "google_site_verification",
+   "fieldtype": "Data",
+   "label": "Google Search Console Token"
+  },
+  {
+   "fieldname": "bing_site_verification",
+   "fieldtype": "Data",
+   "label": "Bing Verification Token"
+  },
+  {
+   "description": "Used to build the structured data that search engines read about the company.",
+   "fieldname": "business_section",
+   "fieldtype": "Section Break",
+   "label": "Business Details"
+  },
+  {
+   "fieldname": "organization_legal_name",
+   "fieldtype": "Data",
+   "label": "Legal Name"
+  },
+  {
+   "fieldname": "cr_number",
+   "fieldtype": "Data",
+   "label": "Commercial Registration No."
+  },
+  {
+   "fieldname": "vat_number",
+   "fieldtype": "Data",
+   "label": "VAT Number"
+  },
+  {
+   "fieldname": "column_break_business",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "founding_year",
+   "fieldtype": "Int",
+   "label": "Founding Year"
+  },
+  {
+   "default": "SAR",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "default": "$$",
+   "description": "Rough price bracket shown in local search results, e.g. $$.",
+   "fieldname": "price_range",
+   "fieldtype": "Data",
+   "label": "Price Range"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-08-30 12:00:00.000000",
+ "modified": "2026-09-08 10:00:00.000000",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "PC Website Settings",

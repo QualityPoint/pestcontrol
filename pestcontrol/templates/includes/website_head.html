@@ -2,8 +2,23 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
+	{#- frappe's MetaTags builds description, og:* and twitter:* out of
+	    context.title / description / image; pc_website/seo.py adds what it
+	    does not derive -- canonical, og:url, og:site_name, og:locale, robots.
+	    meta_block.html then renders whatever ended up in context.metatags.
+	    <meta name="keywords"> is deliberately gone: google has ignored it
+	    since 2009, and an empty one was pure noise. -#}
+	{% include "templates/includes/meta_block.html" %}
+	{{ head_html or "" }}
+	{#- guarded: the portal and dashboard pages never run the seo hook, and an
+	    empty canonical is worse than none -- it self-references the wrong URL. -#}
+	{%- if seo_canonical %}
+	<link rel="canonical" href="{{ seo_canonical }}">
+	{%- endif %}
+	{%- for alt in seo_alternates or [] %}
+	<link rel="alternate" hreflang="{{ alt.lang }}" href="{{ alt.href }}">
+	{%- endfor %}
+	{% include "pestcontrol/templates/includes/seo_analytics.html" %}
 	<meta name="author" content="Skystar">
 	<!-- Page Title -->
 	<!-- Favicon Icon -->

@@ -1,0 +1,36 @@
+{#- Analytics, gated entirely on the settings fields being filled in, so a
+    staging or development site with empty fields sends nothing anywhere.
+
+    Frappe's own Website Settings.google_analytics_id is deliberately not used:
+    it emits the legacy analytics.js / Universal Analytics snippet, which
+    google shut down, and it is suppressed in developer_mode.
+
+    GTM wins when both are set -- running GTM and a raw gtag config together
+    double-counts every pageview. -#}
+{%- if settings.gtm_container_id %}
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
+j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','{{ settings.gtm_container_id }}');</script>
+{%- elif settings.ga4_measurement_id %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ settings.ga4_measurement_id }}"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', '{{ settings.ga4_measurement_id }}', {
+		anonymize_ip: true,
+		{#- content_group splits traffic by language in GA4. Without it there is
+		    no way to tell whether the arabic side of the site is earning
+		    anything, which is the whole question the language-URL work needs
+		    answered. -#}
+		content_group: '{{ lang or "" }}'
+	});
+</script>
+{%- endif %}
+{%- if settings.google_site_verification %}
+<meta name="google-site-verification" content="{{ settings.google_site_verification }}">
+{%- endif %}
+{%- if settings.bing_site_verification %}
+<meta name="msvalidate.01" content="{{ settings.bing_site_verification }}">
+{%- endif %}
