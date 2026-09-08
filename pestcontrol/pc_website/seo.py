@@ -21,7 +21,7 @@ import frappe
 from frappe.utils import get_url, strip_html
 from frappe.website.utils import get_home_page
 
-from pestcontrol.pc_website.utils import article_value, localize
+from pestcontrol.pc_website.utils import article_value, get_site_languages, localize
 
 # First path segment that is not a public marketing page. The desk, the API
 # and the customer portal must never get marketing metadata, and the
@@ -71,7 +71,9 @@ def build_seo_context(context):
 
 	canonical = _canonical(settings, path)
 	context.seo_canonical = canonical
-	context.seo_alternates = []  # populated in the language-URL phase
+	# One list drives both the <link rel="alternate"> tags and the topbar
+	# switcher, so the two can never disagree about where a language lives.
+	context.seo_alternates = _alternates(settings, path)
 
 	tags = context.setdefault("metatags", frappe._dict())
 
@@ -178,14 +180,42 @@ def _canonical(settings, path):
 	set_missing_values(), which runs *after* this hook, so it is neither
 	readable nor writable from here.
 	"""
+	return _abs(settings, path, frappe.local.lang or "en")
+
+
+def _abs(settings, path, lang):
+	"""Absolute, language-prefixed URL for a bare (prefix-stripped) path."""
 	base = (settings.get("canonical_base_url") or get_url()).rstrip("/")
 	if path == get_home_page():
-		# The home page is reachable as "/" but resolves to the endpoint named
-		# by the home_page setting ("home"), which is what lands in
-		# context.path. Canonicalising to /home would point the homepage at a
-		# duplicate of itself -- the exact thing canonical exists to prevent.
+		# The home page is reachable as "/<lang>/" but resolves to the endpoint
+		# named by the home_page setting ("home"). Canonicalising to /ar/home
+		# would point the homepage at a duplicate of itself -- the exact thing
+		# canonical exists to prevent.
 		path = ""
-	return f"{base}/{path}" if path else f"{base}/"
+	prefix = f"/{lang}" if lang else ""
+	return f"{base}{prefix}/{path}" if path else f"{base}{prefix}/"
+
+
+def _alternates(settings, path):
+	"""hreflang alternates: every enabled language, plus x-default.
+
+	Languages come from the enabled Language records, so adding one adds its
+	alternates here with no code change. x-default points at the configured
+	default language, matching where "/" redirects.
+	"""
+	languages = [row["code"] for row in get_site_languages()]
+	if len(languages) < 2:
+		return []
+	alternates = [
+		frappe._dict(lang=code, href=_abs(settings, path, code), label=code)
+		for code in languages
+	]
+	default = settings.get("default_language")
+	if default in languages:
+		alternates.append(
+			frappe._dict(lang="x-default", href=_abs(settings, path, default), label=default)
+		)
+	return alternates
 
 
 def _locale():

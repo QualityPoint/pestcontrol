@@ -54,16 +54,14 @@
 
             var option = e.target.closest("[data-set-lang]");
             if (option) {
-                e.preventDefault();
-                var lang = option.getAttribute("data-set-lang");
-                document.cookie = "preferred_language=" + lang + ";path=/;max-age=31536000";
-                // The cookie alone is ignored by Frappe for logged-in users
-                // (it only reads it for Guests) — the _lang query param is
-                // checked first and always wins, so use it to force the
-                // switch immediately regardless of session state.
-                var url = new URL(window.location.href);
-                url.searchParams.set("_lang", lang);
-                window.location.href = url.toString();
+                // The link's href already points at the translated page, so
+                // navigation is left to the browser -- no preventDefault, no
+                // ?_lang reload. The cookie is still written because the
+                // customer portal (/portal, /orders, ...) stays unprefixed and
+                // has nothing but the cookie to go on.
+                document.cookie =
+                    "preferred_language=" + option.getAttribute("data-set-lang") +
+                    ";path=/;max-age=31536000";
                 return;
             }
 

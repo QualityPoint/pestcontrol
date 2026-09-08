@@ -19,7 +19,7 @@
                                 {%- if loop.last %}
                                 <li class="breadcrumb-item active" aria-current="page">{{ crumb.label }}</li>
                                 {%- else %}
-                                <li class="breadcrumb-item"><a href="/{{ crumb.route }}">{{ crumb.label }}</a></li>
+                                <li class="breadcrumb-item"><a href="{{ u('/' ~ crumb.route) }}">{{ crumb.label }}</a></li>
                                 {%- endif %}
                                 {%- endfor %}
                             </ol>

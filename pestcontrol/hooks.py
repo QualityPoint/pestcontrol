@@ -91,6 +91,16 @@ website_redirects = []
 # each page's get_context(), so it can see context.doc and context.title.
 update_website_context = "pestcontrol.pc_website.seo.build_seo_context"
 
+# Serves each language from its own URL (/ar/about, /en/about) so both can be
+# indexed; frappe otherwise picks the language by cookie, which a crawler does
+# not carry, leaving exactly one language visible to search.
+#
+# NOTE: this REPLACES frappe's own path resolution for every request, and
+# frappe 16 short-circuits only `desk` before the hooks -- /app and /api reach
+# it. See pc_website/router.py. Deleting this one line plus `bench clear-cache`
+# fully disables it.
+website_path_resolver = "pestcontrol.pc_website.router.resolve"
+
 
 # Fixtures
 # ----------
@@ -122,6 +132,7 @@ jinja = {
 		"pestcontrol.pc_website.utils.doc_to_json",
 		"pestcontrol.pc_website.utils.portal_user_info",
 		"pestcontrol.pc_website.utils.current_lang",
+		"pestcontrol.pc_website.router.u",
 	],
 }
 
