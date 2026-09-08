@@ -1,8 +1,13 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}Skystar - {{ _("Environmental Services") }}{% endblock %}
-
 {% block content %}
+    {#- The <h1> normally comes from the first hero slide. If an admin has
+        none published the hero section renders nothing at all, which would
+        leave the site's most important page with no primary heading; this
+        keeps exactly one, without changing the design when slides exist. -#}
+    {%- if not hero_slides %}
+    <h1 class="visually-hidden">{{ title }}</h1>
+    {%- endif %}
     <!-- Hero Section Start -->
     <div class="hero hero-slider-layout dark-section parallaxie">
         <div class="swiper">
@@ -25,7 +30,16 @@
                                         <!-- Section Title Start -->
                                         <div class="section-title">
                                             <span class="section-kicker wow fadeInUp">{{ localize(slide, "kicker") }}</span>
+{#- Only the first slide gets the <h1>. This loop renders one block per
+                                                hero slide, so it used to emit N <h1>s on the home page and
+                                                left the site's most important page with no single primary
+                                                heading. The others keep the identical type scale via
+                                                .hero-heading in skystar.css. -#}
+                                            {%- if loop.first %}
                                             <h1 class="text-anime-style-2" data-cursor="-opaque">{{ localize(slide, "heading") }}</h1>
+                                            {%- else %}
+                                            <span class="hero-heading text-anime-style-2" data-cursor="-opaque">{{ localize(slide, "heading") }}</span>
+                                            {%- endif %}
                                             <p class="wow fadeInUp" data-wow-delay="0.2s">{{ localize(slide, "description") }}</p>
                                         </div>
                                         <!-- Section Title End -->
@@ -485,7 +499,10 @@
                         <!-- Pricing Header Start -->
                         <div class="pricing-header">
                             <h3>{{ localize(plan, "plan_name") }}</h3>
-                            <h2>${{ "%.2f"|format(plan.price) }}{{ "/" ~ plan.billing_period if plan.billing_period else "" }}</h2>
+                            {#- Currency comes from PC Website Settings, defaulting to SAR. It was a
+                                hardcoded "$" on a saudi site, which is both wrong on the page and
+                                would make the Offer/priceCurrency structured data contradict it. -#}
+                            <div class="pricing-amount">{{ frappe.utils.fmt_money(plan.price, currency=settings.currency or "SAR") }}{{ "/" ~ plan.billing_period if plan.billing_period else "" }}</div>
                         </div>
                         <!-- Pricing Header End -->
 

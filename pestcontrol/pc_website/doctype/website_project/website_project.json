@@ -9,7 +9,6 @@
  "engine": "InnoDB",
  "field_order": [
   "route",
-  "page_title",
   "column_break_wprj",
   "image",
   "header_image",
@@ -29,14 +28,6 @@
    "fieldname": "route",
    "fieldtype": "Data",
    "label": "Route"
-  },
-  {
-   "description": "Auto-filled from the English article title. Used as the page title in Frappe's website search index.",
-   "fieldname": "page_title",
-   "fieldtype": "Data",
-   "label": "Page Title",
-   "no_copy": 1,
-   "read_only": 1
   },
   {
    "fieldname": "column_break_wprj",
@@ -134,6 +125,7 @@
    "write": 1
   }
  ],
+ "route": "project",
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
  "sort_field": "creation",

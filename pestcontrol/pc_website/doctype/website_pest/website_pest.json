@@ -16,7 +16,6 @@
   "pest_type",
   "display_order",
   "route",
-  "page_title",
   "published",
   "section_break_wpct",
   "article"
@@ -26,14 +25,6 @@
    "fieldname": "route",
    "fieldtype": "Data",
    "label": "Route",
-   "read_only": 1
-  },
-  {
-   "description": "Auto-filled from the English article title. Used as the page title in Frappe's website search index.",
-   "fieldname": "page_title",
-   "fieldtype": "Data",
-   "label": "Page Title",
-   "no_copy": 1,
    "read_only": 1
   },
   {
@@ -121,6 +112,7 @@
    "write": 1
   }
  ],
+ "route": "pest-library",
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
  "sort_field": "creation",

@@ -2,18 +2,27 @@ import frappe
 from frappe import _
 
 from pestcontrol.pc_website.utils import (
+	css_class_for,
 	filter_by_language,
 	get_language_row,
 	get_translated_list,
 	get_website_context,
 	localize,
-	make_route,
 )
+
+
+# Listed in /sitemap.xml. frappe's www sitemap only includes pages that
+# opt in with this module attribute (website/router.py load_properties_from_controller).
+sitemap = 1
 
 
 def get_context(context):
 	get_website_context(context)
 	context.no_cache = 1
+	context.title = _("Environmental Services")
+	context.description = _(
+		"Skystar provides licensed pest control and environmental services across Saudi Arabia, with eco-friendly treatments for homes, offices and commercial facilities."
+	)
 
 	about_page = frappe.get_cached_doc("Website About Page").as_dict()
 	context.about = get_language_row(about_page.get("content") or [])
@@ -36,7 +45,7 @@ def get_context(context):
 		{p.category for p in context.projects if p.category},
 		key=lambda c: c,
 	)
-	context.category_class = make_route
+	context.category_class = css_class_for
 	context.plans = get_translated_list(
 		"Website Pricing Plan",
 		filters={"published": 1},

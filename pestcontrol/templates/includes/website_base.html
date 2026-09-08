@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="{{ lang }}" dir="{{ 'rtl' if lang == 'ar' else 'ltr' }}">
+<html lang="{{ lang }}" dir="{{ 'rtl' if is_rtl() else 'ltr' }}">
 <head>
     {% include "pestcontrol/templates/includes/website_head.html" %}
-    <title>{% block title %}Skystar - {{ _("Environmental Services") }}{% endblock %}</title>
+    {#- context.title is set by each page's get_context(); frappe's MetaTags
+        mirrors it into og:title and twitter:title, so this is the single
+        source of truth for the page title in every language.
+        seo_page_title is that title plus the brand; context.title stays
+        brand-free because it also feeds og:title, where og:site_name already
+        supplies the brand and repeating it reads badly when shared. -#}
+    <title>{{ seo_page_title or title }}</title>
 </head>
 <body>
+    {%- if settings.gtm_container_id %}
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ settings.gtm_container_id }}"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {%- endif %}
     <a href="#main-content" class="skip-to-content">{{ _("Skip to main content") }}</a>
 
     <!-- Preloader Start -->

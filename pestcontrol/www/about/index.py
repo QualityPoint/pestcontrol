@@ -4,9 +4,18 @@ from frappe import _
 from pestcontrol.pc_website.utils import get_language_row, get_translated_list, get_website_context
 
 
+# Listed in /sitemap.xml. frappe's www sitemap only includes pages that
+# opt in with this module attribute (website/router.py load_properties_from_controller).
+sitemap = 1
+
+
 def get_context(context):
 	get_website_context(context)
 	context.no_cache = 1
+	context.title = _("About Us")
+	context.description = _(
+		"Learn about Skystar, our licensed pest control team, our eco-friendly methods and our commitment to protecting homes and businesses across Saudi Arabia."
+	)
 	context.page_h1 = _("About us")
 	context.breadcrumbs = [
 		{"label": _("home"), "route": ""},

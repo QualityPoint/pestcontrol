@@ -1429,3 +1429,43 @@ html[dir="rtl"] .careers-form select.form-control{
 		grid-template-columns: 1fr;
 	}
 }
+
+/* Hero slides after the first render their heading as .hero-heading rather
+   than <h1>: the swiper loops one block per slide, so every slide emitting an
+   <h1> left the home page with N primary headings and no single one. These
+   rules mirror .section-title h1 exactly (custom.css:99 base, :443 desktop,
+   :4508 <=991px, :5401 <=767px) so nothing moves visually. */
+.section-title .hero-heading{
+	display: block;
+	margin: 0;
+	font-weight: 700;
+	color: var(--primary-color);
+	font-size: 60px;
+	line-height: 1.1em;
+	letter-spacing: -0.02em;
+	margin-bottom: 0;
+	cursor: none;
+}
+
+@media only screen and (max-width: 991px){
+	.section-title .hero-heading{
+		font-size: 44px;
+	}
+}
+
+@media only screen and (max-width: 767px){
+	.section-title .hero-heading{
+		font-size: 26px;
+	}
+}
+
+/* Price was marked up as <h2> purely for its type scale, which put a heading
+   in the document outline for every pricing tier and pushed the real section
+   headings down a level. Same visual result, no outline damage. */
+.pricing-amount{
+	font-size: 34px;
+	font-weight: 700;
+	line-height: 1.2em;
+	color: var(--primary-color);
+	margin: 0;
+}

@@ -1,7 +1,5 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}{{ _("Pricing") }} | Skystar{% endblock %}
-
 {% block page_header %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
@@ -18,7 +16,10 @@
                         <!-- Pricing Header Start -->
                         <div class="pricing-header">
                             <h3>{{ localize(plan, "plan_name") }}</h3>
-                            <h2>${{ "%.2f"|format(plan.price) }}{{ "/" ~ plan.billing_period if plan.billing_period else "" }}</h2>
+                            {#- Currency comes from PC Website Settings, defaulting to SAR. It was a
+                                hardcoded "$" on a saudi site, which is both wrong on the page and
+                                would make the Offer/priceCurrency structured data contradict it. -#}
+                            <div class="pricing-amount">{{ frappe.utils.fmt_money(plan.price, currency=settings.currency or "SAR") }}{{ "/" ~ plan.billing_period if plan.billing_period else "" }}</div>
                         </div>
                         <!-- Pricing Header End -->
 

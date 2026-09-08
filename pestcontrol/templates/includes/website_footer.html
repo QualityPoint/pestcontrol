@@ -31,11 +31,11 @@
                     <div class="footer-links">
                         <h3>{{ _("Links") }}</h3>
                         <ul>
-                            <li><a href="/services">{{ _("Home Pest Control") }}</a></li>
-                            <li><a href="/services">{{ _("Commercial Pest") }}</a></li>
-                            <li><a href="/services">{{ _("Termite & Rodent") }}</a></li>
-                            <li><a href="/services">{{ _("Eco-Friendly Pest") }}</a></li>
-                            <li><a href="/services">{{ _("Wildlife Removal") }}</a></li>
+                            {%- for service in services_nav or [] %}
+                            <li><a href="/{{ service.route }}">{{ localize(service, "service_name") }}</a></li>
+                            {%- else %}
+                            <li><a href="/services">{{ _("Our services") }}</a></li>
+                            {%- endfor %}
                         </ul>
                     </div>
                     <!-- Footer Links End -->
