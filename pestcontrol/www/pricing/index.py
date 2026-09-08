@@ -1,4 +1,5 @@
 import frappe
+from frappe import _
 
 from pestcontrol.pc_website.utils import filter_by_language, get_translated_list, get_website_context
 
@@ -6,6 +7,11 @@ from pestcontrol.pc_website.utils import filter_by_language, get_translated_list
 def get_context(context):
 	get_website_context(context)
 	context.no_cache = 1
+	context.page_h1 = _("Pricing plan")
+	context.breadcrumbs = [
+		{"label": _("home"), "route": ""},
+		{"label": _("pricing"), "route": "pricing"},
+	]
 	context.plans = get_translated_list(
 		"Website Pricing Plan",
 		filters={"published": 1},

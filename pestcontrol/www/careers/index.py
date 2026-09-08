@@ -1,4 +1,5 @@
 import frappe
+from frappe import _
 
 from pestcontrol.pc_website.utils import get_website_context
 
@@ -13,6 +14,11 @@ def _default_currency():
 def get_context(context):
 	get_website_context(context)
 	context.no_cache = 1
+	context.page_h1 = _("Careers")
+	context.breadcrumbs = [
+		{"label": _("home"), "route": ""},
+		{"label": _("careers"), "route": "careers"},
+	]
 	# Positions offered on the careers form come straight from HRMS Job
 	# Openings — admins create them there, tick "Publish on website" (publish)
 	# and set Status = Open to make them selectable here. Same filter HRMS's

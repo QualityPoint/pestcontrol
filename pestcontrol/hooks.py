@@ -77,6 +77,15 @@ website_generators = [
 ]
 
 
+# Redirects
+# ---------
+
+# 301s for routes that have moved. Kept explicit rather than derived: a slug
+# only changes when someone renames a record, and the old URL has to keep
+# working for whatever already links to it.
+website_redirects = []
+
+
 # Fixtures
 # ----------
 

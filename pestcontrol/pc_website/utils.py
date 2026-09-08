@@ -248,17 +248,94 @@ def filter_by_language(rows):
 	return [r for r in rows if r.get("language") == "en"]
 
 
-def route_from_article(doc):
-	"""Return the English article row's title, used to auto-slug `route`."""
-	for row in doc.get("article") or []:
-		if row.language == "en" and row.title:
+# Approximate Arabic -> Latin transliteration, used only as a fallback when a
+# record has no Latin-script title at all. Deliberately lossy: the goal is a
+# stable, readable, unique-enough URL segment, not scholarly accuracy.
+_AR_TRANSLIT = {
+	"\u0627": "a", "\u0623": "a", "\u0625": "i", "\u0622": "a", "\u0628": "b",
+	"\u062a": "t", "\u062b": "th", "\u062c": "j", "\u062d": "h", "\u062e": "kh",
+	"\u062f": "d", "\u0630": "dh", "\u0631": "r", "\u0632": "z", "\u0633": "s",
+	"\u0634": "sh", "\u0635": "s", "\u0636": "d", "\u0637": "t", "\u0638": "z",
+	"\u0639": "a", "\u063a": "gh", "\u0641": "f", "\u0642": "q", "\u0643": "k",
+	"\u0644": "l", "\u0645": "m", "\u0646": "n", "\u0647": "h", "\u0648": "w",
+	"\u064a": "y", "\u0649": "a", "\u0629": "h", "\u0621": "", "\u0624": "w",
+	"\u0626": "y",
+}
+
+# Tashkeel (diacritics) and the tatweel elongation mark carry no lexical
+# meaning, so strip them first — otherwise the same word typed with and
+# without vowel marks would slug to two different routes.
+_AR_DIACRITICS = re.compile(r"[\u064b-\u065f\u0670\u0640]")
+
+
+def transliterate_ar(value):
+	"""Approximate Latin rendering of Arabic text, for route slugs."""
+	value = _AR_DIACRITICS.sub("", value or "")
+	return "".join(_AR_TRANSLIT.get(ch, ch) for ch in value)
+
+
+def route_from_article(doc, prefer="en"):
+	"""Title to slug a `route` from.
+
+	Prefers English so slugs stay Latin-script — readable in Search Console
+	and analytics, and safe to paste into chat — but falls back through the
+	remaining languages instead of returning None. A record whose only
+	article row was Arabic previously produced no route at all, which
+	silently left it with no public page."""
+	rows = doc.get("article") or []
+	for lang in (prefer, "en", "ar"):
+		for row in rows:
+			if row.get("language") == lang and row.get("title"):
+				return row.title
+	for row in rows:
+		if row.get("title"):
 			return row.title
 	return None
 
 
-def make_route(value):
-	"""Slugify `value` into a URL-safe route segment."""
-	return re.sub(r"[^a-z0-9]+", "-", (value or "").lower()).strip("-")
+def make_route(value, allow_unicode=False):
+	"""Slugify `value` into a URL-safe route segment.
+
+	`allow_unicode` keeps Arabic letters in the slug (percent-encoded once in
+	a URL). Off by default: percent-encoded Arabic is unreadable in Search
+	Console, mangles on copy-paste into chat apps, and the Arabic <title>,
+	<h1> and body copy already carry the keyword weight.
+
+	With it off, pure-Arabic input is transliterated rather than reduced to
+	"" — an empty slug used to collide every such record onto the same bare
+	"service/" route."""
+	value = _AR_DIACRITICS.sub("", (value or "").strip().lower())
+	if allow_unicode:
+		return re.sub(r"[^\w\u0600-\u06ff]+", "-", value, flags=re.UNICODE).strip("-")[:139]
+
+	slug = re.sub(r"[^a-z0-9]+", "-", value).strip("-")
+	if not slug:
+		slug = re.sub(r"[^a-z0-9]+", "-", transliterate_ar(value)).strip("-")
+	return slug[:139]
+
+
+def apply_generator_route(doc, prefix, title=None):
+	"""Set `route` and `page_title` on a WebsiteGenerator.
+
+	Call this from validate(), before super().validate() — not from
+	before_save(). Frappe runs validate() first, so
+	WebsiteGenerator.set_route() (which super().validate() invokes) would
+	otherwise get there first and generate a bare, un-prefixed slug of its
+	own.
+
+	`page_title` exists because none of these doctypes has a title-ish field
+	of its own — the human-readable text lives in the `article` child rows —
+	so frappe's get_title_field() falls through to `name`. For the
+	autoname:hash doctypes that means a random hash gets indexed as the
+	page's title in Website Search Index."""
+	title = title or route_from_article(doc)
+	if not doc.route:
+		# Always namespace under `prefix`, even with nothing to slug from: a
+		# published record with no article rows would otherwise fall through
+		# to WebsiteGenerator.set_route(), which mints a bare un-prefixed
+		# slug of the docname at the site root.
+		doc.route = f"{prefix}/{make_route(title) or doc.name.lower()}"
+	doc.page_title = title or doc.name
 
 
 def validate_unique_language(doc, fieldname="article"):

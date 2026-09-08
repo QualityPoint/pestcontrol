@@ -10,6 +10,7 @@
  "field_order": [
   "member_name",
   "route",
+  "page_title",
   "photo",
   "header_image",
   "section_break_wtmd",
@@ -37,6 +38,14 @@
    "fieldname": "route",
    "fieldtype": "Data",
    "label": "Route"
+  },
+  {
+   "description": "Auto-filled from the English article title. Used as the page title in Frappe's website search index.",
+   "fieldname": "page_title",
+   "fieldtype": "Data",
+   "label": "Page Title",
+   "no_copy": 1,
+   "read_only": 1
   },
   {
    "fieldname": "photo",
@@ -120,7 +129,7 @@
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2026-08-29 16:00:00.000000",
+ "modified": "2026-09-07 00:00:00.000000",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Team Member",

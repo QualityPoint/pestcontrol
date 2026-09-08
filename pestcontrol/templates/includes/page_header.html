@@ -1,4 +1,9 @@
     <!-- Page Header Start -->
+    {#- `breadcrumbs` comes from the page's get_context() as a list of
+        {label, route} dicts, last entry being the current page. It lives in
+        python rather than a template-local {% set %} so the same list can
+        drive both this visible trail and the BreadcrumbList JSON-LD --
+        Google requires the two to match. -#}
     {%- set page_header_bg = page_header_image | default(settings.page_header_background, true) -%}
     <div class="page-header parallaxie"{% if page_header_bg %} style="background-image: url('{{ page_header_bg }}');"{% endif %}>
         <div class="container">
@@ -7,12 +12,19 @@
                     <!-- Page Header Box Start -->
                     <div class="page-header-box">
                         <h1 class="text-anime-style-2" data-cursor="-opaque">{{ page_h1 }}</h1>
-                        <nav class="wow fadeInUp">
+                        {%- if breadcrumbs %}
+                        <nav class="wow fadeInUp" aria-label="{{ _('Breadcrumb') }}">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">{{ _("home") }}</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{ page_breadcrumb }}</li>
+                                {%- for crumb in breadcrumbs %}
+                                {%- if loop.last %}
+                                <li class="breadcrumb-item active" aria-current="page">{{ crumb.label }}</li>
+                                {%- else %}
+                                <li class="breadcrumb-item"><a href="/{{ crumb.route }}">{{ crumb.label }}</a></li>
+                                {%- endif %}
+                                {%- endfor %}
                             </ol>
                         </nav>
+                        {%- endif %}
                     </div>
                     <!-- Page Header Box End -->
                 </div>

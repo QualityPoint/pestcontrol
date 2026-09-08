@@ -5,25 +5,24 @@ import frappe
 from frappe.website.website_generator import WebsiteGenerator
 
 from pestcontrol.pc_website.utils import (
+	apply_generator_route,
 	attach_articles,
 	get_website_context,
-	make_route,
-	route_from_article,
 	validate_articles,
 )
 
 
 class WebsiteBlogPost(WebsiteGenerator):
-	website = frappe._dict(template="pestcontrol/templates/generators/website_blog_post.html")
+	website = frappe._dict(
+		template="pestcontrol/templates/generators/website_blog_post.html",
+		page_title_field="page_title",
+		condition_field="published",
+	)
 
 	def validate(self):
 		validate_articles(self)
-
-	def before_save(self):
-		if not self.route:
-			title = route_from_article(self)
-			if title:
-				self.route = f"blog/{make_route(title)}"
+		apply_generator_route(self, "blog")
+		super().validate()
 
 	def get_context(self, context):
 		get_website_context(context)

@@ -1,4 +1,5 @@
 import frappe
+from frappe import _
 
 from pestcontrol.pc_website.utils import get_language_row, get_translated_list, get_website_context
 
@@ -6,6 +7,11 @@ from pestcontrol.pc_website.utils import get_language_row, get_translated_list, 
 def get_context(context):
 	get_website_context(context)
 	context.no_cache = 1
+	context.page_h1 = _("About us")
+	context.breadcrumbs = [
+		{"label": _("home"), "route": ""},
+		{"label": _("about us"), "route": "about"},
+	]
 
 	about_page = frappe.get_cached_doc("Website About Page").as_dict()
 	context.about = get_language_row(about_page.get("content") or [])

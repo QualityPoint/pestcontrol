@@ -1,9 +1,16 @@
+from frappe import _
+
 from pestcontrol.pc_website.utils import get_translated_list, get_website_context, make_route
 
 
 def get_context(context):
 	get_website_context(context)
 	context.no_cache = 1
+	context.page_h1 = _("Our blog")
+	context.breadcrumbs = [
+		{"label": _("home"), "route": ""},
+		{"label": _("blog"), "route": "blog"},
+	]
 	context.blog_posts = get_translated_list(
 		"Website Blog Post",
 		filters={"published": 1},
