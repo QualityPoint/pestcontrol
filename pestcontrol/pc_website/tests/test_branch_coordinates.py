@@ -47,9 +47,12 @@ class TestBranchCoordinates(FrappeTestCase):
 
 	def test_unrecognised_url_leaves_fields_untouched(self):
 		"""A guess would put the business at the wrong address."""
-		for url in ("https://maps.app.goo.gl/abc123",
-		            "https://www.google.com/maps/place/Riyadh",
-		            "not a url at all", ""):
+		for url in (
+			"https://maps.app.goo.gl/abc123",
+			"https://www.google.com/maps/place/Riyadh",
+			"not a url at all",
+			"",
+		):
 			with self.subTest(url=url):
 				branch = _branch(map_embed_url=url)
 				branch.set_coordinates_from_map_url()

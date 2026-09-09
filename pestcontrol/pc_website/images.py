@@ -28,9 +28,18 @@ MAX_EDGE = 1600
 # Only content that ends up on the public website. An invoice attachment or a
 # scanned document has no business being silently resized.
 WEBSITE_DOCTYPES = {
-	"PC Website Settings", "Website Service", "Website Project", "Website Blog Post",
-	"Website Pest", "Website Team Member", "Website Branch", "Website Hero Slide",
-	"Website Gallery Item", "Website Testimonial", "Website City", "Website Article",
+	"PC Website Settings",
+	"Website Service",
+	"Website Project",
+	"Website Blog Post",
+	"Website Pest",
+	"Website Team Member",
+	"Website Branch",
+	"Website Hero Slide",
+	"Website Gallery Item",
+	"Website Testimonial",
+	"Website City",
+	"Website Article",
 }
 
 

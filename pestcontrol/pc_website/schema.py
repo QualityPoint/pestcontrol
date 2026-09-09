@@ -30,8 +30,15 @@ from pestcontrol.pc_website.utils import article_value, localize
 # to connect the site to the same entity elsewhere; it is the strongest signal
 # available without a Knowledge Panel.
 SOCIAL_FIELDS = (
-	"google_business_profile_url", "instagram_url", "facebook_url", "twitter_url",
-	"linkedin_url", "youtube_url", "tiktok_url", "snapchat_url", "linktree_url",
+	"google_business_profile_url",
+	"instagram_url",
+	"facebook_url",
+	"twitter_url",
+	"linkedin_url",
+	"youtube_url",
+	"tiktok_url",
+	"snapchat_url",
+	"linktree_url",
 )
 
 # Pages that may carry LocalBusiness. Never site-wide: google flags a business
@@ -99,10 +106,10 @@ def _contact_point(settings):
 		point["telephone"] = phone
 	if email := settings.get("email"):
 		point["email"] = email
-	point["areaServed"] = (settings.get("country") or "SA")
+	point["areaServed"] = settings.get("country") or "SA"
 	point["availableLanguage"] = [
-		row["code"] for row in (frappe.get_all("Language", filters={"enabled": 1},
-		                                       fields=["name as code"]) or [])
+		row["code"]
+		for row in (frappe.get_all("Language", filters={"enabled": 1}, fields=["name as code"]) or [])
 	]
 	return point
 
@@ -158,12 +165,14 @@ def _breadcrumb(context, base):
 	items = []
 	for position, crumb in enumerate(crumbs, start=1):
 		route = (crumb.get("route") or "").strip("/")
-		items.append({
-			"@type": "ListItem",
-			"position": position,
-			"name": crumb.get("label"),
-			"item": f"{base}{prefix}/{route}" if route else f"{base}{prefix}/",
-		})
+		items.append(
+			{
+				"@type": "ListItem",
+				"position": position,
+				"name": crumb.get("label"),
+				"item": f"{base}{prefix}/{route}" if route else f"{base}{prefix}/",
+			}
+		)
 	return {"@type": "BreadcrumbList", "@id": f"{canonical}#breadcrumb", "itemListElement": items}
 
 

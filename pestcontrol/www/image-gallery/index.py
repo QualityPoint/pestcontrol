@@ -2,7 +2,6 @@ from frappe import _
 
 from pestcontrol.pc_website.utils import get_translated_list, get_website_context
 
-
 # Listed in /sitemap.xml. frappe's www sitemap only includes pages that
 # opt in with this module attribute (website/router.py load_properties_from_controller).
 sitemap = 1

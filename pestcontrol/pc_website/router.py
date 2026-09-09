@@ -30,19 +30,42 @@ from pestcontrol.pc_website.utils import get_site_languages
 # The portal cluster is NOT listed here -- it is derived from the site's own
 # website_route_rules in _reserved_roots(), so an erpnext upgrade that adds a
 # portal route does not silently start prefixing it.
-FRAMEWORK_ROOTS = frozenset((
-	"app", "api", "assets", "files", "private", "backups", "socketio",
-	"printview", "print", "method", "login", "update-password", "signup",
-	"verify-email", "third_party", ".well-known", "desk",
-	# The customer portal and /me are plain www pages rather than route
-	# rules, so _claimed_roots() never sees them. erpnext's ListPage forces
-	# app="frappe" for the portal cluster, and none of it is content a search
-	# engine should be reaching in the first place.
-	"portal", "me",
-))
-RESERVED_EXACT = frozenset((
-	"sitemap.xml", "robots.txt", "favicon.ico", "manifest.json", "website_script.js",
-))
+FRAMEWORK_ROOTS = frozenset(
+	(
+		"app",
+		"api",
+		"assets",
+		"files",
+		"private",
+		"backups",
+		"socketio",
+		"printview",
+		"print",
+		"method",
+		"login",
+		"update-password",
+		"signup",
+		"verify-email",
+		"third_party",
+		".well-known",
+		"desk",
+		# The customer portal and /me are plain www pages rather than route
+		# rules, so _claimed_roots() never sees them. erpnext's ListPage forces
+		# app="frappe" for the portal cluster, and none of it is content a search
+		# engine should be reaching in the first place.
+		"portal",
+		"me",
+	)
+)
+RESERVED_EXACT = frozenset(
+	(
+		"sitemap.xml",
+		"robots.txt",
+		"favicon.ico",
+		"manifest.json",
+		"website_script.js",
+	)
+)
 
 
 def resolve(path):
@@ -61,7 +84,7 @@ def resolve(path):
 	languages = {row["code"] for row in get_site_languages()}
 
 	if first in languages:
-		rest = path[len(first):].strip("/")
+		rest = path[len(first) :].strip("/")
 		frappe.local.lang = first
 		frappe.local.pc_lang = first
 		frappe.local.pc_prefix = "/" + first

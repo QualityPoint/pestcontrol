@@ -248,9 +248,7 @@ def attach_articles(doctype, items):
 	)
 	by_parent = {}
 	for row in rows:
-		by_parent.setdefault(row.parent, {})[row.language] = {
-			field: row.get(field) for field in fields
-		}
+		by_parent.setdefault(row.parent, {})[row.language] = {field: row.get(field) for field in fields}
 
 	for item in items:
 		# attribute assignment, not bracket assignment: `item` may be a real

@@ -23,13 +23,13 @@ from frappe.www.sitemap import get_public_pages_from_doctypes
 
 from pestcontrol.pc_website.utils import get_site_languages
 
-
 no_cache = 1
 base_template_path = "www/sitemap.xml"
 
 # Real pages, but nothing a search engine should be indexing.
-EXCLUDE = frozenset(("404", "account/login", "account/signup", "me", "portal",
-                     "sitemap.xml", "robots.txt", "index"))
+EXCLUDE = frozenset(
+	("404", "account/login", "account/signup", "me", "portal", "sitemap.xml", "robots.txt", "index")
+)
 
 
 def get_context(context):
@@ -64,11 +64,13 @@ def get_context(context):
 		# google requires the annotations to be reciprocal, so every version
 		# has to list every version including itself.
 		for lang in languages:
-			links.append({
-				"loc": _abs(base, path, lang),
-				"lastmod": lastmod,
-				"alternates": alternates,
-			})
+			links.append(
+				{
+					"loc": _abs(base, path, lang),
+					"lastmod": lastmod,
+					"alternates": alternates,
+				}
+			)
 	return {"links": links}
 
 

@@ -37,13 +37,19 @@ class TestLanguageRouter(FrappeTestCase):
 
 	def test_framework_paths_pass_through_unchanged(self):
 		"""A redirect here would break the desk and the API."""
-		for path in ("app", "app/website-service", "api/method/ping",
-		             "assets/pestcontrol/website/css/custom.css",
-		             "files/example.png", "private/files/x.png", "login"):
+		for path in (
+			"app",
+			"app/website-service",
+			"api/method/ping",
+			"assets/pestcontrol/website/css/custom.css",
+			"files/example.png",
+			"private/files/x.png",
+			"login",
+		):
 			with self.subTest(path=path):
 				_bind(path)
 				try:
-					resolve(path)          # must not raise Redirect
+					resolve(path)  # must not raise Redirect
 				except frappe.Redirect:
 					self.fail(f"/{path} was redirected; the desk or API would break")
 				self.assertEqual(frappe.local.pc_prefix, "")
@@ -155,8 +161,7 @@ class TestLanguageRouter(FrappeTestCase):
 			("ar/api/method/ping", "/api/method/ping"),
 			("en/portal", "/portal"),
 			("ar/orders", "/orders"),
-			("en/assets/pestcontrol/website/css/custom.css",
-			 "/assets/pestcontrol/website/css/custom.css"),
+			("en/assets/pestcontrol/website/css/custom.css", "/assets/pestcontrol/website/css/custom.css"),
 		):
 			with self.subTest(path=path):
 				_bind(path)
@@ -173,7 +178,8 @@ class TestLanguageRouter(FrappeTestCase):
 			self.fail("a missing page under a prefix must 404, not redirect")
 
 	def _default(self):
-		langs = {r["code"] for r in frappe.get_all("Language", filters={"enabled": 1},
-		                                           fields=["name as code"])}
+		langs = {
+			r["code"] for r in frappe.get_all("Language", filters={"enabled": 1}, fields=["name as code"])
+		}
 		configured = frappe.db.get_single_value("PC Website Settings", "default_language")
 		return configured if configured in langs else "en"

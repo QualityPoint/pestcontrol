@@ -27,11 +27,28 @@ from pestcontrol.pc_website.utils import article_value, get_site_languages, loca
 # First path segment that is not a public marketing page. The desk, the API
 # and the customer portal must never get marketing metadata, and the
 # machine-readable files must not get any at all.
-SKIP_PREFIXES = frozenset((
-	"app", "api", "assets", "files", "private", "backups", "socketio", "printview",
-	"login", "update-password", "third_party",
-	"portal", "me", "orders", "quotations", "invoices", "addresses", "shipments",
-))
+SKIP_PREFIXES = frozenset(
+	(
+		"app",
+		"api",
+		"assets",
+		"files",
+		"private",
+		"backups",
+		"socketio",
+		"printview",
+		"login",
+		"update-password",
+		"third_party",
+		"portal",
+		"me",
+		"orders",
+		"quotations",
+		"invoices",
+		"addresses",
+		"shipments",
+	)
+)
 SKIP_EXACT = frozenset(("sitemap.xml", "robots.txt", "favicon.ico", "website_script.js"))
 
 # Where to look for a share image on a generator document, best first.
@@ -211,15 +228,10 @@ def _alternates(settings, path):
 	languages = [row["code"] for row in get_site_languages()]
 	if len(languages) < 2:
 		return []
-	alternates = [
-		frappe._dict(lang=code, href=_abs(settings, path, code), label=code)
-		for code in languages
-	]
+	alternates = [frappe._dict(lang=code, href=_abs(settings, path, code), label=code) for code in languages]
 	default = settings.get("default_language")
 	if default in languages:
-		alternates.append(
-			frappe._dict(lang="x-default", href=_abs(settings, path, default), label=default)
-		)
+		alternates.append(frappe._dict(lang="x-default", href=_abs(settings, path, default), label=default))
 	return alternates
 
 
