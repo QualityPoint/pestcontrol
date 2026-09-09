@@ -193,13 +193,29 @@ after_install = "pestcontrol.install.after_install"
 # -----------
 # Permissions evaluated in scripted ways
 
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+# Visit Request grants the Customer role a direct DocPerm, which is
+# doctype-wide on its own -- every self-registered website user gets that role
+# (it is Portal Settings.default_role), so without these three hooks any
+# registered visitor can read every customer's visit requests. See
+# pc_operation/permissions.py for why all three are needed rather than one.
+
+# Filters lists: the portal, /api/resource/Visit Request, search.
+permission_query_conditions = {
+	"Visit Request": "pestcontrol.pc_operation.permissions.visit_request_query",
+}
+
+# Covers a single document fetched by name, which query conditions never see.
+has_permission = {
+	"Visit Request": "pestcontrol.pc_operation.permissions.visit_request_has_permission",
+}
+
+# Frappe's has_website_permission() returns False when no hook is registered,
+# so the portal's own detail view would refuse a customer their own record.
+# ERPNext's implementation is generic -- get_customer_field_name() returns
+# "customer" for everything that is not a Quotation -- so it fits unchanged.
+has_website_permission = {
+	"Visit Request": "erpnext.controllers.website_list_for_contact.has_website_permission",
+}
 
 # DocType Class
 # ---------------

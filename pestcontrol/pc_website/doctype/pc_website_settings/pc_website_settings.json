@@ -7,6 +7,8 @@
  "field_order": [
   "login_page_tab",
   "auth_background_image",
+  "accounts_section",
+  "require_email_verification",
   "brand_tab",
   "site_name",
   "column_break_wsbr",
@@ -75,6 +77,18 @@
    "fieldname": "auth_background_image",
    "fieldtype": "Attach Image",
    "label": "Background Image"
+  },
+  {
+   "fieldname": "accounts_section",
+   "fieldtype": "Section Break",
+   "label": "Accounts"
+  },
+  {
+   "default": "0",
+   "description": "Require a new account to confirm its email address before it can be used. Leave off until a real outgoing Email Account is configured -- with none, no verification message is ever sent and every new account is locked out.",
+   "fieldname": "require_email_verification",
+   "fieldtype": "Check",
+   "label": "Require Email Verification"
   },
   {
    "fieldname": "brand_tab",
