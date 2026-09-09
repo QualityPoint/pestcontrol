@@ -1,0 +1,18 @@
+{#- Floating WhatsApp action.
+
+    Most visitors arrive on mobile, and in this market whatsapp is the default
+    way to reach a business. A number only helps at the moment a visitor
+    happens to scroll past one; this stays thumb-reachable on every page.
+
+    It complements the tel: links rather than replacing them -- an urgent
+    infestation wants a call, while a quote request is better in writing,
+    where the customer can send a photo of the pest for identification.
+
+    Renders nothing when no whatsapp number is configured. -#}
+{%- set wa = whatsapp_url(_("Hello, I would like to ask about your pest control services.")) %}
+{%- if wa %}
+<a href="{{ wa }}" class="whatsapp-float" target="_blank" rel="noopener noreferrer"
+   aria-label="{{ _('Chat with us on WhatsApp') }}">
+	<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+</a>
+{%- endif %}

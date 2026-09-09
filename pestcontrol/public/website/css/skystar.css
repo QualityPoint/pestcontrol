@@ -1477,3 +1477,63 @@ html[dir="rtl"] .careers-form select.form-control{
 	font-size: 0.9em;
 	white-space: nowrap;
 }
+
+/* Floating WhatsApp action.
+
+   `inset-inline-end` rather than `right` so it sits on the correct edge in
+   both directions without a mirrored rule -- same approach as .a11y-panel
+   above. z-index stays under the accessibility backdrop (9997) so opening
+   that drawer covers this rather than leaving it floating on top. */
+.whatsapp-float{
+	position: fixed;
+	inset-inline-end: 20px;
+	bottom: 20px;
+	z-index: 9990;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* 56px: comfortably above the 44px minimum touch target, and the size
+	   people already expect from a floating action button. */
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	background: #25D366;
+	color: #fff;
+	font-size: 30px;
+	line-height: 1;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+	transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.whatsapp-float:hover,
+.whatsapp-float:focus-visible{
+	color: #fff;
+	transform: scale(1.08);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.whatsapp-float:focus-visible{
+	outline: 3px solid #fff;
+	outline-offset: 3px;
+}
+
+/* Honour both the OS setting and the site's own reduce-motion preference. */
+@media (prefers-reduced-motion: reduce){
+	.whatsapp-float{ transition: none; }
+	.whatsapp-float:hover,
+	.whatsapp-float:focus-visible{ transform: none; }
+}
+
+html.a11y-reduce-motion .whatsapp-float{ transition: none; }
+html.a11y-reduce-motion .whatsapp-float:hover,
+html.a11y-reduce-motion .whatsapp-float:focus-visible{ transform: none; }
+
+@media only screen and (max-width: 575px){
+	.whatsapp-float{
+		inset-inline-end: 14px;
+		bottom: 14px;
+		width: 52px;
+		height: 52px;
+		font-size: 28px;
+	}
+}

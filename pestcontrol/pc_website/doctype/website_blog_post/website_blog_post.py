@@ -33,3 +33,15 @@ class WebsiteBlogPost(WebsiteGenerator):
 		# back to get_title_field() -> "name", which is a hash for this
 		# autoname:hash doctype, and the page title becomes the hash.
 		context.title = localize(self, "title")
+
+	def before_save(self):
+		# set the title field from the first row title field in content child table
+		if self.article and self.article[0].title:
+			self.title = self.article[0].title
+
+	def genrateRoute(self):
+		# I wanna generate the route from the first row title field in content child table and Take into consideration language and localization
+		if self.article and self.article[0].title:
+			title = self.article[0].title
+			# Generate the route based on the title and language
+			self.route = f"blog/{self.scrub(title)}"
