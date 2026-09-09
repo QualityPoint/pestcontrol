@@ -21,6 +21,7 @@ import frappe
 from frappe.utils import get_url, strip_html
 from frappe.website.utils import get_home_page
 
+from pestcontrol.pc_website.schema import build_graph
 from pestcontrol.pc_website.utils import article_value, get_site_languages, localize
 
 # First path segment that is not a public marketing page. The desk, the API
@@ -110,6 +111,10 @@ def build_seo_context(context):
 	if handle := settings.get("twitter_handle"):
 		tags["twitter:site"] = handle
 	tags["robots"] = _robots(context)
+
+	# Built last: the graph reuses the title, description, image and
+	# canonical settled above, so every @id matches the canonical URL.
+	context.jsonld = build_graph(context)
 
 
 def _with_brand(title, settings):

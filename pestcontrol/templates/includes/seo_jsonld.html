@@ -1,0 +1,11 @@
+{#- structured data, built in pc_website/schema.py.
+
+    Serialised with frappe's `tojson`, never string-concatenated: the content
+    is admin-written arabic prose, and one unescaped quote in a meta
+    description would break the whole block silently.
+
+    Rendered at the end of <body> rather than in <head> -- it is not
+    render-critical, and crawlers parse it wherever it appears. -#}
+{%- if jsonld %}
+<script type="application/ld+json">{{ {"@context": "https://schema.org", "@graph": jsonld} | tojson }}</script>
+{%- endif %}

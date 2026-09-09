@@ -1,0 +1,55 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-08 13:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "day_of_week",
+  "is_closed",
+  "opens",
+  "closes"
+ ],
+ "fields": [
+  {
+   "fieldname": "day_of_week",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Day",
+   "options": "Monday\nTuesday\nWednesday\nThursday\nFriday\nSaturday\nSunday",
+   "reqd": 1
+  },
+  {
+   "fieldname": "is_closed",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Closed"
+  },
+  {
+   "depends_on": "eval:!doc.is_closed",
+   "fieldname": "opens",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Opens"
+  },
+  {
+   "depends_on": "eval:!doc.is_closed",
+   "fieldname": "closes",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Closes"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-09-08 13:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "PC Website",
+ "name": "Website Opening Hours",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

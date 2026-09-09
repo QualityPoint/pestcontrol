@@ -147,7 +147,7 @@
                         <!-- About Us Image Start -->
                         <div class="about-us-image">
                             <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/about-us-real.webp" alt="">
+                                <img src="/assets/pestcontrol/website/images/about-us-real.webp" alt="{{ _('Skystar technicians preparing equipment before a pest control visit') }}">
                             </figure>
                         </div>
                         <!-- About Us Image End -->
@@ -155,7 +155,7 @@
                         <!-- About Us Circle Image Start -->
                         <div class="about-us-circle-img-1">
                             <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/about-circle-real-1.webp" alt="">
+                                <img src="/assets/pestcontrol/website/images/about-circle-real-1.webp" alt="{{ _('A Skystar technician in protective gear treating a property') }}">
                             </figure>
                         </div>
                         <!-- About Us Circle Image End -->
@@ -163,7 +163,7 @@
                         <!-- About Us Circle Image Start -->
                         <div class="about-us-circle-img-2">
                             <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/about-circle-real-2.webp" alt="">
+                                <img src="/assets/pestcontrol/website/images/about-circle-real-2.webp" alt="{{ _('Close-up of professional pest control spraying equipment') }}">
                             </figure>
                         </div>
                         <!-- About Us Circle Image End -->
@@ -198,7 +198,7 @@
 
                             <div class="about-us-video-image wow fadeInUp" data-wow-delay="0.4s">
                                 <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/about-video-real.webp" alt="">
+                                    <img src="/assets/pestcontrol/website/images/about-video-real.webp" alt="{{ _('Skystar team at work — play the company video') }}">
                                 </figure>
 
                                 <!-- Video Play Button Start -->
@@ -215,7 +215,7 @@
                         <div class="about-counter-list">
                             <!-- About Counter Item Start -->
                             <div class="about-counter-item">
-                               <h2><span class="counter">{{ settings.years_experience or 0 }}</span>+</h2>
+                               <h2 role="presentation"><span class="counter">{{ settings.years_experience or 0 }}</span>+</h2>
                                <p>{{ _("Years Of Experience") }}</p>
                             </div>
                             <!-- About Counter Item End -->
@@ -229,14 +229,14 @@
 
                             <!-- About Counter Item Start -->
                             <div class="about-counter-item">
-                                <h2><span class="counter">{{ settings.team_size or 0 }}</span></h2>
+                                <h2 role="presentation"><span class="counter">{{ settings.team_size or 0 }}</span></h2>
                                 <p>{{ _("Dedicated Team") }}</p>
                             </div>
                             <!-- About Counter Item End -->
 
                             <!-- About Counter Item Start -->
                             <div class="about-counter-item">
-                                <h2><span class="counter">{{ settings.satisfaction_rate or 0 }}</span>%</h2>
+                                <h2 role="presentation"><span class="counter">{{ settings.satisfaction_rate or 0 }}</span>%</h2>
                                 <p>{{ _("Happy Customers") }}</p>
                             </div>
                             <!-- About Counter Item End -->
@@ -395,7 +395,7 @@
                     <!-- Features Image Start -->
                     <div class="features-image">
                         <figure class="image-anime reveal">
-                            <img src="/assets/pestcontrol/website/images/features-real.webp" alt="">
+                            <img src="/assets/pestcontrol/website/images/features-real.webp" alt="{{ _('Skystar technician servicing a commercial kitchen') }}">
                         </figure>
 
                         <!-- Contact Us Circle Start -->
@@ -646,7 +646,7 @@
                         <!-- Faqs Image 1 Start -->
                         <div class="faqs-img-1">
                             <figure class="image-anime reveal">
-                                <img src="/assets/pestcontrol/website/images/faqs-real-1.webp" alt="">
+                                <img src="/assets/pestcontrol/website/images/faqs-real-1.webp" alt="{{ _('Technician answering a customer\'s questions on site') }}">
                             </figure>
                         </div>
                         <!-- Faqs Image 1 End -->
@@ -654,7 +654,7 @@
                         <!-- Faqs Image 2 Start -->
                         <div class="faqs-img-2">
                             <figure class="image-anime reveal">
-                                <img src="/assets/pestcontrol/website/images/faqs-real-2.webp" alt="">
+                                <img src="/assets/pestcontrol/website/images/faqs-real-2.webp" alt="{{ _('Pest control equipment laid out before a treatment') }}">
                             </figure>
                         </div>
                         <!-- Faqs Image 2 End -->
@@ -662,7 +662,7 @@
                         <!-- Faqs Image 3 Start -->
                         <div class="faqs-img-3">
                             <figure class="image-anime reveal">
-                                <img src="/assets/pestcontrol/website/images/faqs-real-3.webp" alt="">
+                                <img src="/assets/pestcontrol/website/images/faqs-real-3.webp" alt="{{ _('Skystar van parked outside a customer\'s property') }}">
                             </figure>
                         </div>
                         <!-- Faqs Image 3 End -->
@@ -685,11 +685,11 @@
                             {% for faq in faqs %}
                             <!-- FAQ Item Start -->
                             <div class="accordion-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
-                                <h2 class="accordion-header" id="heading{{ loop.index }}">
+                                <h3 class="accordion-header" id="heading{{ loop.index }}">
                                     <button class="accordion-button{{ '' if loop.first else ' collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="collapse{{ loop.index }}">
                                         {{ loop.index }}. {{ localize(faq, "question") }}
                                     </button>
-                                </h2>
+                                </h3>
                                 <div id="collapse{{ loop.index }}" class="accordion-collapse collapse{{ ' show' if loop.first else '' }}" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#accordion">
                                     <div class="accordion-body">
                                         <p>{{ localize(faq, "answer") }}</p>
@@ -771,7 +771,7 @@
                 <div class="col-lg-7 col-md-6 order-md-1 order-2">
                     <!-- CTA Box Image Start -->
                     <div class="cta-box-image">
-                        <img src="/assets/pestcontrol/website/images/cta-box-real.webp" alt="">
+                        <img src="/assets/pestcontrol/website/images/cta-box-real.webp" alt="{{ _('Skystar technician ready for a scheduled pest control visit') }}">
                     </div>
                     <!-- CTA Box Image End -->
                 </div>
