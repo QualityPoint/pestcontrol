@@ -31,12 +31,12 @@
                             <div class="project-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                                 <div class="project-image">
                                     <figure>
-                                        <img src="{{ project.image }}" alt="{{ localize(project, 'project_name') }}">
+                                        <img src="{{ project.image }}" alt="{{ localize(project, 'project_name') }}" loading="lazy" decoding="async">
                                     </figure>
                                 </div>
                                 <div class="project-content">
                                     <h3>{{ localize(project, "project_name") }}</h3>
-                                    <a href="{{ u('/' ~ project.route) }}"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
+                                    <a href="{{ u('/' ~ project.route) }}"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt="" loading="lazy" decoding="async"></a>
                                 </div>
                             </div>
                             <!-- Project Item End -->

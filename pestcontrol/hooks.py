@@ -101,6 +101,18 @@ update_website_context = "pestcontrol.pc_website.seo.build_seo_context"
 # fully disables it.
 website_path_resolver = "pestcontrol.pc_website.router.resolve"
 
+# Document Events
+# ---------------
+
+# Frappe never optimises uploads -- optimize_file() exists but nothing calls
+# it -- so images attached to website content arrive at whatever resolution
+# the camera produced. See pc_website/images.py.
+doc_events = {
+	"File": {
+		"after_insert": "pestcontrol.pc_website.images.optimize_website_upload",
+	},
+}
+
 
 # Fixtures
 # ----------

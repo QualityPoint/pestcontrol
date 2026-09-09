@@ -72,6 +72,18 @@ def resolve(path):
 			# logged-in customer to the portal -- but this is the indexable
 			# homepage, and it must show a crawler what it shows a person.
 			return (frappe.get_hooks("home_page") or ["home"])[-1]
+
+		if _is_reserved(rest, rest.split("/", 1)[0].lower()):
+			# A reserved path wearing a language prefix: /en/desk, /ar/orders,
+			# /en/api/method/ping. Nothing links to these, but they are
+			# reachable by hand and by a crawler following a mangled link, and
+			# serving them would mint a second URL for every framework and
+			# portal page. /en/desk also breaks outright, because frappe's own
+			# desk shortcut runs before this hook and only matches a bare
+			# "desk". Send them to the one place they belong.
+			frappe.flags.redirect_location = "/" + rest + _query_suffix()
+			raise frappe.Redirect(301)
+
 		return _delegate(rest)
 
 	# Unprefixed public path: send it to a language prefix, permanently.

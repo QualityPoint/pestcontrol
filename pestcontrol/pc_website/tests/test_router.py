@@ -140,6 +140,30 @@ class TestLanguageRouter(FrappeTestCase):
 		self.assertEqual(resolve(f"ar/{route}"), route)
 		self.assertEqual(frappe.local.lang, "ar")
 
+	def test_reserved_path_under_a_prefix_redirects_away(self):
+		"""/en/desk and friends must not become second URLs for framework pages.
+
+		Regression: the prefix was stripped and the remainder delegated without
+		re-checking it, so /en/app, /ar/orders and /en/api/... were all served
+		under a language prefix. /en/desk broke outright, because frappe's own
+		desk shortcut runs before this hook and only matches a bare "desk".
+		"""
+		for path, expected in (
+			("en/desk", "/desk"),
+			("ar/desk", "/desk"),
+			("en/app", "/app"),
+			("ar/api/method/ping", "/api/method/ping"),
+			("en/portal", "/portal"),
+			("ar/orders", "/orders"),
+			("en/assets/pestcontrol/website/css/custom.css",
+			 "/assets/pestcontrol/website/css/custom.css"),
+		):
+			with self.subTest(path=path):
+				_bind(path)
+				with self.assertRaises(frappe.Redirect):
+					resolve(path)
+				self.assertEqual(frappe.flags.redirect_location, expected)
+
 	def test_unknown_prefixed_path_is_not_redirected(self):
 		"""It should 404 through the normal renderers, not bounce."""
 		_bind("ar/does-not-exist")

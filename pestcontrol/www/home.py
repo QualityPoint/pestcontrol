@@ -19,6 +19,12 @@ sitemap = 1
 def get_context(context):
 	get_website_context(context)
 	context.no_cache = 1
+	# The first hero slide is this page's LCP element. It sits inside a swiper
+	# deep in the body, so without a preload the browser does not discover it
+	# until it has parsed most of the document.
+	context.preload_image = next(
+		(s.background_image for s in context.hero_slides if s.background_image), None
+	)
 	context.title = _("Environmental Services")
 	context.description = _(
 		"Skystar provides licensed pest control and environmental services across Saudi Arabia, with eco-friendly treatments for homes, offices and commercial facilities."

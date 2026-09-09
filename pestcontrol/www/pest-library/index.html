@@ -32,7 +32,7 @@
                                 <div class="post-featured-image">
                                     <a href="{{ u('/' ~ pest.route) }}" data-cursor-text="View">
                                         <figure class="image-anime">
-                                            <img src="{{ pest.cover_image }}" alt="{{ localize(pest, 'pest_name') }}">
+                                            <img src="{{ pest.cover_image }}" alt="{{ localize(pest, 'pest_name') }}" loading="lazy" decoding="async">
                                         </figure>
                                     </a>
                                 </div>

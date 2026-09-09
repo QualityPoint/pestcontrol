@@ -32,7 +32,7 @@
                                 <div class="post-featured-image">
                                     <a href="{{ u('/' ~ post.route) }}" data-cursor-text="View">
                                         <figure class="image-anime">
-                                            <img src="{{ post.cover_image }}" alt="{{ localize(post, 'title') }}">
+                                            <img src="{{ post.cover_image }}" alt="{{ localize(post, 'title') }}" loading="lazy" decoding="async">
                                         </figure>
                                     </a>
                                 </div>

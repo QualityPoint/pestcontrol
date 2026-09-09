@@ -17,7 +17,7 @@
                         <div class="service-image">
                             <a href="{{ u('/' ~ service.route) }}" data-cursor-text="View">
                                 <figure class="image-anime">
-                                    <img src="{{ service.image }}" alt="{{ localize(service, 'service_name') }}">
+                                    <img src="{{ service.image }}" alt="{{ localize(service, 'service_name') }}" loading="lazy" decoding="async">
                                 </figure>
                             </a>
                         </div>
@@ -26,7 +26,7 @@
                         <!-- Service Body Start -->
                         <div class="service-body">
                             <div class="icon-box">
-                                <img src="{{ service.icon }}" alt="">
+                                <img src="{{ service.icon }}" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="service-content">
                                 <h3><a href="{{ u('/' ~ service.route) }}">{{ localize(service, "service_name") }}</a></h3>
@@ -68,7 +68,7 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="why-choose-item-content">
                                 <h3>{{ _("Emergency Services") }}</h3>
@@ -80,7 +80,7 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp" data-wow-delay="0.2s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="why-choose-item-content">
                                 <h3>{{ _("Customized Treatments") }}</h3>
@@ -92,7 +92,7 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp" data-wow-delay="0.4s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="why-choose-item-content">
                                 <h3>{{ _("Certified Professionals") }}</h3>
@@ -114,7 +114,7 @@
                                 <p>{{ _("call now") }}</p>
                                 <div class="cta-contact-item">
                                     <div class="icon-box">
-                                        <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">
+                                        <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="" loading="lazy" decoding="async">
                                     </div>
                                     <div class="cta-contact-item-content">
                                         <h3><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></h3>
@@ -167,7 +167,7 @@
                                         <div class="testimonial-author">
                                             <div class="author-image">
                                                 <figure class="image-anime">
-                                                    <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}">
+                                                    <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}" loading="lazy" decoding="async">
                                                 </figure>
                                             </div>
                                             <div class="author-content">

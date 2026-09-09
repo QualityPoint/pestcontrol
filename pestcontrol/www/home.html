@@ -18,7 +18,11 @@
                     <div class="hero-slide">
                         <!-- Slider Image Start -->
                         <div class="hero-slider-image">
-                            <img src="{{ slide.background_image }}" alt="">
+                            {#- The first slide is the LCP element: it must load eagerly and at high
+                                 priority. Lazy-loading it would defer the very paint that LCP
+                                 measures. Later slides are off-screen behind the swiper. -#}
+                            <img src="{{ slide.background_image }}" alt=""
+                                 {% if loop.first %}fetchpriority="high" decoding="async"{% else %}loading="lazy" decoding="async"{% endif %}>
                         </div>
                         <!-- Slider Image End -->
 
@@ -58,7 +62,7 @@
                                     <!-- Hero Image Start -->
                                     <div class="hero-image">
                                         <figure>
-                                            <img src="{{ slide.foreground_image }}" alt="">
+                                            <img src="{{ slide.foreground_image }}" alt="" loading="lazy" decoding="async">
                                         </figure>
                                     </div>
                                     <!-- Hero Image End -->
@@ -85,7 +89,7 @@
                         <!-- Best Service Item Start -->
                         <div class="best-service-item wow fadeInUp">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-best-service-1.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-best-service-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="best-service-item-content">
                                 <h3>{{ _("Comprehensive Coverage") }}</h3>
@@ -97,7 +101,7 @@
                         <!-- Best Service Item Start -->
                         <div class="best-service-item wow fadeInUp" data-wow-delay="0.2s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-best-service-2.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-best-service-2.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="best-service-item-content">
                                 <h3>{{ _("Fast Response Times") }}</h3>
@@ -109,7 +113,7 @@
                         <!-- Best Service Item Start -->
                         <div class="best-service-item wow fadeInUp" data-wow-delay="0.4s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-best-service-3.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-best-service-3.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="best-service-item-content">
                                 <h3>{{ _("Commercial Services") }}</h3>
@@ -121,7 +125,7 @@
                         <!-- Best Service Item Start -->
                         <div class="best-service-item wow fadeInUp" data-wow-delay="0.6s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-best-service-4.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-best-service-4.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="best-service-item-content">
                                 <h3>{{ _("24/7 Emergency Services") }}</h3>
@@ -147,7 +151,7 @@
                         <!-- About Us Image Start -->
                         <div class="about-us-image">
                             <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/about-us-real.webp" alt="{{ _('Skystar technicians preparing equipment before a pest control visit') }}">
+                                <img src="/assets/pestcontrol/website/images/about-us-real.webp" alt="{{ _('Skystar technicians preparing equipment before a pest control visit') }}" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <!-- About Us Image End -->
@@ -155,7 +159,7 @@
                         <!-- About Us Circle Image Start -->
                         <div class="about-us-circle-img-1">
                             <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/about-circle-real-1.webp" alt="{{ _('A Skystar technician in protective gear treating a property') }}">
+                                <img src="/assets/pestcontrol/website/images/about-circle-real-1.webp" alt="{{ _('A Skystar technician in protective gear treating a property') }}" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <!-- About Us Circle Image End -->
@@ -163,7 +167,7 @@
                         <!-- About Us Circle Image Start -->
                         <div class="about-us-circle-img-2">
                             <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/about-circle-real-2.webp" alt="{{ _('Close-up of professional pest control spraying equipment') }}">
+                                <img src="/assets/pestcontrol/website/images/about-circle-real-2.webp" alt="{{ _('Close-up of professional pest control spraying equipment') }}" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <!-- About Us Circle Image End -->
@@ -198,7 +202,7 @@
 
                             <div class="about-us-video-image wow fadeInUp" data-wow-delay="0.4s">
                                 <figure class="image-anime">
-                                    <img src="/assets/pestcontrol/website/images/about-video-real.webp" alt="{{ _('Skystar team at work — play the company video') }}">
+                                    <img src="/assets/pestcontrol/website/images/about-video-real.webp" alt="{{ _('Skystar team at work — play the company video') }}" loading="lazy" decoding="async">
                                 </figure>
 
                                 <!-- Video Play Button Start -->
@@ -279,7 +283,7 @@
                                         <div class="service-image">
                                             <a href="{{ u('/' ~ service.route) }}" data-cursor-text="View">
                                                 <figure class="image-anime">
-                                                    <img src="{{ service.image }}" alt="{{ localize(service, 'service_name') }}">
+                                                    <img src="{{ service.image }}" alt="{{ localize(service, 'service_name') }}" loading="lazy" decoding="async">
                                                 </figure>
                                             </a>
                                         </div>
@@ -288,7 +292,7 @@
                                         <!-- Service Body Start -->
                                         <div class="service-body">
                                             <div class="icon-box">
-                                                <img src="{{ service.icon or settings.favicon }}" alt="{{ localize(service, 'service_name') }}">
+                                                <img src="{{ service.icon or settings.favicon }}" alt="{{ localize(service, 'service_name') }}" loading="lazy" decoding="async">
                                             </div>
                                             <div class="service-content">
                                                 <h3><a href="{{ u('/' ~ service.route) }}">{{ localize(service, "service_name") }}</a></h3>
@@ -342,7 +346,7 @@
                             <!-- Features Item Start -->
                             <div class="features-item wow fadeInUp">
                                 <div class="icon-box">
-                                    <img src="/assets/pestcontrol/website/images/icon-features-item-1.svg" alt="">
+                                    <img src="/assets/pestcontrol/website/images/icon-features-item-1.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="features-item-content">
                                     <h3>{{ _("Emergency Services") }}</h3>
@@ -354,7 +358,7 @@
                             <!-- Features Item Start -->
                             <div class="features-item wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="icon-box">
-                                    <img src="/assets/pestcontrol/website/images/icon-features-item-2.svg" alt="">
+                                    <img src="/assets/pestcontrol/website/images/icon-features-item-2.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="features-item-content">
                                     <h3>{{ _("Customized Treatment") }}</h3>
@@ -366,7 +370,7 @@
                             <!-- Features Item Start -->
                             <div class="features-item wow fadeInUp" data-wow-delay="0.4s">
                                 <div class="icon-box">
-                                    <img src="/assets/pestcontrol/website/images/icon-features-item-3.svg" alt="">
+                                    <img src="/assets/pestcontrol/website/images/icon-features-item-3.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="features-item-content">
                                     <h3>{{ _("Certified Professionals") }}</h3>
@@ -378,7 +382,7 @@
                             <!-- Features Item Start -->
                             <div class="features-item wow fadeInUp" data-wow-delay="0.6s">
                                 <div class="icon-box">
-                                    <img src="/assets/pestcontrol/website/images/icon-features-item-4.svg" alt="">
+                                    <img src="/assets/pestcontrol/website/images/icon-features-item-4.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="features-item-content">
                                     <h3>{{ _("Guaranteed Results") }}</h3>
@@ -395,13 +399,13 @@
                     <!-- Features Image Start -->
                     <div class="features-image">
                         <figure class="image-anime reveal">
-                            <img src="/assets/pestcontrol/website/images/features-real.webp" alt="{{ _('Skystar technician servicing a commercial kitchen') }}">
+                            <img src="/assets/pestcontrol/website/images/features-real.webp" alt="{{ _('Skystar technician servicing a commercial kitchen') }}" loading="lazy" decoding="async">
                         </figure>
 
                         <!-- Contact Us Circle Start -->
                         <div class="contact-us-circle">
                             <a href="{{ u('/contact') }}">
-                                <img src="/assets/pestcontrol/website/images/contact-us-circle.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/contact-us-circle.svg" alt="" loading="lazy" decoding="async">
                             </a>
                         </div>
                         <!-- Contact Us Circle End -->
@@ -450,12 +454,12 @@
                             <div class="project-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                                 <div class="project-image">
                                     <figure>
-                                        <img src="{{ project.image }}" alt="{{ localize(project, 'project_name') }}">
+                                        <img src="{{ project.image }}" alt="{{ localize(project, 'project_name') }}" loading="lazy" decoding="async">
                                     </figure>
                                 </div>
                                 <div class="project-content">
                                     <h3>{{ localize(project, "project_name") }}</h3>
-                                    <a href="{{ u('/' ~ project.route) }}"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt=""></a>
+                                    <a href="{{ u('/' ~ project.route) }}"><img src="/assets/pestcontrol/website/images/arrow-white.svg" alt="" loading="lazy" decoding="async"></a>
                                 </div>
                             </div>
                             <!-- Project Item End -->
@@ -530,9 +534,9 @@
                     <!-- Pricing Benefit List Start -->
                     <div class="pricing-benefit-list wow fadeInUp" data-wow-delay="0.4s">
                         <ul>
-                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-1.svg" alt="">{{ _("Get 30 day free trial") }}</li>
-                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-2.svg" alt="">{{ _("No any hidden fees pay") }}</li>
-                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-3.svg" alt="">{{ _("You can  cancel anytime ") }}</li>
+                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-1.svg" alt="" loading="lazy" decoding="async">{{ _("Get 30 day free trial") }}</li>
+                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-2.svg" alt="" loading="lazy" decoding="async">{{ _("No any hidden fees pay") }}</li>
+                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-3.svg" alt="" loading="lazy" decoding="async">{{ _("You can  cancel anytime ") }}</li>
                         </ul>
                     </div>
                     <!-- Pricing Benefit List End -->
@@ -564,7 +568,7 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="why-choose-item-content">
                                 <h3>{{ _("Emergency Services") }}</h3>
@@ -576,7 +580,7 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp" data-wow-delay="0.2s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="why-choose-item-content">
                                 <h3>{{ _("Customized Treatments") }}</h3>
@@ -588,7 +592,7 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp" data-wow-delay="0.4s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="why-choose-item-content">
                                 <h3>{{ _("Certified Professionals") }}</h3>
@@ -610,7 +614,7 @@
                                 <p>{{ _("call now") }}</p>
                                 <div class="cta-contact-item">
                                     <div class="icon-box">
-                                        <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">
+                                        <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="" loading="lazy" decoding="async">
                                     </div>
                                     <div class="cta-contact-item-content">
                                         <h3><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></h3>
@@ -646,7 +650,7 @@
                         <!-- Faqs Image 1 Start -->
                         <div class="faqs-img-1">
                             <figure class="image-anime reveal">
-                                <img src="/assets/pestcontrol/website/images/faqs-real-1.webp" alt="{{ _('Technician answering a customer\'s questions on site') }}">
+                                <img src="/assets/pestcontrol/website/images/faqs-real-1.webp" alt="{{ _('Technician answering a customer\'s questions on site') }}" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <!-- Faqs Image 1 End -->
@@ -654,7 +658,7 @@
                         <!-- Faqs Image 2 Start -->
                         <div class="faqs-img-2">
                             <figure class="image-anime reveal">
-                                <img src="/assets/pestcontrol/website/images/faqs-real-2.webp" alt="{{ _('Pest control equipment laid out before a treatment') }}">
+                                <img src="/assets/pestcontrol/website/images/faqs-real-2.webp" alt="{{ _('Pest control equipment laid out before a treatment') }}" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <!-- Faqs Image 2 End -->
@@ -662,7 +666,7 @@
                         <!-- Faqs Image 3 Start -->
                         <div class="faqs-img-3">
                             <figure class="image-anime reveal">
-                                <img src="/assets/pestcontrol/website/images/faqs-real-3.webp" alt="{{ _('Skystar van parked outside a customer\'s property') }}">
+                                <img src="/assets/pestcontrol/website/images/faqs-real-3.webp" alt="{{ _('Skystar van parked outside a customer\'s property') }}" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <!-- Faqs Image 3 End -->
@@ -735,7 +739,7 @@
                                         <div class="testimonial-author">
                                             <div class="author-image">
                                                 <figure class="image-anime">
-                                                    <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}">
+                                                    <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}" loading="lazy" decoding="async">
                                                 </figure>
                                             </div>
                                             <div class="author-content">
@@ -771,7 +775,7 @@
                 <div class="col-lg-7 col-md-6 order-md-1 order-2">
                     <!-- CTA Box Image Start -->
                     <div class="cta-box-image">
-                        <img src="/assets/pestcontrol/website/images/cta-box-real.webp" alt="{{ _('Skystar technician ready for a scheduled pest control visit') }}">
+                        <img src="/assets/pestcontrol/website/images/cta-box-real.webp" alt="{{ _('Skystar technician ready for a scheduled pest control visit') }}" loading="lazy" decoding="async">
                     </div>
                     <!-- CTA Box Image End -->
                 </div>
@@ -831,7 +835,7 @@
                         <div class="post-featured-image">
                             <a href="{{ u('/' ~ post.route) }}" data-cursor-text="View">
                                 <figure class="image-anime">
-                                    <img src="{{ post.cover_image }}" alt="{{ localize(post, 'title') }}">
+                                    <img src="{{ post.cover_image }}" alt="{{ localize(post, 'title') }}" loading="lazy" decoding="async">
                                 </figure>
                             </a>
                         </div>
