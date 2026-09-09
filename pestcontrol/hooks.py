@@ -145,6 +145,7 @@ jinja = {
 		"pestcontrol.pc_website.utils.portal_user_info",
 		"pestcontrol.pc_website.utils.current_lang",
 		"pestcontrol.pc_website.router.u",
+		"pestcontrol.pc_website.utils.whatsapp_url",
 	],
 }
 

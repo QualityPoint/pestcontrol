@@ -1469,3 +1469,11 @@ html[dir="rtl"] .careers-form select.form-control{
 	color: var(--primary-color);
 	margin: 0;
 }
+
+/* City label beside a phone number. Secondary to the number itself, which is
+   the thing a visitor is scanning for. */
+.phone-city{
+	opacity: 0.75;
+	font-size: 0.9em;
+	white-space: nowrap;
+}

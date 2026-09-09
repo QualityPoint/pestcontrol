@@ -4,6 +4,7 @@
 import hashlib
 import os
 import re
+from urllib.parse import quote
 
 import frappe
 from frappe import _
@@ -92,6 +93,7 @@ def get_website_context(context):
 	context.branches = get_translated_list(
 		"Website Branch", filters={"published": 1}, fields="*", order_by="display_order asc"
 	)
+	attach_branch_city(settings.get("phone_numbers"), context.branches)
 	context.lang = frappe.local.lang
 	context.languages = languages
 	context.current_language = next(
@@ -110,6 +112,47 @@ def get_website_context(context):
 		order_by="display_order asc",
 		limit_page_length=5,
 	)
+
+
+def attach_branch_city(phone_rows, branches):
+	"""Stamp each phone row with the city of the branch it points at.
+
+	Resolved here, once, from the branch list already loaded for the page, so
+	templates never have to look a branch up. The label comes from the branch's
+	article bundle rather than being stored on the phone row, which is what
+	makes it follow the visitor's language instead of freezing whatever the
+	admin happened to type.
+
+	Falls back to the branch name: a branch can exist with no city set yet
+	(the label would otherwise render empty and look broken).
+	"""
+	if not phone_rows or not branches:
+		return
+	labels = {
+		branch.name: (localize(branch, "city") or localize(branch, "branch_name")) for branch in branches
+	}
+	for row in phone_rows:
+		row.branch_city = labels.get(row.get("branch"))
+
+
+def whatsapp_url(message=None):
+	"""wa.me link for the configured number, or None when unset.
+
+	wa.me accepts digits only -- no plus, no spaces, no dashes. The number is
+	stored the way a human writes it ("+966 54 362 7727"), so it has to be
+	normalised at every use. Doing that inline in templates is how the contact
+	page ended up emitting `wa.me/+966 54 362 7727`, which silently does
+	nothing when tapped; one helper means one place to get it right.
+
+	`message` pre-fills the chat. It removes the "what do I write" pause, and
+	varying it per page shows in the reply which page the enquiry came from.
+	"""
+	number = frappe.get_cached_value("PC Website Settings", "PC Website Settings", "whatsapp")
+	digits = re.sub(r"\D", "", number or "")
+	if not digits:
+		return None
+	url = f"https://wa.me/{digits}"
+	return f"{url}?text={quote(message)}" if message else url
 
 
 def apply_preferred_language_cookie(languages):

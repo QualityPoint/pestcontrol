@@ -5,7 +5,7 @@ import re
 
 from frappe.model.document import Document
 
-from pestcontrol.pc_website.utils import validate_articles
+from pestcontrol.pc_website.utils import route_from_article, validate_articles
 
 # Google's embed URLs carry the map centre inside the `pb` parameter, where
 # !2d is the longitude and !3d the latitude:
@@ -21,7 +21,22 @@ _EMBED_LATITUDE = re.compile(r"!3d(-?\d+\.\d+)")
 class WebsiteBranch(Document):
 	def validate(self):
 		validate_articles(self)
+		self.set_branch_title()
 		self.set_coordinates_from_map_url()
+
+	def set_branch_title(self):
+		"""Keep a plain-text label in sync with the article title.
+
+		This doctype is autoname:hash, and its human name lives in the article
+		child rows rather than in a field, so anything offering a branch in a
+		dropdown -- the phone-number table, for one -- would otherwise show
+		"ksbm9p7sbd". Declared as the doctype's title_field.
+
+		Deliberately single-language: it labels a picker in the desk, which
+		staff use in one language. Everything public reads the branch city
+		through localize() and still follows the visitor's language.
+		"""
+		self.branch_title = route_from_article(self) or self.name
 
 	def set_coordinates_from_map_url(self):
 		"""Fill latitude/longitude from the pasted Google Maps embed URL.

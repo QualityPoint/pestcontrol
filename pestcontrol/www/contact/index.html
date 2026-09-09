@@ -31,10 +31,13 @@
                             </div>
                             <div class="contact-info-content">
                                 <h3>{{ _("Contact Us") }}</h3>
+                                {#- branch_city comes from the linked branch's article, so it
+                                    renders in the visitor's language. -#}
                                 {% for p in settings.phone_numbers %}
-                                <p><a href="tel:{{ p.phone_number }}">{{ p.phone_number }}</a></p>
+                                <p><a href="tel:{{ p.phone_number }}">{{ p.phone_number }}</a>{% if p.branch_city %} <span class="phone-city">&mdash; {{ p.branch_city }}</span>{% endif %}</p>
                                 {% endfor %}
-                                {% if settings.whatsapp %}<p><a href="https://wa.me/{{ settings.whatsapp }}">{{ settings.whatsapp }}</a></p>{% endif %}
+                                {% set wa = whatsapp_url(_("Hello, I would like to ask about your pest control services.")) %}
+                                  {% if wa %}<p><a href="{{ wa }}" target="_blank" rel="noopener noreferrer">{{ settings.whatsapp }}</a></p>{% endif %}
                             </div>
                         </div>
                         <!-- Contact Info Item End -->

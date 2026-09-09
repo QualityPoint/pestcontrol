@@ -8,6 +8,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "branch_title",
   "phone",
   "column_break_wbrc",
   "display_order",
@@ -30,6 +31,14 @@
   "article"
  ],
  "fields": [
+  {
+   "description": "Auto-filled from the branch's article title. Used as the label wherever a branch is picked from a list.",
+   "fieldname": "branch_title",
+   "fieldtype": "Data",
+   "label": "Branch",
+   "no_copy": 1,
+   "read_only": 1
+  },
   {
    "fieldname": "phone",
    "fieldtype": "Data",
@@ -146,7 +155,7 @@
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2026-09-08 13:00:00.000000",
+ "modified": "2026-09-09 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Branch",
@@ -168,7 +177,9 @@
  ],
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
+ "show_title_field_in_link": 1,
  "sort_field": "display_order",
  "sort_order": "ASC",
- "states": []
+ "states": [],
+ "title_field": "branch_title"
 }

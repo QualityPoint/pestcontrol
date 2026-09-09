@@ -51,8 +51,11 @@
                                 <i class="fa-solid fa-phone"></i>
                             </div>
                             <div class="footer-contact-content">
+                                {#- branch_city is resolved in get_website_context from the
+                                    linked branch's article, so it follows the visitor's
+                                    language rather than whatever the admin typed. -#}
                                 {% for p in settings.phone_numbers %}
-                                <p><a href="tel:{{ p.phone_number }}">{{ p.phone_number }}</a></p>
+                                <p><a href="tel:{{ p.phone_number }}">{{ p.phone_number }}</a>{% if p.branch_city %} <span class="phone-city">&mdash; {{ p.branch_city }}</span>{% endif %}</p>
                                 {% endfor %}
                             </div>
                         </div>
