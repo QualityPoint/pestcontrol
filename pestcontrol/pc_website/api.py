@@ -335,7 +335,7 @@ def verify_account(email: str, expires: str, **kwargs):
 		# request whose method is "safe", and this link is a GET. Without the
 		# commit the account is enabled for the length of the request and then
 		# quietly reverted -- the link would look like it worked.
-		frappe.db.commit()
+		frappe.db.commit()  # nosemgrep: frappe-manual-commit
 
 	frappe.local.flags.redirect_location = "/account/login?verified=1"
 	raise frappe.Redirect
