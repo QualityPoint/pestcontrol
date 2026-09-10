@@ -1,4 +1,5 @@
 import frappe
+from frappe import _
 from frappe.utils import cint
 from frappe.www.login import sanitize_redirect
 
@@ -8,6 +9,9 @@ from pestcontrol.pc_website.utils import get_language_row, get_website_context
 def get_context(context):
 	get_website_context(context)
 	context.no_cache = 1
+	context.title = _("Sign Up")
+	# Nothing here should ever appear in search results.
+	context.seo_noindex = True
 
 	if frappe.session.user != "Guest":
 		frappe.local.flags.redirect_location = "/"

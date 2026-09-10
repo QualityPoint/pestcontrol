@@ -1,7 +1,5 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}{{ localize(doc, "title") }} | {{ settings.site_name or "Skystar" }}{% endblock %}
-
 {% block page_header %}
     <!-- Page Header Start -->
     {%- set page_header_bg = doc.header_image or settings.page_header_background -%}
@@ -36,7 +34,7 @@
                     <!-- Post Featured Image Start -->
                     <div class="post-image">
                         <figure class="image-anime reveal">
-                            <img src="{{ doc.cover_image }}" alt="{{ localize(doc, 'title') }}">
+                            <img src="{{ doc.cover_image }}" alt="{{ localize(doc, 'title') }}" loading="lazy" decoding="async">
                         </figure>
                     </div>
                     <!-- Post Featured Image Start -->

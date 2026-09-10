@@ -77,6 +77,43 @@ website_generators = [
 ]
 
 
+# Redirects
+# ---------
+
+# 301s for routes that have moved. Kept explicit rather than derived: a slug
+# only changes when someone renames a record, and the old URL has to keep
+# working for whatever already links to it.
+website_redirects = []
+
+# Fills in the search-engine metadata frappe does not derive on its own --
+# canonical, og:url/og:site_name/og:locale, robots -- and lets frappe's own
+# MetaTags build the rest from context.title/description/image. Runs after
+# each page's get_context(), so it can see context.doc and context.title.
+update_website_context = "pestcontrol.pc_website.seo.build_seo_context"
+
+# Serves each language from its own URL (/ar/about, /en/about) so both can be
+# indexed; frappe otherwise picks the language by cookie, which a crawler does
+# not carry, leaving exactly one language visible to search.
+#
+# NOTE: this REPLACES frappe's own path resolution for every request, and
+# frappe 16 short-circuits only `desk` before the hooks -- /app and /api reach
+# it. See pc_website/router.py. Deleting this one line plus `bench clear-cache`
+# fully disables it.
+website_path_resolver = "pestcontrol.pc_website.router.resolve"
+
+# Document Events
+# ---------------
+
+# Frappe never optimises uploads -- optimize_file() exists but nothing calls
+# it -- so images attached to website content arrive at whatever resolution
+# the camera produced. See pc_website/images.py.
+doc_events = {
+	"File": {
+		"after_insert": "pestcontrol.pc_website.images.optimize_website_upload",
+	},
+}
+
+
 # Fixtures
 # ----------
 
@@ -107,6 +144,8 @@ jinja = {
 		"pestcontrol.pc_website.utils.doc_to_json",
 		"pestcontrol.pc_website.utils.portal_user_info",
 		"pestcontrol.pc_website.utils.current_lang",
+		"pestcontrol.pc_website.router.u",
+		"pestcontrol.pc_website.utils.whatsapp_url",
 	],
 }
 
@@ -154,13 +193,29 @@ after_install = "pestcontrol.install.after_install"
 # -----------
 # Permissions evaluated in scripted ways
 
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+# Visit Request grants the Customer role a direct DocPerm, which is
+# doctype-wide on its own -- every self-registered website user gets that role
+# (it is Portal Settings.default_role), so without these three hooks any
+# registered visitor can read every customer's visit requests. See
+# pc_operation/permissions.py for why all three are needed rather than one.
+
+# Filters lists: the portal, /api/resource/Visit Request, search.
+permission_query_conditions = {
+	"Visit Request": "pestcontrol.pc_operation.permissions.visit_request_query",
+}
+
+# Covers a single document fetched by name, which query conditions never see.
+has_permission = {
+	"Visit Request": "pestcontrol.pc_operation.permissions.visit_request_has_permission",
+}
+
+# Frappe's has_website_permission() returns False when no hook is registered,
+# so the portal's own detail view would refuse a customer their own record.
+# ERPNext's implementation is generic -- get_customer_field_name() returns
+# "customer" for everything that is not a Quotation -- so it fits unchanged.
+has_website_permission = {
+	"Visit Request": "erpnext.controllers.website_list_for_contact.has_website_permission",
+}
 
 # DocType Class
 # ---------------
@@ -217,7 +272,7 @@ on_session_creation = "pestcontrol.pc_website.utils.sync_portal_user_on_login"
 # Testing
 # -------
 
-# before_tests = "pestcontrol.install.before_tests"
+before_tests = "pestcontrol.install.before_tests"
 
 # Overriding Methods
 # ------------------------------

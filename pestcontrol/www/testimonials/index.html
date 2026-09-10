@@ -1,10 +1,6 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}{{ _("Testimonials") }} | Skystar{% endblock %}
-
 {% block page_header %}
-    {% set page_h1 = _("Testimonials") %}
-    {% set page_breadcrumb = _("testimonials") %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
@@ -20,7 +16,7 @@
                         <div class="testimonial-author">
                             <div class="author-image">
                                 <figure class="image-anime">
-                                    <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}">
+                                    <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}" loading="lazy" decoding="async">
                                 </figure>
                             </div>
                             <div class="author-content">
@@ -65,7 +61,7 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="why-choose-item-content">
                                 <h3>{{ _("Emergency Services") }}</h3>
@@ -77,7 +73,7 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp" data-wow-delay="0.2s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="why-choose-item-content">
                                 <h3>{{ _("Customized Treatments") }}</h3>
@@ -89,7 +85,7 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp" data-wow-delay="0.4s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="why-choose-item-content">
                                 <h3>{{ _("Certified Professionals") }}</h3>
@@ -111,7 +107,7 @@
                                 <p>{{ _("call now") }}</p>
                                 <div class="cta-contact-item">
                                     <div class="icon-box">
-                                        <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">
+                                        <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="" loading="lazy" decoding="async">
                                     </div>
                                     <div class="cta-contact-item-content">
                                         <h3><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></h3>
@@ -128,7 +124,7 @@
                 <div class="col-lg-12">
                     <!-- Section Footer Text Start -->
                     <div class="section-footer-text wow fadeInUp" data-wow-delay="0.8s">
-                        <p><span>{{ _("Free") }}</span>{{ _("Let's create a pest-free environment -") }} <a href="/contact">{{ _("Contact us today!") }}</a></p>
+                        <p><span>{{ _("Free") }}</span>{{ _("Let's create a pest-free environment -") }} <a href="{{ u('/contact') }}">{{ _("Contact us today!") }}</a></p>
                     </div>
                     <!-- Section Footer Text End -->
                 </div>
@@ -156,7 +152,7 @@
                             <!-- Features Item Start -->
                             <div class="features-item wow fadeInUp" data-wow-delay="0.4s">
                                 <div class="icon-box">
-                                    <img src="/assets/pestcontrol/website/images/icon-features-item-1.svg" alt="">
+                                    <img src="/assets/pestcontrol/website/images/icon-features-item-1.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="features-item-content">
                                     <h3>{{ _("Emergency Services") }}</h3>
@@ -168,7 +164,7 @@
                             <!-- Features Item Start -->
                             <div class="features-item wow fadeInUp" data-wow-delay="0.6s">
                                 <div class="icon-box">
-                                    <img src="/assets/pestcontrol/website/images/icon-features-item-2.svg" alt="">
+                                    <img src="/assets/pestcontrol/website/images/icon-features-item-2.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="features-item-content">
                                     <h3>{{ _("Customized Treatment") }}</h3>
@@ -180,7 +176,7 @@
                             <!-- Features Item Start -->
                             <div class="features-item wow fadeInUp" data-wow-delay="0.8s">
                                 <div class="icon-box">
-                                    <img src="/assets/pestcontrol/website/images/icon-features-item-3.svg" alt="">
+                                    <img src="/assets/pestcontrol/website/images/icon-features-item-3.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="features-item-content">
                                     <h3>{{ _("Certified Professionals") }}</h3>
@@ -192,7 +188,7 @@
                             <!-- Features Item Start -->
                             <div class="features-item wow fadeInUp" data-wow-delay="1s">
                                 <div class="icon-box">
-                                    <img src="/assets/pestcontrol/website/images/icon-features-item-4.svg" alt="">
+                                    <img src="/assets/pestcontrol/website/images/icon-features-item-4.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="features-item-content">
                                     <h3>{{ _("Guaranteed Results") }}</h3>
@@ -209,13 +205,13 @@
                     <!-- Features Image Start -->
                     <div class="features-image">
                         <figure class="image-anime">
-                            <img src="/assets/pestcontrol/website/images/features-image.jpg" alt="">
+                            <img src="/assets/pestcontrol/website/images/features-image.jpg" alt="" loading="lazy" decoding="async">
                         </figure>
 
                         <!-- Contact Us Circle Start -->
                         <div class="contact-us-circle">
-                            <a href="/contact">
-                                <img src="/assets/pestcontrol/website/images/contact-us-circle.svg" alt="">
+                            <a href="{{ u('/contact') }}">
+                                <img src="/assets/pestcontrol/website/images/contact-us-circle.svg" alt="" loading="lazy" decoding="async">
                             </a>
                         </div>
                         <!-- Contact Us Circle End -->

@@ -1,31 +1,7 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}{{ localize(doc, "project_name") }} | {{ settings.site_name or "Skystar" }}{% endblock %}
-
 {% block page_header %}
-    <!-- Page Header Start -->
-    {%- set page_header_bg = doc.header_image or settings.page_header_background -%}
-    <div class="page-header parallaxie"{% if page_header_bg %} style="background-image: url('{{ page_header_bg }}');"{% endif %}>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Page Header Box Start -->
-                    <div class="page-header-box">
-                        <h1 class="text-anime-style-2" data-cursor="-opaque">{{ localize(doc, "project_name") }}</h1>
-                        <nav class="wow fadeInUp">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">{{ _("home") }}</a></li>
-                                <li class="breadcrumb-item"><a href="/projects">{{ _("projects") }}</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{ localize(doc, "project_name") }}</li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <!-- Page Header Box End -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Page Header End -->
+    {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
 {% block content %}
@@ -71,7 +47,7 @@
                                 <p>{{ _("call now") }}</p>
                                 <div class="cta-contact-item">
                                     <div class="icon-box">
-                                        <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">
+                                        <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="" loading="lazy" decoding="async">
                                     </div>
                                     <div class="cta-contact-item-content">
                                         <h3><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></h3>
@@ -91,7 +67,7 @@
                         <!-- Project Featured Image Start -->
                         <div class="project-featured-image">
                             <figure class="image-anime reveal">
-                                <img src="{{ doc.image }}" alt="{{ localize(doc, 'project_name') }}">
+                                <img src="{{ doc.image }}" alt="{{ localize(doc, 'project_name') }}" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <!-- Project Featured Image End -->
@@ -141,11 +117,11 @@
                             <div class="faq-accordion" id="accordion">
                                 <!-- FAQ Item Start -->
                                 <div class="accordion-item wow fadeInUp">
-                                    <h2 class="accordion-header" id="heading1">
+                                    <h3 class="accordion-header" id="heading1">
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
                                             {{ _("1. What types of pests do you treat?") }}
                                         </button>
-                                    </h2>
+                                    </h3>
                                     <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#accordion">
                                         <div class="accordion-body">
                                             <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
@@ -156,11 +132,11 @@
 
                                 <!-- FAQ Item Start -->
                                 <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
-                                    <h2 class="accordion-header" id="heading2">
+                                    <h3 class="accordion-header" id="heading2">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
                                             {{ _("2. Are your pest control methods safe for my pets?") }}
                                         </button>
-                                    </h2>
+                                    </h3>
                                     <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#accordion">
                                         <div class="accordion-body">
                                             <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
@@ -171,11 +147,11 @@
 
                                 <!-- FAQ Item Start -->
                                 <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
-                                    <h2 class="accordion-header" id="heading3">
+                                    <h3 class="accordion-header" id="heading3">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
                                             {{ _("3. How often should I schedule pest control services?") }}
                                         </button>
-                                    </h2>
+                                    </h3>
                                     <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordion">
                                         <div class="accordion-body">
                                             <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
@@ -186,11 +162,11 @@
 
                                 <!-- FAQ Item Start -->
                                 <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
-                                    <h2 class="accordion-header" id="heading4">
+                                    <h3 class="accordion-header" id="heading4">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
                                             {{ _("4. Do you offer emergency pest control services?") }}
                                         </button>
-                                    </h2>
+                                    </h3>
                                     <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordion">
                                         <div class="accordion-body">
                                             <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>
@@ -201,11 +177,11 @@
 
                                 <!-- FAQ Item Start -->
                                 <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
-                                    <h2 class="accordion-header" id="heading5">
+                                    <h3 class="accordion-header" id="heading5">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
                                             {{ _("5. How do I know if I have a pest infestation?") }}
                                         </button>
-                                    </h2>
+                                    </h3>
                                     <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#accordion">
                                         <div class="accordion-body">
                                             <p>{{ _("We handle a wide range of pests, including rodents, ants, cockroaches, termites, bed bugs, mosquitoes, spiders, and wildlife.") }}</p>

@@ -1,10 +1,6 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}{{ _("Contact Us") }} | Skystar{% endblock %}
-
 {% block page_header %}
-    {% set page_h1 = _("Contact us") %}
-    {% set page_breadcrumb = _("contact us") %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
@@ -19,7 +15,7 @@
                         <!-- Contact Info Item Start -->
                         <div class="contact-info-item wow fadeInUp">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-mail.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-mail.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="contact-info-content">
                                 <h3>{{ _("Email address") }}</h3>
@@ -31,14 +27,17 @@
                         <!-- Contact Info Item Start -->
                         <div class="contact-info-item wow fadeInUp" data-wow-delay="0.2s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-phone.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-phone.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="contact-info-content">
                                 <h3>{{ _("Contact Us") }}</h3>
+                                {#- branch_city comes from the linked branch's article, so it
+                                    renders in the visitor's language. -#}
                                 {% for p in settings.phone_numbers %}
-                                <p><a href="tel:{{ p.phone_number }}">{{ p.phone_number }}</a></p>
+                                <p><a href="tel:{{ p.phone_number }}">{{ p.phone_number }}</a>{% if p.branch_city %} <span class="phone-city">&mdash; {{ p.branch_city }}</span>{% endif %}</p>
                                 {% endfor %}
-                                {% if settings.whatsapp %}<p><a href="https://wa.me/{{ settings.whatsapp }}">{{ settings.whatsapp }}</a></p>{% endif %}
+                                {% set wa = whatsapp_url(_("Hello, I would like to ask about your pest control services.")) %}
+                                  {% if wa %}<p><a href="{{ wa }}" target="_blank" rel="noopener noreferrer">{{ settings.whatsapp }}</a></p>{% endif %}
                             </div>
                         </div>
                         <!-- Contact Info Item End -->
@@ -49,7 +48,7 @@
                         <!-- Contact Info Item Start -->
                         <div class="contact-info-item wow fadeInUp" data-wow-delay="{{ 0.4 + loop.index0 * 0.15 }}s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-location.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-location.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="contact-info-content">
                                 <h3>{{ localize(b, "branch_name") }}{% if branch_city %} &mdash; {{ branch_city }}{% endif %}</h3>
@@ -63,7 +62,7 @@
                         <!-- Contact Info Item Start -->
                         <div class="contact-info-item wow fadeInUp" data-wow-delay="0.4s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-location.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-location.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="contact-info-content">
                                 <h3>{{ _("location") }}</h3>
@@ -76,7 +75,7 @@
                         <!-- Contact Info Item Start -->
                         <div class="contact-info-item wow fadeInUp" data-wow-delay="0.6s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-clock.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-clock.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="contact-info-content">
                                 <h3>{{ _("Working Hours") }}</h3>
@@ -152,7 +151,7 @@
                         <!-- Contact Us Image Start -->
                         <div class="contact-us-image">
                             <figure class="image-anime">
-                                <img src="/assets/pestcontrol/website/images/contact-us-img.jpg" alt="">
+                                <img src="/assets/pestcontrol/website/images/contact-us-img.jpg" alt="" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <!-- Contact Us Image End -->

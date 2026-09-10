@@ -1,10 +1,6 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}{{ _("Pricing") }} | Skystar{% endblock %}
-
 {% block page_header %}
-    {% set page_h1 = _("Pricing plan") %}
-    {% set page_breadcrumb = _("pricing") %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
@@ -20,7 +16,10 @@
                         <!-- Pricing Header Start -->
                         <div class="pricing-header">
                             <h3>{{ localize(plan, "plan_name") }}</h3>
-                            <h2>${{ "%.2f"|format(plan.price) }}{{ "/" ~ plan.billing_period if plan.billing_period else "" }}</h2>
+                            {#- Currency comes from PC Website Settings, defaulting to SAR. It was a
+                                hardcoded "$" on a saudi site, which is both wrong on the page and
+                                would make the Offer/priceCurrency structured data contradict it. -#}
+                            <div class="pricing-amount">{{ frappe.utils.fmt_money(plan.price, currency=settings.currency or "SAR") }}{{ "/" ~ plan.billing_period if plan.billing_period else "" }}</div>
                         </div>
                         <!-- Pricing Header End -->
 
@@ -48,9 +47,9 @@
                     <!-- Pricing Benefit List Start -->
                     <div class="pricing-benefit-list wow fadeInUp" data-wow-delay="0.6s">
                         <ul>
-                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-1.svg" alt="">{{ _("Get 30 day free trial") }}</li>
-                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-2.svg" alt="">{{ _("No any hidden fees pay") }}</li>
-                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-3.svg" alt="">{{ _("You can  cancel anytime ") }}</li>
+                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-1.svg" alt="" loading="lazy" decoding="async">{{ _("Get 30 day free trial") }}</li>
+                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-2.svg" alt="" loading="lazy" decoding="async">{{ _("No any hidden fees pay") }}</li>
+                            <li><img src="/assets/pestcontrol/website/images/icon-pricing-benefit-3.svg" alt="" loading="lazy" decoding="async">{{ _("You can  cancel anytime ") }}</li>
                         </ul>
                     </div>
                     <!-- Pricing Benefit List End -->
@@ -82,7 +81,7 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="why-choose-item-content">
                                 <h3>{{ _("Emergency Services") }}</h3>
@@ -94,7 +93,7 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp" data-wow-delay="0.2s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="why-choose-item-content">
                                 <h3>{{ _("Customized Treatments") }}</h3>
@@ -106,7 +105,7 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp" data-wow-delay="0.4s">
                             <div class="icon-box">
-                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="">
+                                <img src="/assets/pestcontrol/website/images/icon-why-choose-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="why-choose-item-content">
                                 <h3>{{ _("Certified Professionals") }}</h3>
@@ -128,7 +127,7 @@
                                 <p>{{ _("call now") }}</p>
                                 <div class="cta-contact-item">
                                     <div class="icon-box">
-                                        <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">
+                                        <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="" loading="lazy" decoding="async">
                                     </div>
                                     <div class="cta-contact-item-content">
                                         <h3><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></h3>
@@ -145,7 +144,7 @@
                 <div class="col-lg-12">
                     <!-- Section Footer Text Start -->
                     <div class="section-footer-text wow fadeInUp" data-wow-delay="0.8s">
-                        <p><span>{{ _("Free") }}</span>{{ _("Let's create a pest-free environment -") }} <a href="/contact">{{ _("Contact us today!") }}</a></p>
+                        <p><span>{{ _("Free") }}</span>{{ _("Let's create a pest-free environment -") }} <a href="{{ u('/contact') }}">{{ _("Contact us today!") }}</a></p>
                     </div>
                     <!-- Section Footer Text End -->
                 </div>
@@ -181,7 +180,7 @@
                                         <div class="testimonial-author">
                                             <div class="author-image">
                                                 <figure class="image-anime">
-                                                    <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}">
+                                                    <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}" loading="lazy" decoding="async">
                                                 </figure>
                                             </div>
                                             <div class="author-content">

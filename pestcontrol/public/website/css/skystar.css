@@ -1429,3 +1429,111 @@ html[dir="rtl"] .careers-form select.form-control{
 		grid-template-columns: 1fr;
 	}
 }
+
+/* Hero slides after the first render their heading as .hero-heading rather
+   than <h1>: the swiper loops one block per slide, so every slide emitting an
+   <h1> left the home page with N primary headings and no single one. These
+   rules mirror .section-title h1 exactly (custom.css:99 base, :443 desktop,
+   :4508 <=991px, :5401 <=767px) so nothing moves visually. */
+.section-title .hero-heading{
+	display: block;
+	margin: 0;
+	font-weight: 700;
+	color: var(--primary-color);
+	font-size: 60px;
+	line-height: 1.1em;
+	letter-spacing: -0.02em;
+	margin-bottom: 0;
+	cursor: none;
+}
+
+@media only screen and (max-width: 991px){
+	.section-title .hero-heading{
+		font-size: 44px;
+	}
+}
+
+@media only screen and (max-width: 767px){
+	.section-title .hero-heading{
+		font-size: 26px;
+	}
+}
+
+/* Price was marked up as <h2> purely for its type scale, which put a heading
+   in the document outline for every pricing tier and pushed the real section
+   headings down a level. Same visual result, no outline damage. */
+.pricing-amount{
+	font-size: 34px;
+	font-weight: 700;
+	line-height: 1.2em;
+	color: var(--primary-color);
+	margin: 0;
+}
+
+/* City label beside a phone number. Secondary to the number itself, which is
+   the thing a visitor is scanning for. */
+.phone-city{
+	opacity: 0.75;
+	font-size: 0.9em;
+	white-space: nowrap;
+}
+
+/* Floating WhatsApp action.
+
+   `inset-inline-end` rather than `right` so it sits on the correct edge in
+   both directions without a mirrored rule -- same approach as .a11y-panel
+   above. z-index stays under the accessibility backdrop (9997) so opening
+   that drawer covers this rather than leaving it floating on top. */
+.whatsapp-float{
+	position: fixed;
+	inset-inline-end: 20px;
+	bottom: 20px;
+	z-index: 9990;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* 56px: comfortably above the 44px minimum touch target, and the size
+	   people already expect from a floating action button. */
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	background: #25D366;
+	color: #fff;
+	font-size: 30px;
+	line-height: 1;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+	transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.whatsapp-float:hover,
+.whatsapp-float:focus-visible{
+	color: #fff;
+	transform: scale(1.08);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.whatsapp-float:focus-visible{
+	outline: 3px solid #fff;
+	outline-offset: 3px;
+}
+
+/* Honour both the OS setting and the site's own reduce-motion preference. */
+@media (prefers-reduced-motion: reduce){
+	.whatsapp-float{ transition: none; }
+	.whatsapp-float:hover,
+	.whatsapp-float:focus-visible{ transform: none; }
+}
+
+html.a11y-reduce-motion .whatsapp-float{ transition: none; }
+html.a11y-reduce-motion .whatsapp-float:hover,
+html.a11y-reduce-motion .whatsapp-float:focus-visible{ transform: none; }
+
+@media only screen and (max-width: 575px){
+	.whatsapp-float{
+		inset-inline-end: 14px;
+		bottom: 14px;
+		width: 52px;
+		height: 52px;
+		font-size: 28px;
+	}
+}

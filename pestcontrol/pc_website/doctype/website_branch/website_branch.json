@@ -8,16 +8,37 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "branch_title",
   "phone",
   "column_break_wbrc",
   "display_order",
   "published",
   "column_break_wbrd",
   "map_embed_url",
+  "location_section",
+  "postal_code",
+  "column_break_loc",
+  "latitude",
+  "longitude",
+  "contact_section",
+  "email",
+  "whatsapp",
+  "column_break_bcon",
+  "google_business_profile_url",
+  "hours_section",
+  "opening_hours",
   "section_break_wbra",
   "article"
  ],
  "fields": [
+  {
+   "description": "Auto-filled from the branch's article title. Used as the label wherever a branch is picked from a list.",
+   "fieldname": "branch_title",
+   "fieldtype": "Data",
+   "label": "Branch",
+   "no_copy": 1,
+   "read_only": 1
+  },
   {
    "fieldname": "phone",
    "fieldtype": "Data",
@@ -64,13 +85,77 @@
    "label": "Article",
    "options": "Website Article",
    "reqd": 1
+  },
+  {
+   "fieldname": "location_section",
+   "fieldtype": "Section Break",
+   "label": "Location"
+  },
+  {
+   "fieldname": "postal_code",
+   "fieldtype": "Data",
+   "label": "Postal Code"
+  },
+  {
+   "fieldname": "column_break_loc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "From Google Maps: right-click the pin, then click the coordinates to copy. Both are required before this branch is published as a business location.",
+   "fieldname": "latitude",
+   "fieldtype": "Float",
+   "label": "Latitude",
+   "precision": "6"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Float",
+   "label": "Longitude",
+   "precision": "6"
+  },
+  {
+   "fieldname": "contact_section",
+   "fieldtype": "Section Break",
+   "label": "Branch Contact"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "whatsapp",
+   "fieldtype": "Data",
+   "label": "WhatsApp"
+  },
+  {
+   "fieldname": "column_break_bcon",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "This branch's own Google listing. Links the location to your Google Business Profile.",
+   "fieldname": "google_business_profile_url",
+   "fieldtype": "Data",
+   "label": "Google Business Profile URL"
+  },
+  {
+   "fieldname": "hours_section",
+   "fieldtype": "Section Break",
+   "label": "Opening Hours"
+  },
+  {
+   "fieldname": "opening_hours",
+   "fieldtype": "Table",
+   "label": "Opening Hours",
+   "options": "Website Opening Hours"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2026-08-30 13:00:00.000000",
+ "modified": "2026-09-09 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Branch",
@@ -92,7 +177,9 @@
  ],
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
+ "show_title_field_in_link": 1,
  "sort_field": "display_order",
  "sort_order": "ASC",
- "states": []
+ "states": [],
+ "title_field": "branch_title"
 }

@@ -8,18 +8,19 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "category",
+  "published",
+  "title",
   "route",
   "column_break_wprj",
   "image",
   "header_image",
-  "category",
   "column_break_wprl",
   "client_name",
   "location",
   "duration",
   "column_break_bjeh",
   "display_order",
-  "published",
   "section_break_art_roject",
   "article"
  ],
@@ -27,6 +28,7 @@
   {
    "fieldname": "route",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Route"
   },
   {
@@ -99,13 +101,18 @@
   {
    "fieldname": "column_break_bjeh",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2026-08-29 16:00:00.000000",
+ "modified": "2026-09-10 12:14:26.283006",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Project",
@@ -125,9 +132,11 @@
    "write": 1
   }
  ],
+ "route": "project",
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "title"
 }

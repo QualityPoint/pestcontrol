@@ -1,10 +1,6 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}{{ _("FAQs") }} | Skystar{% endblock %}
-
 {% block page_header %}
-    {% set page_h1 = _("Frequently asked question") %}
-    {% set page_breadcrumb = _("FAQs") %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
@@ -39,7 +35,7 @@
                                 <p>{{ _("call now") }}</p>
                                 <div class="cta-contact-item">
                                     <div class="icon-box">
-                                        <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="">
+                                        <img src="/assets/pestcontrol/website/images/icon-cta-phone.svg" alt="" loading="lazy" decoding="async">
                                     </div>
                                     <div class="cta-contact-item-content">
                                         <h3><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></h3>
@@ -68,11 +64,11 @@
                                 {% for faq in group_faqs %}
                                 <!-- FAQ Item Start -->
                                 <div class="accordion-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
-                                    <h2 class="accordion-header" id="heading{{ group_index }}-{{ loop.index }}">
+                                    <h3 class="accordion-header" id="heading{{ group_index }}-{{ loop.index }}">
                                         <button class="accordion-button{{ '' if loop.first else ' collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ group_index }}-{{ loop.index }}" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="collapse{{ group_index }}-{{ loop.index }}">
                                             {{ localize(faq, "question") }}
                                         </button>
-                                    </h2>
+                                    </h3>
                                     <div id="collapse{{ group_index }}-{{ loop.index }}" class="accordion-collapse collapse{{ ' show' if loop.first else '' }}" aria-labelledby="heading{{ group_index }}-{{ loop.index }}" data-bs-parent="#accordion{{ group_index }}">
                                         <div class="accordion-body">
                                             <p>{{ localize(faq, "answer") }}</p>

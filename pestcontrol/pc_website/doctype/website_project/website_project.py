@@ -2,12 +2,13 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
 from frappe.website.website_generator import WebsiteGenerator
 
 from pestcontrol.pc_website.utils import (
 	attach_articles,
 	get_website_context,
-	make_route,
+	localize,
 	route_from_article,
 	validate_articles,
 )
@@ -18,14 +19,27 @@ class WebsiteProject(WebsiteGenerator):
 
 	def validate(self):
 		validate_articles(self)
-
-	def before_save(self):
 		if not self.route:
-			title = route_from_article(self)
-			if title:
-				self.route = f"project/{make_route(title)}"
+			# self.scrub() is frappe's cleanup_page_name: Unicode-safe, so a
+			# non-Latin title slugs to itself instead of to an empty string.
+			if title := route_from_article(self):
+				self.route = f"project/{self.scrub(title)}"
+		super().validate()
 
 	def get_context(self, context):
 		get_website_context(context)
 		context.no_cache = 1
 		attach_articles("Website Project", [self])
+		context.title = localize(self, "project_name")
+		context.page_h1 = context.title
+		context.page_header_image = self.header_image
+		context.breadcrumbs = [
+			{"label": _("home"), "route": ""},
+			{"label": _("projects"), "route": "projects"},
+			{"label": context.page_h1, "route": self.route},
+		]
+
+	def before_save(self):
+		# set the title field from the first row title field in content child table
+		if self.article and self.article[0].title:
+			self.title = self.article[0].title

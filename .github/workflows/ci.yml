@@ -70,7 +70,7 @@ jobs:
       - name: Setup
         run: |
           pip install frappe-bench
-          bench init --skip-redis-config-generation --skip-assets --python "$(which python)" ~/frappe-bench
+          bench init --skip-redis-config-generation --skip-assets --python "$(which python)" --frappe-branch version-16 ~/frappe-bench
           mariadb --host 127.0.0.1 --port 3306 -u root -proot -e "SET GLOBAL character_set_server = 'utf8mb4'"
           mariadb --host 127.0.0.1 --port 3306 -u root -proot -e "SET GLOBAL collation_server = 'utf8mb4_unicode_ci'"
 
@@ -92,6 +92,12 @@ jobs:
         working-directory: /home/runner/frappe-bench
         run: |
           bench --site test_site set-config allow_tests true
-          bench --site test_site run-tests --app pestcontrol
+          # --lightmode skips frappe's before_tests machinery entirely (it
+          # takes a different code path -- run_tests_in_light_mode -- that
+          # never calls the before_tests hook), so pestcontrol's before_tests
+          # (Website Settings.disable_signup, Portal Settings.default_role)
+          # is run explicitly here instead.
+          bench --site test_site execute pestcontrol.install.before_tests
+          bench --site test_site run-tests --lightmode --app pestcontrol
         env:
           TYPE: server

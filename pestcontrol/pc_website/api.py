@@ -3,8 +3,24 @@
 
 import frappe
 from frappe import _
-from frappe.utils import flt
+from frappe.rate_limiter import rate_limit
+from frappe.utils import cint, escape_html, flt, get_url, now_datetime, validate_email_address
 from frappe.utils.file_manager import save_file
+from frappe.utils.password_strength import test_password_strength
+from frappe.utils.verified_command import get_signed_params, verify_request
+from frappe.website.utils import is_signup_disabled
+from frappe.www.login import sanitize_redirect
+
+# A floor applied to self-registered passwords no matter what
+# `System Settings.enable_password_policy` says -- see _validate_password.
+# The score is zxcvbn's 0-4 scale; 2 is "somewhat guessable", the same value
+# frappe suggests as a default minimum_password_score.
+MIN_PASSWORD_LENGTH = 8
+MIN_PASSWORD_SCORE = 2
+
+# How long an email-confirmation link stays usable. Frappe's own signed links
+# never expire; an account activation is worth bounding.
+VERIFICATION_TTL = 24 * 60 * 60
 
 
 # Reviewed: intentionally public, this is the site's own contact form
@@ -124,3 +140,202 @@ def get_portal_document(doctype: str, name: str):
 	if not frappe.has_website_permission(doc):
 		frappe.throw(frappe._("Not Permitted"), frappe.PermissionError)
 	return doc.as_dict()
+
+
+# Reviewed: intentionally public, this is the site's own registration
+# endpoint; anonymous visitors are exactly who is meant to call it.
+@frappe.whitelist(allow_guest=True, methods=["POST"])  # nosemgrep: guest-whitelisted-method
+@rate_limit(limit=5, seconds=60 * 60)
+def register_account(
+	full_name: str, email: str, mobile_no: str, password: str, redirect_to: str = ""
+) -> dict:
+	"""Create a Website User with a password the visitor chose themselves.
+
+	This exists instead of frappe.core.doctype.user.user.sign_up because that
+	one sets `new_password = random_string(10)` and relies on the "Verify Your
+	Email" notification to let the user pick their own. This site has no
+	outgoing Email Account, so nothing is ever sent: sign_up returns "ask your
+	administrator to verify your sign-up" and leaves behind an account that is
+	enabled but that nobody can log into -- password reset needs the same
+	missing email. Letting the visitor set the password at registration is
+	what makes the account usable at all.
+
+	The account is active immediately, with no admin approval, unless
+	`PC Website Settings.require_email_verification` is on -- which should stay
+	off until a real outgoing Email Account exists, or new accounts go back to
+	being locked out.
+	"""
+	if is_signup_disabled():
+		frappe.throw(_("Sign up is disabled"), title=_("Not Allowed"))
+
+	email = (email or "").strip().lower()
+	full_name = (full_name or "").strip()
+	mobile_no = (mobile_no or "").strip()
+
+	if not (full_name and email and mobile_no and password):
+		frappe.throw(_("All fields are required."))
+
+	validate_email_address(email, throw=True)
+
+	if existing := frappe.db.get_value("User", {"email": email}, ["enabled"], as_dict=True):
+		# Same wording and shape as frappe's own sign_up, which the login page
+		# already leaks this much through anyway.
+		return {
+			"success": False,
+			"message": _("Already Registered") if existing.enabled else _("Registered but disabled"),
+		}
+
+	# Same throttle frappe's sign_up applies, for the same reason.
+	max_per_hour = cint(frappe.get_system_settings("max_signups_allowed_per_hour") or 300)
+	if frappe.db.get_creation_count("User", 60) >= max_per_hour:
+		frappe.throw(
+			_("Too many accounts were created recently. Please try again in an hour."),
+			title=_("Temporarily Disabled"),
+		)
+
+	_validate_password(password, [full_name, email, mobile_no])
+
+	require_verification = cint(
+		frappe.db.get_single_value("PC Website Settings", "require_email_verification")
+	)
+	if require_verification and not frappe.db.exists("Email Account", {"enable_outgoing": 1}):
+		# Checked before the User is created, not after. Otherwise the account
+		# exists, is disabled, and no message is ever sent to enable it --
+		# which is precisely the stranded-account bug this endpoint replaces.
+		frappe.throw(
+			_("Sign up is temporarily unavailable. Please contact us."),
+			title=_("Not Available"),
+		)
+
+	user = frappe.get_doc(
+		{
+			"doctype": "User",
+			"email": email,
+			"first_name": escape_html(full_name),
+			"mobile_no": mobile_no,
+			"user_type": "Website User",
+			# Active without admin approval, which is the whole point; the
+			# verification switch is the only thing that holds an account back.
+			"enabled": 0 if require_verification else 1,
+			"new_password": password,
+			# Frappe's welcome email invites the recipient to set a password,
+			# which they have just chosen; the verification mail below says the
+			# one thing that actually needs saying.
+			"send_welcome_email": 0,
+		}
+	)
+	user.flags.ignore_permissions = True
+	# Deliberately NOT setting ignore_password_policy: that flag is precisely
+	# how sign_up gets away with a random password, and _validate_password
+	# above has already applied a floor of its own.
+	user.insert()
+
+	# Portal Settings.default_role is "Customer" here, which is what makes
+	# erpnext create the Customer + Contact on first session and what every
+	# portal scoping rule keys off.
+	if default_role := frappe.get_single_value("Portal Settings", "default_role"):
+		user.add_roles(default_role)
+
+	if require_verification:
+		_send_verification_email(user)
+		return {
+			"success": True,
+			"verify": True,
+			"message": _("Please check your email to confirm your account."),
+		}
+
+	# Log them straight in: an account they cannot immediately use is the exact
+	# failure this endpoint exists to fix. login_manager only exists on a real
+	# HTTP request, so a direct call (a test, the console) creates the account
+	# and skips the session rather than blowing up.
+	if login_manager := getattr(frappe.local, "login_manager", None):
+		login_manager.login_as(email)
+	return {
+		"success": True,
+		"verify": False,
+		"redirect_to": _safe_redirect(redirect_to),
+	}
+
+
+def _safe_redirect(redirect_to: str) -> str:
+	"""Where to send the freshly signed-in visitor.
+
+	sanitize_redirect() compares the target against the *current request's*
+	host, so it only works on a real HTTP request. A direct call -- a test, the
+	console -- has no request and nowhere to redirect to anyway, so it falls
+	back rather than raising. The sanitiser is never skipped when there is a
+	request to sanitise against.
+	"""
+	if redirect_to and getattr(frappe.local, "request", None):
+		return sanitize_redirect(redirect_to) or "/portal"
+	return "/portal"
+
+
+def _validate_password(password: str, user_inputs: list) -> None:
+	"""Reject a weak password regardless of the site's password policy.
+
+	`System Settings.enable_password_policy` is off on this site, and frappe's
+	own strength check short-circuits to a pass when it is -- so without this,
+	an account that can read customer records could be created with "123456".
+	"""
+	if len(password) < MIN_PASSWORD_LENGTH:
+		frappe.throw(_("Password must be at least {0} characters long.").format(MIN_PASSWORD_LENGTH))
+
+	result = test_password_strength(password, user_inputs=[i for i in user_inputs if i])
+	if cint(result.get("score")) < MIN_PASSWORD_SCORE:
+		suggestions = (result.get("feedback") or {}).get("suggestions") or []
+		frappe.throw(
+			_("Please choose a stronger password.") + ((" " + " ".join(suggestions)) if suggestions else "")
+		)
+
+
+def _send_verification_email(user) -> None:
+	"""Mail the one link that can turn a pending account on."""
+	params = get_signed_params(
+		{"email": user.name, "expires": cint(now_datetime().timestamp()) + VERIFICATION_TTL}
+	)
+	link = get_url(f"/api/method/pestcontrol.pc_website.api.verify_account?{params}")
+
+	frappe.sendmail(
+		recipients=user.name,
+		subject=_("Confirm your account"),
+		message=_("Hello {0},").format(user.first_name)
+		+ "<br><br>"
+		+ _("Please confirm your email address to activate your account.")
+		+ f'<br><br><a href="{link}">'
+		+ _("Confirm my account")
+		+ "</a><br><br>"
+		+ _("This link expires in {0} hours.").format(VERIFICATION_TTL // 3600),
+		now=True,
+	)
+
+
+# Reviewed: intentionally public. The link is HMAC-signed by frappe and
+# carries its own expiry, so possession of the URL is the authorisation.
+@frappe.whitelist(allow_guest=True, methods=["GET"])  # nosemgrep: guest-whitelisted-method
+def verify_account(email: str, expires: str, **kwargs):
+	"""Enable an account that was held back for email verification."""
+	if not verify_request():
+		# verify_request() has already rendered an "Invalid Link" page.
+		return
+
+	if cint(expires) < cint(now_datetime().timestamp()):
+		frappe.respond_as_web_page(
+			_("Link Expired"),
+			_("This confirmation link has expired. Please sign up again."),
+			indicator_color="red",
+		)
+		return
+
+	# Only ever flips a *pending* account on, so this can neither re-enable an
+	# account an administrator later disabled nor be replayed to any effect.
+	if frappe.db.get_value("User", email, "enabled") == 0:
+		frappe.db.set_value("User", email, "enabled", 1)
+		# Required, not defensive: frappe's sync_database() rolls back any
+		# request whose method is "safe", and this link is a GET. Without the
+		# commit the account is enabled for the length of the request and then
+		# quietly reverted -- the link would look like it worked.
+		frappe.db.commit()  # nosemgrep: frappe-manual-commit
+
+	frappe.local.flags.redirect_location = "/account/login?verified=1"
+	raise frappe.Redirect

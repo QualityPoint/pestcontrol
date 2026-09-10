@@ -1,31 +1,7 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}{{ localize(doc, "pest_name") }} | {{ settings.site_name or "Skystar" }}{% endblock %}
-
 {% block page_header %}
-    <!-- Page Header Start -->
-    {%- set page_header_bg = doc.header_image or settings.page_header_background -%}
-    <div class="page-header parallaxie"{% if page_header_bg %} style="background-image: url('{{ page_header_bg }}');"{% endif %}>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Page Header Box Start -->
-                    <div class="page-header-box">
-                        <h1 class="text-anime-style-2" data-cursor="-opaque">{{ localize(doc, "pest_name") }}</h1>
-                        <nav class="wow fadeInUp">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">{{ _("home") }}</a></li>
-                                <li class="breadcrumb-item"><a href="/pest-library">{{ _("pest library") }}</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{ localize(doc, "pest_name") }}</li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <!-- Page Header Box End -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Page Header End -->
+    {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
 {% block content %}
@@ -46,7 +22,7 @@
                     <!-- Post Featured Image Start -->
                     <div class="post-image">
                         <figure class="image-anime reveal">
-                            <img src="{{ doc.cover_image }}" alt="{{ localize(doc, 'pest_name') }}">
+                            <img src="{{ doc.cover_image }}" alt="{{ localize(doc, 'pest_name') }}" loading="lazy" decoding="async">
                         </figure>
                     </div>
                     <!-- Post Featured Image End -->
@@ -68,7 +44,7 @@
 
                     <!-- Back Link Start -->
                     <div class="post-item-btn wow fadeInUp">
-                        <a href="/pest-library" class="readmore-btn">{{ _("back to pest library") }}</a>
+                        <a href="{{ u('/pest-library') }}" class="readmore-btn">{{ _("back to pest library") }}</a>
                     </div>
                     <!-- Back Link End -->
                 </div>

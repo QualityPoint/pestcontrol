@@ -1,10 +1,6 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}{{ _("Pest Library") }} | Skystar{% endblock %}
-
 {% block page_header %}
-    {% set page_h1 = _("Pest Library") %}
-    {% set page_breadcrumb = _("pest library") %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
@@ -34,9 +30,9 @@
                             <div class="post-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                                 <!-- Pest Featured Image Start-->
                                 <div class="post-featured-image">
-                                    <a href="/{{ pest.route }}" data-cursor-text="View">
+                                    <a href="{{ u('/' ~ pest.route) }}" data-cursor-text="View">
                                         <figure class="image-anime">
-                                            <img src="{{ pest.cover_image }}" alt="{{ localize(pest, 'pest_name') }}">
+                                            <img src="{{ pest.cover_image }}" alt="{{ localize(pest, 'pest_name') }}" loading="lazy" decoding="async">
                                         </figure>
                                     </a>
                                 </div>
@@ -46,7 +42,7 @@
                                 <div class="post-item-body">
                                     <!-- Pest Item Content Start -->
                                     <div class="post-item-content">
-                                        <h2><a href="/{{ pest.route }}">{{ localize(pest, "pest_name") }}</a></h2>
+                                        <h2><a href="{{ u('/' ~ pest.route) }}">{{ localize(pest, "pest_name") }}</a></h2>
                                         {% if localize(pest, "short_description") %}
                                         <p>{{ localize(pest, "short_description") }}</p>
                                         {% endif %}
@@ -55,7 +51,7 @@
 
                                     <!-- Pest Item Button Start -->
                                     <div class="post-item-btn">
-                                        <a href="/{{ pest.route }}" class="readmore-btn">{{ _("read more") }}</a>
+                                        <a href="{{ u('/' ~ pest.route) }}" class="readmore-btn">{{ _("read more") }}</a>
                                     </div>
                                     <!-- Pest Item Button End -->
                                 </div>

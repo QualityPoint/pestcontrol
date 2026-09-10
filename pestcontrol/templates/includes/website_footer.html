@@ -16,11 +16,11 @@
                     <div class="footer-links">
                         <h3>{{ _("services") }}</h3>
                         <ul>
-                            <li><a href="/about">{{ _("About company") }}</a></li>
-                            <li><a href="/services">{{ _("Our services") }}</a></li>
-                            <li><a href="/projects">{{ _("Our projects") }}</a></li>
-                            <li><a href="/blog">{{ _("Our blogs") }}</a></li>
-                            <li><a href="/contact">{{ _("Contact us") }}</a></li>
+                            <li><a href="{{ u('/about') }}">{{ _("About company") }}</a></li>
+                            <li><a href="{{ u('/services') }}">{{ _("Our services") }}</a></li>
+                            <li><a href="{{ u('/projects') }}">{{ _("Our projects") }}</a></li>
+                            <li><a href="{{ u('/blog') }}">{{ _("Our blogs") }}</a></li>
+                            <li><a href="{{ u('/contact') }}">{{ _("Contact us") }}</a></li>
                         </ul>
                     </div>
                     <!-- Footer Links End -->
@@ -31,11 +31,11 @@
                     <div class="footer-links">
                         <h3>{{ _("Links") }}</h3>
                         <ul>
-                            <li><a href="/services">{{ _("Home Pest Control") }}</a></li>
-                            <li><a href="/services">{{ _("Commercial Pest") }}</a></li>
-                            <li><a href="/services">{{ _("Termite & Rodent") }}</a></li>
-                            <li><a href="/services">{{ _("Eco-Friendly Pest") }}</a></li>
-                            <li><a href="/services">{{ _("Wildlife Removal") }}</a></li>
+                            {%- for service in services_nav or [] %}
+                            <li><a href="{{ u('/' ~ service.route) }}">{{ localize(service, "service_name") }}</a></li>
+                            {%- else %}
+                            <li><a href="{{ u('/services') }}">{{ _("Our services") }}</a></li>
+                            {%- endfor %}
                         </ul>
                     </div>
                     <!-- Footer Links End -->
@@ -51,8 +51,11 @@
                                 <i class="fa-solid fa-phone"></i>
                             </div>
                             <div class="footer-contact-content">
+                                {#- branch_city is resolved in get_website_context from the
+                                    linked branch's article, so it follows the visitor's
+                                    language rather than whatever the admin typed. -#}
                                 {% for p in settings.phone_numbers %}
-                                <p><a href="tel:{{ p.phone_number }}">{{ p.phone_number }}</a></p>
+                                <p><a href="tel:{{ p.phone_number }}">{{ p.phone_number }}</a>{% if p.branch_city %} <span class="phone-city">&mdash; {{ p.branch_city }}</span>{% endif %}</p>
                                 {% endfor %}
                             </div>
                         </div>
@@ -79,7 +82,7 @@
                     <div class="footer-copyright">
                         <!-- Footer Logo Start -->
                         <div class="footer-logo">
-                            <img src="{{ settings.footer_logo or '/assets/pestcontrol/website/icons/skystar-logo.png' }}" alt="{{ settings.site_name or 'Skystar' }}">
+                            <img src="{{ settings.footer_logo or '/assets/pestcontrol/website/icons/skystar-logo.png' }}" alt="{{ settings.site_name or 'Skystar' }}" loading="lazy" decoding="async">
                         </div>
                         <!-- Footer Logo End -->
 

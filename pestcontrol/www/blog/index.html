@@ -1,10 +1,6 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}{{ _("Blog") }} | Skystar{% endblock %}
-
 {% block page_header %}
-    {% set page_h1 = _("Our blog") %}
-    {% set page_breadcrumb = _("blog") %}
     {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
@@ -34,9 +30,9 @@
                             <div class="post-item wow fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
                                 <!-- Post Featured Image Start-->
                                 <div class="post-featured-image">
-                                    <a href="/{{ post.route }}" data-cursor-text="View">
+                                    <a href="{{ u('/' ~ post.route) }}" data-cursor-text="View">
                                         <figure class="image-anime">
-                                            <img src="{{ post.cover_image }}" alt="{{ localize(post, 'title') }}">
+                                            <img src="{{ post.cover_image }}" alt="{{ localize(post, 'title') }}" loading="lazy" decoding="async">
                                         </figure>
                                     </a>
                                 </div>
@@ -46,13 +42,13 @@
                                 <div class="post-item-body">
                                     <!-- Post Item Content Start -->
                                     <div class="post-item-content">
-                                        <h2><a href="/{{ post.route }}">{{ localize(post, "title") }}</a></h2>
+                                        <h2><a href="{{ u('/' ~ post.route) }}">{{ localize(post, "title") }}</a></h2>
                                     </div>
                                     <!-- Post Item Content End -->
 
                                     <!-- Blog Item Button Start -->
                                     <div class="post-item-btn">
-                                        <a href="/{{ post.route }}" class="readmore-btn">{{ _("read more") }}</a>
+                                        <a href="{{ u('/' ~ post.route) }}" class="readmore-btn">{{ _("read more") }}</a>
                                     </div>
                                     <!-- Blog Item Button End -->
                                 </div>

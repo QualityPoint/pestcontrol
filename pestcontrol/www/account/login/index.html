@@ -1,7 +1,5 @@
 {% extends "pestcontrol/templates/includes/website_base_minimal.html" %}
 
-{% block title %}{{ _("Login") }} | Skystar{% endblock %}
-
 {% block content %}
     <!-- Auth Page Start -->
     <div class="auth-page" style="background-image: url('{{ settings.auth_background_image or '/assets/pestcontrol/website/images/page-header-bg.jpg' }}');">
@@ -12,8 +10,8 @@
             </div>
 
             <div class="auth-page-box">
-                <a href="/" class="auth-page-logo">
-                    <img src="{{ settings.logo or '/assets/pestcontrol/website/icons/skystar-logo.png' }}" alt="{{ settings.site_name or 'Skystar' }}">
+                <a href="{{ u('/') }}" class="auth-page-logo">
+                    <img src="{{ settings.logo or '/assets/pestcontrol/website/icons/skystar-logo.png' }}" alt="{{ settings.site_name or 'Skystar' }}" loading="lazy" decoding="async">
                 </a>
 
                 <h2>{{ _("Welcome back") }}</h2>
@@ -37,7 +35,7 @@
                 </form>
 
                 {% if not disable_signup %}
-                <p class="auth-switch">{{ _("Don't have an account?") }} <a href="/account/signup{{ ('?redirect-to=' ~ redirect_to) if redirect_to else '' }}">{{ _("Sign up") }}</a></p>
+                <p class="auth-switch">{{ _("Don't have an account?") }} <a href="{{ u('/account/signup') }}{{ ('?redirect-to=' ~ redirect_to) if redirect_to else '' }}">{{ _("Sign up") }}</a></p>
                 {% endif %}
             </div>
         </div>

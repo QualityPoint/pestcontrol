@@ -7,7 +7,8 @@
  "engine": "InnoDB",
  "field_order": [
   "phone_number",
-  "is_primary"
+  "is_primary",
+  "branch"
  ],
  "fields": [
   {
@@ -24,13 +25,21 @@
    "fieldtype": "Check",
    "in_list_view": 1,
    "label": "Is Primary"
+  },
+  {
+   "description": "Which branch this number reaches. The city shown on the website comes from the branch, so it follows the visitor's language.",
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Branch",
+   "options": "Website Branch"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-08-30 12:00:00",
+ "modified": "2026-09-09 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Phone Number",

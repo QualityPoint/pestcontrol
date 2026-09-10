@@ -1,8 +1,10 @@
 # Copyright (c) 2026, QualityPoint and contributors
 # For license information, please see license.txt
 
+import hashlib
 import os
 import re
+from urllib.parse import quote
 
 import frappe
 from frappe import _
@@ -91,12 +93,66 @@ def get_website_context(context):
 	context.branches = get_translated_list(
 		"Website Branch", filters={"published": 1}, fields="*", order_by="display_order asc"
 	)
+	attach_branch_city(settings.get("phone_numbers"), context.branches)
 	context.lang = frappe.local.lang
 	context.languages = languages
 	context.current_language = next(
 		(l for l in languages if l["code"] == context.lang),
 		(languages[0] if languages else {"code": "en", "label": "English"}),
 	)
+
+	# Top services, for the footer's link column. It previously listed five
+	# different anchor texts that all pointed at /services -- five duplicate
+	# internal links, and five service keywords with no landing page behind
+	# them, despite Website Service being a generator with real routes.
+	context.services_nav = get_translated_list(
+		"Website Service",
+		filters={"published": 1},
+		fields=["name", "route"],
+		order_by="display_order asc",
+		limit_page_length=5,
+	)
+
+
+def attach_branch_city(phone_rows, branches):
+	"""Stamp each phone row with the city of the branch it points at.
+
+	Resolved here, once, from the branch list already loaded for the page, so
+	templates never have to look a branch up. The label comes from the branch's
+	article bundle rather than being stored on the phone row, which is what
+	makes it follow the visitor's language instead of freezing whatever the
+	admin happened to type.
+
+	Falls back to the branch name: a branch can exist with no city set yet
+	(the label would otherwise render empty and look broken).
+	"""
+	if not phone_rows or not branches:
+		return
+	labels = {
+		branch.name: (localize(branch, "city") or localize(branch, "branch_name")) for branch in branches
+	}
+	for row in phone_rows:
+		row.branch_city = labels.get(row.get("branch"))
+
+
+def whatsapp_url(message=None):
+	"""wa.me link for the configured number, or None when unset.
+
+	wa.me accepts digits only -- no plus, no spaces, no dashes. The number is
+	stored the way a human writes it ("+966 54 362 7727"), so it has to be
+	normalised at every use. Doing that inline in templates is how the contact
+	page ended up emitting `wa.me/+966 54 362 7727`, which silently does
+	nothing when tapped; one helper means one place to get it right.
+
+	`message` pre-fills the chat. It removes the "what do I write" pause, and
+	varying it per page shows in the reply which page the enquiry came from.
+	"""
+	number = frappe.get_cached_value("PC Website Settings", "PC Website Settings", "whatsapp")
+	digits = re.sub(r"\D", "", number or "")
+	if not digits:
+		return None
+	url = f"https://wa.me/{digits}"
+	return f"{url}?text={quote(message)}" if message else url
 
 
 def apply_preferred_language_cookie(languages):
@@ -116,9 +172,18 @@ def apply_preferred_language_cookie(languages):
 	pestcontrol's override (frappe/website/page_renderers/template_page.py's
 	set_standard_path forces self.app = "frappe"), so a per-page call in
 	pestcontrol's own www/portal.py wouldn't even reach those routes."""
+	request = getattr(frappe.local, "request", None)
+	if not request:
+		# No HTTP request bound: a console session, a background job, a test
+		# render. frappe.request is a werkzeug LocalProxy that raises
+		# RuntimeError rather than returning None when unbound, so this has
+		# to be checked before touching it -- reading .cookies here used to
+		# blow up every non-request render of any page that calls
+		# get_website_context().
+		return
 	if frappe.form_dict.get("_lang"):
 		return  # explicit request always wins; core already applied it
-	cookie_lang = frappe.request.cookies.get("preferred_language")
+	cookie_lang = request.cookies.get("preferred_language")
 	valid_codes = {l["code"] for l in languages}
 	if cookie_lang and cookie_lang in valid_codes:
 		frappe.local.lang = cookie_lang
@@ -176,6 +241,37 @@ def doc_to_json(doc):
 	return frappe.as_json(doc.as_dict())
 
 
+# Every translatable value on a Website Article row. `title`/`subtitle`/
+# `context` are the generic slots ARTICLE_FIELD_MAP renames per doctype; the
+# meta_* fields are real columns, read directly by article_value().
+ARTICLE_ROW_FIELDS = ("title", "subtitle", "context", "meta_title", "meta_description", "og_image")
+
+
+def _article_row_fields():
+	"""ARTICLE_ROW_FIELDS, minus any column the database does not have yet.
+
+	Code always lands before `bench migrate` runs, and this is queried on
+	every page render -- selecting a column that does not exist yet would
+	take the whole site down for the length of the deploy with
+	"Unknown column 'meta_title' in 'SELECT'". Meta is cached, so the check
+	costs nothing per request."""
+	meta = frappe.get_meta("Website Article")
+	return [f for f in ARTICLE_ROW_FIELDS if meta.has_field(f)]
+
+
+def article_value(item, field):
+	"""Per-language value from an item's article bundle, addressed by the
+	Website Article fieldname itself rather than a semantic slot.
+
+	localize() is the right call for content fields, since it maps a
+	doctype's own fieldname onto a slot. The SEO fields are real columns
+	shared by every doctype, so they need no mapping — just the active
+	language, falling back to English for a partial translation."""
+	articles = item.get("_articles") or {}
+	lang = frappe.local.lang or "en"
+	return (articles.get(lang) or {}).get(field) or (articles.get("en") or {}).get(field)
+
+
 def attach_articles(doctype, items):
 	"""Batch-fetch Website Article rows for a list of already-fetched items
 	and stash them on each item for localize() to read — one query per page,
@@ -183,6 +279,7 @@ def attach_articles(doctype, items):
 	if not items:
 		return items
 
+	fields = _article_row_fields()
 	rows = frappe.get_all(
 		"Website Article",
 		filters={
@@ -190,15 +287,11 @@ def attach_articles(doctype, items):
 			"parentfield": "article",
 			"parent": ["in", [item.name for item in items]],
 		},
-		fields=["parent", "language", "title", "subtitle", "context"],
+		fields=["parent", "language", *fields],
 	)
 	by_parent = {}
 	for row in rows:
-		by_parent.setdefault(row.parent, {})[row.language] = {
-			"title": row.title,
-			"subtitle": row.subtitle,
-			"context": row.context,
-		}
+		by_parent.setdefault(row.parent, {})[row.language] = {field: row.get(field) for field in fields}
 
 	for item in items:
 		# attribute assignment, not bracket assignment: `item` may be a real
@@ -248,17 +341,38 @@ def filter_by_language(rows):
 	return [r for r in rows if r.get("language") == "en"]
 
 
+def css_class_for(value):
+	"""Stable, selector-safe CSS class for a category name.
+
+	Used by the isotope filters (`data-filter=".{{ category_class(x) }}"`), so
+	the result has to be ASCII — a non-Latin class name would need CSS
+	escaping inside the jQuery selector and silently breaks the filter.
+
+	Latin text slugs normally; anything else falls back to a short stable
+	hash rather than collapsing to "", which would emit the invalid selector
+	"." and break filtering entirely. No language is named either way.
+	"""
+	slug = re.sub(r"[^a-z0-9]+", "-", (value or "").strip().lower()).strip("-")
+	if slug:
+		return slug[:64]
+	digest = hashlib.md5((value or "").encode("utf-8")).hexdigest()[:8]
+	return f"cat-{digest}"
+
+
 def route_from_article(doc):
-	"""Return the English article row's title, used to auto-slug `route`."""
-	for row in doc.get("article") or []:
-		if row.language == "en" and row.title:
-			return row.title
-	return None
+	"""Title to slug a `route` from.
 
+	English first so slugs stay Latin-script where possible, then any other
+	language rather than returning None — a record whose only article row was
+	Arabic previously produced no route at all, and so no public page.
 
-def make_route(value):
-	"""Slugify `value` into a URL-safe route segment."""
-	return re.sub(r"[^a-z0-9]+", "-", (value or "").lower()).strip("-")
+	Callers slug the result with frappe's own WebsiteGenerator.scrub(), which
+	is Unicode-safe, so nothing here is language-specific."""
+	rows = doc.get("article") or []
+	return next(
+		(r.title for r in rows if r.language == "en" and r.title),
+		next((r.title for r in rows if r.title), None),
+	)
 
 
 def validate_unique_language(doc, fieldname="article"):

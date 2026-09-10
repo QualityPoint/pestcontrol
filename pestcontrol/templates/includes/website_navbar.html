@@ -1,8 +1,8 @@
     <nav class="navbar navbar-expand-lg">
         <div class="header-fluid">
             <!-- Logo Start -->
-            <a class="navbar-brand" href="/">
-                <img src="{{ settings.logo or '/assets/pestcontrol/website/icons/skystar-logo.png' }}" alt="{{ settings.site_name or 'Skystar' }}">
+            <a class="navbar-brand" href="{{ u('/') }}">
+                <img src="{{ settings.logo or '/assets/pestcontrol/website/icons/skystar-logo.png' }}" alt="{{ settings.site_name or 'Skystar' }}" loading="lazy" decoding="async">
             </a>
             <!-- Logo End -->
 
@@ -10,49 +10,49 @@
             <div class="collapse navbar-collapse main-menu">
                 <div class="nav-menu-wrapper">
                     <ul class="navbar-nav mr-auto" id="menu">
-                        <li class="nav-item"><a class="nav-link" href="/">{{ _("Home") }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/about">{{ _("About Us") }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/services">{{ _("Services") }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/blog">{{ _("Blog") }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/pest-library">{{ _("Pest Library") }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ u('/') }}">{{ _("Home") }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ u('/about') }}">{{ _("About Us") }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ u('/services') }}">{{ _("Services") }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ u('/blog') }}">{{ _("Blog") }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ u('/pest-library') }}">{{ _("Pest Library") }}</a></li>
                         <li class="nav-item submenu"><a class="nav-link" href="#">{{ _("Pages") }}</a>
                             <ul>
-                                <li class="nav-item"><a class="nav-link" href="/projects">{{ _("Projects") }}</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/team">{{ _("Team") }}</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/pricing">{{ _("Pricing Plan") }}</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/testimonials">{{ _("Testimonials") }}</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/image-gallery">{{ _("Image Gallery") }}</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/video-gallery">{{ _("Video Gallery") }}</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/faqs">{{ _("FAQs") }}</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/careers">{{ _("Careers") }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ u('/projects') }}">{{ _("Projects") }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ u('/team') }}">{{ _("Team") }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ u('/pricing') }}">{{ _("Pricing Plan") }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ u('/testimonials') }}">{{ _("Testimonials") }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ u('/image-gallery') }}">{{ _("Image Gallery") }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ u('/video-gallery') }}">{{ _("Video Gallery") }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ u('/faqs') }}">{{ _("FAQs") }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ u('/careers') }}">{{ _("Careers") }}</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="/branches">{{ _("Branches") }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/contact">{{ _("Contact Us") }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ u('/branches') }}">{{ _("Branches") }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ u('/contact') }}">{{ _("Contact Us") }}</a></li>
                         {% if is_logged_in %}
                         <li class="nav-item submenu nav-item-account">
                             <a class="nav-link nav-account-link" href="#">
                                 {% if user_image_url %}
-                                <img src="{{ user_image_url }}" alt="" class="nav-avatar">
+                                <img src="{{ user_image_url }}" alt="" class="nav-avatar" loading="lazy" decoding="async">
                                 {% else %}
                                 <span class="nav-avatar nav-avatar-initials" aria-hidden="true">{{ user_initials }}</span>
                                 {% endif %}
                                 <span class="nav-account-name">{{ user_full_name or _("Account") }}</span>
                             </a>
                             <ul>
-                                <li class="nav-item"><a class="nav-link" href="/portal">{{ _("Dashboard") }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ u('/portal') }}">{{ _("Dashboard") }}</a></li>
                                 <li class="nav-item"><a class="nav-link" id="logoutLink" href="/api/method/logout">{{ _("Logout") }}</a></li>
                             </ul>
                         </li>
                         {% else %}
-                        <li class="nav-item"><a class="nav-link" href="/account/login">{{ _("Login") }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ u('/account/login') }}">{{ _("Login") }}</a></li>
                         {% endif %}
                     </ul>
                 </div>
 
                 <!-- Header Btn Start -->
                 <div class="header-btn">
-                    <a href="/contact" class="btn-default">{{ _("get a quote") }}</a>
+                    <a href="{{ u('/contact') }}" class="btn-default">{{ _("get a quote") }}</a>
                 </div>
                 <!-- Header Btn End -->
             </div>

@@ -2,22 +2,21 @@
  "actions": [],
  "allow_guest_to_view": 1,
  "allow_import": 1,
- "allow_rename": 1,
  "autoname": "hash",
  "creation": "2026-08-05 12:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "route",
+  "title",
+  "blog_category",
+  "author_name",
+  "website_tags",
   "column_break_wblg",
+  "published",
+  "published_on",
   "cover_image",
   "header_image",
-  "author_name",
-  "published",
-  "column_break_xiuu",
-  "blog_category",
-  "published_on",
-  "website_tags",
   "section_break_art_ogpost",
   "column_break_wbed",
   "article"
@@ -26,6 +25,7 @@
   {
    "fieldname": "route",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Route"
   },
   {
@@ -87,19 +87,21 @@
    "reqd": 1
   },
   {
-   "fieldname": "column_break_xiuu",
+   "fieldname": "column_break_wbed",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_wbed",
-   "fieldtype": "Column Break"
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Title"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2026-08-29 16:00:00.000000",
+ "modified": "2026-09-09 15:08:58.017312",
  "modified_by": "Administrator",
  "module": "PC Website",
  "name": "Website Blog Post",
@@ -119,9 +121,12 @@
    "write": 1
   }
  ],
+ "route": "blog",
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
+ "show_title_field_in_link": 1,
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "title"
 }

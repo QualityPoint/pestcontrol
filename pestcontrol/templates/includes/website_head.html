@@ -2,16 +2,43 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
+	{#- frappe's MetaTags builds description, og:* and twitter:* out of
+	    context.title / description / image; pc_website/seo.py adds what it
+	    does not derive -- canonical, og:url, og:site_name, og:locale, robots.
+	    meta_block.html then renders whatever ended up in context.metatags.
+	    <meta name="keywords"> is deliberately gone: google has ignored it
+	    since 2009, and an empty one was pure noise. -#}
+	{% include "templates/includes/meta_block.html" %}
+	{{ head_html or "" }}
+	{#- guarded: the portal and dashboard pages never run the seo hook, and an
+	    empty canonical is worse than none -- it self-references the wrong URL. -#}
+	{%- if seo_canonical %}
+	<link rel="canonical" href="{{ seo_canonical }}">
+	{%- endif %}
+	{%- for alt in seo_alternates or [] %}
+	<link rel="alternate" hreflang="{{ alt.lang }}" href="{{ alt.href }}">
+	{%- endfor %}
+	{% include "pestcontrol/templates/includes/seo_analytics.html" %}
 	<meta name="author" content="Skystar">
 	<!-- Page Title -->
 	<!-- Favicon Icon -->
 	<link rel="shortcut icon" type="image/x-icon" href="{{ settings.favicon or '/assets/pestcontrol/website/images/favicon.png' }}">
+	{#- Weights match what the stylesheets actually use (400/500/600/700/900).
+	    100/200/300 were being downloaded and never referenced, while 900 was
+	    referenced in 8 rules but never loaded -- the browser faked it from 700,
+	    which smears arabic letterforms rather than thickening them. -#}
+	{#- Preload the page's LCP image, set by the page itself in get_context().
+	    Deliberately not derived from hero_slides here: those are fetched into
+	    site-wide context for every page, so keying off them would preload a hero
+	    on /about and /contact, which never render one -- an unused preload is
+	    wasted bandwidth and a lighthouse warning. -#}
+	{%- if preload_image %}
+	<link rel="preload" as="image" href="{{ preload_image }}" fetchpriority="high">
+	{%- endif %}
 	<!-- Google Fonts Css-->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 	<!-- Lexend: a research-backed font for reading proficiency, used by the
 	     accessibility toolbar's "Dyslexia font" option. Latin-only — Arabic
 	     text falls through automatically to IBM Plex Sans Arabic via the

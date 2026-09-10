@@ -35,11 +35,19 @@
                             <i class="fa-solid fa-chevron-down lang-switch-caret" aria-hidden="true"></i>
                         </button>
                         <ul class="lang-switch-menu" role="menu">
+                            {#- Real links, not buttons: a crawler has to be able to follow
+                                these to discover the other language, and they are built from
+                                the same seo_alternates list that emits the hreflang tags, so
+                                the switcher and the tags cannot disagree. -#}
                             {% for l in languages %}
+                            {%- set alt = (seo_alternates or []) | selectattr("lang", "equalto", l.code) | first %}
                             <li role="none">
-                                <button type="button" role="menuitem" class="lang-option{{ ' active' if l.code == lang else '' }}" data-set-lang="{{ l.code }}"{{ ' aria-current="true"' if l.code == lang else '' }}>
+                                <a role="menuitem" class="lang-option{{ ' active' if l.code == lang else '' }}"
+                                   href="{{ alt.href if alt else '/' ~ l.code ~ '/' }}"
+                                   hreflang="{{ l.code }}" lang="{{ l.code }}" data-set-lang="{{ l.code }}"
+                                   {{ 'aria-current="true"' if l.code == lang else '' }}>
                                     {{ l.label }}
-                                </button>
+                                </a>
                             </li>
                             {% endfor %}
                         </ul>
@@ -56,7 +64,7 @@
                         <div class="deaf-contact-menu" id="deafContactMenu" role="menu" aria-label="{{ _('Contact without a phone call') }}">
                             <p class="deaf-contact-intro">{{ _("Reach us without a phone call") }}</p>
                             {% if settings.whatsapp %}
-                            <a href="https://wa.me/{{ settings.whatsapp | replace(' ', '') | replace('+', '') }}" target="_blank" rel="noopener noreferrer" class="deaf-contact-link" role="menuitem">
+                            <a href="{{ whatsapp_url() }}" target="_blank" rel="noopener noreferrer" class="deaf-contact-link" role="menuitem">
                                 <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                                 <span>{{ _("WhatsApp") }}</span>
                             </a>
@@ -67,7 +75,7 @@
                                 <span>{{ _("Email") }}</span>
                             </a>
                             {% endif %}
-                            <a href="/contact" class="deaf-contact-link" role="menuitem">
+                            <a href="{{ u('/contact') }}" class="deaf-contact-link" role="menuitem">
                                 <i class="fa-regular fa-comments" aria-hidden="true"></i>
                                 <span>{{ _("Send a message") }}</span>
                             </a>

@@ -1,7 +1,5 @@
 {% extends "pestcontrol/templates/includes/website_base_minimal.html" %}
 
-{% block title %}{{ _("Sign Up") }} | Skystar{% endblock %}
-
 {% block content %}
     <!-- Auth Page Start -->
     <div class="auth-page" style="background-image: url('{{ settings.auth_background_image or '/assets/pestcontrol/website/images/page-header-bg.jpg' }}');">
@@ -12,14 +10,14 @@
             </div>
 
             <div class="auth-page-box">
-                <a href="/" class="auth-page-logo">
-                    <img src="{{ settings.logo or '/assets/pestcontrol/website/icons/skystar-logo.png' }}" alt="{{ settings.site_name or 'Skystar' }}">
+                <a href="{{ u('/') }}" class="auth-page-logo">
+                    <img src="{{ settings.logo or '/assets/pestcontrol/website/icons/skystar-logo.png' }}" alt="{{ settings.site_name or 'Skystar' }}" loading="lazy" decoding="async">
                 </a>
 
                 {% if disable_signup %}
                 <h2>{{ _("Sign ups are closed") }}</h2>
                 <p>{{ _("New account registration isn't available right now. Please contact us if you need access.") }}</p>
-                <p class="auth-switch"><a href="/contact">{{ _("Contact us") }}</a></p>
+                <p class="auth-switch"><a href="{{ u('/contact') }}">{{ _("Contact us") }}</a></p>
                 {% else %}
                 <h2>{{ _("Create an account") }}</h2>
                 <p>{{ _("Sign up to get started") }}</p>
@@ -37,11 +35,29 @@
                         <div class="help-block with-errors"></div>
                     </div>
 
+                    <div class="form-group mb-4">
+                        <label for="mobile_no" class="visually-hidden">{{ _('Mobile number') }}</label>
+                        <input type="tel" name="mobile_no" class="form-control" id="mobile_no" placeholder="{{ _('Mobile number') }}" autocomplete="tel" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="password" class="visually-hidden">{{ _('Password') }}</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="{{ _('Password') }}" autocomplete="new-password" minlength="8" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="confirm_password" class="visually-hidden">{{ _('Confirm password') }}</label>
+                        <input type="password" name="confirm_password" class="form-control" id="confirm_password" placeholder="{{ _('Confirm password') }}" autocomplete="new-password" minlength="8" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
                     <button type="submit" class="btn-default"><span>{{ _("Sign up") }}</span></button>
                     <div id="signupMsg" class="h3 hidden"></div>
                 </form>
 
-                <p class="auth-switch">{{ _("Already have an account?") }} <a href="/account/login{{ ('?redirect-to=' ~ redirect_to) if redirect_to else '' }}">{{ _("Login") }}</a></p>
+                <p class="auth-switch">{{ _("Already have an account?") }} <a href="{{ u('/account/login') }}{{ ('?redirect-to=' ~ redirect_to) if redirect_to else '' }}">{{ _("Login") }}</a></p>
                 {% endif %}
             </div>
         </div>

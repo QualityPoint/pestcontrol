@@ -54,16 +54,14 @@
 
             var option = e.target.closest("[data-set-lang]");
             if (option) {
-                e.preventDefault();
-                var lang = option.getAttribute("data-set-lang");
-                document.cookie = "preferred_language=" + lang + ";path=/;max-age=31536000";
-                // The cookie alone is ignored by Frappe for logged-in users
-                // (it only reads it for Guests) — the _lang query param is
-                // checked first and always wins, so use it to force the
-                // switch immediately regardless of session state.
-                var url = new URL(window.location.href);
-                url.searchParams.set("_lang", lang);
-                window.location.href = url.toString();
+                // The link's href already points at the translated page, so
+                // navigation is left to the browser -- no preventDefault, no
+                // ?_lang reload. The cookie is still written because the
+                // customer portal (/portal, /orders, ...) stays unprefixed and
+                // has nothing but the cookie to go on.
+                document.cookie =
+                    "preferred_language=" + option.getAttribute("data-set-lang") +
+                    ";path=/;max-age=31536000";
                 return;
             }
 
@@ -247,27 +245,47 @@
                 e.preventDefault();
                 var msgBox = document.getElementById("signupMsg");
                 var formData = new FormData(signupForm);
+                function showError(text) {
+                    if (!msgBox) return;
+                    msgBox.classList.remove("hidden", "text-success");
+                    msgBox.classList.add("text-danger");
+                    msgBox.textContent = text;
+                }
+                if (formData.get("password") !== formData.get("confirm_password")) {
+                    showError("{{ _('The two passwords do not match.') }}");
+                    return;
+                }
+                formData.delete("confirm_password");
                 formData.append("redirect_to", signupForm.getAttribute("data-redirect-to") || "");
-                fetch("/api/method/frappe.core.doctype.user.user.sign_up", {
+                fetch("/api/method/pestcontrol.pc_website.api.register_account", {
                     method: "POST",
                     body: formData,
                     headers: { "X-Frappe-CSRF-Token": "{{ csrf_token }}" },
                 })
                     .then(function (response) {
                         return response.json().then(function (data) {
-                            if (!response.ok) throw new Error((data.message && data.message.message) || "Sign up failed");
+                            if (!response.ok) throw new Error((data.message && data.message.message) || data._server_messages || "Sign up failed");
                             return data;
                         });
                     })
                     .then(function (data) {
-                        var result = data.message || [];
-                        var ok = result[0] === 1 || result[0] === 2;
-                        if (msgBox) {
-                            msgBox.classList.remove("hidden");
-                            msgBox.classList.add(ok ? "text-success" : "text-danger");
-                            msgBox.textContent = result[1] || "Something went wrong.";
+                        var result = data.message || {};
+                        if (!result.success) {
+                            showError(result.message || "Something went wrong.");
+                            return;
                         }
-                        if (ok) signupForm.reset();
+                        // No verification: the account is already signed in, so
+                        // send them on rather than leaving them on a dead form.
+                        if (!result.verify) {
+                            window.location.href = result.redirect_to || "/portal";
+                            return;
+                        }
+                        if (msgBox) {
+                            msgBox.classList.remove("hidden", "text-danger");
+                            msgBox.classList.add("text-success");
+                            msgBox.textContent = result.message || "";
+                        }
+                        signupForm.reset();
                     })
                     .catch(function (err) {
                         if (msgBox) {

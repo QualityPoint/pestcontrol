@@ -1,31 +1,7 @@
 {% extends "pestcontrol/templates/includes/website_base.html" %}
 
-{% block title %}{{ doc.member_name }} | {{ settings.site_name or "Skystar" }}{% endblock %}
-
 {% block page_header %}
-    <!-- Page Header Start -->
-    {%- set page_header_bg = doc.header_image or settings.page_header_background -%}
-    <div class="page-header parallaxie"{% if page_header_bg %} style="background-image: url('{{ page_header_bg }}');"{% endif %}>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Page Header Box Start -->
-                    <div class="page-header-box">
-                        <h1 class="text-anime-style-2" data-cursor="-opaque">{{ doc.member_name }}</h1>
-                        <nav class="wow fadeInUp">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">{{ _("home") }}</a></li>
-                                <li class="breadcrumb-item"><a href="/team">{{ _("team") }}</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{ doc.member_name }}</li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <!-- Page Header Box End -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Page Header End -->
+    {% include "pestcontrol/templates/includes/page_header.html" %}
 {% endblock %}
 
 {% block content %}
@@ -41,7 +17,7 @@
                             <!-- Team Member Image Start -->
                             <div class="team-member-image">
                                 <figure class="image-anime reveal">
-                                    <img src="{{ doc.photo }}" alt="{{ doc.member_name }}">
+                                    <img src="{{ doc.photo }}" alt="{{ doc.member_name }}" loading="lazy" decoding="async">
                                 </figure>
                             </div>
                             <!-- Team Member Image End -->
