@@ -34,24 +34,26 @@ def _company(name):
 	# is a mandatory Link, so without this setUpClass fails with a
 	# LinkValidationError before any test body runs.
 	if not frappe.db.exists("Company", name):
-		frappe.get_doc(
-			{
-				"doctype": "Company",
-				"company_name": name,
-				"abbr": "SS",
-				"default_currency": "SAR",
-				"country": "Saudi Arabia",
-				# Without a real template, Company.on_update() still sets
-				# frappe.flags.country_change = True and runs its full
-				# first-time provisioning (warehouses, cost centers, regional
-				# fixtures) against a company with no chart of accounts
-				# underneath it -- an untested combination that erpnext's own
-				# controller doesn't handle cleanly. "Standard" mirrors
-				# erpnext's own _Test Company fixture (test_records.json),
-				# the exact path every real Company creation exercises.
-				"chart_of_accounts": "Standard",
-			}
-		).insert(ignore_permissions=True)
+		# ignore_chart_of_accounts skips erpnext's entire first-time
+		# provisioning chain in Company.on_update() -- chart of accounts,
+		# default warehouses, country/tax fixtures. That chain assumes
+		# master data (e.g. Warehouse Type "Transit") this site never seeds
+		# without the interactive setup wizard, which CI does not run. The
+		# test has no use for any of it -- it only needs a Company to exist
+		# as a Link target for Visit Request.
+		frappe.local.flags.ignore_chart_of_accounts = True
+		try:
+			frappe.get_doc(
+				{
+					"doctype": "Company",
+					"company_name": name,
+					"abbr": "SS",
+					"default_currency": "SAR",
+					"country": "Saudi Arabia",
+				}
+			).insert(ignore_permissions=True)
+		finally:
+			frappe.local.flags.ignore_chart_of_accounts = False
 	return name
 
 
