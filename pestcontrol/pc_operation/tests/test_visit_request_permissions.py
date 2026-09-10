@@ -41,6 +41,15 @@ def _company(name):
 				"abbr": "SS",
 				"default_currency": "SAR",
 				"country": "Saudi Arabia",
+				# Without a real template, Company.on_update() still sets
+				# frappe.flags.country_change = True and runs its full
+				# first-time provisioning (warehouses, cost centers, regional
+				# fixtures) against a company with no chart of accounts
+				# underneath it -- an untested combination that erpnext's own
+				# controller doesn't handle cleanly. "Standard" mirrors
+				# erpnext's own _Test Company fixture (test_records.json),
+				# the exact path every real Company creation exercises.
+				"chart_of_accounts": "Standard",
 			}
 		).insert(ignore_permissions=True)
 	return name
