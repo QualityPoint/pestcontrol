@@ -33,5 +33,10 @@ def before_tests():
 	frappe.db.set_single_value("Website Settings", "disable_signup", 0)
 	if not frappe.get_single_value("Portal Settings", "default_role"):
 		frappe.db.set_single_value("Portal Settings", "default_role", "Customer")
-	frappe.db.commit()
+	# Required, not defensive: before_tests runs once, outside any individual
+	# test's own transaction, and mirrors frappe's own before_tests (which
+	# does the same commit) for exactly that reason -- later test classes,
+	# each with their own rollback-to-savepoint, must see this as committed
+	# baseline state rather than something a later rollback could undo.
+	frappe.db.commit()  # nosemgrep: frappe-manual-commit
 	frappe.clear_cache()
