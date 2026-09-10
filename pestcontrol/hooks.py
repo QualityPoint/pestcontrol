@@ -272,7 +272,7 @@ on_session_creation = "pestcontrol.pc_website.utils.sync_portal_user_on_login"
 # Testing
 # -------
 
-# before_tests = "pestcontrol.install.before_tests"
+before_tests = "pestcontrol.install.before_tests"
 
 # Overriding Methods
 # ------------------------------

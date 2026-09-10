@@ -38,3 +38,8 @@ class WebsiteProject(WebsiteGenerator):
 			{"label": _("projects"), "route": "projects"},
 			{"label": context.page_h1, "route": self.route},
 		]
+
+	def before_save(self):
+		# set the title field from the first row title field in content child table
+		if self.article and self.article[0].title:
+			self.title = self.article[0].title

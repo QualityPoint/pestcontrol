@@ -30,6 +30,17 @@ def _cleanup():
 		frappe.delete_doc("User", EMAIL, force=True, ignore_permissions=True)
 
 
+def _ensure_article():
+	"""PC Website Settings.article is mandatory; a fresh site has no rows,
+	which makes change_settings()'s settings.save() raise MandatoryError
+	before any test body runs. No-op on sites that already have content."""
+	settings = frappe.get_doc("PC Website Settings")
+	if not settings.article:
+		settings.append("article", {"language": "en", "title": "Test Article"})
+		settings.save(ignore_permissions=True)
+		frappe.db.commit()
+
+
 def _bind_request(path="/account/signup"):
 	frappe.local.request = Request(EnvironBuilder(path=path).get_environ())
 	# The endpoint is rate limited per IP, and the limiter reads request_ip
@@ -163,6 +174,7 @@ class TestEmailVerification(FrappeTestCase):
 		super().setUp()
 		frappe.set_user("Administrator")
 		_cleanup()
+		_ensure_article()
 		# frappe's own context manager rather than set_single_value: the latter
 		# leaves the singles cache holding the test's value after the class
 		# rolls back, which then leaks into every other test in the module.

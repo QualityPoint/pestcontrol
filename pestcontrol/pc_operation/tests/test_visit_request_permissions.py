@@ -28,6 +28,24 @@ USER_B = "_test_portal_b@example.com"
 USER_UNLINKED = "_test_portal_unlinked@example.com"
 
 
+def _company(name):
+	# "Sky Star" only exists because it was created by hand on the developer's
+	# site -- CI's fresh site has zero Company records, and Visit Request.company
+	# is a mandatory Link, so without this setUpClass fails with a
+	# LinkValidationError before any test body runs.
+	if not frappe.db.exists("Company", name):
+		frappe.get_doc(
+			{
+				"doctype": "Company",
+				"company_name": name,
+				"abbr": "SS",
+				"default_currency": "SAR",
+				"country": "Saudi Arabia",
+			}
+		).insert(ignore_permissions=True)
+	return name
+
+
 def _customer(name):
 	if not frappe.db.exists("Customer", name):
 		frappe.get_doc({"doctype": "Customer", "customer_name": name, "customer_type": "Individual"}).insert(
@@ -91,6 +109,7 @@ class TestVisitRequestPermissions(FrappeTestCase):
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
+		_company(COMPANY)
 		_customer(CUSTOMER_A)
 		_customer(CUSTOMER_B)
 		_portal_user(USER_A, CUSTOMER_A)
